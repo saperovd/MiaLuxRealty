@@ -1910,8 +1910,7 @@ function parsePastedHtml() {
     }
 
     // Address
-    const addrMatch = bodyText.match(/\d+\s+[\w\s]+(?:Street|St|Avenue|Ave|Boulevard|Blvd|Drive|Dr|Way|Road|Rd|Lane|Ln|Court|Ct|Place|Pl)[^,
-]{0,30}/i);
+    const addrMatch = bodyText.match(/\d+\s+[\w ]+(?:Street|St|Avenue|Ave|Blvd|Drive|Dr|Way|Rd|Ln|Court|Ct|Place|Pl)[^,\n]{0,30}/i);
 
     // Neighborhood
     const hoods = ['Brickell','Edgewater','Wynwood','Miami Beach','Sunny Isles','Bal Harbour','Coconut Grove','Downtown Miami','Midtown','Design District','Aventura','Coral Gables'];
