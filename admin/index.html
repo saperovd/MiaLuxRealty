@@ -479,14 +479,33 @@ html,body{height:100%;background:var(--darker);color:var(--text);font-family:var
       <div class="panel-sub">Paste any listing or property URL to import data as a draft. You can then edit and improve it before publishing.</div>
 
       <div class="cms-card">
-        <div class="cms-card-title">Scrape URL</div>
-        <div style="display:flex;gap:.6rem;margin-bottom:.8rem">
-          <input class="cms-input" id="scrape-url" placeholder="https://developer.ciprianiresidencessoutham.com/..." style="flex:1">
-          <button class="btn-add" onclick="scrapeUrl()" id="scrape-btn">Scrape →</button>
+        <div class="cms-card-title">Import Source</div>
+
+        <!-- Mode tabs -->
+        <div style="display:flex;gap:0;margin-bottom:1rem;border:1px solid var(--border);border-radius:var(--r);overflow:hidden">
+          <button id="tab-url" onclick="setScrapeMode('url')" style="flex:1;padding:.45rem;font-size:.72rem;background:var(--gold);color:#1a1610;border:none;cursor:pointer;font-family:var(--sans);font-weight:600">🔗 From URL</button>
+          <button id="tab-paste" onclick="setScrapeMode('paste')" style="flex:1;padding:.45rem;font-size:.72rem;background:var(--card2);color:var(--muted);border:none;cursor:pointer;font-family:var(--sans)">📋 Paste HTML</button>
         </div>
-        <div style="font-size:.72rem;color:var(--muted);line-height:1.6">
-          Works best with developer websites, Zillow, Realtor.com, StreetEasy, and luxury condo project pages.
-          Due to CORS restrictions some sites require using a proxy — the scraper will try automatically.
+
+        <!-- URL mode -->
+        <div id="mode-url">
+          <div style="display:flex;gap:.6rem;margin-bottom:.8rem">
+            <input class="cms-input" id="scrape-url" placeholder="https://developer.ciprianiresidencessoutham.com/..." style="flex:1">
+            <button class="btn-add" onclick="scrapeUrl()" id="scrape-btn">Scrape →</button>
+          </div>
+          <div style="font-size:.72rem;color:var(--muted);line-height:1.6">
+            Works via a server-side Worker. Some sites block all scrapers — use Paste HTML mode for those.
+          </div>
+        </div>
+
+        <!-- Paste HTML mode -->
+        <div id="mode-paste" style="display:none">
+          <div style="font-size:.78rem;color:var(--muted);margin-bottom:.6rem;line-height:1.6">
+            Open the listing page in your browser → <strong style="color:var(--gold-light)">View Source</strong> (⌘U on Mac) → Select All → Copy → Paste below:
+          </div>
+          <input class="cms-input" id="paste-source-url" placeholder="Source URL (for reference)" style="margin-bottom:.5rem">
+          <textarea class="cms-textarea" id="paste-html" rows="6" placeholder="Paste full page HTML here..."></textarea>
+          <button class="btn-add" onclick="parsePastedHtml()" style="margin-top:.6rem;width:100%">Parse HTML →</button>
         </div>
       </div>
 
@@ -1831,6 +1850,110 @@ function saveScrapedAsPost() {
   showToast('Saved as draft blog post! Go to Blog Posts to edit and publish.', 'success');
   clearScraper();
   showPanel('posts');
+}
+
+function setScrapeMode(mode) {
+  document.getElementById('mode-url').style.display = mode === 'url' ? 'block' : 'none';
+  document.getElementById('mode-paste').style.display = mode === 'paste' ? 'block' : 'none';
+  document.getElementById('tab-url').style.background = mode === 'url' ? 'var(--gold)' : 'var(--card2)';
+  document.getElementById('tab-url').style.color = mode === 'url' ? '#1a1610' : 'var(--muted)';
+  document.getElementById('tab-paste').style.background = mode === 'paste' ? 'var(--gold)' : 'var(--card2)';
+  document.getElementById('tab-paste').style.color = mode === 'paste' ? '#1a1610' : 'var(--muted)';
+}
+
+function parsePastedHtml() {
+  const pastedHtml = document.getElementById('paste-html').value.trim();
+  const sourceUrl = document.getElementById('paste-source-url').value.trim() || 'pasted-html';
+  if (!pastedHtml || pastedHtml.length < 100) {
+    showToast('Please paste some HTML first', 'error'); return;
+  }
+
+  const statusEl = document.getElementById('scrape-status');
+  const statusText = document.getElementById('scrape-status-text');
+  statusEl.style.display = 'block';
+  statusText.textContent = '⏳ Parsing HTML…';
+  document.getElementById('scrape-results').style.display = 'none';
+
+  // Parse in browser using DOMParser
+  try {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(pastedHtml, 'text/html');
+
+    const get = (selectors) => {
+      for (const sel of selectors) {
+        try {
+          const el = doc.querySelector(sel);
+          if (el) {
+            const t = (el.getAttribute('content') || el.textContent || '').trim();
+            if (t.length > 1) return t;
+          }
+        } catch(e) {}
+      }
+      return '';
+    };
+
+    const title = get(['meta[property="og:title"]','meta[name="twitter:title"]','h1','title']);
+    const description = get(['meta[property="og:description"]','meta[name="description"]']);
+    const ogImage = get(['meta[property="og:image"]','meta[name="twitter:image"]']);
+
+    const bodyText = doc.body ? (doc.body.innerText || doc.body.textContent || '') : '';
+
+    // Price
+    let priceFrom = 0;
+    const priceMatch = bodyText.match(/\$\s?[\d,]+(?:\.\d+)?\s?[Mm](?:illion)?|\$\s?[\d,]{7,}/g);
+    if (priceMatch) {
+      const prices = priceMatch.map(p => {
+        const n = parseFloat(p.replace(/[$,\s]/g,''));
+        return /[Mm]/.test(p) ? n * 1000000 : n;
+      }).filter(n => n > 200000 && n < 500000000).sort((a,b) => a-b);
+      if (prices.length) priceFrom = prices[0];
+    }
+
+    // Address
+    const addrMatch = bodyText.match(/\d+\s+[\w\s]+(?:Street|St|Avenue|Ave|Boulevard|Blvd|Drive|Dr|Way|Road|Rd|Lane|Ln|Court|Ct|Place|Pl)[^,
+]{0,30}/i);
+
+    // Neighborhood
+    const hoods = ['Brickell','Edgewater','Wynwood','Miami Beach','Sunny Isles','Bal Harbour','Coconut Grove','Downtown Miami','Midtown','Design District','Aventura','Coral Gables'];
+    const bodyLower = bodyText.toLowerCase();
+    const neighborhood = hoods.find(h => bodyLower.includes(h.toLowerCase())) || '';
+
+    // Images
+    const images = [];
+    const seen = new Set();
+    if (ogImage) { seen.add(ogImage); images.push(ogImage); }
+    doc.querySelectorAll('img[src],img[data-src]').forEach(img => {
+      let src = img.getAttribute('src') || img.getAttribute('data-src') || '';
+      if (src.startsWith('//')) src = 'https:' + src;
+      if (src.startsWith('/') && sourceUrl.startsWith('http')) src = new URL(sourceUrl).origin + src;
+      if (!src.startsWith('http') || seen.has(src)) return;
+      if (/logo|icon|avatar|sprite|pixel|blank|1x1/i.test(src)) return;
+      const w = parseInt(img.getAttribute('width') || '0');
+      if (w > 0 && w < 200) return;
+      seen.add(src); images.push(src);
+      if (images.length >= 15) return;
+    });
+
+    // Paragraphs
+    const paragraphs = [];
+    doc.querySelectorAll('p').forEach(p => {
+      const t = p.textContent.trim();
+      if (t.length > 100) paragraphs.push(t);
+      if (paragraphs.length >= 6) return;
+    });
+
+    const data = {
+      title, description, images,
+      priceFrom, address: addrMatch ? addrMatch[0].trim() : '',
+      neighborhood, paragraphs, sourceUrl,
+      slug: title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').substring(0,60)
+    };
+
+    statusEl.style.display = 'none';
+    fillScraperForm(data);
+  } catch(e) {
+    document.getElementById('scrape-status-text').textContent = '❌ Parse error: ' + e.message;
+  }
 }
 
 function clearScraper() {
