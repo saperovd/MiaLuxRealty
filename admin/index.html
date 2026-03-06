@@ -1928,57 +1928,23 @@ async function aiExtract() {
   document.getElementById('scrape-results').style.display = 'none';
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch('https://mialux-scraper.gqmiami.workers.dev/ai-extract', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{
-          role: 'user',
-          content: `Extract structured listing data from this real estate text. Return ONLY valid JSON, no markdown, no explanation.
-
-Text:
-${rawText.substring(0, 4000)}
-
-Return this exact JSON structure:
-{
-  "title": "project name only, no location suffix",
-  "slug": "url-friendly-slug",
-  "developer": "developer company name",
-  "neighborhood": "one of: Brickell, Edgewater, Wynwood, Miami Beach, Sunny Isles, Bal Harbour, Coconut Grove, Downtown Miami, Midtown, Design District, Aventura, Coral Gables, or empty string",
-  "address": "full street address if found, else empty string",
-  "price_from": number in dollars or 0,
-  "floors": number or 0,
-  "total_units": number or 0,
-  "delivery": "YYYY-QN format or empty",
-  "architect": "architect name or empty",
-  "interior_designer": "interior designer or empty",
-  "description": "2-3 sentence summary of the project",
-  "full_content": "all meaningful content about the project, excluding legal disclaimers and navigation",
-  "status": "one of: Coming Soon, Selling, Under Construction, Completed"
-}`
-        }]
-      })
+      body: JSON.stringify({ text: rawText.substring(0, 4000), sourceUrl }),
+      signal: AbortSignal.timeout(30000)
     });
 
     const data = await response.json();
     btn.textContent = '✨ Extract with AI →';
     btn.disabled = false;
 
-    if (!response.ok) {
-      statusText.innerHTML = '❌ AI error: ' + (data.error?.message || response.status);
+    if (!response.ok || data.error) {
+      statusText.innerHTML = '❌ ' + (data.error || 'AI extraction failed');
       return;
     }
 
-    const text = data.content?.[0]?.text || '';
-    let parsed;
-    try {
-      parsed = JSON.parse(text.replace(/```json|```/g, '').trim());
-    } catch(e) {
-      statusText.innerHTML = '❌ Could not parse AI response. Try again.';
-      return;
-    }
+    const parsed = data;
 
     // Fill form with AI-extracted data
     fillScraperForm({
