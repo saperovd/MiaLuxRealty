@@ -1652,15 +1652,13 @@ function showToast(msg, type='') {
 // ═══════════════════════════════════════════════════════
 // URL SCRAPER
 // ═══════════════════════════════════════════════════════
-const CORS_PROXIES = [
-  'https://api.allorigins.win/get?url=',
-  'https://corsproxy.io/?',
-  'https://cors-anywhere.herokuapp.com/'
-];
+// Worker URL - update this after deploying the Cloudflare Worker
+const SCRAPER_WORKER_URL = '/api/scrape';
 
 async function scrapeUrl() {
   const url = document.getElementById('scrape-url').value.trim();
   if (!url) { showToast('Please enter a URL', 'error'); return; }
+  if (!url.startsWith('http')) { showToast('Please enter a full URL starting with https://', 'error'); return; }
 
   const btn = document.getElementById('scrape-btn');
   const statusEl = document.getElementById('scrape-status');
@@ -1668,131 +1666,59 @@ async function scrapeUrl() {
   btn.textContent = 'Scraping…';
   btn.disabled = true;
   statusEl.style.display = 'block';
-  statusText.textContent = '⏳ Fetching page…';
+  statusText.textContent = '⏳ Fetching page via server…';
   document.getElementById('scrape-results').style.display = 'none';
 
-  let html = null;
-
-  // Try direct fetch first (works if CORS allows)
   try {
-    const r = await fetch(url, { signal: AbortSignal.timeout(8000) });
-    if (r.ok) html = await r.text();
-  } catch(e) {}
+    const r = await fetch(SCRAPER_WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url }),
+      signal: AbortSignal.timeout(20000)
+    });
 
-  // Try CORS proxies
-  if (!html) {
-    for (const proxy of CORS_PROXIES) {
-      try {
-        statusText.textContent = `⏳ Trying proxy…`;
-        const r = await fetch(proxy + encodeURIComponent(url), { signal: AbortSignal.timeout(10000) });
-        if (r.ok) {
-          const data = await r.json().catch(() => null);
-          html = data ? (data.contents || data.body || null) : await r.text();
-          if (html) break;
-        }
-      } catch(e) {}
+    const data = await r.json();
+    btn.textContent = 'Scrape →';
+    btn.disabled = false;
+
+    if (!r.ok || data.error) {
+      statusText.innerHTML = `❌ ${data.error || 'Could not fetch page'}.`;
+      return;
     }
+
+    statusText.textContent = '✓ Page fetched — filling form…';
+    fillScraperForm(data);
+
+  } catch(e) {
+    btn.textContent = 'Scrape →';
+    btn.disabled = false;
+    statusText.innerHTML = `❌ Error: ${e.message}`;
   }
-
-  btn.textContent = 'Scrape →';
-  btn.disabled = false;
-
-  if (!html) {
-    statusText.innerHTML = `❌ Could not fetch this page due to CORS restrictions.<br>
-      <span style="font-size:.75rem">Try: copy the page source manually and paste the key info into a listing directly.</span>`;
-    return;
-  }
-
-  statusText.textContent = '✓ Page fetched — parsing data…';
-  parseScrapedHtml(html, url);
 }
 
-function parseScrapedHtml(html, sourceUrl) {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, 'text/html');
+function fillScraperForm(data) {
+  const { title = '', slug = '', description = '', images = [], priceFrom = 0,
+    address = '', neighborhood = '', paragraphs = [], sourceUrl = '' } = data;
 
-  // Extract data using common patterns
-  const get = (selectors) => {
-    for (const sel of selectors) {
-      try {
-        const el = doc.querySelector(sel);
-        if (el) {
-          const t = (el.getAttribute('content') || el.textContent || '').trim();
-          if (t.length > 1) return t;
-        }
-      } catch(e) {}
-    }
-    return '';
-  };
-
-  const title = get(['meta[property="og:title"]','meta[name="twitter:title"]','h1','title']);
-  const desc  = get(['meta[property="og:description"]','meta[name="description"]','meta[name="twitter:description"]']);
-  const image = get(['meta[property="og:image"]','meta[name="twitter:image"]']);
-
-  // Extract price patterns — $X,XXX,XXX or from $X.XM
-  let priceFrom = 0;
-  const priceText = doc.body.innerText || doc.body.textContent || '';
-  const priceMatch = priceText.match(/\$\s*([\d,]+(?:\.\d+)?)\s*[Mm]?/g);
-  if (priceMatch) {
-    const prices = priceMatch.map(p => {
-      const n = parseFloat(p.replace(/[$,\s]/g,''));
-      return p.toLowerCase().includes('m') ? n * 1000000 : n;
-    }).filter(n => n > 100000).sort((a,b) => a-b);
-    if (prices.length) priceFrom = prices[0];
-  }
-
-  // Extract address
-  const addrPatterns = [
-    /\d+\s+[\w]+(?:\s+[\w]+)*\s+(?:St|Ave|Blvd|Dr|Way|Rd|Ln|Court|Ct|Place|Pl)\b[^\n]*/i,
-    /\d+\s+\w+\s+\w+,\s*Miami/i
-  ];
-  let address = '';
-  for (const pat of addrPatterns) {
-    const m = priceText.match(pat);
-    if (m) { address = m[0].trim(); break; }
-  }
-
-  // Slug from title
-  const slug = title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').substring(0,60);
-
-  // Collect images
-  const imgs = [];
-  doc.querySelectorAll('img[src],meta[property="og:image"],meta[name="twitter:image"]').forEach(el => {
-    let src = el.getAttribute('src') || el.getAttribute('content') || '';
-    if (!src) return;
-    if (src.startsWith('//')) src = 'https:' + src;
-    if (src.startsWith('/')) src = new URL(sourceUrl).origin + src;
-    if (src.startsWith('http') && !src.includes('logo') && !src.includes('icon') && !src.includes('avatar')) {
-      const w = parseInt(el.getAttribute('width')||'0');
-      if (w === 0 || w > 200) imgs.push(src);
-    }
-  });
-  const uniqueImgs = [...new Set(imgs)].slice(0, 12);
-
-  // Auto-generate SEO draft
+  const fullDesc = paragraphs && paragraphs.length ? paragraphs.join('\n\n') : description;
   const cleanTitle = title.replace(/\s*[-|]\s*.+$/, '').trim();
   const metaTitle = cleanTitle ? `${cleanTitle} | Miami Pre-Construction Condos | MiaLux Realty` : '';
-  const metaDesc = desc || `Discover ${cleanTitle} — luxury pre-construction condos in Miami. VIP pricing, zero buyer commission. Contact MiaLux Realty for exclusive access.`;
+  const metaDesc = description || `Discover ${cleanTitle} — luxury pre-construction condos in Miami. VIP pricing, zero buyer commission.`;
 
-  // Fill form
+  // Fill all form fields
   document.getElementById('sc-name').value = cleanTitle;
   document.getElementById('sc-slug').value = slug;
-  document.getElementById('sc-description').value = desc;
+  document.getElementById('sc-description').value = fullDesc;
   document.getElementById('sc-price_from').value = priceFrom || '';
   document.getElementById('sc-address').value = address;
+  document.getElementById('sc-neighborhood').value = neighborhood;
   document.getElementById('sc-source').value = sourceUrl;
   document.getElementById('sc-meta_title').value = metaTitle.substring(0,80);
   document.getElementById('sc-meta_desc').value = metaDesc.substring(0,200);
 
-  // Detect neighborhood
-  const neighborhoods = ['Brickell','Edgewater','Wynwood','Miami Beach','Sunny Isles','Bal Harbour','Coconut Grove','Downtown','Midtown','Design District'];
-  const bodyText = (doc.body.textContent||'').toLowerCase();
-  const hood = neighborhoods.find(n => bodyText.includes(n.toLowerCase())) || '';
-  document.getElementById('sc-neighborhood').value = hood;
-
   // Show images
   const imgContainer = document.getElementById('sc-images');
-  imgContainer.innerHTML = uniqueImgs.length ? uniqueImgs.map((src,i) => `
+  imgContainer.innerHTML = images.length ? images.map(src => `
     <div style="position:relative;display:inline-block">
       <img src="${src}" style="width:120px;height:80px;object-fit:cover;border-radius:4px;border:2px solid var(--border);cursor:pointer" 
         onclick="toggleImgSelect(this)" title="${src}" onerror="this.parentElement.remove()">
@@ -1809,7 +1735,7 @@ function parseScrapedHtml(html, sourceUrl) {
 
   document.getElementById('scrape-status').style.display = 'none';
   document.getElementById('scrape-results').style.display = 'block';
-  showToast('Page scraped successfully. Review and edit before saving.', 'success');
+  showToast('Page scraped! Review and rewrite for SEO before publishing.', 'success');
 }
 
 function toggleImgSelect(img) {
