@@ -1,1 +1,22 @@
+# OS
 .DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Old draft files (not needed in repo)
+index-light.html
+index-light-photo.html
+index-final.html
+developments.html
+
+# CMS build trigger (auto-generated)
+.cms-build-trigger
+
+# Dependencies (if you ever add Node/Python packages)
+node_modules/
+__pycache__/
+*.pyc
+.env
