@@ -289,6 +289,15 @@ html,body{height:100%;background:var(--darker);color:var(--text);font-family:var
       <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
       Redirects
     </div>
+    <div class="sidebar-section">Tools</div>
+    <div class="sidebar-item" data-panel="scraper" onclick="showPanel('scraper')">
+      <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      URL Scraper
+    </div>
+    <div class="sidebar-item" data-panel="imagetools" onclick="showPanel('imagetools')">
+      <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      Image Tools
+    </div>
   </div>
 
   <!-- MAIN PANELS -->
@@ -461,6 +470,116 @@ html,body{height:100%;background:var(--darker);color:var(--text);font-family:var
         </div>
         <div id="customRedirects"></div>
         <button class="add-row-btn" onclick="addRedirectRow()">+ Add Redirect</button>
+      </div>
+    </div>
+
+    <!-- URL SCRAPER -->
+    <div class="panel" id="panel-scraper">
+      <div class="panel-title">URL Scraper</div>
+      <div class="panel-sub">Paste any listing or property URL to import data as a draft. You can then edit and improve it before publishing.</div>
+
+      <div class="cms-card">
+        <div class="cms-card-title">Scrape URL</div>
+        <div style="display:flex;gap:.6rem;margin-bottom:.8rem">
+          <input class="cms-input" id="scrape-url" placeholder="https://developer.ciprianiresidencessoutham.com/..." style="flex:1">
+          <button class="btn-add" onclick="scrapeUrl()" id="scrape-btn">Scrape →</button>
+        </div>
+        <div style="font-size:.72rem;color:var(--muted);line-height:1.6">
+          Works best with developer websites, Zillow, Realtor.com, StreetEasy, and luxury condo project pages.
+          Due to CORS restrictions some sites require using a proxy — the scraper will try automatically.
+        </div>
+      </div>
+
+      <div id="scrape-status" style="display:none" class="cms-card">
+        <div id="scrape-status-text" style="font-size:.82rem;color:var(--muted)">Fetching...</div>
+      </div>
+
+      <div id="scrape-results" style="display:none">
+        <div class="cms-card">
+          <div class="cms-card-title">Scraped Data — Review & Edit Before Saving</div>
+          <div style="background:rgba(184,147,90,.08);border:1px solid rgba(184,147,90,.2);border-radius:var(--r);padding:.8rem;margin-bottom:1rem;font-size:.78rem;color:var(--gold-light);line-height:1.6">
+            ⚠ This is a draft. Review all fields, rewrite descriptions for SEO, verify prices, and replace images with WebP versions before publishing.
+          </div>
+          <div class="field-grid">
+            <div class="field"><label>Project Name</label><input class="cms-input" id="sc-name" placeholder="Project name"></div>
+            <div class="field"><label>Slug (URL)</label><input class="cms-input" id="sc-slug" placeholder="project-name-miami"></div>
+            <div class="field"><label>Developer</label><input class="cms-input" id="sc-developer" placeholder="Developer name"></div>
+            <div class="field"><label>Neighborhood</label><input class="cms-input" id="sc-neighborhood" placeholder="Brickell"></div>
+            <div class="field"><label>Address</label><input class="cms-input" id="sc-address" placeholder="123 Main St, Miami, FL"></div>
+            <div class="field"><label>Price From ($)</label><input class="cms-input" type="number" id="sc-price_from" placeholder="1500000"></div>
+            <div class="field"><label>Status</label>
+              <select class="cms-select" id="sc-status">
+                <option>Coming Soon</option><option>Selling</option><option>Under Construction</option><option>Completed</option>
+              </select>
+            </div>
+            <div class="field"><label>Estimated Delivery</label><input class="cms-input" id="sc-delivery" placeholder="2027-Q4"></div>
+            <div class="field full"><label>Short Description <span style="color:var(--light);font-size:.65rem;font-weight:300">(rewrite for SEO before publishing)</span></label>
+              <textarea class="cms-textarea" id="sc-description" rows="4"></textarea>
+            </div>
+            <div class="field full"><label>Images Found <span style="color:var(--light);font-size:.65rem;font-weight:300">(select which to keep, convert to WebP in Image Tools)</span></label>
+              <div id="sc-images" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.4rem"></div>
+            </div>
+            <div class="field full"><label>Source URL</label><input class="cms-input" id="sc-source" readonly style="color:var(--muted)"></div>
+          </div>
+        </div>
+
+        <div class="cms-card">
+          <div class="cms-card-title">SEO Draft</div>
+          <div style="font-size:.75rem;color:var(--muted);margin-bottom:.8rem">Auto-generated from scraped content. Rewrite these before publishing for best SEO results.</div>
+          <div class="field-grid">
+            <div class="field full"><label>Meta Title <span style="color:var(--light);font-size:.65rem;font-weight:300">(50-60 chars ideal)</span></label>
+              <input class="cms-input" id="sc-meta_title" maxlength="80">
+              <div class="char-count" id="cc-sc-meta_title"></div>
+            </div>
+            <div class="field full"><label>Meta Description <span style="color:var(--light);font-size:.65rem;font-weight:300">(140-160 chars ideal)</span></label>
+              <textarea class="cms-textarea" id="sc-meta_desc" maxlength="200" rows="3"></textarea>
+              <div class="char-count" id="cc-sc-meta_desc"></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:.6rem;margin-top:.5rem">
+          <button class="btn-add" onclick="saveScrapedAsListing()">Save as New Listing Draft</button>
+          <button class="btn-secondary" onclick="saveScrapedAsPost()">Save as Blog Post Draft</button>
+          <button class="btn-secondary" onclick="clearScraper()">Clear</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- IMAGE TOOLS -->
+    <div class="panel" id="panel-imagetools">
+      <div class="panel-title">Image Tools</div>
+      <div class="panel-sub">Convert images to WebP format and set SEO metadata. All processing happens in your browser — no upload to any server.</div>
+
+      <div class="cms-card">
+        <div class="cms-card-title">Upload & Convert to WebP</div>
+        <div id="img-drop-zone" style="border:2px dashed var(--border);border-radius:var(--rm);padding:2rem;text-align:center;cursor:pointer;transition:border-color .2s;margin-bottom:1rem" onclick="document.getElementById('img-file-input').click()" ondragover="event.preventDefault();this.style.borderColor='var(--gold)'" ondragleave="this.style.borderColor='var(--border)'" ondrop="handleImageDrop(event)">
+          <div style="font-size:2rem;margin-bottom:.5rem">🖼</div>
+          <div style="font-size:.82rem;color:var(--muted)">Click or drag & drop images here</div>
+          <div style="font-size:.72rem;color:var(--light);margin-top:.3rem">JPG, PNG, GIF, HEIC supported · Converts to WebP · Max 20MB per file</div>
+        </div>
+        <input type="file" id="img-file-input" multiple accept="image/*" style="display:none" onchange="handleImageFiles(this.files)">
+        <div style="display:flex;gap:.6rem;margin-bottom:.8rem;flex-wrap:wrap">
+          <div class="field" style="flex:1;min-width:140px"><label>Quality <span style="color:var(--light);font-size:.65rem">(1-100, default 85)</span></label>
+            <input class="cms-input" type="number" id="img-quality" value="85" min="1" max="100">
+          </div>
+          <div class="field" style="flex:1;min-width:140px"><label>Max Width px <span style="color:var(--light);font-size:.65rem">(0 = keep original)</span></label>
+            <input class="cms-input" type="number" id="img-maxwidth" value="1920" min="0">
+          </div>
+        </div>
+      </div>
+
+      <div id="img-queue" style="display:flex;flex-direction:column;gap:.8rem"></div>
+
+      <div id="img-actions" style="display:none;margin-top:.5rem">
+        <div class="cms-card">
+          <div class="cms-card-title">Batch Actions</div>
+          <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+            <button class="btn-add" onclick="convertAllImages()">Convert All to WebP</button>
+            <button class="btn-secondary" onclick="downloadAllImages()">Download All</button>
+            <button class="btn-secondary" onclick="clearImageQueue()">Clear All</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1527,6 +1646,426 @@ function showToast(msg, type='') {
   t.textContent = (type==='success'?'✓ ':type==='error'?'✗ ':'') + msg;
   t.className = 'toast show ' + type;
   setTimeout(() => t.className = 'toast', 3500);
+}
+
+
+// ═══════════════════════════════════════════════════════
+// URL SCRAPER
+// ═══════════════════════════════════════════════════════
+const CORS_PROXIES = [
+  'https://api.allorigins.win/get?url=',
+  'https://corsproxy.io/?',
+  'https://cors-anywhere.herokuapp.com/'
+];
+
+async function scrapeUrl() {
+  const url = document.getElementById('scrape-url').value.trim();
+  if (!url) { showToast('Please enter a URL', 'error'); return; }
+
+  const btn = document.getElementById('scrape-btn');
+  const statusEl = document.getElementById('scrape-status');
+  const statusText = document.getElementById('scrape-status-text');
+  btn.textContent = 'Scraping…';
+  btn.disabled = true;
+  statusEl.style.display = 'block';
+  statusText.textContent = '⏳ Fetching page…';
+  document.getElementById('scrape-results').style.display = 'none';
+
+  let html = null;
+
+  // Try direct fetch first (works if CORS allows)
+  try {
+    const r = await fetch(url, { signal: AbortSignal.timeout(8000) });
+    if (r.ok) html = await r.text();
+  } catch(e) {}
+
+  // Try CORS proxies
+  if (!html) {
+    for (const proxy of CORS_PROXIES) {
+      try {
+        statusText.textContent = `⏳ Trying proxy…`;
+        const r = await fetch(proxy + encodeURIComponent(url), { signal: AbortSignal.timeout(10000) });
+        if (r.ok) {
+          const data = await r.json().catch(() => null);
+          html = data ? (data.contents || data.body || null) : await r.text();
+          if (html) break;
+        }
+      } catch(e) {}
+    }
+  }
+
+  btn.textContent = 'Scrape →';
+  btn.disabled = false;
+
+  if (!html) {
+    statusText.innerHTML = `❌ Could not fetch this page due to CORS restrictions.<br>
+      <span style="font-size:.75rem">Try: copy the page source manually and paste the key info into a listing directly.</span>`;
+    return;
+  }
+
+  statusText.textContent = '✓ Page fetched — parsing data…';
+  parseScrapedHtml(html, url);
+}
+
+function parseScrapedHtml(html, sourceUrl) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+
+  // Extract data using common patterns
+  const get = (selectors) => {
+    for (const sel of selectors) {
+      try {
+        const el = doc.querySelector(sel);
+        if (el) {
+          const t = (el.getAttribute('content') || el.textContent || '').trim();
+          if (t.length > 1) return t;
+        }
+      } catch(e) {}
+    }
+    return '';
+  };
+
+  const title = get(['meta[property="og:title"]','meta[name="twitter:title"]','h1','title']);
+  const desc  = get(['meta[property="og:description"]','meta[name="description"]','meta[name="twitter:description"]']);
+  const image = get(['meta[property="og:image"]','meta[name="twitter:image"]']);
+
+  // Extract price patterns — $X,XXX,XXX or from $X.XM
+  let priceFrom = 0;
+  const priceText = doc.body.innerText || doc.body.textContent || '';
+  const priceMatch = priceText.match(/\$\s*([\d,]+(?:\.\d+)?)\s*[Mm]?/g);
+  if (priceMatch) {
+    const prices = priceMatch.map(p => {
+      const n = parseFloat(p.replace(/[$,\s]/g,''));
+      return p.toLowerCase().includes('m') ? n * 1000000 : n;
+    }).filter(n => n > 100000).sort((a,b) => a-b);
+    if (prices.length) priceFrom = prices[0];
+  }
+
+  // Extract address
+  const addrPatterns = [
+    /\d+\s+[\w]+(?:\s+[\w]+)*\s+(?:St|Ave|Blvd|Dr|Way|Rd|Ln|Court|Ct|Place|Pl)\b[^\n]*/i,
+    /\d+\s+\w+\s+\w+,\s*Miami/i
+  ];
+  let address = '';
+  for (const pat of addrPatterns) {
+    const m = priceText.match(pat);
+    if (m) { address = m[0].trim(); break; }
+  }
+
+  // Slug from title
+  const slug = title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').substring(0,60);
+
+  // Collect images
+  const imgs = [];
+  doc.querySelectorAll('img[src],meta[property="og:image"],meta[name="twitter:image"]').forEach(el => {
+    let src = el.getAttribute('src') || el.getAttribute('content') || '';
+    if (!src) return;
+    if (src.startsWith('//')) src = 'https:' + src;
+    if (src.startsWith('/')) src = new URL(sourceUrl).origin + src;
+    if (src.startsWith('http') && !src.includes('logo') && !src.includes('icon') && !src.includes('avatar')) {
+      const w = parseInt(el.getAttribute('width')||'0');
+      if (w === 0 || w > 200) imgs.push(src);
+    }
+  });
+  const uniqueImgs = [...new Set(imgs)].slice(0, 12);
+
+  // Auto-generate SEO draft
+  const cleanTitle = title.replace(/\s*[-|]\s*.+$/, '').trim();
+  const metaTitle = cleanTitle ? `${cleanTitle} | Miami Pre-Construction Condos | MiaLux Realty` : '';
+  const metaDesc = desc || `Discover ${cleanTitle} — luxury pre-construction condos in Miami. VIP pricing, zero buyer commission. Contact MiaLux Realty for exclusive access.`;
+
+  // Fill form
+  document.getElementById('sc-name').value = cleanTitle;
+  document.getElementById('sc-slug').value = slug;
+  document.getElementById('sc-description').value = desc;
+  document.getElementById('sc-price_from').value = priceFrom || '';
+  document.getElementById('sc-address').value = address;
+  document.getElementById('sc-source').value = sourceUrl;
+  document.getElementById('sc-meta_title').value = metaTitle.substring(0,80);
+  document.getElementById('sc-meta_desc').value = metaDesc.substring(0,200);
+
+  // Detect neighborhood
+  const neighborhoods = ['Brickell','Edgewater','Wynwood','Miami Beach','Sunny Isles','Bal Harbour','Coconut Grove','Downtown','Midtown','Design District'];
+  const bodyText = (doc.body.textContent||'').toLowerCase();
+  const hood = neighborhoods.find(n => bodyText.includes(n.toLowerCase())) || '';
+  document.getElementById('sc-neighborhood').value = hood;
+
+  // Show images
+  const imgContainer = document.getElementById('sc-images');
+  imgContainer.innerHTML = uniqueImgs.length ? uniqueImgs.map((src,i) => `
+    <div style="position:relative;display:inline-block">
+      <img src="${src}" style="width:120px;height:80px;object-fit:cover;border-radius:4px;border:2px solid var(--border);cursor:pointer" 
+        onclick="toggleImgSelect(this)" title="${src}" onerror="this.parentElement.remove()">
+      <div style="position:absolute;top:3px;right:3px;width:18px;height:18px;background:var(--gold);border-radius:50%;display:none;align-items:center;justify-content:center;font-size:.6rem;color:#fff" class="img-check">✓</div>
+    </div>`).join('') 
+    : '<span style="color:var(--muted);font-size:.78rem">No images found on this page.</span>';
+
+  // Update char counts
+  ['sc-meta_title','sc-meta_desc'].forEach(id => {
+    const el = document.getElementById(id);
+    const cc = document.getElementById('cc-'+id);
+    if (el && cc) { cc.textContent = `${el.value.length} / ${el.maxLength}`; }
+  });
+
+  document.getElementById('scrape-status').style.display = 'none';
+  document.getElementById('scrape-results').style.display = 'block';
+  showToast('Page scraped successfully. Review and edit before saving.', 'success');
+}
+
+function toggleImgSelect(img) {
+  const check = img.nextElementSibling;
+  const selected = img.style.borderColor === 'rgb(184, 147, 90)';
+  img.style.borderColor = selected ? 'var(--border)' : 'var(--gold)';
+  check.style.display = selected ? 'none' : 'flex';
+}
+
+function getSelectedImages() {
+  return [...document.querySelectorAll('#sc-images img')]
+    .filter(img => img.style.borderColor === 'rgb(184, 147, 90)')
+    .map(img => img.src);
+}
+
+function saveScrapedAsListing() {
+  const selectedImgs = getSelectedImages();
+  const allImgs = [...document.querySelectorAll('#sc-images img')].map(i => i.src);
+  const images = selectedImgs.length ? selectedImgs : allImgs.slice(0,3);
+
+  listings = listings || [];
+  const newListing = {
+    id: 'listing-' + Date.now(),
+    slug: document.getElementById('sc-slug').value || 'new-listing',
+    name: document.getElementById('sc-name').value || 'New Listing',
+    tagline: '',
+    badge: 'New Launch',
+    featured: false,
+    status: document.getElementById('sc-status').value,
+    neighborhood: document.getElementById('sc-neighborhood').value,
+    address: document.getElementById('sc-address').value,
+    developer: document.getElementById('sc-developer').value,
+    architect: '', interior_designer: '', brand_partner: '',
+    floors: 0, total_units: 0,
+    price_from: parseInt(document.getElementById('sc-price_from').value) || 0,
+    price_to: 0, price_per_sqft_from: 0,
+    estimated_delivery: document.getElementById('sc-delivery').value,
+    construction_progress: 0, deposit_percent: 20,
+    views: [], unit_types: [], payment_schedule: [],
+    amenities: [], residence_features: [],
+    description_short: document.getElementById('sc-description').value.substring(0, 300),
+    description_full: document.getElementById('sc-description').value,
+    image_main: images[0] || '',
+    images_gallery: images.slice(1),
+    brochure_pdf: '', floorplans_pdf: '',
+    _source_url: document.getElementById('sc-source').value,
+    _scraped_at: new Date().toISOString(),
+    seo: {
+      en: {
+        meta_title: document.getElementById('sc-meta_title').value,
+        meta_description: document.getElementById('sc-meta_desc').value,
+        og_image: images[0] || '', canonical: '', schema_type: 'Accommodation', hreflang: {}
+      },
+      es:{meta_title:'',meta_description:'',og_image:'',canonical:'',schema_type:'Accommodation',hreflang:{}},
+      pt:{meta_title:'',meta_description:'',og_image:'',canonical:'',schema_type:'Accommodation',hreflang:{}},
+      ru:{meta_title:'',meta_description:'',og_image:'',canonical:'',schema_type:'Accommodation',hreflang:{}}
+    }
+  };
+
+  listings.push(newListing);
+  updateCounts();
+  showToast('Saved as draft listing! Go to Listings to edit and publish.', 'success');
+  clearScraper();
+  showPanel('listings');
+}
+
+function saveScrapedAsPost() {
+  content.posts = content.posts || [];
+  const post = {
+    id: 'post-' + Date.now(),
+    slug: document.getElementById('sc-slug').value || 'new-post',
+    status: 'draft',
+    date: new Date().toISOString().split('T')[0],
+    author: 'MiaLux Realty Team',
+    category: 'Market Reports',
+    image: [...document.querySelectorAll('#sc-images img')].find(i => i.style.borderColor === 'rgb(184, 147, 90)')?.src || '',
+    _source_url: document.getElementById('sc-source').value,
+    en: {
+      title: document.getElementById('sc-name').value,
+      meta_description: document.getElementById('sc-meta_desc').value,
+      og_title: document.getElementById('sc-meta_title').value,
+      og_description: document.getElementById('sc-meta_desc').value,
+      og_image: '', excerpt: document.getElementById('sc-description').value.substring(0,200),
+      body: `<p>${document.getElementById('sc-description').value}</p>`,
+      canonical: '', schema_type: 'Article', hreflang: {}
+    },
+    es:{title:'',meta_description:'',og_title:'',og_description:'',og_image:'',excerpt:'',body:'',canonical:'',schema_type:'Article',hreflang:{}},
+    pt:{title:'',meta_description:'',og_title:'',og_description:'',og_image:'',excerpt:'',body:'',canonical:'',schema_type:'Article',hreflang:{}},
+    ru:{title:'',meta_description:'',og_title:'',og_description:'',og_image:'',excerpt:'',body:'',canonical:'',schema_type:'Article',hreflang:{}}
+  };
+  content.posts.push(post);
+  updateCounts();
+  showToast('Saved as draft blog post! Go to Blog Posts to edit and publish.', 'success');
+  clearScraper();
+  showPanel('posts');
+}
+
+function clearScraper() {
+  document.getElementById('scrape-url').value = '';
+  document.getElementById('scrape-results').style.display = 'none';
+  document.getElementById('scrape-status').style.display = 'none';
+}
+
+// ═══════════════════════════════════════════════════════
+// IMAGE TOOLS — WebP Converter
+// ═══════════════════════════════════════════════════════
+let imageQueue = [];
+
+function handleImageDrop(e) {
+  e.preventDefault();
+  document.getElementById('img-drop-zone').style.borderColor = 'var(--border)';
+  handleImageFiles(e.dataTransfer.files);
+}
+
+function handleImageFiles(files) {
+  if (!files.length) return;
+  [...files].forEach(file => {
+    if (!file.type.startsWith('image/')) return;
+    const id = 'img-' + Date.now() + '-' + Math.random().toString(36).substr(2,5);
+    const reader = new FileReader();
+    reader.onload = e => addImageToQueue(id, file, e.target.result);
+    reader.readAsDataURL(file);
+  });
+}
+
+function slugifyFilename(name) {
+  return name.toLowerCase()
+    .replace(/\.[^.]+$/, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+function addImageToQueue(id, file, dataUrl) {
+  const baseName = slugifyFilename(file.name);
+  imageQueue.push({ id, file, dataUrl, converted: null, filename: baseName });
+
+  const div = document.createElement('div');
+  div.className = 'cms-card';
+  div.id = 'imgcard-' + id;
+  div.innerHTML = `
+    <div style="display:grid;grid-template-columns:140px 1fr;gap:1rem;align-items:start">
+      <div>
+        <img src="${dataUrl}" style="width:140px;height:90px;object-fit:cover;border-radius:var(--r);border:1px solid var(--border)">
+        <div style="font-size:.65rem;color:var(--muted);margin-top:.3rem;word-break:break-all">${file.name}</div>
+        <div style="font-size:.65rem;color:var(--light)">${(file.size/1024).toFixed(0)} KB · ${file.type.split('/')[1].toUpperCase()}</div>
+      </div>
+      <div>
+        <div class="field-grid">
+          <div class="field"><label>Filename <span style="color:var(--light);font-size:.6rem">(without .webp)</span></label>
+            <input class="cms-input" id="fn-${id}" value="${baseName}" placeholder="cipriani-residences-miami-lobby">
+          </div>
+          <div class="field"><label>Alt Text <span style="color:var(--light);font-size:.6rem">(describe for SEO)</span></label>
+            <input class="cms-input" id="alt-${id}" placeholder="Cipriani Residences Miami lobby interior">
+          </div>
+          <div class="field"><label>Title <span style="color:var(--light);font-size:.6rem">(hover tooltip)</span></label>
+            <input class="cms-input" id="title-${id}" placeholder="Cipriani Residences Miami – Luxury Living">
+          </div>
+          <div class="field"><label>Status</label>
+            <div id="status-${id}" style="font-size:.75rem;color:var(--muted);padding:.5rem 0">Ready to convert</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:.5rem;margin-top:.6rem;flex-wrap:wrap">
+          <button class="btn-add" style="font-size:.65rem;padding:.35rem .7rem" onclick="convertSingleImage('${id}')">Convert to WebP</button>
+          <button class="btn-secondary" style="font-size:.65rem" id="dl-${id}" onclick="downloadSingleImage('${id}')" disabled>Download</button>
+          <button class="btn-danger" style="font-size:.65rem" onclick="removeFromQueue('${id}')">Remove</button>
+        </div>
+        <div id="preview-${id}" style="margin-top:.6rem;display:none">
+          <div style="font-size:.65rem;color:var(--green);margin-bottom:.3rem" id="savings-${id}"></div>
+          <img id="webp-preview-${id}" style="max-width:200px;height:60px;object-fit:cover;border-radius:4px;border:1px solid var(--green)">
+        </div>
+      </div>
+    </div>`;
+  document.getElementById('img-queue').appendChild(div);
+  document.getElementById('img-actions').style.display = 'block';
+}
+
+async function convertSingleImage(id) {
+  const item = imageQueue.find(i => i.id === id);
+  if (!item) return;
+
+  const quality = Math.min(100, Math.max(1, parseInt(document.getElementById('img-quality').value) || 85)) / 100;
+  const maxWidth = parseInt(document.getElementById('img-maxwidth').value) || 0;
+  const statusEl = document.getElementById('status-' + id);
+  statusEl.innerHTML = '<span style="color:var(--gold)">⏳ Converting…</span>';
+
+  try {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+
+    await new Promise((res, rej) => {
+      img.onload = res; img.onerror = rej;
+      img.src = item.dataUrl;
+    });
+
+    let w = img.width, h = img.height;
+    if (maxWidth > 0 && w > maxWidth) { h = Math.round(h * maxWidth / w); w = maxWidth; }
+    canvas.width = w; canvas.height = h;
+    ctx.drawImage(img, 0, 0, w, h);
+
+    const webpDataUrl = canvas.toDataURL('image/webp', quality);
+    item.converted = webpDataUrl;
+    item.width = w; item.height = h;
+
+    // Show savings
+    const origSize = Math.round(item.file.size / 1024);
+    const webpSize = Math.round((webpDataUrl.length * 3/4) / 1024);
+    const savings = Math.round((1 - webpSize/origSize) * 100);
+
+    statusEl.innerHTML = `<span style="color:var(--green)">✓ Converted ${w}×${h}px</span>`;
+    document.getElementById('savings-' + id).textContent = 
+      `${origSize}KB → ${webpSize}KB · ${savings > 0 ? savings+'% smaller' : 'similar size'}`;
+    document.getElementById('preview-' + id).style.display = 'block';
+    document.getElementById('webp-preview-' + id).src = webpDataUrl;
+    document.getElementById('dl-' + id).disabled = false;
+  } catch(e) {
+    statusEl.innerHTML = `<span style="color:var(--red)">✗ Error: ${e.message}</span>`;
+  }
+}
+
+function downloadSingleImage(id) {
+  const item = imageQueue.find(i => i.id === id);
+  if (!item || !item.converted) return;
+  const filename = (document.getElementById('fn-' + id)?.value || item.id) + '.webp';
+  const a = document.createElement('a');
+  a.href = item.converted;
+  a.download = filename;
+  a.click();
+}
+
+async function convertAllImages() {
+  for (const item of imageQueue) {
+    if (!item.converted) await convertSingleImage(item.id);
+  }
+  showToast('All images converted!', 'success');
+}
+
+function downloadAllImages() {
+  const ready = imageQueue.filter(i => i.converted);
+  if (!ready.length) { showToast('Convert images first', 'error'); return; }
+  ready.forEach((item, i) => {
+    setTimeout(() => downloadSingleImage(item.id), i * 300);
+  });
+}
+
+function removeFromQueue(id) {
+  imageQueue = imageQueue.filter(i => i.id !== id);
+  const card = document.getElementById('imgcard-' + id);
+  if (card) card.remove();
+  if (!imageQueue.length) document.getElementById('img-actions').style.display = 'none';
+}
+
+function clearImageQueue() {
+  imageQueue = [];
+  document.getElementById('img-queue').innerHTML = '';
+  document.getElementById('img-actions').style.display = 'none';
 }
 
 // ═══════════════════════════════════════════════════════
