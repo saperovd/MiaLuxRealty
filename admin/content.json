@@ -1,0 +1,423 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "last_updated": "2025-01-01",
+    "languages": [
+      "en",
+      "es",
+      "pt",
+      "ru"
+    ],
+    "default_language": "en"
+  },
+  "site_settings": {
+    "site_name": "MiaLux Realty",
+    "site_url": "https://mialuxrealty.com",
+    "logo_text": "MiaLux",
+    "logo_text_accent": "Realty",
+    "phone": "+1 (305) 000-0000",
+    "phone_raw": "+13050000000",
+    "email": "hello@mialuxrealty.com",
+    "whatsapp": "13050000000",
+    "license": "Licensed Real Estate Broker, Florida",
+    "address": "Miami, FL 33131",
+    "hours": "Mon–Sun 9am–9pm EST",
+    "social": {
+      "instagram": "",
+      "facebook": "",
+      "linkedin": "",
+      "youtube": ""
+    },
+    "analytics": {
+      "gtm_id": "",
+      "ga4_id": "",
+      "meta_pixel": "",
+      "clarity_id": ""
+    },
+    "seo": {
+      "og_image": "/images/og-default.webp",
+      "twitter_card": "summary_large_image",
+      "robots": "index, follow"
+    }
+  },
+  "navigation": {
+    "en": {
+      "links": [
+        {
+          "label": "Developments",
+          "url": "/miami-pre-construction-condos.html"
+        },
+        {
+          "label": "Neighborhoods",
+          "url": "/#neighborhoods"
+        },
+        {
+          "label": "Process",
+          "url": "/#process"
+        },
+        {
+          "label": "FAQ",
+          "url": "/#faq"
+        },
+        {
+          "label": "News",
+          "url": "/#news"
+        }
+      ],
+      "cta": {
+        "label": "Get VIP Access",
+        "url": "/#contact"
+      }
+    },
+    "es": {
+      "links": [
+        {
+          "label": "Desarrollos",
+          "url": "/es/condominios-preconstruccion-miami.html"
+        },
+        {
+          "label": "Vecindarios",
+          "url": "/es/#vecindarios"
+        },
+        {
+          "label": "Proceso",
+          "url": "/es/#proceso"
+        },
+        {
+          "label": "FAQ",
+          "url": "/es/#faq"
+        },
+        {
+          "label": "Noticias",
+          "url": "/es/#noticias"
+        }
+      ],
+      "cta": {
+        "label": "Acceso VIP",
+        "url": "/es/#contacto"
+      }
+    },
+    "pt": {
+      "links": [
+        {
+          "label": "Empreendimentos",
+          "url": "/pt/condominios-pre-construcao-miami.html"
+        },
+        {
+          "label": "Bairros",
+          "url": "/pt/#bairros"
+        },
+        {
+          "label": "Processo",
+          "url": "/pt/#processo"
+        },
+        {
+          "label": "FAQ",
+          "url": "/pt/#faq"
+        },
+        {
+          "label": "Notícias",
+          "url": "/pt/#noticias"
+        }
+      ],
+      "cta": {
+        "label": "Acesso VIP",
+        "url": "/pt/#contato"
+      }
+    },
+    "ru": {
+      "links": [
+        {
+          "label": "Проекты",
+          "url": "/ru/zhilye-kompleksy-mayami.html"
+        },
+        {
+          "label": "Районы",
+          "url": "/ru/#rayony"
+        },
+        {
+          "label": "Процесс",
+          "url": "/ru/#process"
+        },
+        {
+          "label": "FAQ",
+          "url": "/ru/#faq"
+        },
+        {
+          "label": "Новости",
+          "url": "/ru/#novosti"
+        }
+      ],
+      "cta": {
+        "label": "VIP Доступ",
+        "url": "/ru/#kontakt"
+      }
+    }
+  },
+  "footer": {
+    "en": {
+      "description": "Miami's premier pre-construction specialists. VIP access to luxury new developments. Zero buyer commission. Expert guidance for international investors.",
+      "columns": [
+        {
+          "heading": "Neighborhoods",
+          "links": [
+            {
+              "label": "Brickell",
+              "url": "/#neighborhoods"
+            },
+            {
+              "label": "Miami Beach",
+              "url": "/#neighborhoods"
+            },
+            {
+              "label": "Edgewater",
+              "url": "/#neighborhoods"
+            },
+            {
+              "label": "Sunny Isles Beach",
+              "url": "/#neighborhoods"
+            },
+            {
+              "label": "Downtown Miami",
+              "url": "/#neighborhoods"
+            }
+          ]
+        },
+        {
+          "heading": "Resources",
+          "links": [
+            {
+              "label": "Buying Process",
+              "url": "/#process"
+            },
+            {
+              "label": "FAQ",
+              "url": "/#faq"
+            },
+            {
+              "label": "Market Reports",
+              "url": "/#news"
+            },
+            {
+              "label": "Free Consultation",
+              "url": "/#contact"
+            }
+          ]
+        },
+        {
+          "heading": "Contact",
+          "links": []
+        }
+      ],
+      "legal": "All rights reserved · Licensed Real Estate Broker, Florida",
+      "privacy_url": "/privacy.html",
+      "terms_url": "/terms.html",
+      "sitemap_url": "/sitemap.xml"
+    },
+    "es": {
+      "description": "Especialistas en pre-construcción de lujo en Miami. Acceso VIP a nuevos desarrollos. Cero comisión para compradores.",
+      "columns": [],
+      "legal": "Todos los derechos reservados · Corredor de Bienes Raíces Licenciado, Florida",
+      "privacy_url": "/es/privacidad.html",
+      "terms_url": "/es/terminos.html",
+      "sitemap_url": "/sitemap.xml"
+    },
+    "pt": {
+      "description": "Especialistas em pré-construção de luxo em Miami. Acesso VIP a novos empreendimentos. Zero comissão para compradores.",
+      "columns": [],
+      "legal": "Todos os direitos reservados · Corretor Imobiliário Licenciado, Flórida",
+      "privacy_url": "/pt/privacidade.html",
+      "terms_url": "/pt/termos.html",
+      "sitemap_url": "/sitemap.xml"
+    },
+    "ru": {
+      "description": "Ведущие специалисты по пре-констракшн недвижимости в Майами. VIP-доступ к новым проектам. Нулевая комиссия для покупателей.",
+      "columns": [],
+      "legal": "Все права защищены · Лицензированный риэлтор, Флорида",
+      "privacy_url": "/ru/konfidencialnost.html",
+      "terms_url": "/ru/usloviya.html",
+      "sitemap_url": "/sitemap.xml"
+    }
+  },
+  "pages": [
+    {
+      "id": "home",
+      "slug": "",
+      "template": "home",
+      "status": "published",
+      "en": {
+        "title": "Miami Luxury Realty | Pre-Construction Condos & New Developments Miami 2025",
+        "meta_description": "Exclusive pre-construction condos and luxury new developments in Miami. VIP access, best pricing, zero buyer commission. Brickell, Edgewater, Miami Beach.",
+        "h1": "Miami's Most <em>Exclusive</em> Pre-Construction Developments",
+        "hero_subtitle": "VIP access to luxury new developments in Brickell, Miami Beach & Edgewater. Zero buyer commission. Expert guidance for international investors.",
+        "og_title": "Miami Luxury Realty | Pre-Construction Condos Miami 2025",
+        "og_description": "VIP access to Miami's finest new developments. Zero buyer commission.",
+        "og_image": "/images/og-home.webp",
+        "canonical": "https://mialuxrealty.com/",
+        "schema_type": "RealEstateAgent",
+        "hreflang": {
+          "en": "https://mialuxrealty.com/",
+          "es": "https://mialuxrealty.com/es/",
+          "pt": "https://mialuxrealty.com/pt/",
+          "ru": "https://mialuxrealty.com/ru/"
+        }
+      },
+      "es": {
+        "title": "",
+        "meta_description": "",
+        "h1": "",
+        "hero_subtitle": "",
+        "og_title": "",
+        "og_description": "",
+        "og_image": "",
+        "canonical": "https://mialuxrealty.com/es/",
+        "schema_type": "RealEstateAgent",
+        "hreflang": {}
+      },
+      "pt": {
+        "title": "",
+        "meta_description": "",
+        "h1": "",
+        "hero_subtitle": "",
+        "og_title": "",
+        "og_description": "",
+        "og_image": "",
+        "canonical": "https://mialuxrealty.com/pt/",
+        "schema_type": "RealEstateAgent",
+        "hreflang": {}
+      },
+      "ru": {
+        "title": "",
+        "meta_description": "",
+        "h1": "",
+        "hero_subtitle": "",
+        "og_title": "",
+        "og_description": "",
+        "og_image": "",
+        "canonical": "https://mialuxrealty.com/ru/",
+        "schema_type": "RealEstateAgent",
+        "hreflang": {}
+      }
+    },
+    {
+      "id": "catalog",
+      "slug": "miami-pre-construction-condos",
+      "template": "catalog",
+      "status": "published",
+      "en": {
+        "title": "Miami Pre-Construction Luxury Condos 2025 | New Developments | MiaLux Realty",
+        "meta_description": "Browse luxury pre-construction developments in Miami. Cipriani, St. Regis, Mandarin Oriental & more. VIP pricing, zero buyer commission.",
+        "h1": "Miami Pre-Construction <em>Luxury Condos</em> 2025",
+        "intro": "Miami's luxury pre-construction market offers international buyers a rare opportunity to secure a residence at today's prices.",
+        "og_title": "Miami Pre-Construction Luxury Condos 2025 | MiaLux Realty",
+        "og_description": "VIP access to Miami's finest new developments. Zero buyer commission. Expert guidance for international investors.",
+        "og_image": "/images/og-catalog.webp",
+        "canonical": "https://mialuxrealty.com/miami-pre-construction-condos",
+        "schema_type": "ItemList",
+        "hreflang": {
+          "en": "https://mialuxrealty.com/miami-pre-construction-condos",
+          "es": "https://mialuxrealty.com/es/condominios-preconstruccion-miami",
+          "pt": "https://mialuxrealty.com/pt/condominios-pre-construcao-miami",
+          "ru": "https://mialuxrealty.com/ru/zhilye-kompleksy-mayami"
+        }
+      },
+      "es": {
+        "title": "",
+        "meta_description": "",
+        "h1": "",
+        "intro": "",
+        "og_title": "",
+        "og_description": "",
+        "og_image": "",
+        "canonical": "https://mialuxrealty.com/es/condominios-preconstruccion-miami",
+        "schema_type": "ItemList",
+        "hreflang": {}
+      },
+      "pt": {
+        "title": "",
+        "meta_description": "",
+        "h1": "",
+        "intro": "",
+        "og_title": "",
+        "og_description": "",
+        "og_image": "",
+        "canonical": "https://mialuxrealty.com/pt/condominios-pre-construcao-miami",
+        "schema_type": "ItemList",
+        "hreflang": {}
+      },
+      "ru": {
+        "title": "",
+        "meta_description": "",
+        "h1": "",
+        "intro": "",
+        "og_title": "",
+        "og_description": "",
+        "og_image": "",
+        "canonical": "https://mialuxrealty.com/ru/zhilye-kompleksy-mayami",
+        "schema_type": "ItemList",
+        "hreflang": {}
+      }
+    }
+  ],
+  "posts": [
+    {
+      "id": "miami-pre-construction-market-2025",
+      "slug": "miami-pre-construction-market-2025",
+      "status": "published",
+      "date": "2025-01-15",
+      "author": "MiaLux Realty Team",
+      "category": "Market Reports",
+      "image": "/images/blog/market-2025.webp",
+      "en": {
+        "title": "Miami Pre-Construction Market Report 2025",
+        "meta_description": "Complete overview of Miami's luxury pre-construction condo market in 2025. Prices, trends, best neighborhoods and top projects.",
+        "og_title": "Miami Pre-Construction Market Report 2025 | MiaLux Realty",
+        "og_description": "Complete overview of Miami's luxury pre-construction market. Prices, trends, top projects for 2025.",
+        "og_image": "/images/blog/market-2025.webp",
+        "excerpt": "Miami's luxury pre-construction market continues to set records in 2025, with branded residences and international demand driving unprecedented price growth.",
+        "body": "<p>Miami's luxury pre-construction market continues to set records in 2025...</p>",
+        "canonical": "https://mialuxrealty.com/blog/miami-pre-construction-market-2025",
+        "schema_type": "Article",
+        "hreflang": {
+          "en": "https://mialuxrealty.com/blog/miami-pre-construction-market-2025"
+        }
+      },
+      "es": {
+        "title": "",
+        "meta_description": "",
+        "og_title": "",
+        "og_description": "",
+        "og_image": "",
+        "excerpt": "",
+        "body": "",
+        "canonical": "",
+        "schema_type": "Article",
+        "hreflang": {}
+      },
+      "pt": {
+        "title": "",
+        "meta_description": "",
+        "og_title": "",
+        "og_description": "",
+        "og_image": "",
+        "excerpt": "",
+        "body": "",
+        "canonical": "",
+        "schema_type": "Article",
+        "hreflang": {}
+      },
+      "ru": {
+        "title": "",
+        "meta_description": "",
+        "og_title": "",
+        "og_description": "",
+        "og_image": "",
+        "excerpt": "",
+        "body": "",
+        "canonical": "",
+        "schema_type": "Article",
+        "hreflang": {}
+      }
+    }
+  ]
+}
