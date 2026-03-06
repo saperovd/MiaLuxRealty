@@ -2024,7 +2024,10 @@ function parsePastedHtml() {
     }
 
     // Address
-    const addrMatch = bodyText.match(/\d{2,5}\s+[A-Z][\w ]{3,30}(?:Street|St|Avenue|Ave|Boulevard|Blvd|Drive|Dr|Way|Rd|Ln|Court|Ct|Place|Pl)[^,\n]{0,20}/i);
+    // Address: match number + street, stop at zip code or end
+    const addrRaw = bodyText.match(/\d{2,5}\s+[A-Z][\w ]{2,25}(?:Street|St|Avenue|Ave|Boulevard|Blvd|Drive|Dr|Way|Rd|Ln|Court|Ct|Place|Pl)/i);
+    // Stop address at zip code or junk words
+    const addrMatch = addrRaw ? [addrRaw[0].trim()] : null;
 
     // Neighborhood
     const hoods = ['Brickell','Edgewater','Wynwood','Miami Beach','Sunny Isles','Bal Harbour','Coconut Grove','Downtown Miami','Midtown','Design District','Aventura','Coral Gables'];
@@ -2035,24 +2038,45 @@ function parsePastedHtml() {
     const images = [];
     const seen = new Set();
     if (ogImage) { seen.add(ogImage); images.push(ogImage); }
-    doc.querySelectorAll('img[src],img[data-src]').forEach(img => {
-      let src = img.getAttribute('src') || img.getAttribute('data-src') || '';
+    // Check ALL possible image src attributes
+    const imgAttrs = ['src','data-src','data-lazy-src','data-original','data-img','data-image','data-bg','data-url','data-full'];
+    doc.querySelectorAll('img, [data-src], [data-lazy-src], [data-original]').forEach(img => {
+      for (const attr of imgAttrs) {
+        let src = img.getAttribute(attr) || '';
+        if (!src) continue;
+        if (src.startsWith('//')) src = 'https:' + src;
+        if (src.startsWith('/') && sourceUrl.startsWith('http')) { try { src = new URL(src, sourceUrl).href; } catch(e) { continue; } }
+        if (!src.startsWith('http') || seen.has(src)) continue;
+        if (/logo|icon|avatar|sprite|pixel|blank|1x1|\.gif|\.svg|\.ico/i.test(src)) continue;
+        const w = parseInt(img.getAttribute('width') || '0');
+        if (w > 0 && w < 150) continue;
+        seen.add(src); images.push(src);
+        break;
+      }
+      if (images.length >= 20) return;
+    });
+    // Also extract from CSS background-image inline styles
+    doc.querySelectorAll('[style*="background"]').forEach(el => {
+      const style = el.getAttribute('style') || '';
+      const m = style.match(/url\(['"']?([^'"')]+)['"']?\)/);
+      if (!m) return;
+      let src = m[1];
       if (src.startsWith('//')) src = 'https:' + src;
-      if (src.startsWith('/') && sourceUrl.startsWith('http')) src = new URL(sourceUrl).origin + src;
+      if (src.startsWith('/') && sourceUrl.startsWith('http')) { try { src = new URL(src, sourceUrl).href; } catch(e) { return; } }
       if (!src.startsWith('http') || seen.has(src)) return;
       if (/logo|icon|avatar|sprite|pixel|blank|1x1/i.test(src)) return;
-      const w = parseInt(img.getAttribute('width') || '0');
-      if (w > 0 && w < 200) return;
       seen.add(src); images.push(src);
-      if (images.length >= 15) return;
     });
 
-    // Paragraphs
+    // Paragraphs — grab p, li, div with substantial text
     const paragraphs = [];
-    doc.querySelectorAll('p').forEach(p => {
-      const t = p.textContent.trim();
-      if (t.length > 100) paragraphs.push(t);
-      if (paragraphs.length >= 6) return;
+    const skipWords = /log in|register|cookie|privacy policy|terms of|subscribe|newsletter|copyright|all rights|©/i;
+    doc.querySelectorAll('p, li, [class*="desc"], [class*="content"], [class*="text"], [class*="detail"]').forEach(el => {
+      if (paragraphs.length >= 10) return;
+      const t = el.textContent.trim().replace(/\s+/g,' ');
+      if (t.length < 80 || t.length > 1500) return;
+      if (skipWords.test(t)) return;
+      if (!paragraphs.includes(t)) paragraphs.push(t);
     });
 
     const data = {
