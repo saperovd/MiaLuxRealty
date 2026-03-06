@@ -533,9 +533,18 @@ html,body{height:100%;background:var(--darker);color:var(--text);font-family:var
             </div>
             <div class="field"><label>Estimated Delivery</label><input class="cms-input" id="sc-delivery" placeholder="2027-Q4"></div>
             <div class="field full"><label>Short Description <span style="color:var(--light);font-size:.65rem;font-weight:300">(rewrite for SEO before publishing)</span></label>
-              <textarea class="cms-textarea" id="sc-description" rows="4"></textarea>
+              <textarea class="cms-textarea" id="sc-description" rows="3"></textarea>
             </div>
-            <div class="field full"><label>Images Found <span style="color:var(--light);font-size:.65rem;font-weight:300">(select which to keep, convert to WebP in Image Tools)</span></label>
+            <div class="field full"><label>Full Content / Body <span style="color:var(--light);font-size:.65rem;font-weight:300">(scraped article text — rewrite before publishing)</span></label>
+              <textarea class="cms-textarea" id="sc-fullcontent" rows="8" placeholder="Full article body will appear here after scraping..."></textarea>
+            </div>
+            <div class="field full"><label>Images Found 
+                <span style="color:var(--light);font-size:.65rem;font-weight:300">(click to select · convert to WebP in Image Tools)</span>
+                <span style="margin-left:.8rem">
+                  <button onclick="selectAllImages()" style="font-size:.62rem;padding:.15rem .4rem;background:rgba(184,147,90,.15);border:1px solid var(--gold);border-radius:3px;color:var(--gold);cursor:pointer">Select All</button>
+                  <button onclick="deselectAllImages()" style="font-size:.62rem;padding:.15rem .4rem;background:var(--card2);border:1px solid var(--border);border-radius:3px;color:var(--muted);cursor:pointer;margin-left:.3rem">Deselect All</button>
+                </span>
+              </label>
               <div id="sc-images" style="display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.4rem"></div>
             </div>
             <div class="field full"><label>Source URL</label><input class="cms-input" id="sc-source" readonly style="color:var(--muted)"></div>
@@ -1720,14 +1729,15 @@ function fillScraperForm(data) {
     address = '', neighborhood = '', paragraphs = [], sourceUrl = '' } = data;
 
   const fullDesc = paragraphs && paragraphs.length ? paragraphs.join('\n\n') : description;
-  const cleanTitle = title.replace(/\s*[-|]\s*.+$/, '').trim();
+  const cleanTitle = title.replace(/\s*[-|–]\s*.+$/, '').trim();
   const metaTitle = cleanTitle ? `${cleanTitle} | Miami Pre-Construction Condos | MiaLux Realty` : '';
   const metaDesc = description || `Discover ${cleanTitle} — luxury pre-construction condos in Miami. VIP pricing, zero buyer commission.`;
 
   // Fill all form fields
   document.getElementById('sc-name').value = cleanTitle;
   document.getElementById('sc-slug').value = slug;
-  document.getElementById('sc-description').value = fullDesc;
+  document.getElementById('sc-description').value = description.substring(0, 400);
+  document.getElementById('sc-fullcontent').value = fullDesc;
   document.getElementById('sc-price_from').value = priceFrom || '';
   document.getElementById('sc-address').value = address;
   document.getElementById('sc-neighborhood').value = neighborhood;
@@ -1761,7 +1771,22 @@ function toggleImgSelect(img) {
   const check = img.nextElementSibling;
   const selected = img.style.borderColor === 'rgb(184, 147, 90)';
   img.style.borderColor = selected ? 'var(--border)' : 'var(--gold)';
+  img.style.opacity = selected ? '1' : '1';
   check.style.display = selected ? 'none' : 'flex';
+}
+
+function selectAllImages() {
+  document.querySelectorAll('#sc-images img').forEach(img => {
+    img.style.borderColor = 'var(--gold)';
+    img.nextElementSibling.style.display = 'flex';
+  });
+}
+
+function deselectAllImages() {
+  document.querySelectorAll('#sc-images img').forEach(img => {
+    img.style.borderColor = 'var(--border)';
+    img.nextElementSibling.style.display = 'none';
+  });
 }
 
 function getSelectedImages() {
@@ -1796,7 +1821,7 @@ function saveScrapedAsListing() {
     views: [], unit_types: [], payment_schedule: [],
     amenities: [], residence_features: [],
     description_short: document.getElementById('sc-description').value.substring(0, 300),
-    description_full: document.getElementById('sc-description').value,
+    description_full: document.getElementById('sc-fullcontent').value || document.getElementById('sc-description').value,
     image_main: images[0] || '',
     images_gallery: images.slice(1),
     brochure_pdf: '', floorplans_pdf: '',
@@ -1910,7 +1935,7 @@ function parsePastedHtml() {
     }
 
     // Address
-    const addrMatch = bodyText.match(/\d+\s+[\w ]+(?:Street|St|Avenue|Ave|Blvd|Drive|Dr|Way|Rd|Ln|Court|Ct|Place|Pl)[^,\n]{0,30}/i);
+    const addrMatch = bodyText.match(/\d{2,5}\s+[A-Z][\w ]{3,30}(?:Street|St|Avenue|Ave|Boulevard|Blvd|Drive|Dr|Way|Rd|Ln|Court|Ct|Place|Pl)[^,\n]{0,20}/i);
 
     // Neighborhood
     const hoods = ['Brickell','Edgewater','Wynwood','Miami Beach','Sunny Isles','Bal Harbour','Coconut Grove','Downtown Miami','Midtown','Design District','Aventura','Coral Gables'];
