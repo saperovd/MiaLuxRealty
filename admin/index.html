@@ -484,7 +484,8 @@ html,body{height:100%;background:var(--darker);color:var(--text);font-family:var
         <!-- Mode tabs -->
         <div style="display:flex;gap:0;margin-bottom:1rem;border:1px solid var(--border);border-radius:var(--r);overflow:hidden">
           <button id="tab-url" onclick="setScrapeMode('url')" style="flex:1;padding:.45rem;font-size:.72rem;background:var(--gold);color:#1a1610;border:none;cursor:pointer;font-family:var(--sans);font-weight:600">🔗 From URL</button>
-          <button id="tab-paste" onclick="setScrapeMode('paste')" style="flex:1;padding:.45rem;font-size:.72rem;background:var(--card2);color:var(--muted);border:none;cursor:pointer;font-family:var(--sans)">📋 Paste HTML</button>
+          <button id="tab-paste" onclick="setScrapeMode('paste')" style="flex:1;padding:.45rem;font-size:.72rem;background:var(--card2);color:var(--muted);border:none;cursor:pointer;font-family:var(--sans)">📋 Paste Text</button>
+          <button id="tab-ai" onclick="setScrapeMode('ai')" style="flex:1;padding:.45rem;font-size:.72rem;background:var(--card2);color:var(--muted);border:none;cursor:pointer;font-family:var(--sans)">✨ AI Extract</button>
         </div>
 
         <!-- URL mode -->
@@ -494,18 +495,28 @@ html,body{height:100%;background:var(--darker);color:var(--text);font-family:var
             <button class="btn-add" onclick="scrapeUrl()" id="scrape-btn">Scrape →</button>
           </div>
           <div style="font-size:.72rem;color:var(--muted);line-height:1.6">
-            Works via a server-side Worker. Some sites block all scrapers — use Paste HTML mode for those.
+            Works best on static sites. For JS-rendered sites (Zillow, miamiresidence.com etc) use <strong style="color:var(--gold-light)">Paste Text</strong> or <strong style="color:var(--gold-light)">AI Extract</strong>.
           </div>
         </div>
 
-        <!-- Paste HTML mode -->
+        <!-- Paste Text mode -->
         <div id="mode-paste" style="display:none">
           <div style="font-size:.78rem;color:var(--muted);margin-bottom:.6rem;line-height:1.6">
-            Open the listing page in your browser → <strong style="color:var(--gold-light)">View Source</strong> (⌘U on Mac) → Select All → Copy → Paste below:
+            Open listing page → select all visible text on the page → copy → paste below. Works on any site including JS-rendered ones.
           </div>
           <input class="cms-input" id="paste-source-url" placeholder="Source URL (for reference)" style="margin-bottom:.5rem">
-          <textarea class="cms-textarea" id="paste-html" rows="6" placeholder="Paste full page HTML here..."></textarea>
-          <button class="btn-add" onclick="parsePastedHtml()" style="margin-top:.6rem;width:100%">Parse HTML →</button>
+          <textarea class="cms-textarea" id="paste-html" rows="6" placeholder="Paste page text or HTML here..."></textarea>
+          <button class="btn-add" onclick="parsePastedHtml()" style="margin-top:.6rem;width:100%">Parse →</button>
+        </div>
+
+        <!-- AI Extract mode -->
+        <div id="mode-ai" style="display:none">
+          <div style="background:rgba(184,147,90,.08);border:1px solid rgba(184,147,90,.2);border-radius:var(--r);padding:.7rem;margin-bottom:.8rem;font-size:.75rem;color:var(--gold-light);line-height:1.6">
+            ✨ Paste ANY text about a listing — from a website, email, brochure, or PDF. AI will extract all structured fields automatically.
+          </div>
+          <input class="cms-input" id="ai-source-url" placeholder="Source URL (optional, for reference)" style="margin-bottom:.5rem">
+          <textarea class="cms-textarea" id="ai-raw-text" rows="8" placeholder="Paste listing text here — any format works:&#10;&#10;Mercedes-Benz Places, 1133 SW 2nd Ave Miami FL 33130&#10;65 floors, 390 residences, delivery 2028&#10;Prices from $1.2M, architect SHoP Architects..."></textarea>
+          <button class="btn-add" onclick="aiExtract()" id="ai-btn" style="margin-top:.6rem;width:100%">✨ Extract with AI →</button>
         </div>
       </div>
 
@@ -1749,7 +1760,7 @@ function fillScraperForm(data) {
   const imgContainer = document.getElementById('sc-images');
   imgContainer.innerHTML = images.length ? images.map(src => `
     <div style="position:relative;display:inline-block">
-      <img src="${src}" style="width:120px;height:80px;object-fit:cover;border-radius:4px;border:2px solid var(--border);cursor:pointer" 
+      <img src="${src}" data-selected="0" style="width:120px;height:80px;object-fit:cover;border-radius:4px;border:2px solid var(--border);cursor:pointer;opacity:0.5;transition:all .15s" 
         onclick="toggleImgSelect(this)" title="${src}" onerror="this.parentElement.remove()">
       <div style="position:absolute;top:3px;right:3px;width:18px;height:18px;background:var(--gold);border-radius:50%;display:none;align-items:center;justify-content:center;font-size:.6rem;color:#fff" class="img-check">✓</div>
     </div>`).join('') 
@@ -1769,29 +1780,41 @@ function fillScraperForm(data) {
 
 function toggleImgSelect(img) {
   const check = img.nextElementSibling;
-  const selected = img.style.borderColor === 'rgb(184, 147, 90)';
-  img.style.borderColor = selected ? 'var(--border)' : 'var(--gold)';
-  img.style.opacity = selected ? '1' : '1';
-  check.style.display = selected ? 'none' : 'flex';
+  const selected = img.dataset.selected === '1';
+  if (selected) {
+    img.dataset.selected = '0';
+    img.style.borderColor = 'var(--border)';
+    img.style.opacity = '0.5';
+    check.style.display = 'none';
+  } else {
+    img.dataset.selected = '1';
+    img.style.borderColor = 'var(--gold)';
+    img.style.opacity = '1';
+    check.style.display = 'flex';
+  }
 }
 
 function selectAllImages() {
   document.querySelectorAll('#sc-images img').forEach(img => {
+    img.dataset.selected = '1';
     img.style.borderColor = 'var(--gold)';
+    img.style.opacity = '1';
     img.nextElementSibling.style.display = 'flex';
   });
 }
 
 function deselectAllImages() {
   document.querySelectorAll('#sc-images img').forEach(img => {
+    img.dataset.selected = '0';
     img.style.borderColor = 'var(--border)';
+    img.style.opacity = '0.5';
     img.nextElementSibling.style.display = 'none';
   });
 }
 
 function getSelectedImages() {
   return [...document.querySelectorAll('#sc-images img')]
-    .filter(img => img.style.borderColor === 'rgb(184, 147, 90)')
+    .filter(img => img.dataset.selected === '1')
     .map(img => img.src);
 }
 
@@ -1878,12 +1901,112 @@ function saveScrapedAsPost() {
 }
 
 function setScrapeMode(mode) {
-  document.getElementById('mode-url').style.display = mode === 'url' ? 'block' : 'none';
-  document.getElementById('mode-paste').style.display = mode === 'paste' ? 'block' : 'none';
-  document.getElementById('tab-url').style.background = mode === 'url' ? 'var(--gold)' : 'var(--card2)';
-  document.getElementById('tab-url').style.color = mode === 'url' ? '#1a1610' : 'var(--muted)';
-  document.getElementById('tab-paste').style.background = mode === 'paste' ? 'var(--gold)' : 'var(--card2)';
-  document.getElementById('tab-paste').style.color = mode === 'paste' ? '#1a1610' : 'var(--muted)';
+  ['url','paste','ai'].forEach(m => {
+    const panel = document.getElementById('mode-' + m);
+    const tab = document.getElementById('tab-' + m);
+    if (!panel || !tab) return;
+    const active = m === mode;
+    panel.style.display = active ? 'block' : 'none';
+    tab.style.background = active ? 'var(--gold)' : 'var(--card2)';
+    tab.style.color = active ? '#1a1610' : 'var(--muted)';
+    tab.style.fontWeight = active ? '600' : '400';
+  });
+}
+
+async function aiExtract() {
+  const rawText = document.getElementById('ai-raw-text').value.trim();
+  const sourceUrl = document.getElementById('ai-source-url').value.trim();
+  if (!rawText || rawText.length < 20) { showToast('Please paste some listing text first', 'error'); return; }
+
+  const btn = document.getElementById('ai-btn');
+  const statusEl = document.getElementById('scrape-status');
+  const statusText = document.getElementById('scrape-status-text');
+  btn.textContent = '✨ Extracting…';
+  btn.disabled = true;
+  statusEl.style.display = 'block';
+  statusText.textContent = '✨ AI is reading the listing…';
+  document.getElementById('scrape-results').style.display = 'none';
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{
+          role: 'user',
+          content: `Extract structured listing data from this real estate text. Return ONLY valid JSON, no markdown, no explanation.
+
+Text:
+${rawText.substring(0, 4000)}
+
+Return this exact JSON structure:
+{
+  "title": "project name only, no location suffix",
+  "slug": "url-friendly-slug",
+  "developer": "developer company name",
+  "neighborhood": "one of: Brickell, Edgewater, Wynwood, Miami Beach, Sunny Isles, Bal Harbour, Coconut Grove, Downtown Miami, Midtown, Design District, Aventura, Coral Gables, or empty string",
+  "address": "full street address if found, else empty string",
+  "price_from": number in dollars or 0,
+  "floors": number or 0,
+  "total_units": number or 0,
+  "delivery": "YYYY-QN format or empty",
+  "architect": "architect name or empty",
+  "interior_designer": "interior designer or empty",
+  "description": "2-3 sentence summary of the project",
+  "full_content": "all meaningful content about the project, excluding legal disclaimers and navigation",
+  "status": "one of: Coming Soon, Selling, Under Construction, Completed"
+}`
+        }]
+      })
+    });
+
+    const data = await response.json();
+    btn.textContent = '✨ Extract with AI →';
+    btn.disabled = false;
+
+    if (!response.ok) {
+      statusText.innerHTML = '❌ AI error: ' + (data.error?.message || response.status);
+      return;
+    }
+
+    const text = data.content?.[0]?.text || '';
+    let parsed;
+    try {
+      parsed = JSON.parse(text.replace(/```json|```/g, '').trim());
+    } catch(e) {
+      statusText.innerHTML = '❌ Could not parse AI response. Try again.';
+      return;
+    }
+
+    // Fill form with AI-extracted data
+    fillScraperForm({
+      title: parsed.title || '',
+      slug: parsed.slug || '',
+      description: parsed.description || '',
+      paragraphs: parsed.full_content ? [parsed.full_content] : [],
+      images: [],
+      priceFrom: parsed.price_from || 0,
+      address: parsed.address || '',
+      neighborhood: parsed.neighborhood || '',
+      sourceUrl: sourceUrl,
+      _ai: parsed  // carry extra fields
+    });
+
+    // Fill extra fields not in standard form
+    if (parsed.developer) document.getElementById('sc-developer').value = parsed.developer;
+    if (parsed.delivery) document.getElementById('sc-delivery').value = parsed.delivery;
+    if (parsed.status) document.getElementById('sc-status').value = parsed.status;
+
+    statusEl.style.display = 'none';
+    showToast('AI extracted ' + Object.keys(parsed).filter(k => parsed[k]).length + ' fields!', 'success');
+
+  } catch(e) {
+    btn.textContent = '✨ Extract with AI →';
+    btn.disabled = false;
+    statusText.innerHTML = '❌ Error: ' + e.message;
+  }
 }
 
 function parsePastedHtml() {
