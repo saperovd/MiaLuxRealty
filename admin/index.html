@@ -2030,7 +2030,7 @@ function parsePastedHtml() {
     const addrMatch = addrRaw ? [addrRaw[0].trim()] : null;
 
     // Neighborhood
-    const hoods = ['Brickell','Edgewater','Wynwood','Miami Beach','Sunny Isles','Bal Harbour','Coconut Grove','Downtown Miami','Midtown','Design District','Aventura','Coral Gables'];
+    const hoods = ['Miami Beach','South Beach','Brickell','Edgewater','Wynwood','Sunny Isles','Bal Harbour','Coconut Grove','Downtown Miami','Midtown','Design District','Aventura','Coral Gables','Fisher Island','Key Biscayne','Surfside'];
     const bodyLower = bodyText.toLowerCase();
     const neighborhood = hoods.find(h => bodyLower.includes(h.toLowerCase())) || '';
 
@@ -2064,7 +2064,9 @@ function parsePastedHtml() {
       if (src.startsWith('//')) src = 'https:' + src;
       if (src.startsWith('/') && sourceUrl.startsWith('http')) { try { src = new URL(src, sourceUrl).href; } catch(e) { return; } }
       if (!src.startsWith('http') || seen.has(src)) return;
-      if (/logo|icon|avatar|sprite|pixel|blank|1x1/i.test(src)) return;
+      // Only check the filename part — avoid false-matching domains like 'miamicondos'
+      const imgFile = src.split('/').pop().split('?')[0];
+      if (/logo|icon|avatar|sprite|pixel|blank|1x1/i.test(imgFile)) return;
       seen.add(src); images.push(src);
     });
 
