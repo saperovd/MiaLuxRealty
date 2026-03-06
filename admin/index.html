@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MiaLux CMS</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#b8935a;--gold-light:#d4b483;--gold-pale:#f5ede0;
+  --dark:#1e1e1e;--darker:#151515;--card:#252525;--card2:#2e2e2e;
+  --border:rgba(255,255,255,.1);--border2:rgba(255,255,255,.06);
+  --text:#e8e8e8;--muted:rgba(255,255,255,.45);--light:rgba(255,255,255,.25);
+  --green:#4caf7d;--red:#e05a5a;--blue:#5a9fd4;
+  --serif:'Georgia',serif;--sans:system-ui,-apple-system,sans-serif;
+  --r:6px;--rm:10px;--rl:16px;
+}
+html,body{height:100%;background:var(--darker);color:var(--text);font-family:var(--sans);font-size:14px;line-height:1.5;overflow:hidden}
+
+/* LOGIN */
+#loginScreen{display:flex;align-items:center;justify-content:center;height:100vh;background:var(--darker)}
+.login-box{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:2.5rem;width:360px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.login-logo{font-family:var(--serif);font-size:1.4rem;color:#fff;margin-bottom:.3rem}
+.login-logo span{color:var(--gold-light)}
+.login-sub{font-size:.78rem;color:var(--muted);margin-bottom:2rem}
+.login-label{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;display:block}
+.login-input{width:100%;background:var(--card2);border:1px solid var(--border);border-radius:var(--r);padding:.7rem .9rem;color:var(--text);font-family:var(--sans);font-size:.9rem;outline:none;transition:border-color .2s;margin-bottom:1rem}
+.login-input:focus{border-color:var(--gold)}
+.login-btn{width:100%;background:var(--gold);color:#fff;border:none;border-radius:var(--r);padding:.8rem;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;font-family:var(--sans);transition:background .2s;margin-top:.3rem}
+.login-btn:hover{background:var(--gold-light)}
+.login-error{color:var(--red);font-size:.78rem;margin-top:.7rem;text-align:center;display:none}
+.login-hint{font-size:.72rem;color:var(--light);margin-top:1rem;text-align:center}
+
+/* APP SHELL */
+#app{display:none;height:100vh;display:none;grid-template-columns:220px 1fr;grid-template-rows:48px 1fr}
+#app.visible{display:grid}
+
+/* TOP BAR */
+.topbar{grid-column:1/-1;background:var(--dark);border-bottom:1px solid var(--border2);display:flex;align-items:center;padding:0 1.2rem;gap:1rem}
+.topbar-logo{font-family:var(--serif);font-size:1rem;color:#fff;flex-shrink:0}
+.topbar-logo span{color:var(--gold-light)}
+.topbar-badge{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;background:rgba(184,147,90,.15);color:var(--gold);padding:.2rem .6rem;border-radius:4px;border:1px solid rgba(184,147,90,.2)}
+.topbar-spacer{flex:1}
+.topbar-lang{display:flex;gap:.3rem}
+.lang-btn{padding:.28rem .6rem;font-size:.68rem;letter-spacing:.07em;background:none;border:1px solid var(--border);border-radius:4px;color:var(--muted);cursor:pointer;transition:all .2s;font-family:var(--sans)}
+.lang-btn.active{background:var(--gold);border-color:var(--gold);color:#fff}
+.topbar-save{padding:.38rem .9rem;background:var(--gold);color:#fff;border:none;border-radius:var(--r);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;font-family:var(--sans);transition:background .2s;display:flex;align-items:center;gap:.4rem}
+.topbar-save:hover{background:var(--gold-light)}
+.topbar-save.saving{background:#555;pointer-events:none}
+.save-status{font-size:.72rem;color:var(--muted)}
+.save-status.ok{color:var(--green)}
+.save-status.err{color:var(--red)}
+.topbar-logout{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.8rem;padding:.3rem;transition:color .2s}
+.topbar-logout:hover{color:var(--red)}
+
+/* SIDEBAR */
+.sidebar{background:var(--dark);border-right:1px solid var(--border2);padding:.6rem 0;overflow-y:auto}
+.sidebar-section{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--light);padding:.8rem 1rem .3rem;margin-top:.4rem}
+.sidebar-item{display:flex;align-items:center;gap:.6rem;padding:.55rem 1rem;cursor:pointer;color:var(--muted);transition:all .2s;font-size:.82rem;border-left:2px solid transparent}
+.sidebar-item:hover{color:var(--text);background:rgba(255,255,255,.04)}
+.sidebar-item.active{color:var(--gold-light);background:rgba(184,147,90,.08);border-left-color:var(--gold)}
+.sidebar-icon{width:16px;height:16px;flex-shrink:0;opacity:.7}
+.sidebar-item.active .sidebar-icon{opacity:1}
+.sidebar-count{margin-left:auto;font-size:.65rem;background:rgba(255,255,255,.08);padding:.1rem .4rem;border-radius:3px;color:var(--light)}
+
+/* MAIN CONTENT */
+.main{background:var(--darker);overflow-y:auto;padding:1.5rem}
+.panel{display:none}
+.panel.active{display:block}
+.panel-title{font-size:1.1rem;font-weight:500;color:#fff;margin-bottom:.3rem}
+.panel-sub{font-size:.8rem;color:var(--muted);margin-bottom:1.5rem}
+
+/* CARDS / SECTIONS */
+.cms-card{background:var(--card);border:1px solid var(--border2);border-radius:var(--rl);padding:1.4rem;margin-bottom:1rem}
+.cms-card-title{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+.cms-card-title::before{content:'';display:block;width:16px;height:1.5px;background:var(--gold)}
+
+/* FORM ELEMENTS */
+.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.field-grid.three{grid-template-columns:1fr 1fr 1fr}
+.field-grid.full{grid-template-columns:1fr}
+.field{display:flex;flex-direction:column;gap:.3rem}
+.field.full{grid-column:1/-1}
+.field label{font-size:.65rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.field label .req{color:var(--gold);margin-left:2px}
+.field label .hint{color:var(--light);font-size:.6rem;letter-spacing:0;text-transform:none;margin-left:.4rem;font-weight:300}
+.cms-input,.cms-select,.cms-textarea{background:var(--card2);border:1px solid var(--border);border-radius:var(--r);padding:.6rem .8rem;color:var(--text);font-family:var(--sans);font-size:.84rem;outline:none;transition:border-color .2s;width:100%}
+.cms-input:focus,.cms-select:focus,.cms-textarea:focus{border-color:var(--gold)}
+.cms-textarea{resize:vertical;min-height:80px;line-height:1.6}
+.cms-textarea.tall{min-height:200px}
+.cms-select option{background:var(--card)}
+.char-count{font-size:.62rem;color:var(--light);text-align:right;margin-top:.2rem}
+.char-count.warn{color:#f0a040}
+.char-count.over{color:var(--red)}
+
+/* TABS */
+.tab-bar{display:flex;gap:.3rem;margin-bottom:1rem;border-bottom:1px solid var(--border2);padding-bottom:.3rem}
+.tab-btn{padding:.4rem .8rem;font-size:.72rem;letter-spacing:.06em;background:none;border:none;color:var(--muted);cursor:pointer;border-radius:var(--r) var(--r) 0 0;transition:all .2s;font-family:var(--sans)}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{color:var(--gold-light);background:rgba(184,147,90,.1)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* LANG TABS */
+.lang-tabs{display:flex;gap:.3rem;margin-bottom:1rem}
+.ltab{padding:.3rem .7rem;font-size:.68rem;letter-spacing:.08em;background:none;border:1px solid var(--border);border-radius:4px;color:var(--muted);cursor:pointer;transition:all .2s;font-family:var(--sans)}
+.ltab.active{background:rgba(184,147,90,.12);border-color:var(--gold);color:var(--gold-light)}
+.ltab-content{display:none}
+.ltab-content.active{display:block}
+
+/* LIST VIEW */
+.list-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.list-actions{display:flex;gap:.5rem}
+.btn-add{display:flex;align-items:center;gap:.4rem;padding:.45rem .9rem;background:var(--gold);color:#fff;border:none;border-radius:var(--r);font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;font-family:var(--sans);transition:background .2s}
+.btn-add:hover{background:var(--gold-light)}
+.btn-secondary{padding:.42rem .85rem;background:none;border:1px solid var(--border);border-radius:var(--r);color:var(--muted);font-size:.72rem;cursor:pointer;font-family:var(--sans);transition:all .2s}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold)}
+.btn-danger{padding:.42rem .85rem;background:none;border:1px solid rgba(224,90,90,.3);border-radius:var(--r);color:var(--red);font-size:.72rem;cursor:pointer;font-family:var(--sans);transition:all .2s}
+.btn-danger:hover{background:rgba(224,90,90,.1)}
+
+/* ITEM LIST */
+.items-list{display:flex;flex-direction:column;gap:.5rem}
+.item-row{background:var(--card);border:1px solid var(--border2);border-radius:var(--rm);padding:.8rem 1rem;display:flex;align-items:center;gap:.8rem;cursor:pointer;transition:border-color .2s}
+.item-row:hover{border-color:rgba(184,147,90,.3)}
+.item-row.active{border-color:var(--gold);background:rgba(184,147,90,.05)}
+.item-badge{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;padding:.18rem .5rem;border-radius:3px}
+.badge-published{background:rgba(76,175,125,.15);color:var(--green);border:1px solid rgba(76,175,125,.2)}
+.badge-draft{background:rgba(255,255,255,.06);color:var(--muted);border:1px solid var(--border)}
+.item-name{font-size:.85rem;color:var(--text);flex:1}
+.item-meta{font-size:.72rem;color:var(--muted)}
+.item-actions{display:flex;gap:.4rem;opacity:0;transition:opacity .2s}
+.item-row:hover .item-actions{opacity:1}
+.ia-btn{padding:.25rem .5rem;font-size:.65rem;background:none;border:1px solid var(--border);border-radius:4px;color:var(--muted);cursor:pointer;transition:all .2s}
+.ia-btn:hover{border-color:var(--gold);color:var(--gold)}
+.ia-btn.del:hover{border-color:var(--red);color:var(--red)}
+
+/* EDITOR BACK BTN */
+.back-btn{display:flex;align-items:center;gap:.4rem;background:none;border:none;color:var(--muted);cursor:pointer;font-size:.78rem;margin-bottom:1rem;padding:0;transition:color .2s;font-family:var(--sans)}
+.back-btn:hover{color:var(--gold)}
+.back-btn svg{width:14px;height:14px}
+
+/* SEO PREVIEW */
+.seo-preview{background:var(--card2);border-radius:var(--rm);padding:1rem;border:1px solid var(--border2)}
+.seo-preview-url{font-size:.72rem;color:var(--green);margin-bottom:.2rem}
+.seo-preview-title{font-size:.95rem;color:#8ab4f8;margin-bottom:.25rem;font-weight:400}
+.seo-preview-desc{font-size:.78rem;color:rgba(255,255,255,.55);line-height:1.5}
+.seo-bar{display:flex;gap:.5rem;margin-top:.6rem}
+.seo-indicator{font-size:.65rem;padding:.18rem .5rem;border-radius:3px}
+.seo-ok{background:rgba(76,175,125,.15);color:var(--green)}
+.seo-warn{background:rgba(240,160,64,.15);color:#f0a040}
+.seo-bad{background:rgba(224,90,90,.15);color:var(--red)}
+
+/* NAV EDITOR */
+.nav-item-row{display:flex;gap:.5rem;align-items:center;margin-bottom:.5rem}
+.nav-item-row .cms-input{flex:1}
+.drag-handle{color:var(--light);cursor:grab;padding:0 .3rem;font-size:1rem}
+.remove-btn{width:28px;height:28px;background:none;border:1px solid rgba(224,90,90,.2);border-radius:4px;color:var(--red);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;transition:background .2s}
+.remove-btn:hover{background:rgba(224,90,90,.1)}
+.add-row-btn{display:flex;align-items:center;gap:.3rem;background:none;border:1px dashed var(--border);border-radius:var(--r);padding:.4rem .8rem;color:var(--muted);font-size:.72rem;cursor:pointer;width:100%;justify-content:center;transition:all .2s;margin-top:.3rem;font-family:var(--sans)}
+.add-row-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* TOGGLE */
+.toggle-wrap{display:flex;align-items:center;gap:.6rem}
+.toggle{width:36px;height:20px;background:var(--border);border-radius:10px;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0;border:none}
+.toggle.on{background:var(--gold)}
+.toggle::after{content:'';position:absolute;top:3px;left:3px;width:14px;height:14px;background:#fff;border-radius:50%;transition:transform .2s}
+.toggle.on::after{transform:translateX(16px)}
+.toggle-label{font-size:.78rem;color:var(--muted)}
+
+/* SCHEMA SELECTOR */
+.schema-chips{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.3rem}
+.schema-chip{padding:.25rem .6rem;font-size:.65rem;letter-spacing:.05em;background:var(--card2);border:1px solid var(--border);border-radius:4px;color:var(--muted);cursor:pointer;transition:all .2s}
+.schema-chip.active{background:rgba(184,147,90,.12);border-color:var(--gold);color:var(--gold-light)}
+
+/* REDIRECT TABLE */
+.redirect-row{display:grid;grid-template-columns:1fr 1fr 80px 36px;gap:.5rem;align-items:center;margin-bottom:.5rem}
+.redirect-code{background:var(--card2);border:1px solid var(--border);border-radius:var(--r);padding:.5rem;color:var(--text);font-family:var(--sans);font-size:.8rem;outline:none}
+
+/* TOAST */
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:var(--rm);padding:.8rem 1.2rem;font-size:.8rem;color:var(--text);box-shadow:0 8px 32px rgba(0,0,0,.4);z-index:9999;transform:translateY(20px);opacity:0;transition:all .3s;display:flex;align-items:center;gap:.6rem}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{border-color:rgba(76,175,125,.3);color:var(--green)}
+.toast.error{border-color:rgba(224,90,90,.3);color:var(--red)}
+
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:500;align-items:center;justify-content:center}
+.modal-bg.open{display:flex}
+.modal-box{background:var(--card);border:1px solid var(--border);border-radius:var(--rl);padding:1.8rem;width:420px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.modal-title{font-size:1rem;color:#fff;margin-bottom:.5rem}
+.modal-text{font-size:.82rem;color:var(--muted);margin-bottom:1.4rem;line-height:1.6}
+.modal-actions{display:flex;gap:.6rem;justify-content:flex-end}
+.modal-confirm{padding:.5rem 1rem;background:var(--red);color:#fff;border:none;border-radius:var(--r);font-size:.75rem;cursor:pointer;font-family:var(--sans)}
+.modal-cancel{padding:.5rem 1rem;background:none;border:1px solid var(--border);border-radius:var(--r);color:var(--muted);font-size:.75rem;cursor:pointer;font-family:var(--sans)}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  #app.visible{grid-template-columns:1fr;grid-template-rows:48px 48px 1fr}
+  .sidebar{grid-row:2;display:flex;overflow-x:auto;padding:0 .5rem;border-right:none;border-bottom:1px solid var(--border2)}
+  .sidebar-section{display:none}
+  .sidebar-item{flex-direction:column;gap:.2rem;font-size:.6rem;padding:.5rem .7rem;white-space:nowrap;border-left:none;border-bottom:2px solid transparent}
+  .sidebar-item.active{border-bottom-color:var(--gold);border-left:none}
+  .sidebar-count{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">MiaLux<span>CMS</span></div>
+    <div class="login-sub">Content Management System</div>
+    <label class="login-label">GitHub Personal Access Token</label>
+    <input class="login-input" type="password" id="tokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off">
+    <label class="login-label">Repository (owner/repo)</label>
+    <input class="login-input" type="text" id="repoInput" placeholder="yourusername/mialuxrealty" value="">
+    <label class="login-label">Branch</label>
+    <input class="login-input" type="text" id="branchInput" value="main" placeholder="main">
+    <button class="login-btn" onclick="doLogin()">Connect to GitHub →</button>
+    <div class="login-error" id="loginError"></div>
+    <div class="login-hint">Your token is stored in localStorage only. Never sent anywhere except GitHub API.</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-logo">MiaLux<span>CMS</span></div>
+    <div class="topbar-badge">Admin</div>
+    <div class="topbar-spacer"></div>
+    <div style="font-size:.72rem;color:var(--muted)" id="repoDisplay"></div>
+    <div class="topbar-lang" id="langSwitcher">
+      <button class="lang-btn active" data-lang="en" onclick="switchLang('en')">EN</button>
+      <button class="lang-btn" data-lang="es" onclick="switchLang('es')">ES</button>
+      <button class="lang-btn" data-lang="pt" onclick="switchLang('pt')">PT</button>
+      <button class="lang-btn" data-lang="ru" onclick="switchLang('ru')">RU</button>
+    </div>
+    <span class="save-status" id="saveStatus"></span>
+    <button class="topbar-save" id="saveBtn" onclick="saveAll()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+      Save & Deploy
+    </button>
+    <button class="topbar-logout" onclick="logout()" title="Logout">✕</button>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="sidebar-section">Content</div>
+    <div class="sidebar-item active" data-panel="dashboard" onclick="showPanel('dashboard')">
+      <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </div>
+    <div class="sidebar-item" data-panel="pages" onclick="showPanel('pages')">
+      <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Pages
+      <span class="sidebar-count" id="pagesCount">0</span>
+    </div>
+    <div class="sidebar-item" data-panel="listings" onclick="showPanel('listings')">
+      <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Listings
+      <span class="sidebar-count" id="listingsCount">0</span>
+    </div>
+    <div class="sidebar-item" data-panel="posts" onclick="showPanel('posts')">
+      <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      Blog Posts
+      <span class="sidebar-count" id="postsCount">0</span>
+    </div>
+    <div class="sidebar-section">Site</div>
+    <div class="sidebar-item" data-panel="navigation" onclick="showPanel('navigation')">
+      <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      Navigation
+    </div>
+    <div class="sidebar-item" data-panel="footer" onclick="showPanel('footer')">
+      <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="18" x2="21" y2="18"/><line x1="3" y1="12" x2="15" y2="12"/><line x1="3" y1="6" x2="9" y2="6"/></svg>
+      Footer
+    </div>
+    <div class="sidebar-item" data-panel="settings" onclick="showPanel('settings')">
+      <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      Site Settings
+    </div>
+    <div class="sidebar-item" data-panel="redirects" onclick="showPanel('redirects')">
+      <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
+      Redirects
+    </div>
+  </div>
+
+  <!-- MAIN PANELS -->
+  <div class="main">
+
+    <!-- DASHBOARD -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="panel-title">Dashboard</div>
+      <div class="panel-sub">Welcome to MiaLux CMS. Select a section to start editing.</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem">
+        <div class="cms-card" style="cursor:pointer" onclick="showPanel('listings')">
+          <div style="font-size:2rem;color:var(--gold);font-family:var(--serif)" id="dash-listings">0</div>
+          <div style="font-size:.72rem;color:var(--muted);margin-top:.3rem;text-transform:uppercase;letter-spacing:.1em">Listings</div>
+        </div>
+        <div class="cms-card" style="cursor:pointer" onclick="showPanel('posts')">
+          <div style="font-size:2rem;color:var(--gold);font-family:var(--serif)" id="dash-posts">0</div>
+          <div style="font-size:.72rem;color:var(--muted);margin-top:.3rem;text-transform:uppercase;letter-spacing:.1em">Blog Posts</div>
+        </div>
+        <div class="cms-card" style="cursor:pointer" onclick="showPanel('pages')">
+          <div style="font-size:2rem;color:var(--gold);font-family:var(--serif)" id="dash-pages">0</div>
+          <div style="font-size:.72rem;color:var(--muted);margin-top:.3rem;text-transform:uppercase;letter-spacing:.1em">Pages</div>
+        </div>
+      </div>
+      <div class="cms-card">
+        <div class="cms-card-title">Quick Actions</div>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+          <button class="btn-add" onclick="newListing()">+ New Listing</button>
+          <button class="btn-add" onclick="newPost()">+ New Blog Post</button>
+          <button class="btn-add" onclick="newPage()">+ New Page</button>
+          <button class="btn-secondary" onclick="showPanel('settings')">⚙ Site Settings</button>
+        </div>
+      </div>
+      <div class="cms-card">
+        <div class="cms-card-title">Deploy Status</div>
+        <div style="font-size:.82rem;color:var(--muted)">
+          Connected to: <span style="color:var(--gold)" id="deployRepo">—</span><br>
+          Branch: <span style="color:var(--text)" id="deployBranch">—</span><br>
+          <span style="font-size:.75rem;color:var(--light);margin-top:.4rem;display:block">Every save commits to GitHub → Cloudflare deploys in ~45 seconds.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGES -->
+    <div class="panel" id="panel-pages">
+      <div id="pages-list-view">
+        <div class="list-header">
+          <div><div class="panel-title">Pages</div><div class="panel-sub">Static pages with full SEO control</div></div>
+          <div class="list-actions"><button class="btn-add" onclick="newPage()">+ New Page</button></div>
+        </div>
+        <div class="items-list" id="pagesList"></div>
+      </div>
+      <div id="pages-editor-view" style="display:none"></div>
+    </div>
+
+    <!-- LISTINGS -->
+    <div class="panel" id="panel-listings">
+      <div id="listings-list-view">
+        <div class="list-header">
+          <div><div class="panel-title">Listings</div><div class="panel-sub">Pre-construction project listings</div></div>
+          <div class="list-actions"><button class="btn-add" onclick="newListing()">+ New Listing</button></div>
+        </div>
+        <div class="items-list" id="listingsList"></div>
+      </div>
+      <div id="listings-editor-view" style="display:none"></div>
+    </div>
+
+    <!-- POSTS -->
+    <div class="panel" id="panel-posts">
+      <div id="posts-list-view">
+        <div class="list-header">
+          <div><div class="panel-title">Blog Posts</div><div class="panel-sub">Market reports, news and articles</div></div>
+          <div class="list-actions"><button class="btn-add" onclick="newPost()">+ New Post</button></div>
+        </div>
+        <div class="items-list" id="postsList"></div>
+      </div>
+      <div id="posts-editor-view" style="display:none"></div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div class="panel" id="panel-navigation">
+      <div class="panel-title">Navigation</div>
+      <div class="panel-sub">Edit header menu links and CTA button per language</div>
+      <div class="lang-tabs" id="navLangTabs"></div>
+      <div id="navLangContents"></div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="panel" id="panel-footer">
+      <div class="panel-title">Footer</div>
+      <div class="panel-sub">Edit footer description, columns and legal text per language</div>
+      <div class="lang-tabs" id="footerLangTabs"></div>
+      <div id="footerLangContents"></div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="panel" id="panel-settings">
+      <div class="panel-title">Site Settings</div>
+      <div class="panel-sub">Global settings shared across all pages and languages</div>
+
+      <div class="cms-card">
+        <div class="cms-card-title">Contact & Identity</div>
+        <div class="field-grid">
+          <div class="field"><label>Site Name</label><input class="cms-input" id="s-site_name" placeholder="MiaLux Realty"></div>
+          <div class="field"><label>Site URL</label><input class="cms-input" id="s-site_url" placeholder="https://mialuxrealty.com"></div>
+          <div class="field"><label>Logo Text</label><input class="cms-input" id="s-logo_text" placeholder="MiaLux"></div>
+          <div class="field"><label>Logo Accent</label><input class="cms-input" id="s-logo_text_accent" placeholder="Realty"></div>
+          <div class="field"><label>Phone <span class="hint">(display)</span></label><input class="cms-input" id="s-phone" placeholder="+1 (305) 000-0000"></div>
+          <div class="field"><label>Phone Raw <span class="hint">(digits only)</span></label><input class="cms-input" id="s-phone_raw" placeholder="+13050000000"></div>
+          <div class="field"><label>Email</label><input class="cms-input" id="s-email" placeholder="hello@mialuxrealty.com"></div>
+          <div class="field"><label>WhatsApp <span class="hint">(digits only)</span></label><input class="cms-input" id="s-whatsapp" placeholder="13050000000"></div>
+          <div class="field full"><label>License Text</label><input class="cms-input" id="s-license" placeholder="Licensed Real Estate Broker, Florida"></div>
+          <div class="field"><label>Address</label><input class="cms-input" id="s-address" placeholder="Miami, FL 33131"></div>
+          <div class="field"><label>Hours</label><input class="cms-input" id="s-hours" placeholder="Mon–Sun 9am–9pm EST"></div>
+        </div>
+      </div>
+
+      <div class="cms-card">
+        <div class="cms-card-title">Social Media</div>
+        <div class="field-grid">
+          <div class="field"><label>Instagram URL</label><input class="cms-input" id="s-instagram" placeholder="https://instagram.com/..."></div>
+          <div class="field"><label>Facebook URL</label><input class="cms-input" id="s-facebook" placeholder="https://facebook.com/..."></div>
+          <div class="field"><label>LinkedIn URL</label><input class="cms-input" id="s-linkedin" placeholder="https://linkedin.com/..."></div>
+          <div class="field"><label>YouTube URL</label><input class="cms-input" id="s-youtube" placeholder="https://youtube.com/..."></div>
+        </div>
+      </div>
+
+      <div class="cms-card">
+        <div class="cms-card-title">Analytics & Tracking</div>
+        <div class="field-grid">
+          <div class="field"><label>GTM ID</label><input class="cms-input" id="s-gtm_id" placeholder="GTM-XXXXXXX"></div>
+          <div class="field"><label>GA4 ID</label><input class="cms-input" id="s-ga4_id" placeholder="G-XXXXXXXXXX"></div>
+          <div class="field"><label>Meta Pixel ID</label><input class="cms-input" id="s-meta_pixel" placeholder="000000000000000"></div>
+          <div class="field"><label>Clarity ID</label><input class="cms-input" id="s-clarity_id" placeholder="xxxxxxxxxx"></div>
+        </div>
+      </div>
+
+      <div class="cms-card">
+        <div class="cms-card-title">Default SEO</div>
+        <div class="field-grid">
+          <div class="field"><label>Default OG Image</label><input class="cms-input" id="s-og_image" placeholder="/images/og-default.webp"></div>
+          <div class="field"><label>Robots</label>
+            <select class="cms-select" id="s-robots">
+              <option value="index, follow">index, follow</option>
+              <option value="noindex, nofollow">noindex, nofollow</option>
+              <option value="index, nofollow">index, nofollow</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REDIRECTS -->
+    <div class="panel" id="panel-redirects">
+      <div class="panel-title">Redirects</div>
+      <div class="panel-sub">Manage URL redirects. Generates <code style="color:var(--gold)">_redirects</code> file for Cloudflare Pages.</div>
+      <div class="cms-card">
+        <div class="cms-card-title">Language Redirects (Auto)</div>
+        <div style="font-size:.8rem;color:var(--muted);margin-bottom:1rem;line-height:1.6">
+          These redirect non-English language paths to English until translated content is ready. Toggle off when content is live.
+        </div>
+        <div id="langRedirects"></div>
+      </div>
+      <div class="cms-card">
+        <div class="cms-card-title">Custom Redirects</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 80px 36px;gap:.5rem;margin-bottom:.5rem">
+          <div style="font-size:.63rem;letter-spacing:.08em;text-transform:uppercase;color:var(--light)">From</div>
+          <div style="font-size:.63rem;letter-spacing:.08em;text-transform:uppercase;color:var(--light)">To</div>
+          <div style="font-size:.63rem;letter-spacing:.08em;text-transform:uppercase;color:var(--light)">Code</div>
+          <div></div>
+        </div>
+        <div id="customRedirects"></div>
+        <button class="add-row-btn" onclick="addRedirectRow()">+ Add Redirect</button>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /app -->
+
+<!-- CONFIRM MODAL -->
+<div class="modal-bg" id="confirmModal">
+  <div class="modal-box">
+    <div class="modal-title" id="modalTitle">Confirm Delete</div>
+    <div class="modal-text" id="modalText">Are you sure?</div>
+    <div class="modal-actions">
+      <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+      <button class="modal-confirm" id="modalConfirm">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════
+let GH_TOKEN = '', GH_REPO = '', GH_BRANCH = 'main';
+let content = {}, listings = [];
+let currentLang = 'en';
+let fileSHAs = {};
+let pendingDelete = null;
+
+// ═══════════════════════════════════════════════════════
+// AUTH
+// ═══════════════════════════════════════════════════════
+async function doLogin() {
+  const token  = document.getElementById('tokenInput').value.trim();
+  const repo   = document.getElementById('repoInput').value.trim();
+  const branch = document.getElementById('branchInput').value.trim() || 'main';
+  const err    = document.getElementById('loginError');
+
+  if (!token || !repo) { err.textContent = 'Please fill in all fields.'; err.style.display='block'; return; }
+
+  err.style.display = 'none';
+  document.querySelector('.login-btn').textContent = 'Connecting…';
+
+  try {
+    const r = await ghGet(`repos/${repo}`);
+    if (r.id) {
+      GH_TOKEN = token; GH_REPO = repo; GH_BRANCH = branch;
+      localStorage.setItem('cms_token', token);
+      localStorage.setItem('cms_repo', repo);
+      localStorage.setItem('cms_branch', branch);
+      await initApp();
+    }
+  } catch(e) {
+    err.textContent = 'Connection failed. Check your token and repo name.';
+    err.style.display = 'block';
+    document.querySelector('.login-btn').textContent = 'Connect to GitHub →';
+  }
+}
+
+function logout() {
+  localStorage.removeItem('cms_token');
+  localStorage.removeItem('cms_repo');
+  localStorage.removeItem('cms_branch');
+  location.reload();
+}
+
+// ═══════════════════════════════════════════════════════
+// GITHUB API
+// ═══════════════════════════════════════════════════════
+async function ghGet(path) {
+  const r = await fetch(`https://api.github.com/${path}`, {
+    headers: { Authorization: `token ${GH_TOKEN}`, Accept: 'application/vnd.github.v3+json' }
+  });
+  if (!r.ok) throw new Error(r.status);
+  return r.json();
+}
+
+async function ghGetFile(path) {
+  try {
+    const r = await ghGet(`repos/${GH_REPO}/contents/${path}?ref=${GH_BRANCH}`);
+    fileSHAs[path] = r.sha;
+    return JSON.parse(atob(r.content.replace(/\n/g,'')));
+  } catch(e) { return null; }
+}
+
+async function ghPutFile(path, data, message) {
+  const body = {
+    message,
+    content: btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2)))),
+    branch: GH_BRANCH
+  };
+  if (fileSHAs[path]) body.sha = fileSHAs[path];
+  const r = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: { Authorization: `token ${GH_TOKEN}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  if (!r.ok) { const e = await r.json(); throw new Error(e.message); }
+  const res = await r.json();
+  fileSHAs[path] = res.content.sha;
+  return res;
+}
+
+// ═══════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════
+async function initApp() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('app').classList.add('visible');
+  document.getElementById('repoDisplay').textContent = GH_REPO;
+  document.getElementById('deployRepo').textContent = GH_REPO;
+  document.getElementById('deployBranch').textContent = GH_BRANCH;
+
+  // Load data
+  const [c, l] = await Promise.all([
+    ghGetFile('content.json'),
+    ghGetFile('listings.json')
+  ]);
+
+  content  = c  || getDefaultContent();
+  listings = l  || [];
+
+  updateCounts();
+  renderNavEditor();
+  renderFooterEditor();
+  renderSettingsEditor();
+  renderRedirects();
+  renderPagesList();
+  renderListingsList();
+  renderPostsList();
+}
+
+function getDefaultContent() {
+  return {
+    _meta: { version:'1.0', languages:['en','es','pt','ru'], default_language:'en' },
+    site_settings: { site_name:'MiaLux Realty', site_url:'https://mialuxrealty.com', logo_text:'MiaLux', logo_text_accent:'Realty', phone:'', phone_raw:'', email:'', whatsapp:'', license:'', address:'', hours:'', social:{instagram:'',facebook:'',linkedin:'',youtube:''}, analytics:{gtm_id:'',ga4_id:'',meta_pixel:'',clarity_id:''}, seo:{og_image:'',robots:'index, follow'} },
+    navigation: { en:{links:[],cta:{label:'',url:''}}, es:{links:[],cta:{label:'',url:''}}, pt:{links:[],cta:{label:'',url:''}}, ru:{links:[],cta:{label:'',url:''}} },
+    footer: { en:{description:'',columns:[],legal:'',privacy_url:'',terms_url:'',sitemap_url:''}, es:{description:'',columns:[],legal:'',privacy_url:'',terms_url:'',sitemap_url:''}, pt:{description:'',columns:[],legal:'',privacy_url:'',terms_url:'',sitemap_url:''}, ru:{description:'',columns:[],legal:'',privacy_url:'',terms_url:'',sitemap_url:''} },
+    pages: [], posts: []
+  };
+}
+
+function updateCounts() {
+  const p = (content.pages||[]).length;
+  const po = (content.posts||[]).length;
+  const l = listings.length;
+  document.getElementById('pagesCount').textContent = p;
+  document.getElementById('postsCount').textContent = po;
+  document.getElementById('listingsCount').textContent = l;
+  document.getElementById('dash-pages').textContent = p;
+  document.getElementById('dash-posts').textContent = po;
+  document.getElementById('dash-listings').textContent = l;
+}
+
+// ═══════════════════════════════════════════════════════
+// PANEL NAVIGATION
+// ═══════════════════════════════════════════════════════
+function showPanel(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  document.querySelector(`[data-panel="${name}"]`).classList.add('active');
+}
+
+function switchLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+}
+
+// ═══════════════════════════════════════════════════════
+// SAVE & DEPLOY
+// ═══════════════════════════════════════════════════════
+async function saveAll() {
+  const btn = document.getElementById('saveBtn');
+  const status = document.getElementById('saveStatus');
+  btn.classList.add('saving');
+  btn.textContent = 'Saving…';
+  status.className = 'save-status';
+  status.textContent = '';
+
+  // Collect all form data back into content object
+  collectSettings();
+  collectNavigation();
+  collectFooter();
+  generateRedirectsFile();
+
+  try {
+    await Promise.all([
+      ghPutFile('content.json', content, 'CMS: update content.json'),
+      ghPutFile('listings.json', listings, 'CMS: update listings.json'),
+    ]);
+
+    // Trigger build via empty commit to build_catalog.py
+    await triggerBuild();
+
+    status.className = 'save-status ok';
+    status.textContent = '✓ Saved & deploying';
+    showToast('Saved! Cloudflare will deploy in ~45 seconds.', 'success');
+  } catch(e) {
+    status.className = 'save-status err';
+    status.textContent = '✗ Save failed';
+    showToast('Save failed: ' + e.message, 'error');
+  }
+
+  btn.classList.remove('saving');
+  btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Save & Deploy';
+}
+
+async function triggerBuild() {
+  // Trigger GitHub Action by creating/updating a timestamp file
+  try {
+    const ts = { last_build: new Date().toISOString() };
+    await ghPutFile('.cms-build-trigger', ts, 'CMS: trigger build');
+  } catch(e) {} // Non-fatal
+}
+
+async function generateRedirectsFile() {
+  const langs = ['es','pt','ru'];
+  const enabled = langs.filter(l => {
+    const el = document.getElementById('redirect-toggle-'+l);
+    return el && el.classList.contains('on');
+  });
+
+  let redirects = '# Auto-generated by MiaLux CMS\n# Do not edit manually\n\n';
+  redirects += '# Language redirects\n';
+  enabled.forEach(l => {
+    redirects += `/${l}/* / 302\n`;
+  });
+
+  // Custom redirects
+  const rows = document.querySelectorAll('.custom-redirect-row');
+  if (rows.length) {
+    redirects += '\n# Custom redirects\n';
+    rows.forEach(row => {
+      const from = row.querySelector('.cr-from').value.trim();
+      const to   = row.querySelector('.cr-to').value.trim();
+      const code = row.querySelector('.cr-code').value;
+      if (from && to) redirects += `${from} ${to} ${code}\n`;
+    });
+  }
+
+  try {
+    const enc = btoa(unescape(encodeURIComponent(redirects)));
+    const body = { message:'CMS: update _redirects', content: enc, branch: GH_BRANCH };
+    if (fileSHAs['_redirects']) body.sha = fileSHAs['_redirects'];
+    const r = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/_redirects`, {
+      method:'PUT', headers:{Authorization:`token ${GH_TOKEN}`,'Content-Type':'application/json'},
+      body: JSON.stringify(body)
+    });
+    if (r.ok) { const res = await r.json(); fileSHAs['_redirects'] = res.content.sha; }
+  } catch(e) {}
+}
+
+// ═══════════════════════════════════════════════════════
+// SETTINGS EDITOR
+// ═══════════════════════════════════════════════════════
+function renderSettingsEditor() {
+  const s = content.site_settings || {};
+  const flat = {
+    site_name: s.site_name, site_url: s.site_url, logo_text: s.logo_text,
+    logo_text_accent: s.logo_text_accent, phone: s.phone, phone_raw: s.phone_raw,
+    email: s.email, whatsapp: s.whatsapp, license: s.license, address: s.address, hours: s.hours,
+    instagram: s.social?.instagram, facebook: s.social?.facebook,
+    linkedin: s.social?.linkedin, youtube: s.social?.youtube,
+    gtm_id: s.analytics?.gtm_id, ga4_id: s.analytics?.ga4_id,
+    meta_pixel: s.analytics?.meta_pixel, clarity_id: s.analytics?.clarity_id,
+    og_image: s.seo?.og_image, robots: s.seo?.robots
+  };
+  Object.entries(flat).forEach(([k,v]) => {
+    const el = document.getElementById('s-'+k);
+    if (el && v !== undefined) el.value = v || '';
+  });
+}
+
+function collectSettings() {
+  const s = content.site_settings;
+  ['site_name','site_url','logo_text','logo_text_accent','phone','phone_raw','email','whatsapp','license','address','hours'].forEach(k => {
+    const el = document.getElementById('s-'+k); if (el) s[k] = el.value;
+  });
+  ['instagram','facebook','linkedin','youtube'].forEach(k => {
+    const el = document.getElementById('s-'+k); if (el) s.social[k] = el.value;
+  });
+  ['gtm_id','ga4_id','meta_pixel','clarity_id'].forEach(k => {
+    const el = document.getElementById('s-'+k); if (el) s.analytics[k] = el.value;
+  });
+  const og = document.getElementById('s-og_image'); if (og) s.seo.og_image = og.value;
+  const rb = document.getElementById('s-robots'); if (rb) s.seo.robots = rb.value;
+}
+
+// ═══════════════════════════════════════════════════════
+// NAVIGATION EDITOR
+// ═══════════════════════════════════════════════════════
+function renderNavEditor() {
+  const langs = ['en','es','pt','ru'];
+  const labels = {en:'English',es:'Español',pt:'Português',ru:'Русский'};
+
+  document.getElementById('navLangTabs').innerHTML = langs.map((l,i) =>
+    `<button class="ltab ${i===0?'active':''}" onclick="switchLangTab('nav',this,'${l}')">${labels[l]}</button>`
+  ).join('');
+
+  document.getElementById('navLangContents').innerHTML = langs.map((l,i) => {
+    const nav = content.navigation?.[l] || {links:[], cta:{label:'',url:''}};
+    const linksHtml = (nav.links||[]).map((lk,j) => navLinkRow(l, j, lk)).join('');
+    return `<div class="ltab-content ${i===0?'active':''}" id="nav-lang-${l}">
+      <div class="cms-card">
+        <div class="cms-card-title">Menu Links</div>
+        <div id="nav-links-${l}">${linksHtml}</div>
+        <button class="add-row-btn" onclick="addNavLink('${l}')">+ Add Link</button>
+      </div>
+      <div class="cms-card">
+        <div class="cms-card-title">CTA Button</div>
+        <div class="field-grid">
+          <div class="field"><label>Button Label</label><input class="cms-input" id="nav-cta-label-${l}" value="${nav.cta?.label||''}"></div>
+          <div class="field"><label>Button URL</label><input class="cms-input" id="nav-cta-url-${l}" value="${nav.cta?.url||''}"></div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function navLinkRow(lang, idx, link) {
+  return `<div class="nav-item-row" id="nav-row-${lang}-${idx}">
+    <span class="drag-handle">⠿</span>
+    <input class="cms-input" placeholder="Label" value="${link.label||''}" data-nav-label="${lang}-${idx}">
+    <input class="cms-input" placeholder="/url" value="${link.url||''}" data-nav-url="${lang}-${idx}">
+    <button class="remove-btn" onclick="removeNavLink('${lang}',${idx})">✕</button>
+  </div>`;
+}
+
+function addNavLink(lang) {
+  const nav = content.navigation[lang] || {links:[], cta:{label:'',url:''}};
+  if (!nav.links) nav.links = [];
+  nav.links.push({label:'',url:''});
+  content.navigation[lang] = nav;
+  renderNavEditor();
+  switchLangTabById('nav', lang);
+}
+
+function removeNavLink(lang, idx) {
+  content.navigation[lang].links.splice(idx, 1);
+  renderNavEditor();
+  switchLangTabById('nav', lang);
+}
+
+function collectNavigation() {
+  ['en','es','pt','ru'].forEach(lang => {
+    if (!content.navigation[lang]) content.navigation[lang] = {links:[],cta:{label:'',url:''}};
+    const links = [];
+    const container = document.getElementById('nav-links-'+lang);
+    if (container) {
+      container.querySelectorAll('.nav-item-row').forEach((row,i) => {
+        links.push({
+          label: row.querySelector(`[data-nav-label="${lang}-${i}"]`)?.value || '',
+          url:   row.querySelector(`[data-nav-url="${lang}-${i}"]`)?.value || ''
+        });
+      });
+    }
+    content.navigation[lang].links = links;
+    const label = document.getElementById(`nav-cta-label-${lang}`);
+    const url   = document.getElementById(`nav-cta-url-${lang}`);
+    content.navigation[lang].cta = { label: label?.value||'', url: url?.value||'' };
+  });
+}
+
+// ═══════════════════════════════════════════════════════
+// FOOTER EDITOR
+// ═══════════════════════════════════════════════════════
+function renderFooterEditor() {
+  const langs = ['en','es','pt','ru'];
+  const labels = {en:'English',es:'Español',pt:'Português',ru:'Русский'};
+
+  document.getElementById('footerLangTabs').innerHTML = langs.map((l,i) =>
+    `<button class="ltab ${i===0?'active':''}" onclick="switchLangTab('footer',this,'${l}')">${labels[l]}</button>`
+  ).join('');
+
+  document.getElementById('footerLangContents').innerHTML = langs.map((l,i) => {
+    const f = content.footer?.[l] || {description:'',columns:[],legal:'',privacy_url:'',terms_url:'',sitemap_url:''};
+    return `<div class="ltab-content ${i===0?'active':''}" id="footer-lang-${l}">
+      <div class="cms-card">
+        <div class="cms-card-title">Description</div>
+        <div class="field full"><textarea class="cms-textarea" id="footer-desc-${l}" rows="3">${f.description||''}</textarea></div>
+      </div>
+      <div class="cms-card">
+        <div class="cms-card-title">Legal & Links</div>
+        <div class="field-grid">
+          <div class="field full"><label>Legal Text</label><input class="cms-input" id="footer-legal-${l}" value="${f.legal||''}"></div>
+          <div class="field"><label>Privacy Policy URL</label><input class="cms-input" id="footer-privacy-${l}" value="${f.privacy_url||''}"></div>
+          <div class="field"><label>Terms URL</label><input class="cms-input" id="footer-terms-${l}" value="${f.terms_url||''}"></div>
+          <div class="field"><label>Sitemap URL</label><input class="cms-input" id="footer-sitemap-${l}" value="${f.sitemap_url||''}"></div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function collectFooter() {
+  ['en','es','pt','ru'].forEach(lang => {
+    if (!content.footer[lang]) content.footer[lang] = {description:'',columns:[],legal:'',privacy_url:'',terms_url:'',sitemap_url:''};
+    const d = document.getElementById(`footer-desc-${lang}`);
+    const le = document.getElementById(`footer-legal-${lang}`);
+    const pr = document.getElementById(`footer-privacy-${lang}`);
+    const te = document.getElementById(`footer-terms-${lang}`);
+    const si = document.getElementById(`footer-sitemap-${lang}`);
+    if (d)  content.footer[lang].description = d.value;
+    if (le) content.footer[lang].legal = le.value;
+    if (pr) content.footer[lang].privacy_url = pr.value;
+    if (te) content.footer[lang].terms_url = te.value;
+    if (si) content.footer[lang].sitemap_url = si.value;
+  });
+}
+
+// ═══════════════════════════════════════════════════════
+// LANG TAB SWITCHER
+// ═══════════════════════════════════════════════════════
+function switchLangTab(prefix, btn, lang) {
+  const parent = btn.closest('.panel') || btn.parentElement.parentElement;
+  parent.querySelectorAll(`.ltab`).forEach(b => b.classList.remove('active'));
+  parent.querySelectorAll(`.ltab-content`).forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  const target = document.getElementById(`${prefix}-lang-${lang}`);
+  if (target) target.classList.add('active');
+}
+
+function switchLangTabById(prefix, lang) {
+  const container = document.getElementById(`${prefix}LangTabs`);
+  const tabs = container?.querySelectorAll('.ltab');
+  const langs = ['en','es','pt','ru'];
+  const idx = langs.indexOf(lang);
+  if (tabs && tabs[idx]) switchLangTab(prefix, tabs[idx], lang);
+}
+
+// ═══════════════════════════════════════════════════════
+// PAGES
+// ═══════════════════════════════════════════════════════
+function renderPagesList() {
+  const pages = content.pages || [];
+  document.getElementById('pagesList').innerHTML = pages.length === 0
+    ? '<div style="color:var(--muted);font-size:.82rem;padding:1rem">No pages yet.</div>'
+    : pages.map((p,i) => `
+      <div class="item-row" onclick="editPage(${i})">
+        <span class="item-badge ${p.status==='published'?'badge-published':'badge-draft'}">${p.status||'draft'}</span>
+        <span class="item-name">${p.en?.title || p.id || 'Untitled Page'}</span>
+        <span class="item-meta">/${p.slug||''}</span>
+        <div class="item-actions">
+          <button class="ia-btn" onclick="event.stopPropagation();editPage(${i})">Edit</button>
+          <button class="ia-btn del" onclick="event.stopPropagation();confirmDelete('page',${i})">Del</button>
+        </div>
+      </div>`).join('');
+  updateCounts();
+}
+
+function newPage() {
+  content.pages = content.pages || [];
+  const id = 'page-' + Date.now();
+  content.pages.push({
+    id, slug:'', template:'page', status:'draft',
+    en:{title:'',meta_description:'',h1:'',body:'',og_title:'',og_description:'',og_image:'',canonical:'',schema_type:'WebPage',hreflang:{}},
+    es:{title:'',meta_description:'',h1:'',body:'',og_title:'',og_description:'',og_image:'',canonical:'',schema_type:'WebPage',hreflang:{}},
+    pt:{title:'',meta_description:'',h1:'',body:'',og_title:'',og_description:'',og_image:'',canonical:'',schema_type:'WebPage',hreflang:{}},
+    ru:{title:'',meta_description:'',h1:'',body:'',og_title:'',og_description:'',og_image:'',canonical:'',schema_type:'WebPage',hreflang:{}}
+  });
+  editPage(content.pages.length - 1);
+}
+
+function editPage(idx) {
+  const page = content.pages[idx];
+  showPanel('pages');
+  document.getElementById('pages-list-view').style.display = 'none';
+  document.getElementById('pages-editor-view').style.display = 'block';
+  document.getElementById('pages-editor-view').innerHTML = renderItemEditor('page', idx, page);
+  bindCharCounters();
+  updateSeoPreview('page', idx, 'en');
+}
+
+// ═══════════════════════════════════════════════════════
+// LISTINGS
+// ═══════════════════════════════════════════════════════
+function renderListingsList() {
+  document.getElementById('listingsList').innerHTML = listings.length === 0
+    ? '<div style="color:var(--muted);font-size:.82rem;padding:1rem">No listings yet.</div>'
+    : listings.map((l,i) => `
+      <div class="item-row" onclick="editListing(${i})">
+        <span class="item-badge ${l.status==='Selling'?'badge-published':'badge-draft'}">${l.status||'Draft'}</span>
+        <span class="item-name">${l.name||'Untitled Listing'}</span>
+        <span class="item-meta">${l.neighborhood||''} · ${l.price_from ? '$'+Math.round(l.price_from/1000)+'K' : '—'}</span>
+        <div class="item-actions">
+          <button class="ia-btn" onclick="event.stopPropagation();editListing(${i})">Edit</button>
+          <button class="ia-btn del" onclick="event.stopPropagation();confirmDelete('listing',${i})">Del</button>
+        </div>
+      </div>`).join('');
+  updateCounts();
+}
+
+function newListing() {
+  listings.push({
+    id:'listing-'+Date.now(), slug:'', name:'', tagline:'', badge:'New Launch',
+    featured:false, status:'Coming Soon', neighborhood:'', address:'', developer:'',
+    architect:'', interior_designer:'', brand_partner:'', floors:0, total_units:0,
+    price_from:0, price_to:0, price_per_sqft_from:0,
+    estimated_delivery:'', construction_progress:0, deposit_percent:20,
+    views:[], unit_types:[], payment_schedule:[], amenities:[], residence_features:[],
+    description_short:'', description_full:'', image_main:'', images_gallery:[],
+    brochure_pdf:'', floorplans_pdf:'',
+    seo: {
+      en:{meta_title:'',meta_description:'',og_image:'',canonical:'',schema_type:'Accommodation',hreflang:{}},
+      es:{meta_title:'',meta_description:'',og_image:'',canonical:'',schema_type:'Accommodation',hreflang:{}},
+      pt:{meta_title:'',meta_description:'',og_image:'',canonical:'',schema_type:'Accommodation',hreflang:{}},
+      ru:{meta_title:'',meta_description:'',og_image:'',canonical:'',schema_type:'Accommodation',hreflang:{}}
+    }
+  });
+  editListing(listings.length - 1);
+}
+
+function editListing(idx) {
+  const l = listings[idx];
+  showPanel('listings');
+  document.getElementById('listings-list-view').style.display = 'none';
+  document.getElementById('listings-editor-view').style.display = 'block';
+  document.getElementById('listings-editor-view').innerHTML = renderListingEditor(idx, l);
+  bindCharCounters();
+}
+
+function renderListingEditor(idx, l) {
+  const langs = ['en','es','pt','ru'];
+  const seo = l.seo || {en:{},es:{},pt:{},ru:{}};
+  return `
+    <button class="back-btn" onclick="backToList('listings')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Listings
+    </button>
+    <div class="panel-title">${l.name || 'New Listing'}</div>
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab(this,'ltab-info-${idx}')">Project Info</button>
+      <button class="tab-btn" onclick="switchTab(this,'ltab-details-${idx}')">Details & Units</button>
+      <button class="tab-btn" onclick="switchTab(this,'ltab-media-${idx}')">Media</button>
+      <button class="tab-btn" onclick="switchTab(this,'ltab-seo-${idx}')">SEO</button>
+    </div>
+
+    <div class="tab-content active" id="ltab-info-${idx}">
+      <div class="cms-card">
+        <div class="cms-card-title">Identity</div>
+        <div class="field-grid">
+          <div class="field"><label>Project Name <span class="req">*</span></label><input class="cms-input" id="l-name-${idx}" value="${l.name||''}" oninput="listings[${idx}].name=this.value"></div>
+          <div class="field"><label>Slug <span class="hint">(URL)</span></label><input class="cms-input" id="l-slug-${idx}" value="${l.slug||''}" oninput="listings[${idx}].slug=this.value"></div>
+          <div class="field"><label>Tagline</label><input class="cms-input" id="l-tagline-${idx}" value="${l.tagline||''}" oninput="listings[${idx}].tagline=this.value"></div>
+          <div class="field"><label>Badge</label>
+            <select class="cms-select" id="l-badge-${idx}" onchange="listings[${idx}].badge=this.value">
+              ${['Hot Deal','New Launch','VIP Pricing','Coming Soon'].map(b=>`<option ${l.badge===b?'selected':''}>${b}</option>`).join('')}
+            </select>
+          </div>
+          <div class="field"><label>Status</label>
+            <select class="cms-select" id="l-status-${idx}" onchange="listings[${idx}].status=this.value">
+              ${['Selling','Coming Soon','Under Construction','Completed'].map(s=>`<option ${l.status===s?'selected':''}>${s}</option>`).join('')}
+            </select>
+          </div>
+          <div class="field"><label>Featured</label>
+            <div style="margin-top:.5rem">
+              <button class="toggle ${l.featured?'on':''}" id="l-featured-${idx}" onclick="listings[${idx}].featured=!listings[${idx}].featured;this.classList.toggle('on')"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cms-card">
+        <div class="cms-card-title">Location</div>
+        <div class="field-grid">
+          <div class="field"><label>Neighborhood</label><input class="cms-input" id="l-neighborhood-${idx}" value="${l.neighborhood||''}" oninput="listings[${idx}].neighborhood=this.value"></div>
+          <div class="field full"><label>Full Address</label><input class="cms-input" id="l-address-${idx}" value="${l.address||''}" oninput="listings[${idx}].address=this.value"></div>
+        </div>
+      </div>
+      <div class="cms-card">
+        <div class="cms-card-title">Developer & Team</div>
+        <div class="field-grid">
+          <div class="field"><label>Developer</label><input class="cms-input" id="l-developer-${idx}" value="${l.developer||''}" oninput="listings[${idx}].developer=this.value"></div>
+          <div class="field"><label>Architect</label><input class="cms-input" id="l-architect-${idx}" value="${l.architect||''}" oninput="listings[${idx}].architect=this.value"></div>
+          <div class="field"><label>Interior Designer</label><input class="cms-input" id="l-interior_designer-${idx}" value="${l.interior_designer||''}" oninput="listings[${idx}].interior_designer=this.value"></div>
+          <div class="field"><label>Brand Partner</label><input class="cms-input" id="l-brand_partner-${idx}" value="${l.brand_partner||''}" oninput="listings[${idx}].brand_partner=this.value"></div>
+        </div>
+      </div>
+      <div class="cms-card">
+        <div class="cms-card-title">Description</div>
+        <div class="field full"><label>Short Description <span class="hint">(shown on cards, ~160 chars)</span></label>
+          <textarea class="cms-textarea" id="l-desc_short-${idx}" oninput="listings[${idx}].description_short=this.value">${l.description_short||''}</textarea>
+          <div class="char-count" id="cc-l-desc_short-${idx}"></div>
+        </div>
+        <div class="field full" style="margin-top:.8rem"><label>Full Description <span class="hint">(shown on detail page)</span></label>
+          <textarea class="cms-textarea tall" id="l-desc_full-${idx}" oninput="listings[${idx}].description_full=this.value">${l.description_full||''}</textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="ltab-details-${idx}">
+      <div class="cms-card">
+        <div class="cms-card-title">Building Specs</div>
+        <div class="field-grid three">
+          <div class="field"><label>Floors</label><input class="cms-input" type="number" id="l-floors-${idx}" value="${l.floors||0}" oninput="listings[${idx}].floors=+this.value"></div>
+          <div class="field"><label>Total Units</label><input class="cms-input" type="number" id="l-total_units-${idx}" value="${l.total_units||0}" oninput="listings[${idx}].total_units=+this.value"></div>
+          <div class="field"><label>Parking Spaces</label><input class="cms-input" type="number" id="l-parking-${idx}" value="${l.parking_spaces||0}" oninput="listings[${idx}].parking_spaces=+this.value"></div>
+        </div>
+      </div>
+      <div class="cms-card">
+        <div class="cms-card-title">Pricing</div>
+        <div class="field-grid three">
+          <div class="field"><label>Price From ($)</label><input class="cms-input" type="number" id="l-price_from-${idx}" value="${l.price_from||0}" oninput="listings[${idx}].price_from=+this.value"></div>
+          <div class="field"><label>Price To ($)</label><input class="cms-input" type="number" id="l-price_to-${idx}" value="${l.price_to||0}" oninput="listings[${idx}].price_to=+this.value"></div>
+          <div class="field"><label>$/sqft From</label><input class="cms-input" type="number" id="l-price_sqft-${idx}" value="${l.price_per_sqft_from||0}" oninput="listings[${idx}].price_per_sqft_from=+this.value"></div>
+          <div class="field"><label>Deposit %</label><input class="cms-input" type="number" id="l-deposit-${idx}" value="${l.deposit_percent||20}" oninput="listings[${idx}].deposit_percent=+this.value"></div>
+          <div class="field"><label>Estimated Delivery</label><input class="cms-input" id="l-delivery-${idx}" placeholder="2028-Q4" value="${l.estimated_delivery||''}" oninput="listings[${idx}].estimated_delivery=this.value"></div>
+          <div class="field"><label>Construction %</label><input class="cms-input" type="number" min="0" max="100" id="l-progress-${idx}" value="${l.construction_progress||0}" oninput="listings[${idx}].construction_progress=+this.value"></div>
+        </div>
+      </div>
+      <div class="cms-card">
+        <div class="cms-card-title">Views</div>
+        <div class="field full">
+          <input class="cms-input" id="l-views-${idx}" placeholder="Ocean, Bay, City Skyline (comma separated)" value="${(l.views||[]).join(', ')}" oninput="listings[${idx}].views=this.value.split(',').map(v=>v.trim()).filter(Boolean)">
+        </div>
+      </div>
+      <div class="cms-card">
+        <div class="cms-card-title">Amenities</div>
+        <div class="field full">
+          <textarea class="cms-textarea" id="l-amenities-${idx}" placeholder="One amenity per line" oninput="listings[${idx}].amenities=this.value.split('\n').map(v=>v.trim()).filter(Boolean)">${(l.amenities||[]).join('\n')}</textarea>
+        </div>
+      </div>
+      <div class="cms-card">
+        <div class="cms-card-title">Residence Features</div>
+        <div class="field full">
+          <textarea class="cms-textarea" id="l-features-${idx}" placeholder="One feature per line" oninput="listings[${idx}].residence_features=this.value.split('\n').map(v=>v.trim()).filter(Boolean)">${(l.residence_features||[]).join('\n')}</textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="ltab-media-${idx}">
+      <div class="cms-card">
+        <div class="cms-card-title">Images</div>
+        <div class="field-grid">
+          <div class="field"><label>Main Image URL</label><input class="cms-input" id="l-image_main-${idx}" placeholder="/images/project-main.webp" value="${l.image_main||''}" oninput="listings[${idx}].image_main=this.value"></div>
+          <div class="field"><label>OG / Social Image</label><input class="cms-input" placeholder="/images/project-og.webp" value="${l.seo?.en?.og_image||''}"></div>
+          <div class="field full"><label>Gallery Images <span class="hint">(one URL per line)</span></label>
+            <textarea class="cms-textarea" id="l-gallery-${idx}" placeholder="/images/project-1.webp" oninput="listings[${idx}].images_gallery=this.value.split('\n').map(v=>v.trim()).filter(Boolean)">${(l.images_gallery||[]).join('\n')}</textarea>
+          </div>
+        </div>
+      </div>
+      <div class="cms-card">
+        <div class="cms-card-title">Downloads</div>
+        <div class="field-grid">
+          <div class="field"><label>Brochure PDF</label><input class="cms-input" id="l-brochure-${idx}" placeholder="/docs/project-brochure.pdf" value="${l.brochure_pdf||''}" oninput="listings[${idx}].brochure_pdf=this.value"></div>
+          <div class="field"><label>Floor Plans PDF</label><input class="cms-input" id="l-floorplans-${idx}" placeholder="/docs/project-floorplans.pdf" value="${l.floorplans_pdf||''}" oninput="listings[${idx}].floorplans_pdf=this.value"></div>
+          <div class="field"><label>Virtual Tour URL</label><input class="cms-input" placeholder="https://tour.example.com/..." value="${l.virtual_tour_url||''}" oninput="listings[${idx}].virtual_tour_url=this.value"></div>
+          <div class="field"><label>Video URL</label><input class="cms-input" placeholder="https://youtube.com/..." value="${l.video_url||''}" oninput="listings[${idx}].video_url=this.value"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="ltab-seo-${idx}">
+      ${langs.map((lang,li) => `
+      <div style="${li>0?'display:none':''}" id="lseo-${lang}-${idx}">
+        <div style="display:flex;gap:.4rem;margin-bottom:1rem">
+          ${langs.map((lg,lgi) => `<button class="ltab ${lgi===0&&lang==='en'?'active':''}" onclick="switchListingSeoLang(${idx},'${lg}',this)">${lg.toUpperCase()}</button>`).join('')}
+        </div>
+      </div>`).join('')}
+      <div id="lseo-fields-${idx}">
+        ${renderSeoFields('l', idx, 'en', seo.en||{})}
+      </div>
+    </div>`;
+}
+
+function switchListingSeoLang(idx, lang, btn) {
+  btn.closest('.tab-content').querySelectorAll('.ltab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const seo = listings[idx].seo?.[lang] || {};
+  document.getElementById(`lseo-fields-${idx}`).innerHTML = renderSeoFields('l', idx, lang, seo);
+  bindCharCounters();
+}
+
+// ═══════════════════════════════════════════════════════
+// BLOG POSTS
+// ═══════════════════════════════════════════════════════
+function renderPostsList() {
+  const posts = content.posts || [];
+  document.getElementById('postsList').innerHTML = posts.length === 0
+    ? '<div style="color:var(--muted);font-size:.82rem;padding:1rem">No posts yet.</div>'
+    : posts.map((p,i) => `
+      <div class="item-row" onclick="editPost(${i})">
+        <span class="item-badge ${p.status==='published'?'badge-published':'badge-draft'}">${p.status||'draft'}</span>
+        <span class="item-name">${p.en?.title || p.id || 'Untitled Post'}</span>
+        <span class="item-meta">${p.date||''} · ${p.category||''}</span>
+        <div class="item-actions">
+          <button class="ia-btn" onclick="event.stopPropagation();editPost(${i})">Edit</button>
+          <button class="ia-btn del" onclick="event.stopPropagation();confirmDelete('post',${i})">Del</button>
+        </div>
+      </div>`).join('');
+  updateCounts();
+}
+
+function newPost() {
+  content.posts = content.posts || [];
+  content.posts.push({
+    id:'post-'+Date.now(), slug:'', status:'draft',
+    date: new Date().toISOString().split('T')[0],
+    author:'MiaLux Realty Team', category:'Market Reports', image:'',
+    en:{title:'',meta_description:'',og_title:'',og_description:'',og_image:'',excerpt:'',body:'',canonical:'',schema_type:'Article',hreflang:{}},
+    es:{title:'',meta_description:'',og_title:'',og_description:'',og_image:'',excerpt:'',body:'',canonical:'',schema_type:'Article',hreflang:{}},
+    pt:{title:'',meta_description:'',og_title:'',og_description:'',og_image:'',excerpt:'',body:'',canonical:'',schema_type:'Article',hreflang:{}},
+    ru:{title:'',meta_description:'',og_title:'',og_description:'',og_image:'',excerpt:'',body:'',canonical:'',schema_type:'Article',hreflang:{}}
+  });
+  editPost(content.posts.length-1);
+}
+
+function editPost(idx) {
+  const post = content.posts[idx];
+  showPanel('posts');
+  document.getElementById('posts-list-view').style.display = 'none';
+  document.getElementById('posts-editor-view').style.display = 'block';
+  document.getElementById('posts-editor-view').innerHTML = renderPostEditor(idx, post);
+  bindCharCounters();
+}
+
+function renderPostEditor(idx, p) {
+  const langs = ['en','es','pt','ru'];
+  return `
+    <button class="back-btn" onclick="backToList('posts')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Posts
+    </button>
+    <div class="panel-title">${p.en?.title || 'New Post'}</div>
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab(this,'ptab-info-${idx}')">Info</button>
+      <button class="tab-btn" onclick="switchTab(this,'ptab-content-${idx}')">Content</button>
+      <button class="tab-btn" onclick="switchTab(this,'ptab-seo-${idx}')">SEO</button>
+    </div>
+
+    <div class="tab-content active" id="ptab-info-${idx}">
+      <div class="cms-card">
+        <div class="cms-card-title">Post Details</div>
+        <div class="field-grid">
+          <div class="field"><label>Slug <span class="hint">(URL)</span></label><input class="cms-input" value="${p.slug||''}" oninput="content.posts[${idx}].slug=this.value"></div>
+          <div class="field"><label>Status</label>
+            <select class="cms-select" onchange="content.posts[${idx}].status=this.value">
+              <option ${p.status==='published'?'selected':''}>published</option>
+              <option ${p.status==='draft'?'selected':''}>draft</option>
+            </select>
+          </div>
+          <div class="field"><label>Date</label><input class="cms-input" type="date" value="${p.date||''}" oninput="content.posts[${idx}].date=this.value"></div>
+          <div class="field"><label>Author</label><input class="cms-input" value="${p.author||''}" oninput="content.posts[${idx}].author=this.value"></div>
+          <div class="field"><label>Category</label><input class="cms-input" value="${p.category||''}" oninput="content.posts[${idx}].category=this.value"></div>
+          <div class="field"><label>Cover Image URL</label><input class="cms-input" value="${p.image||''}" oninput="content.posts[${idx}].image=this.value"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="ptab-content-${idx}">
+      <div class="lang-tabs">
+        ${langs.map((l,li) => `<button class="ltab ${li===0?'active':''}" onclick="switchLangTab('post-content-${idx}',this,'${l}')">${l.toUpperCase()}</button>`).join('')}
+      </div>
+      ${langs.map((l,li) => `
+      <div class="ltab-content ${li===0?'active':''}" id="post-content-${idx}-lang-${l}">
+        <div class="cms-card">
+          <div class="field full"><label>Title</label><input class="cms-input" value="${p[l]?.title||''}" oninput="content.posts[${idx}]['${l}'].title=this.value"></div>
+          <div class="field full" style="margin-top:.8rem"><label>Excerpt <span class="hint">(shown in listings)</span></label>
+            <textarea class="cms-textarea" oninput="content.posts[${idx}]['${l}'].excerpt=this.value">${p[l]?.excerpt||''}</textarea>
+          </div>
+          <div class="field full" style="margin-top:.8rem"><label>Body <span class="hint">(HTML)</span></label>
+            <textarea class="cms-textarea tall" oninput="content.posts[${idx}]['${l}'].body=this.value">${p[l]?.body||''}</textarea>
+          </div>
+        </div>
+      </div>`).join('')}
+    </div>
+
+    <div class="tab-content" id="ptab-seo-${idx}">
+      <div class="lang-tabs">
+        ${langs.map((l,li) => `<button class="ltab ${li===0?'active':''}" onclick="switchPostSeoLang(${idx},'${l}',this)">${l.toUpperCase()}</button>`).join('')}
+      </div>
+      <div id="pseo-fields-${idx}">
+        ${renderSeoFields('p', idx, 'en', p.en||{})}
+      </div>
+    </div>`;
+}
+
+function switchPostSeoLang(idx, lang, btn) {
+  btn.closest('.tab-content').querySelectorAll('.ltab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const data = content.posts[idx]?.[lang] || {};
+  document.getElementById(`pseo-fields-${idx}`).innerHTML = renderSeoFields('p', idx, lang, data);
+  bindCharCounters();
+}
+
+// ═══════════════════════════════════════════════════════
+// SEO FIELDS (reusable)
+// ═══════════════════════════════════════════════════════
+function renderSeoFields(prefix, idx, lang, data) {
+  const schemaTypes = ['WebPage','Article','RealEstateAgent','Accommodation','ItemList','LocalBusiness','FAQPage','BreadcrumbList'];
+  const url = data.canonical || '';
+  const title = data.meta_title || data.title || '';
+  const desc = data.meta_description || '';
+  return `
+    <div class="cms-card">
+      <div class="cms-card-title">Meta Tags — ${lang.toUpperCase()}</div>
+      <div class="field-grid">
+        <div class="field full"><label>Meta Title <span class="hint">(50–60 chars ideal)</span></label>
+          <input class="cms-input cc-input" id="${prefix}-meta_title-${idx}-${lang}" maxlength="80" placeholder="Page Title | MiaLux Realty" value="${title}" oninput="updateSeoPreviewFromField(this,'title','${prefix}-${idx}-${lang}')">
+          <div class="char-count" id="cc-${prefix}-meta_title-${idx}-${lang}"></div>
+        </div>
+        <div class="field full"><label>Meta Description <span class="hint">(140–160 chars ideal)</span></label>
+          <textarea class="cms-textarea cc-input" id="${prefix}-meta_desc-${idx}-${lang}" maxlength="200" oninput="updateSeoPreviewFromField(this,'desc','${prefix}-${idx}-${lang}')">${desc}</textarea>
+          <div class="char-count" id="cc-${prefix}-meta_desc-${idx}-${lang}"></div>
+        </div>
+        <div class="field"><label>Canonical URL</label><input class="cms-input" placeholder="https://mialuxrealty.com/..." value="${url}"></div>
+        <div class="field"><label>OG Image URL</label><input class="cms-input" placeholder="/images/og.webp" value="${data.og_image||''}"></div>
+        <div class="field"><label>OG Title <span class="hint">(optional override)</span></label><input class="cms-input" placeholder="Same as meta title if blank" value="${data.og_title||''}"></div>
+        <div class="field"><label>OG Description</label><input class="cms-input" placeholder="Same as meta desc if blank" value="${data.og_description||''}"></div>
+      </div>
+    </div>
+    <div class="cms-card">
+      <div class="cms-card-title">Schema Type</div>
+      <div class="schema-chips" id="schema-chips-${prefix}-${idx}-${lang}">
+        ${schemaTypes.map(t => `<div class="schema-chip ${data.schema_type===t?'active':''}" onclick="selectSchema(this,'${prefix}-${idx}-${lang}')">${t}</div>`).join('')}
+      </div>
+    </div>
+    <div class="cms-card">
+      <div class="cms-card-title">hreflang URLs <span style="font-size:.65rem;color:var(--muted);text-transform:none;letter-spacing:0;font-weight:300;margin-left:.4rem">(tell Google which language version exists at which URL)</span></div>
+      <div class="field-grid">
+        ${['en','es','pt','ru'].map(l => `
+        <div class="field"><label>hreflang: ${l}</label>
+          <input class="cms-input" placeholder="https://mialuxrealty.com/${l==='en'?'':''+l+'/'}..." value="${data.hreflang?.[l]||''}">
+        </div>`).join('')}
+      </div>
+    </div>
+    <div class="cms-card">
+      <div class="cms-card-title">Google Preview</div>
+      <div class="seo-preview" id="seo-preview-${prefix}-${idx}-${lang}">
+        <div class="seo-preview-url">${url || 'https://mialuxrealty.com/...'}</div>
+        <div class="seo-preview-title" id="seo-pt-${prefix}-${idx}-${lang}">${title || 'Page Title'}</div>
+        <div class="seo-preview-desc" id="seo-pd-${prefix}-${idx}-${lang}">${desc || 'Meta description will appear here...'}</div>
+        <div class="seo-bar">
+          <span class="seo-indicator ${title.length>=50&&title.length<=60?'seo-ok':title.length>0?'seo-warn':'seo-bad'}" id="seo-t-ind-${prefix}-${idx}-${lang}">Title ${title.length}/60</span>
+          <span class="seo-indicator ${desc.length>=140&&desc.length<=160?'seo-ok':desc.length>0?'seo-warn':'seo-bad'}" id="seo-d-ind-${prefix}-${idx}-${lang}">Desc ${desc.length}/160</span>
+        </div>
+      </div>
+    </div>`;
+}
+
+function updateSeoPreviewFromField(el, type, key) {
+  const val = el.value;
+  const pt = document.getElementById(`seo-pt-${key}`);
+  const pd = document.getElementById(`seo-pd-${key}`);
+  const ti = document.getElementById(`seo-t-ind-${key}`);
+  const di = document.getElementById(`seo-d-ind-${key}`);
+  if (type === 'title' && pt) {
+    pt.textContent = val || 'Page Title';
+    if (ti) { ti.textContent = `Title ${val.length}/60`; ti.className = `seo-indicator ${val.length>=50&&val.length<=60?'seo-ok':val.length>0?'seo-warn':'seo-bad'}`; }
+  }
+  if (type === 'desc' && pd) {
+    pd.textContent = val || 'Meta description will appear here...';
+    if (di) { di.textContent = `Desc ${val.length}/160`; di.className = `seo-indicator ${val.length>=140&&val.length<=160?'seo-ok':val.length>0?'seo-warn':'seo-bad'}`; }
+  }
+  updateCharCount(el);
+}
+
+function updateSeoPreview(prefix, idx, lang) {}
+function selectSchema(chip, key) {
+  chip.closest('.schema-chips').querySelectorAll('.schema-chip').forEach(c=>c.classList.remove('active'));
+  chip.classList.add('active');
+}
+
+// ═══════════════════════════════════════════════════════
+// PAGES EDITOR
+// ═══════════════════════════════════════════════════════
+function renderItemEditor(type, idx, item) {
+  const langs = ['en','es','pt','ru'];
+  return `
+    <button class="back-btn" onclick="backToList('${type}s')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Pages
+    </button>
+    <div class="panel-title">${item.en?.title || 'New Page'}</div>
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab(this,'itab-info-${idx}')">Settings</button>
+      <button class="tab-btn" onclick="switchTab(this,'itab-content-${idx}')">Content</button>
+      <button class="tab-btn" onclick="switchTab(this,'itab-seo-${idx}')">SEO</button>
+    </div>
+    <div class="tab-content active" id="itab-info-${idx}">
+      <div class="cms-card">
+        <div class="field-grid">
+          <div class="field"><label>Page ID</label><input class="cms-input" value="${item.id||''}" oninput="content.pages[${idx}].id=this.value"></div>
+          <div class="field"><label>Slug <span class="hint">(URL path)</span></label><input class="cms-input" value="${item.slug||''}" oninput="content.pages[${idx}].slug=this.value"></div>
+          <div class="field"><label>Template</label>
+            <select class="cms-select" onchange="content.pages[${idx}].template=this.value">
+              ${['home','catalog','page','landing'].map(t=>`<option ${item.template===t?'selected':''}>${t}</option>`).join('')}
+            </select>
+          </div>
+          <div class="field"><label>Status</label>
+            <select class="cms-select" onchange="content.pages[${idx}].status=this.value">
+              <option ${item.status==='published'?'selected':''}>published</option>
+              <option ${item.status==='draft'?'selected':''}>draft</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content" id="itab-content-${idx}">
+      <div class="lang-tabs">
+        ${langs.map((l,li)=>`<button class="ltab ${li===0?'active':''}" onclick="switchLangTab('page-content-${idx}',this,'${l}')">${l.toUpperCase()}</button>`).join('')}
+      </div>
+      ${langs.map((l,li)=>`
+      <div class="ltab-content ${li===0?'active':''}" id="page-content-${idx}-lang-${l}">
+        <div class="cms-card">
+          <div class="field full"><label>H1 Heading</label><input class="cms-input" value="${item[l]?.h1||''}" oninput="content.pages[${idx}]['${l}'].h1=this.value"></div>
+          <div class="field full" style="margin-top:.8rem"><label>Body Content <span class="hint">(HTML)</span></label>
+            <textarea class="cms-textarea tall" oninput="content.pages[${idx}]['${l}'].body=this.value">${item[l]?.body||''}</textarea>
+          </div>
+        </div>
+      </div>`).join('')}
+    </div>
+    <div class="tab-content" id="itab-seo-${idx}">
+      <div class="lang-tabs">
+        ${langs.map((l,li)=>`<button class="ltab ${li===0?'active':''}" onclick="switchPageSeoLang(${idx},'${l}',this)">${l.toUpperCase()}</button>`).join('')}
+      </div>
+      <div id="iseo-fields-${idx}">${renderSeoFields('i',idx,'en',item.en||{})}</div>
+    </div>`;
+}
+
+function switchPageSeoLang(idx, lang, btn) {
+  btn.closest('.tab-content').querySelectorAll('.ltab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(`iseo-fields-${idx}`).innerHTML = renderSeoFields('i', idx, lang, content.pages[idx]?.[lang]||{});
+  bindCharCounters();
+}
+
+// ═══════════════════════════════════════════════════════
+// BACK TO LIST
+// ═══════════════════════════════════════════════════════
+function backToList(panel) {
+  if (panel === 'listings') {
+    document.getElementById('listings-list-view').style.display = 'block';
+    document.getElementById('listings-editor-view').style.display = 'none';
+    renderListingsList();
+  } else if (panel === 'posts') {
+    document.getElementById('posts-list-view').style.display = 'block';
+    document.getElementById('posts-editor-view').style.display = 'none';
+    renderPostsList();
+  } else if (panel === 'pages') {
+    document.getElementById('pages-list-view').style.display = 'block';
+    document.getElementById('pages-editor-view').style.display = 'none';
+    renderPagesList();
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// TAB SWITCHER
+// ═══════════════════════════════════════════════════════
+function switchTab(btn, targetId) {
+  const parent = btn.closest('.panel') || document.body;
+  const tabBar = btn.closest('.tab-bar');
+  tabBar.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const panelEl = btn.closest('.panel') || document.getElementById('panel-listings') || document.getElementById('panel-posts') || document.getElementById('panel-pages');
+  if (panelEl) {
+    panelEl.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  }
+  const target = document.getElementById(targetId);
+  if (target) target.classList.add('active');
+}
+
+// ═══════════════════════════════════════════════════════
+// REDIRECTS
+// ═══════════════════════════════════════════════════════
+function renderRedirects() {
+  const langs = [{code:'es',name:'Spanish',path:'/es/'},{code:'pt',name:'Portuguese',path:'/pt/'},{code:'ru',name:'Russian',path:'/ru/'}];
+  document.getElementById('langRedirects').innerHTML = langs.map(l => `
+    <div style="display:flex;align-items:center;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--border2)">
+      <button class="toggle on" id="redirect-toggle-${l.code}" onclick="this.classList.toggle('on')"></button>
+      <span class="toggle-label">${l.path}* → / (302) &nbsp;·&nbsp; <strong style="color:var(--text)">${l.name}</strong></span>
+      <span style="font-size:.7rem;color:var(--light);margin-left:auto">Redirect until ${l.name} content is ready</span>
+    </div>`).join('');
+
+  document.getElementById('customRedirects').innerHTML = '';
+}
+
+function addRedirectRow() {
+  const row = document.createElement('div');
+  row.className = 'custom-redirect-row redirect-row';
+  row.innerHTML = `
+    <input class="cms-input cr-from" placeholder="/old-page">
+    <input class="cms-input cr-to" placeholder="/new-page">
+    <select class="redirect-code cr-code"><option>301</option><option>302</option></select>
+    <button class="remove-btn" onclick="this.parentElement.remove()">✕</button>`;
+  document.getElementById('customRedirects').appendChild(row);
+}
+
+// ═══════════════════════════════════════════════════════
+// DELETE
+// ═══════════════════════════════════════════════════════
+function confirmDelete(type, idx) {
+  pendingDelete = {type, idx};
+  const names = {
+    listing: listings[idx]?.name,
+    page: content.pages[idx]?.en?.title,
+    post: content.posts[idx]?.en?.title
+  };
+  document.getElementById('modalTitle').textContent = 'Delete ' + type.charAt(0).toUpperCase() + type.slice(1);
+  document.getElementById('modalText').textContent = `Delete "${names[type] || 'this item'}"? This cannot be undone.`;
+  document.getElementById('modalConfirm').onclick = executeDelete;
+  document.getElementById('confirmModal').classList.add('open');
+}
+
+function executeDelete() {
+  if (!pendingDelete) return;
+  const {type, idx} = pendingDelete;
+  if (type === 'listing') listings.splice(idx, 1);
+  else if (type === 'page') content.pages.splice(idx, 1);
+  else if (type === 'post') content.posts.splice(idx, 1);
+  closeModal();
+  renderListingsList(); renderPagesList(); renderPostsList();
+  showToast('Deleted. Remember to Save & Deploy.', 'success');
+}
+
+function closeModal() {
+  document.getElementById('confirmModal').classList.remove('open');
+  pendingDelete = null;
+}
+
+// ═══════════════════════════════════════════════════════
+// CHAR COUNTERS
+// ═══════════════════════════════════════════════════════
+function bindCharCounters() {
+  document.querySelectorAll('.cc-input').forEach(el => updateCharCount(el));
+  document.querySelectorAll('.cc-input').forEach(el => el.addEventListener('input', () => updateCharCount(el)));
+}
+function updateCharCount(el) {
+  const max = parseInt(el.maxLength) || 0;
+  if (!max) return;
+  const len = el.value.length;
+  const cc = el.parentElement.querySelector('.char-count');
+  if (!cc) return;
+  cc.textContent = `${len} / ${max}`;
+  cc.className = 'char-count' + (len > max*0.9 && len <= max ? ' warn' : len > max ? ' over' : '');
+}
+
+// ═══════════════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════════════
+function showToast(msg, type='') {
+  const t = document.getElementById('toast');
+  t.textContent = (type==='success'?'✓ ':type==='error'?'✗ ':'') + msg;
+  t.className = 'toast show ' + type;
+  setTimeout(() => t.className = 'toast', 3500);
+}
+
+// ═══════════════════════════════════════════════════════
+// AUTO-LOGIN
+// ═══════════════════════════════════════════════════════
+window.addEventListener('DOMContentLoaded', async () => {
+  const token  = localStorage.getItem('cms_token');
+  const repo   = localStorage.getItem('cms_repo');
+  const branch = localStorage.getItem('cms_branch') || 'main';
+  if (token && repo) {
+    GH_TOKEN = token; GH_REPO = repo; GH_BRANCH = branch;
+    document.getElementById('tokenInput').value = token;
+    document.getElementById('repoInput').value = repo;
+    document.getElementById('branchInput').value = branch;
+    try { await initApp(); } catch(e) { /* Token expired, show login */ }
+  }
+});
+</script>
+</body>
+</html>
