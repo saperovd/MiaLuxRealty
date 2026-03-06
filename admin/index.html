@@ -1653,7 +1653,7 @@ function showToast(msg, type='') {
 // URL SCRAPER
 // ═══════════════════════════════════════════════════════
 // Worker URL - update this after deploying the Cloudflare Worker
-const SCRAPER_WORKER_URL = '/api/scrape';
+const SCRAPER_WORKER_URL = 'https://mialux-scraper.gqmiami.workers.dev';
 
 async function scrapeUrl() {
   const url = document.getElementById('scrape-url').value.trim();
