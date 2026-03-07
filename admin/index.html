@@ -1176,13 +1176,24 @@ function renderListingEditor(idx, l) {
       <button class="tab-btn" onclick="switchTab(this,'ltab-details-${idx}')">Details & Units</button>
       <button class="tab-btn" onclick="switchTab(this,'ltab-media-${idx}')">Media</button>
       <button class="tab-btn" onclick="switchTab(this,'ltab-seo-${idx}')">SEO</button>
+      <button class="tab-btn" onclick="switchTab(this,'ltab-reviews-${idx}')">⭐ Reviews</button>
+      <button class="tab-btn" onclick="switchTab(this,'ltab-microdata-${idx}')">📍 Microdata</button>
     </div>
 
     <div class="tab-content active" id="ltab-info-${idx}">
+      <div class="cms-card" style="background:linear-gradient(135deg,rgba(184,147,90,.08),rgba(184,147,90,.03));border-color:rgba(184,147,90,.25)">
+        <div class="cms-card-title" style="color:var(--gold-light)">⚡ Quick Fill</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-bottom:.6rem">Paste a line with any info — AI will parse and fill all fields instantly.</div>
+        <div style="display:flex;gap:.5rem">
+          <input class="cms-input" id="qf-input-${idx}" placeholder='e.g. "The Perigon | 5333 Collins Ave | Miami Beach | $3.75M | 2027 | OMA Architect | Mast Capital"' style="flex:1;font-size:.78rem">
+          <button class="btn-add" onclick="quickFill(${idx})" style="white-space:nowrap;padding:.5rem .9rem">⚡ Fill</button>
+        </div>
+      </div>
+
       <div class="cms-card">
         <div class="cms-card-title">Identity</div>
         <div class="field-grid">
-          <div class="field"><label>Project Name <span class="req">*</span></label><input class="cms-input" id="l-name-${idx}" value="${l.name||''}" oninput="listings[${idx}].name=this.value"></div>
+          <div class="field"><label>Project Name <span class="req">*</span></label><input class="cms-input" id="l-name-${idx}" value="${l.name||''}" oninput="listings[${idx}].name=this.value; autoSlug(${idx})"></div>
           <div class="field"><label>Slug <span class="hint">(URL)</span></label><input class="cms-input" id="l-slug-${idx}" value="${l.slug||''}" oninput="listings[${idx}].slug=this.value"></div>
           <div class="field"><label>Tagline</label><input class="cms-input" id="l-tagline-${idx}" value="${l.tagline||''}" oninput="listings[${idx}].tagline=this.value"></div>
           <div class="field"><label>Badge</label>
@@ -1302,7 +1313,335 @@ function renderListingEditor(idx, l) {
       <div id="lseo-fields-${idx}">
         ${renderSeoFields('l', idx, 'en', seo.en||{})}
       </div>
+    </div>
+
+    <div class="tab-content" id="ltab-reviews-${idx}">
+      <!-- ── SEO STAR RATINGS NOTE ── -->
+      <div class="cms-card" style="background:linear-gradient(135deg,rgba(255,200,50,.07),rgba(255,200,50,.02));border-color:rgba(255,200,50,.3)">
+        <div class="cms-card-title" style="color:#FFD700;display:flex;align-items:center;gap:.5rem">
+          ⭐ How to Get Star Ratings in Google Search
+        </div>
+        <div style="font-size:.78rem;line-height:1.75;color:rgba(255,255,255,.75);margin-bottom:1rem">
+          <p style="margin-bottom:.6rem">Once you collect <strong style="color:var(--text)">real client reviews</strong> on your site, add them here. The build script will automatically inject <code style="background:rgba(255,255,255,.08);padding:.1rem .3rem;border-radius:3px">AggregateRating</code> + <code style="background:rgba(255,255,255,.08);padding:.1rem .3rem;border-radius:3px">Review</code> structured data into the listing's JSON-LD — which triggers ⭐ gold star ratings in Google search results.</p>
+          <p style="margin-bottom:.6rem">📌 <strong style="color:var(--gold-light)">Google's rules (must follow to avoid penalty):</strong></p>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:.4rem;padding-left:.5rem">
+            <li>✅ Reviews must come from <strong>real users</strong> who interacted with your agency — not copy-pasted from Google Maps, Zillow, or other sites</li>
+            <li>✅ Each review must have a <strong>real author name</strong> (no "Anonymous" or keyword-stuffed names)</li>
+            <li>✅ Each review must have a <strong>written review body</strong> (not just a star number)</li>
+            <li>✅ You need at least <strong>1 review</strong> for the schema to activate — stars appear once Google re-crawls the page</li>
+            <li>❌ Do <strong>NOT</strong> fabricate or incentivize fake reviews — Google will penalize the entire domain</li>
+          </ul>
+        </div>
+        <div style="font-size:.7rem;color:var(--muted);padding:.6rem .8rem;background:rgba(0,0,0,.25);border-radius:4px;border-left:2px solid var(--gold)">
+          💡 <strong style="color:var(--gold-light)">Tip:</strong> After a deal closes, send clients a short WhatsApp message: <em>"Would you mind leaving us a quick review about your experience? It takes 2 minutes and helps other buyers find us."</em> Then add their review here.
+        </div>
+      </div>
+
+      <!-- ── REMINDER: HOW REVIEWS REACH listings.json ── -->
+      <div class="cms-card" style="background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.02));border-color:rgba(201,168,76,.35)">
+        <div class="cms-card-title" style="color:var(--gold-light);display:flex;align-items:center;gap:.5rem">
+          📌 Important: How Reviews Get Into the Website
+        </div>
+        <div style="font-size:.78rem;line-height:1.8;color:rgba(255,255,255,.75)">
+          <p style="margin-bottom:.8rem">Reviews added here are saved to <code style="background:rgba(255,255,255,.08);padding:.1rem .4rem;border-radius:3px">listings.json</code>. <strong style="color:var(--text)">They don't appear on the live website until you run the build script.</strong> The workflow is:</p>
+          <ol style="padding-left:1.2rem;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem">
+            <li>Add the review in this tab using the form below ↓</li>
+            <li>Click <strong style="color:var(--text)">Export listings.json</strong> (top of the Listings section) and push to GitHub</li>
+            <li>Run <code style="background:rgba(255,255,255,.08);padding:.1rem .4rem;border-radius:3px">python3 build_all.py</code> — it reads the reviews and injects <code style="background:rgba(255,255,255,.08);padding:.1rem .4rem;border-radius:3px">AggregateRating</code> + <code style="background:rgba(255,255,255,.08);padding:.1rem .4rem;border-radius:3px">Review</code> JSON-LD automatically</li>
+            <li>Cloudflare Pages deploys — Google sees the stars on the next crawl (usually within 1–7 days)</li>
+          </ol>
+          <div style="padding:.7rem .9rem;background:rgba(0,0,0,.3);border-radius:4px;border-left:2px solid var(--gold);font-size:.72rem;color:var(--muted)">
+            <strong style="color:var(--text)">Once you have at least 1 review with a written body and real author name, the stars activate automatically.</strong> You never need to touch the HTML or schema code manually — <code style="background:rgba(255,255,255,.08);padding:.1rem .3rem;border-radius:3px">build_all.py</code> handles it all.
+          </div>
+        </div>
+      </div>
+
+      <!-- ── AGGREGATE RATING INPUTS ── -->
+      <div class="cms-card">
+        <div class="cms-card-title">Aggregate Rating <span class="hint">(auto-calculated from reviews below, or set manually)</span></div>
+        <div class="field-grid three">
+          <div class="field">
+            <label>Rating Value <span class="hint">(e.g. 4.8)</span></label>
+            <input class="cms-input" type="number" min="1" max="5" step="0.1"
+              id="l-rating_value-${idx}"
+              value="${l.rating_value||''}"
+              placeholder="4.8"
+              oninput="listings[${idx}].rating_value=parseFloat(this.value)||null; recalcRating(${idx})">
+          </div>
+          <div class="field">
+            <label>Review Count</label>
+            <input class="cms-input" type="number" min="0"
+              id="l-review_count-${idx}"
+              value="${l.review_count||0}"
+              readonly
+              style="opacity:.6;cursor:not-allowed"
+              title="Auto-calculated from reviews below">
+          </div>
+          <div class="field">
+            <label>Status</label>
+            <div id="l-rating-status-${idx}" style="margin-top:.6rem;font-size:.72rem;padding:.4rem .6rem;border-radius:4px;${
+              (l.review_count||0) > 0
+                ? 'background:rgba(80,200,80,.12);border:1px solid rgba(80,200,80,.3);color:#7eff7e'
+                : 'background:rgba(255,200,50,.08);border:1px solid rgba(255,200,50,.25);color:#FFD700'
+            }">
+              ${(l.review_count||0) > 0
+                ? `✅ ${l.review_count} review${l.review_count>1?'s':''} · Stars active in Google`
+                : '⏳ No reviews yet — stars won\'t show in Google'}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── INDIVIDUAL REVIEWS ── -->
+      <div class="cms-card">
+        <div class="cms-card-title">Individual Reviews</div>
+        <div id="l-reviews-list-${idx}">
+          ${(l.reviews||[]).length === 0
+            ? `<div style="color:var(--muted);font-size:.78rem;padding:.8rem 0;font-style:italic">No reviews yet. Add the first one below.</div>`
+            : (l.reviews||[]).map((r,ri) => `
+              <div class="review-item" id="l-review-${idx}-${ri}" style="background:var(--card2);border:1px solid var(--border);border-radius:var(--r);padding:1rem;margin-bottom:.6rem;position:relative">
+                <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.5rem">
+                  <span style="font-size:.82rem;font-weight:600;color:var(--text)">${r.author||'Unknown'}</span>
+                  <span style="color:#FFD700;font-size:.85rem">${'★'.repeat(Math.round(r.rating||5))}${'☆'.repeat(5-Math.round(r.rating||5))}</span>
+                  <span style="font-size:.65rem;color:var(--muted)">${r.date||''}</span>
+                </div>
+                <div style="font-size:.78rem;color:rgba(255,255,255,.7);line-height:1.6">${r.body||''}</div>
+                <button onclick="deleteReview(${idx},${ri})" style="position:absolute;top:.6rem;right:.6rem;background:rgba(255,80,80,.12);border:1px solid rgba(255,80,80,.25);color:#ff8080;padding:.2rem .5rem;border-radius:3px;font-size:.65rem;cursor:pointer">✕ Delete</button>
+              </div>`).join('')
+          }
+        </div>
+
+        <!-- Add review form -->
+        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border2)">
+          <div style="font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem">Add New Review</div>
+          <div class="field-grid three" style="margin-bottom:.6rem">
+            <div class="field">
+              <label>Author Name <span class="req">*</span></label>
+              <input class="cms-input" id="new-review-author-${idx}" placeholder="Maria S.">
+            </div>
+            <div class="field">
+              <label>Star Rating</label>
+              <select class="cms-select" id="new-review-rating-${idx}">
+                <option value="5">★★★★★ (5)</option>
+                <option value="4">★★★★☆ (4)</option>
+                <option value="3">★★★☆☆ (3)</option>
+                <option value="2">★★☆☆☆ (2)</option>
+                <option value="1">★☆☆☆☆ (1)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Date Published</label>
+              <input class="cms-input" type="date" id="new-review-date-${idx}" value="${new Date().toISOString().split('T')[0]}">
+            </div>
+          </div>
+          <div class="field full" style="margin-bottom:.8rem">
+            <label>Review Body <span class="req">*</span> <span class="hint">(written text required by Google — not just stars)</span></label>
+            <textarea class="cms-textarea" id="new-review-body-${idx}" rows="3" placeholder="Working with MiaLux Realty was an exceptional experience. They found us the perfect unit at Cipriani and guided us through every step of the process..."></textarea>
+          </div>
+          <button class="btn-add" onclick="addReview(${idx})" style="width:100%;justify-content:center">
+            + Add Review
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content" id="ltab-microdata-${idx}">
+      <!-- ── MICRODATA EXPLAINER ── -->
+      <div class="cms-card" style="background:linear-gradient(135deg,rgba(80,160,255,.07),rgba(80,160,255,.02));border-color:rgba(80,160,255,.3)">
+        <div class="cms-card-title" style="color:#7eb8ff;display:flex;align-items:center;gap:.5rem">
+          📍 Schema.org Microdata — What's Auto vs Manual
+        </div>
+        <div style="font-size:.78rem;line-height:1.8;color:rgba(255,255,255,.75)">
+          <p style="margin-bottom:.8rem">When you run <code style="background:rgba(255,255,255,.08);padding:.1rem .3rem;border-radius:3px">build_all.py</code>, it reads every field in your listings and injects rich structured data into each page's <code style="background:rgba(255,255,255,.08);padding:.1rem .3rem;border-radius:3px">&lt;script type="application/ld+json"&gt;</code>. Here's what's automatic and what you need to check:</p>
+          
+          <table style="width:100%;border-collapse:collapse;font-size:.72rem">
+            <thead>
+              <tr style="border-bottom:1px solid rgba(255,255,255,.1)">
+                <th style="text-align:left;padding:.5rem .6rem;color:var(--muted)">Schema Field</th>
+                <th style="text-align:left;padding:.5rem .6rem;color:var(--muted)">Source</th>
+                <th style="text-align:left;padding:.5rem .6rem;color:var(--muted)">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${[
+                ['RealEstateListing @type','Automatic','✅ Always set'],
+                ['name, description, url','From Project Name + Short Desc fields','✅ Automatic'],
+                ['offers.price','From Price From field','✅ Automatic'],
+                ['offers.availability','From Status field (Selling = PreOrder)','✅ Automatic'],
+                ['broker (@id reference)','Global RealEstateAgent entity','✅ Automatic'],
+                ['image[] array','From Main Image + Gallery','✅ Automatic — use absolute URLs'],
+                ['BreadcrumbList (4 levels)','Built from slug + neighborhood','✅ Automatic'],
+                ['hreflang (EN/ES/PT/RU)','Built from language structure','✅ Automatic'],
+                ['og:title, og:description','From Meta Title + Meta Desc fields (SEO tab)','✅ Auto-filled from listing if empty'],
+                ['og:image (absolute URL)','From Main Image field','⚠️ Must be full https:// URL'],
+                ['og:locale per language','en_US / es_LA / pt_BR / ru_RU','✅ Automatic'],
+                ['twitter:card (summary_large_image)','All pages','✅ Automatic'],
+                ['Accommodation.floorSize','From largest unit_type size_to','✅ Automatic from unit types'],
+                ['Accommodation.numberOfFloors','From Floors field','✅ Automatic'],
+                ['GeoCoordinates (lat/lng)','From Microdata tab below ↓','⚠️ Check & update per listing'],
+                ['postalCode','From Microdata tab below ↓','⚠️ Check & update per listing'],
+                ['AggregateRating + Review[]','From Reviews tab ↑','⭐ Manual — add reviews to activate stars'],
+              ].map(([field,source,status]) => `
+                <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
+                  <td style="padding:.5rem .6rem;color:var(--text);font-family:monospace;font-size:.68rem">${field}</td>
+                  <td style="padding:.5rem .6rem;color:var(--muted)">${source}</td>
+                  <td style="padding:.5rem .6rem">${status}</td>
+                </tr>`).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── GEO + POSTAL FIELDS ── -->
+      <div class="cms-card">
+        <div class="cms-card-title">📍 Geo Coordinates & Postal Code
+          <span class="hint" style="display:block;margin-top:.2rem;font-weight:400">Used in GeoCoordinates schema on the listing page. Pre-filled from neighborhood defaults — verify per listing for accuracy.</span>
+        </div>
+        <div class="field-grid three">
+          <div class="field">
+            <label>Latitude</label>
+            <input class="cms-input" type="number" step="0.0001"
+              id="l-geo-lat-${idx}"
+              value="${(l.geo||{}).lat||''}"
+              placeholder="25.7617"
+              oninput="if(!listings[${idx}].geo)listings[${idx}].geo={};listings[${idx}].geo.lat=parseFloat(this.value)||null">
+          </div>
+          <div class="field">
+            <label>Longitude</label>
+            <input class="cms-input" type="number" step="0.0001"
+              id="l-geo-lng-${idx}"
+              value="${(l.geo||{}).lng||''}"
+              placeholder="-80.1918"
+              oninput="if(!listings[${idx}].geo)listings[${idx}].geo={};listings[${idx}].geo.lng=parseFloat(this.value)||null">
+          </div>
+          <div class="field">
+            <label>Postal Code</label>
+            <input class="cms-input"
+              id="l-postal_code-${idx}"
+              value="${l.postal_code||''}"
+              placeholder="33130"
+              oninput="listings[${idx}].postal_code=this.value">
+          </div>
+        </div>
+        <div style="margin-top:.8rem;font-size:.7rem;color:var(--muted);display:flex;align-items:center;gap:.5rem">
+          <span>🗺</span>
+          <span>To find exact coordinates: go to <a href="https://maps.google.com" target="_blank" style="color:var(--gold)">Google Maps</a>, right-click on the building, copy the lat/lng shown.</span>
+        </div>
+      </div>
+
+      <!-- ── VALIDATE BUTTON ── -->
+      <div class="cms-card">
+        <div class="cms-card-title">Validate Schema</div>
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:.8rem">After publishing, test this listing's structured data in Google's Rich Results Test tool to verify everything is correct.</div>
+        <div style="display:flex;gap:.8rem;flex-wrap:wrap">
+          <a href="https://search.google.com/test/rich-results" target="_blank"
+            style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:rgba(80,160,255,.12);border:1px solid rgba(80,160,255,.3);border-radius:4px;font-size:.72rem;color:#7eb8ff;text-decoration:none">
+            🔍 Google Rich Results Test
+          </a>
+          <a href="https://search.google.com/search-console" target="_blank"
+            style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:rgba(80,160,255,.12);border:1px solid rgba(80,160,255,.3);border-radius:4px;font-size:.72rem;color:#7eb8ff;text-decoration:none">
+            📊 Google Search Console
+          </a>
+          <a href="https://validator.schema.org/" target="_blank"
+            style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:rgba(80,160,255,.12);border:1px solid rgba(80,160,255,.3);border-radius:4px;font-size:.72rem;color:#7eb8ff;text-decoration:none">
+            ✅ Schema.org Validator
+          </a>
+        </div>
+      </div>
     </div>`;
+}
+
+// ── REVIEWS ──────────────────────────────────────────────────
+function recalcRating(idx) {
+  const reviews = listings[idx].reviews || [];
+  if (reviews.length === 0) return;
+  const avg = reviews.reduce((sum, r) => sum + (r.rating || 5), 0) / reviews.length;
+  listings[idx].rating_value = Math.round(avg * 10) / 10;
+  listings[idx].review_count = reviews.length;
+  const valEl = document.getElementById(`l-rating_value-${idx}`);
+  const cntEl = document.getElementById(`l-review_count-${idx}`);
+  const statusEl = document.getElementById(`l-rating-status-${idx}`);
+  if (valEl) valEl.value = listings[idx].rating_value;
+  if (cntEl) cntEl.value = reviews.length;
+  if (statusEl) {
+    const n = reviews.length;
+    statusEl.style.background = 'rgba(80,200,80,.12)';
+    statusEl.style.border = '1px solid rgba(80,200,80,.3)';
+    statusEl.style.color = '#7eff7e';
+    statusEl.textContent = `✅ ${n} review${n>1?'s':''} · Stars active in Google`;
+  }
+}
+
+function addReview(idx) {
+  const author = document.getElementById(`new-review-author-${idx}`)?.value?.trim();
+  const body   = document.getElementById(`new-review-body-${idx}`)?.value?.trim();
+  const rating = parseInt(document.getElementById(`new-review-rating-${idx}`)?.value || '5');
+  const date   = document.getElementById(`new-review-date-${idx}`)?.value || new Date().toISOString().split('T')[0];
+
+  if (!author) { showToast('Author name is required.', 'error'); return; }
+  if (!body)   { showToast('Review text is required (Google requires written reviews).', 'error'); return; }
+
+  if (!listings[idx].reviews) listings[idx].reviews = [];
+  listings[idx].reviews.push({ author, body, rating, date });
+  recalcRating(idx);
+
+  // Clear form
+  document.getElementById(`new-review-author-${idx}`).value = '';
+  document.getElementById(`new-review-body-${idx}`).value = '';
+
+  // Re-render review list
+  const listEl = document.getElementById(`l-reviews-list-${idx}`);
+  if (listEl) {
+    listEl.innerHTML = listings[idx].reviews.map((r, ri) => `
+      <div class="review-item" id="l-review-${idx}-${ri}" style="background:var(--card2);border:1px solid var(--border);border-radius:var(--r);padding:1rem;margin-bottom:.6rem;position:relative">
+        <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.5rem">
+          <span style="font-size:.82rem;font-weight:600;color:var(--text)">${r.author}</span>
+          <span style="color:#FFD700;font-size:.85rem">${'★'.repeat(Math.round(r.rating||5))}${'☆'.repeat(5-Math.round(r.rating||5))}</span>
+          <span style="font-size:.65rem;color:var(--muted)">${r.date||''}</span>
+        </div>
+        <div style="font-size:.78rem;color:rgba(255,255,255,.7);line-height:1.6">${r.body}</div>
+        <button onclick="deleteReview(${idx},${ri})" style="position:absolute;top:.6rem;right:.6rem;background:rgba(255,80,80,.12);border:1px solid rgba(255,80,80,.25);color:#ff8080;padding:.2rem .5rem;border-radius:3px;font-size:.65rem;cursor:pointer">✕ Delete</button>
+      </div>`).join('');
+  }
+
+  showToast(`Review by ${author} added. ⭐ Stars will activate after next build & deploy.`, 'success');
+}
+
+function deleteReview(idx, ri) {
+  if (!confirm('Delete this review?')) return;
+  listings[idx].reviews.splice(ri, 1);
+  if (listings[idx].reviews.length === 0) {
+    listings[idx].rating_value = null;
+    listings[idx].review_count = 0;
+  } else {
+    recalcRating(idx);
+  }
+  // Re-render by re-opening editor
+  const listEl = document.getElementById(`l-reviews-list-${idx}`);
+  if (listEl) {
+    if (listings[idx].reviews.length === 0) {
+      listEl.innerHTML = '<div style="color:var(--muted);font-size:.78rem;padding:.8rem 0;font-style:italic">No reviews yet. Add the first one below.</div>';
+      const statusEl = document.getElementById(`l-rating-status-${idx}`);
+      if (statusEl) {
+        statusEl.style.background = 'rgba(255,200,50,.08)';
+        statusEl.style.border = '1px solid rgba(255,200,50,.25)';
+        statusEl.style.color = '#FFD700';
+        statusEl.textContent = "⏳ No reviews yet — stars won't show in Google";
+      }
+    } else {
+      listEl.innerHTML = listings[idx].reviews.map((r, ri2) => `
+        <div class="review-item" style="background:var(--card2);border:1px solid var(--border);border-radius:var(--r);padding:1rem;margin-bottom:.6rem;position:relative">
+          <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.5rem">
+            <span style="font-size:.82rem;font-weight:600;color:var(--text)">${r.author}</span>
+            <span style="color:#FFD700;font-size:.85rem">${'★'.repeat(Math.round(r.rating||5))}${'☆'.repeat(5-Math.round(r.rating||5))}</span>
+            <span style="font-size:.65rem;color:var(--muted)">${r.date||''}</span>
+          </div>
+          <div style="font-size:.78rem;color:rgba(255,255,255,.7);line-height:1.6">${r.body}</div>
+          <button onclick="deleteReview(${idx},${ri2})" style="position:absolute;top:.6rem;right:.6rem;background:rgba(255,80,80,.12);border:1px solid rgba(255,80,80,.25);color:#ff8080;padding:.2rem .5rem;border-radius:3px;font-size:.65rem;cursor:pointer">✕ Delete</button>
+        </div>`).join('');
+    }
+  }
+  showToast('Review deleted.', 'success');
 }
 
 function switchListingSeoLang(idx, lang, btn) {
@@ -2093,6 +2432,118 @@ function parsePastedHtml() {
   } catch(e) {
     document.getElementById('scrape-status-text').textContent = '❌ Parse error: ' + e.message;
   }
+}
+
+// ── LISTING QUICK-FILL & AI HELPERS ──────────────────────────
+function autoSlug(idx) {
+  const name = document.getElementById('l-name-' + idx)?.value || '';
+  const slug = name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  const slugEl = document.getElementById('l-slug-' + idx);
+  if (slugEl && !slugEl.dataset.manuallyEdited) {
+    slugEl.value = slug;
+    listings[idx].slug = slug;
+  }
+}
+
+async function quickFill(idx) {
+  const input = document.getElementById('qf-input-' + idx)?.value?.trim();
+  if (!input) { showToast('Enter some text first', 'error'); return; }
+
+  const btn = event.target;
+  btn.textContent = '⏳';
+  btn.disabled = true;
+
+  try {
+    const response = await fetch('https://mialux-scraper.gqmiami.workers.dev/ai-extract', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: input, sourceUrl: '' }),
+      signal: AbortSignal.timeout(20000)
+    });
+    const data = await response.json();
+    if (data.error) throw new Error(data.error);
+
+    // Fill matching fields
+    const setField = (id, val) => {
+      const el = document.getElementById(id + '-' + idx);
+      if (el && val) { el.value = val; el.dispatchEvent(new Event('input')); el.dispatchEvent(new Event('change')); }
+    };
+
+    if (data.title) { setField('l-name', data.title); listings[idx].name = data.title; autoSlug(idx); }
+    if (data.address) { setField('l-address', data.address); listings[idx].address = data.address; }
+    if (data.neighborhood) { setField('l-neighborhood', data.neighborhood); listings[idx].neighborhood = data.neighborhood; }
+    if (data.developer) { setField('l-developer', data.developer); listings[idx].developer = data.developer; }
+    if (data.architect) { setField('l-architect', data.architect); listings[idx].architect = data.architect; }
+    if (data.interior_designer) { setField('l-interior', data.interior_designer); listings[idx].interior_designer = data.interior_designer; }
+    if (data.price_from > 0) { setField('l-price-from', data.price_from); listings[idx].price_from = data.price_from; }
+    if (data.floors > 0) { setField('l-floors', data.floors); listings[idx].floors = data.floors; }
+    if (data.total_units > 0) { setField('l-units', data.total_units); listings[idx].total_units = data.total_units; }
+    if (data.delivery) { setField('l-delivery', data.delivery); listings[idx].estimated_delivery = data.delivery; }
+    if (data.description) { setField('l-desc-short', data.description); listings[idx].description_short = data.description; }
+    if (data.full_content) { setField('l-desc-full', data.full_content); listings[idx].description_full = data.full_content; }
+    if (data.status) {
+      const selEl = document.getElementById('l-status-' + idx);
+      if (selEl) { selEl.value = data.status; listings[idx].status = data.status; }
+    }
+
+    document.getElementById('qf-input-' + idx).value = '';
+    showToast('Quick Fill complete! Review and adjust fields.', 'success');
+  } catch(e) {
+    showToast('Error: ' + e.message, 'error');
+  }
+  btn.textContent = '⚡ Fill';
+  btn.disabled = false;
+}
+
+async function aiGenDesc(idx, type) {
+  const l = listings[idx];
+  const context = [
+    l.name, l.neighborhood, l.address,
+    l.developer ? 'by ' + l.developer : '',
+    l.architect ? 'Architect: ' + l.architect : '',
+    l.floors ? l.floors + ' floors' : '',
+    l.total_units ? l.total_units + ' units' : '',
+    l.price_from ? 'from $' + (l.price_from/1000000).toFixed(1) + 'M' : '',
+    l.estimated_delivery ? 'delivery ' + l.estimated_delivery : '',
+    l.description_full || l.description_short || ''
+  ].filter(Boolean).join(', ');
+
+  if (!context.trim()) { showToast('Fill in some fields first', 'error'); return; }
+
+  const btn = event.target;
+  btn.textContent = '⏳';
+  btn.disabled = true;
+
+  try {
+    const prompt = type === 'short'
+      ? 'Write a compelling 1-2 sentence property description for a luxury Miami real estate website (max 160 chars). Project info: ' + context + '. Return only the description text, no quotes.'
+      : 'Write a detailed 3-4 paragraph property description for a luxury Miami real estate website. Highlight architecture, lifestyle, and investment value. Project info: ' + context + '. Return only the description, no headings.';
+
+    const response = await fetch('https://mialux-scraper.gqmiami.workers.dev/ai-extract', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: prompt, sourceUrl: '' }),
+      signal: AbortSignal.timeout(25000)
+    });
+    const data = await response.json();
+
+    // For description generation, use full_content or description field
+    const generated = data.description || data.full_content || '';
+    if (!generated) throw new Error('No description generated');
+
+    const fieldId = type === 'short' ? 'l-desc-short-' + idx : 'l-desc-full-' + idx;
+    const el = document.getElementById(fieldId);
+    if (el) {
+      el.value = type === 'short' ? generated.substring(0,320) : generated;
+      if (type === 'short') listings[idx].description_short = el.value;
+      else listings[idx].description_full = el.value;
+    }
+    showToast('AI description generated!', 'success');
+  } catch(e) {
+    showToast('Error: ' + e.message, 'error');
+  }
+  btn.textContent = '✨ AI Write';
+  btn.disabled = false;
 }
 
 function clearScraper() {
