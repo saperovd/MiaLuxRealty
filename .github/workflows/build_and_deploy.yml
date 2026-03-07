@@ -1,0 +1,37 @@
+name: Build & Deploy MiaLux
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'listings.json'
+      - 'content.json'
+      - 'build_all.py'
+      - 'hub-template.html'
+      - 'hood-template.html'
+      - 'landing-template.html'
+      - '.cms-build-trigger'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run build script
+        run: python3 build_all.py
+
+      - name: Commit & push generated pages
+        run: |
+          git config user.name  "MiaLux CMS Bot"
+          git config user.email "cms@mialuxrealty.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "Build: auto-generate pages [skip ci]"
+          git push
