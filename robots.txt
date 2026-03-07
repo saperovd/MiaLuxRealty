@@ -1,5 +1,18 @@
+# ─────────────────────────────────────────────
+# MiaLux Realty — robots.txt
+# STATUS: DEVELOPMENT MODE — all crawlers blocked
+# ⚠ When going live, replace with the PRODUCTION version below
+# ─────────────────────────────────────────────
+
 User-agent: *
 Disallow: /
 
-User-agent: Googlebot
-Disallow: /
+# ─────────────────────────────────────────────
+# PRODUCTION VERSION (use when ready to go live)
+# ─────────────────────────────────────────────
+# User-agent: *
+# Allow: /
+# Disallow: /admin/
+#
+# Sitemap: https://mialuxrealty.com/sitemap.xml
+# ─────────────────────────────────────────────
