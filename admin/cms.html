@@ -335,7 +335,7 @@ html,body{height:100%;background:var(--darker);color:var(--text);font-family:var
         <div style="font-size:.82rem;color:var(--muted)">
           Connected to: <span style="color:var(--gold)" id="deployRepo">—</span><br>
           Branch: <span style="color:var(--text)" id="deployBranch">—</span><br>
-          <span style="font-size:.75rem;color:var(--light);margin-top:.4rem;display:block">Every save commits to GitHub → Cloudflare deploys in ~45 seconds.</span>
+          <span style="font-size:.75rem;color:var(--light);margin-top:.4rem;display:block">Save → GitHub Action runs build_all.py → all listing folders auto-generated → Cloudflare deploys in ~2 min.</span>
         </div>
       </div>
     </div>
@@ -836,8 +836,8 @@ async function saveAll() {
     await triggerBuild();
 
     status.className = 'save-status ok';
-    status.textContent = '✓ Saved & deploying';
-    showToast('Saved! Cloudflare will deploy in ~45 seconds.', 'success');
+    status.textContent = '✓ Saved — building pages…';
+    showToast('✓ Saved! GitHub Action is now running build_all.py → generating all listing folders → Cloudflare deploys in ~2 min.', 'success');
   } catch(e) {
     status.className = 'save-status err';
     status.textContent = '✗ Save failed';
@@ -849,11 +849,12 @@ async function saveAll() {
 }
 
 async function triggerBuild() {
-  // Trigger GitHub Action by creating/updating a timestamp file
+  // Write a build trigger timestamp → GitHub Action picks it up and runs build_all.py
+  // This generates all folder/index.html pages automatically on the server
   try {
-    const ts = { last_build: new Date().toISOString() };
-    await ghPutFile('.cms-build-trigger', ts, 'CMS: trigger build');
-  } catch(e) {} // Non-fatal
+    const ts = { last_build: new Date().toISOString(), triggered_by: 'cms-admin' };
+    await ghPutFile('.cms-build-trigger', ts, 'CMS: trigger build → runs build_all.py via GitHub Action');
+  } catch(e) {} // Non-fatal — deploy still proceeds via listings.json commit
 }
 
 async function generateRedirectsFile() {
