@@ -191,11 +191,11 @@ LANGS = {
         'hub_browse':'Поиск по Районам','hub_all':'Все Проекты',
         'hood_label':'Новостройки','hood_other':'Другие Районы Майами','hood_all_miami':'← Все Новостройки Майами',
         'card_from':'От','card_floors':'Этажей','card_units':'Резиденций','card_delivery':'Сдача','card_view':'Подробнее →',
-        'cta_title':'Получить Эксклюзивный Доступ','cta_subtitle':'Планировки, цены и брошюры застройщика — на вашу почту.',
+        'cta_title':'Получить Эксклюзивный Доступ','cta_subtitle':'Планировки, цены и брошюры застроищика — на вашу почту.',
         'cta_name':'Полное Имя','cta_email':'Email','cta_submit':'Запросить Информацию →',
         'hub_meta_title':'Новые Кондоминиумы в Майами 2025 | MiaLux Realty',
         'hub_meta_desc':'Все новые кондоминиумы в Майами. Брикелл, Майами Бич, Эджуотер, Санни-Айлс. VIP-цены, без комиссии.',
-        'hood_meta_title':'Новостроики в {hood} Майами | MiaLux Realty',
+        'hood_meta_title':'Новостройки в {hood} Майами | MiaLux Realty',
         'hood_meta_desc':'Новые кондоминиумы в {hood}, Майами. Эксклюзивные VIP-цены, полные планировки. Без комиссии.',
     }},
 }
@@ -438,7 +438,7 @@ for lc, lang in LANGS.items():
 
 # ══════════════════════════════════════════════════════════════
 # NEIGHBORHOOD PAGES
-# ═══════════════════════════════════════════════════════════════
+# ══════════════════════════════════════════════════════════════
 print("\nBuilding Neighborhood pages...")
 for lc, lang in LANGS.items():
     T, d = lang['T'], lang['dir']
@@ -470,7 +470,7 @@ for lc, lang in LANGS.items():
             '{{LISTINGS_JSON}}':json.dumps(LISTINGS,ensure_ascii=False),
             '{{ALL_HOODS_META_JSON}}':json.dumps(HOOD_META,ensure_ascii=False),
         })
-        html = inject_schema(html, s_hood(cat, hood_slug, hood_name, meta.get('geo'), meta_title, meta_desc, land, T))
+        html = inject_schema(html, s_hood(cat, hood_slug, hood_name, meta.get('geo'), meta_title, meta_desc, lang, T))
         html = inject_head(html, og(meta_title,meta_desc,url,hood_img or f"{BASE_URL}/images/miami-{hood_slug}.jpg",lang['og_locale']), hreflang(cat, hood_slug))
         out  = f"{d}/{cat}/{hood_slug}/index.html" if d else f"{cat}/{hood_slug}/index.html"
         write_file(out, html)
@@ -601,7 +601,7 @@ print(f"""
 ║  Hub pages           {len(LANGS)*len(ALL_CATEGORIES):>4}                                    ║
 ║  Neighborhood pages  {total_hood_pages:>4}                                    ║
 ║  Listing pages       {len(LANGS)*len(LISTINGS):>4}                                    ║
-║  Sitemap URLs        {len(urls):?4}                                    ║
+║  Sitemap URLs        {len(urls):>4}                                    ║
 ╠═══════════════════════════════════════════════════════════════╣
 ║  /new-developments/brickell/cipriani-residences/   ✓ EN       ║
 ║  /es/new-developments/brickell/cipriani-residences/ ✓ ES      ║
