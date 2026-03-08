@@ -506,7 +506,7 @@ for lc, lang in LANGS.items():
             '{{ADDRESS}}':listing.get('address','Miami, FL'),
             '{{PRICE_FROM}}':str(listing.get('price_from',0)),
             '{{LISTING_JSON}}':json.dumps(listing,ensure_ascii=False),
-            '{{LANG_CODE}}':lc,'{{LANG_DIR}}':d,
+            '{{LANG_CODE}}':lc,'{{LANG_CODE_UPPER}}':lc.upper(),'{{LANG_DIR}}':d,
             '/new-developments/':f"/{lp(d)}{cat}/",
         })
         html = inject_schema(html, s_listing(listing, lang))
