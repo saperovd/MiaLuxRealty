@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 """
-MiaLux Realty â Master Build Script v3
+MiaLux Realty â Master Build Script v3
 URL Structure:
-  /new-developments/                               â Category hub (EN)
-  /new-developments/brickell/                      â Neighborhood (EN)
-  /new-developments/brickell/cipriani-residences/  â Listing (EN)
-  /es/new-developments/brickell/cipriani-residences/ â Listing (ES)
+  /new-developments/                               â Category hub (EN)
+  /new-developments/brickell/                      â Neighborhood (EN)
+  /new-developments/brickell/cipriani-residences/  â Listing (EN)
+  /es/new-developments/brickell/cipriani-residences/ â Listing (ES)
 
 Future categories:
   /villas/brickell/casa-bella/
   /penthouses/brickell/cipriani-penthouse/
   /es/villas/brickell/
 
-Root stays CLEAN â only index.html + config files.
+Root stays CLEAN â only index.html + config files.
 """
 
 import json, os, re
@@ -27,7 +27,7 @@ SITE_NAME  = "MiaLux Realty"
 PHONE      = "+1-305-000-0000"
 LOGO_URL   = f"{BASE_URL}/images/logo.png"
 
-#──Load listings ââââââââââââââââââââââââââââââââââââââââââââââ
+#──Load listings ââââââââââââââââââââââââââââââââââââââââââââââ
 with open('listings.json') as f:
     LISTINGS = json.load(f)
 
@@ -53,28 +53,28 @@ for l in LISTINGS:
 
 ALL_CATEGORIES = list(by_cat_hood.keys())
 
-#──Neighborhood metadata ââââââââââââââââââââââââââââââââââââââ
+#──Neighborhood metadata ââââââââââââââââââââââââââââââââââââââ
 HOOD_META = {
     'brickell': {
         'name':'Brickell','tagline':"Miami's Financial Capital & Luxury Living Hub",
         'geo':{'lat':25.7617,'lng':-80.1918},
         'highlights':['Bay & City Views','Walk Score 95+','World-Class Dining','Top Investment Returns'],
         'descriptions':{
-            'en':"Brickell is Miami's undisputed financial capital â a gleaming vertical neighborhood of luxury towers, world-class restaurants, and bayfront parks. Known as the \"Manhattan of the South,\" it attracts global investors and urban professionals seeking walkable luxury living steps from the bay.",
-            'es':"Brickell es la indiscutible capital financiera de Miami â un resplandeciente barrio vertical de torres de lujo, restaurantes de clase mundial y parques frente a la bahÃ­a.",
-            'pt':"Brickell Ã© a capital financeira indiscutÃ­vel de Miami â um bairro vertical repleto de torres de luxo, restaurantes de classe mundial e parques Ã  beira da baÃ­a.",
-            'ru':"ÐÑÐ¸ÐºÐµÐ»Ð» â Ð±ÐµÑÑÐ¿Ð¾ÑÐ½Ð°Ñ ÑÐ¸Ð½Ð°Ð½ÑÐ¾Ð²Ð°Ñ ÑÑÐ¾Ð»Ð¸ÑÐ° ÐÐ°Ð¹Ð°Ð¼Ð¸ â ÑÐ¸ÑÑÑÐ¸Ð¹ Ð²ÐµÑÑÐ¸ÐºÐ°Ð»ÑÐ½ÑÐ¹ ÑÐ°Ð¹Ð¾Ð½ ÑÐ¾ÑÐºÐ¾ÑÐ½ÑÑ Ð±Ð°ÑÐµÐ½, ÑÐµÑÑÐ¾ÑÐ°Ð½Ð¾Ð² Ð¼Ð¸ÑÐ¾Ð²Ð¾Ð³Ð¾ ÐºÐ»Ð°ÑÑÐ° Ð¸ Ð¿Ð°ÑÐºÐ¾Ð² Ð½Ð° Ð±ÐµÑÐµÐ³Ñ Ð·Ð°Ð»Ð¸Ð²Ð°.",
+            'en':"Brickell is Miami's undisputed financial capital — a gleaming vertical neighborhood of luxury towers, world-class restaurants, and bayfront parks. Known as the \"Manhattan of the South,\" it attracts global investors and urban professionals seeking walkable luxury living steps from the bay.",
+            'es':"Brickell es la indiscutible capital financiera de Miami — un resplandeciente barrio vertical de torres de lujo, restaurantes de clase mundial y parques frente a la bahía.",
+            'pt':"Brickell é a capital financeira indiscutível de Miami — um bairro vertical repleto de torres de luxo, restaurantes de classe mundial e parques à beira da baía.",
+            'ru':"Брикелл — бесспорная финансовая столица Майами — сияющий вертикальный район роскошных башен, ресторанов мирового класса и парков на берегу залива.",
         },
     },
     'sunny-isles-beach': {
-        'name':'Sunny Isles Beach','tagline':"The Riviera of the Americas â Oceanfront Ultra-Luxury",
+        'name':'Sunny Isles Beach','tagline':"The Riviera of the Americas — Oceanfront Ultra-Luxury",
         'geo':{'lat':25.9386,'lng':-80.1222},
         'highlights':['Direct Ocean Access','Ultra-Luxury Brand Towers','Private Beach','International Community'],
         'descriptions':{
-            'en':"Sunny Isles Beach â nicknamed the \"Riviera of the Americas\" â is a pristine barrier island between the Atlantic Ocean and the Intracoastal Waterway. Home to iconic ultra-luxury towers by Porsche, Armani and Bentley.",
-            'es':"Sunny Isles Beach â apodada la \"Riviera de las AmÃ©ricas\" â es una prÃ­stina isla barrera entre el OcÃ©ano AtlÃ¡ntico y la VÃ­a Intracostera.",
-            'pt':"Sunny Isles Beach â apelidada de \"Riviera das AmÃ©ricas\" â Ã© uma ilha barreira pristina entre o Oceano AtlÃ¢ntico e a Hidrovia Intracoastal.",
-            'ru':"Ð¡Ð°Ð½Ð½Ð¸-ÐÐ¹Ð»Ñ-ÐÐ¸Ñ â Ð¿ÑÐ¾Ð·Ð²Ð°Ð½Ð½ÑÐ¹ Â«Ð Ð¸Ð²ÑÐµÑÐ¾Ð¹ ÐÐ¼ÐµÑÐ¸ÐºÐ¸Â» â Ð½ÐµÑÑÐ¾Ð½ÑÑÑÐ¹ Ð±Ð°ÑÑÐµÑÐ½ÑÐ¹ Ð¾ÑÑÑÐ¾Ð² Ð¼ÐµÐ¶Ð´Ñ ÐÑÐ»Ð°Ð½ÑÐ¸ÑÐµÑÐºÐ¸Ð¼ Ð¾ÐºÐµÐ°Ð½Ð¾Ð¼ Ð¸ ÐÐ½ÑÑÑÐ¸Ð±ÐµÑÐµÐ³Ð¾Ð²ÑÐ¼ Ð²Ð¾Ð´Ð½ÑÐ¼ Ð¿ÑÑÐµÐ¼.",
+            'en':"Sunny Isles Beach — nicknamed the \"Riviera of the Americas\" — is a pristine barrier island between the Atlantic Ocean and the Intracoastal Waterway. Home to iconic ultra-luxury towers by Porsche, Armani and Bentley.",
+            'es':"Sunny Isles Beach — apodada la \"Riviera de las Américas\" — es una prístina isla barrera entre el Océano Atlántico y la Vía Intracostera.",
+            'pt':"Sunny Isles Beach — apelidada de \"Riviera das Américas\" — é uma ilha barreira pristina entre o Oceano Atlântico e a Hidrovia Intracoastal.",
+            'ru':"Санни-Айлс-Бич — прозванный «Ривьерой Америки» — нетронутый барьерный остров между Атлантическим океаном и Внутрибереговым водным путём.",
         },
     },
     'miami-beach': {
@@ -82,10 +82,10 @@ HOOD_META = {
         'geo':{'lat':25.7907,'lng':-80.1300},
         'highlights':['Atlantic Oceanfront','Art Deco Historic District','World-Class Nightlife','Celebrity Enclave'],
         'descriptions':{
-            'en':"Miami Beach is the world's most iconic beach destination â a vibrant island city combining Art Deco architecture, world-famous nightlife, and pristine Atlantic beaches.",
-            'es':"Miami Beach es el destino de playa mÃ¡s icÃ³nico del mundo â una vibrante ciudad isleÃ±a que combina arquitectura Art Deco, vida nocturna de fama mundial y playas atlÃ¡nticas prÃ­stinas.",
-            'pt':"Miami Beach Ã© o destino de praia mais icÃ´nico do mundo â uma cidade insular vibrante que combina arquitetura Art Deco, vida noturna mundialmente famosa e praias atlÃ¢nticas prÃ­stinas.",
-            'ru':"ÐÐ°Ð¹Ð°Ð¼Ð¸-ÐÐ¸Ñ â ÑÐ°Ð¼ÑÐ¹ Ð·Ð½Ð°ÐºÐ¾Ð²ÑÐ¹ Ð¿Ð»ÑÐ¶Ð½ÑÐ¹ ÐºÑÑÐ¾ÑÑ Ð¼Ð¸ÑÐ° â Ð¶Ð¸Ð²Ð¾Ð¹ Ð¾ÑÑÑÐ¾Ð²Ð½Ð¾Ð¹ Ð³Ð¾ÑÐ¾Ð´ Ñ Ð°ÑÑÐ¸ÑÐµÐºÑÑÑÐ¾Ð¹ ÐÑÑ-Ð´ÐµÐºÐ¾, Ð²ÑÐµÐ¼Ð¸ÑÐ½Ð¾ Ð¸Ð·Ð²ÐµÑÑÐ½Ð¾Ð¹ Ð½Ð¾ÑÐ½Ð¾Ð¹ Ð¶Ð¸Ð·Ð½ÑÑ Ð¸ Ð½ÐµÑÑÐ¾Ð½ÑÑÑÐ¼Ð¸ Ð¿Ð»ÑÐ¶Ð°Ð¼Ð¸.",
+            'en':"Miami Beach is the world's most iconic beach destination — a vibrant island city combining Art Deco architecture, world-famous nightlife, and pristine Atlantic beaches.",
+            'es':"Miami Beach es el destino de playa más icónico del mundo — una vibrante ciudad isleña que combina arquitectura Art Deco, vida nocturna de fama mundial y playas atlánticas prístinas.",
+            'pt':"Miami Beach é o destino de praia mais icônico do mundo — uma cidade insular vibrante que combina arquitetura Art Deco, vida noturna mundialmente famosa e praias atlânticas prístinas.",
+            'ru':"Майами-Бич — самый знаковый пляжный курорт мира — живой островной город с архитектурой Арт-деко, всемирно известной ночной жизнью и нетронутыми пляжами.",
         },
     },
     'edgewater': {
@@ -93,64 +93,64 @@ HOOD_META = {
         'geo':{'lat':25.7936,'lng':-80.1878},
         'highlights':['Biscayne Bay Views','Near Wynwood Arts','Emerging Luxury Hub','High Growth Potential'],
         'descriptions':{
-            'en':"Edgewater is Miami's fastest-growing luxury neighborhood â a waterfront district between the energy of Wynwood and the sophistication of Brickell, with unobstructed Biscayne Bay views.",
-            'es':"Edgewater es el vecindario de lujo de mÃ¡s rÃ¡pido crecimiento en Miami â un distrito frente al mar entre la energÃ­a de Wynwood y la sofisticaciÃ³n de Brickell.",
-            'pt':"Edgewater Ã© o bairro de luxo de crescimento mais rÃ¡pido de Miami â um distrito Ã  beira-mar entre a energia do Wynwood e a sofisticaÃ§Ã£o do Brickell.",
-            'ru':"Ð­Ð´Ð¶ÑÐ¾ÑÐµÑ â ÑÐ°Ð¼ÑÐ¹ Ð±ÑÑÑÑÐ¾ÑÐ°ÑÑÑÑÐ¸Ð¹ ÑÐ¾ÑÐºÐ¾ÑÐ½ÑÐ¹ ÑÐ°Ð¹Ð¾Ð½ ÐÐ°Ð¹Ð°Ð¼Ð¸ â Ð¿ÑÐ¸Ð±ÑÐµÐ¶Ð½ÑÐ¹ ÑÐ°Ð¹Ð¾Ð½ Ð¼ÐµÐ¶Ð´Ñ ÑÐ½ÐµÑÐ³Ð¸ÐµÐ¹ ÐÐ°Ð¹Ð½Ð²ÑÐ´Ð° Ð¸ Ð¸Ð·ÑÑÐºÐ°Ð½Ð½Ð¾ÑÑÑÑ ÐÑÐ¸ÐºÐµÐ»Ð»Ð°.",
+            'en':"Edgewater is Miami's fastest-growing luxury neighborhood — a waterfront district between the energy of Wynwood and the sophistication of Brickell, with unobstructed Biscayne Bay views.",
+            'es':"Edgewater es el vecindario de lujo de más rápido crecimiento en Miami — un distrito frente al mar entre la energía de Wynwood y la sofisticación de Brickell.",
+            'pt':"Edgewater é o bairro de luxo de crescimento mais rápido de Miami — um distrito à beira-mar entre a energia do Wynwood e a sofisticação do Brickell.",
+            'ru':"Эджуотер — самый быстрорастущий роскошный район Майами — прибрежный район между энергией Вайнвуда и изысканностью Брикелла.",
         },
     },
     'downtown-miami': {
-        'name':'Downtown Miami','tagline':"Miami's Urban Heart â Culture, Bay Views & Connectivity",
+        'name':'Downtown Miami','tagline':"Miami's Urban Heart — Culture, Bay Views & Connectivity",
         'geo':{'lat':25.7751,'lng':-80.1951},
         'highlights':['Bay & Ocean Views','Brightline Rail Access','Cultural District','Urban Walkability'],
         'descriptions':{
-            'en':"Downtown Miami is the beating heart of the Magic City â a dynamic urban core with stunning bay views, world-class museums, and direct Brightline rail access to Fort Lauderdale and Orlando.",
-            'es':"Downtown Miami es el corazÃ³n palpitante de la Ciudad MÃ¡gica â un nÃºcleo urbano dinÃ¡mico con impresionantes vistas a la bahÃ­a y acceso directo al tren Brightline.",
-            'pt':"Downtown Miami Ã© o coraÃ§Ã£o pulsante da Cidade MÃ¡gica â um nÃºcleo urbano dinÃ¢mico com vistas deslumbrantes da baÃ­a e acesso direto ao trem Brightline.",
-            'ru':"Ð¦ÐµÐ½ÑÑ ÐÐ°Ð¹Ð°Ð¼Ð¸ â Ð±ÑÑÑÐµÐµÑÑ ÑÐµÑÐ´ÑÐµ ÐÐ¾Ð»ÑÐµÐ±Ð½Ð¾Ð³Ð¾ Ð³Ð¾ÑÐ¾Ð´Ð° â Ð´Ð¸Ð½Ð°Ð¼Ð¸ÑÐ½ÑÐ¹ Ð³Ð¾ÑÐ¾Ð´ÑÐºÐ¾Ð¹ ÑÐµÐ½ÑÑ Ñ Ð²Ð¸Ð´Ð°Ð¼Ð¸ Ð½Ð° Ð·Ð°Ð»Ð¸Ð² Ð¸ Ð¶ÐµÐ»ÐµÐ·Ð½Ð¾Ð´Ð¾ÑÐ¾Ð¶Ð½ÑÐ¼ ÑÐ¾Ð¾Ð±ÑÐµÐ½Ð¸ÐµÐ¼ Brightline.",
+            'en':"Downtown Miami is the beating heart of the Magic City — a dynamic urban core with stunning bay views, world-class museums, and direct Brightline rail access to Fort Lauderdale and Orlando.",
+            'es':"Downtown Miami es el corazón palpitante de la Ciudad Mágica — un núcleo urbano dinámico con impresionantes vistas a la bahía y acceso directo al tren Brightline.",
+            'pt':"Downtown Miami é o coração pulsante da Cidade Mágica — um núcleo urbano dinâmico com vistas deslumbrantes da baía e acesso direto ao trem Brightline.",
+            'ru':"Центр Майами — бьющееся сердце Волшебного города — динамичный городской центр с видами на залив и железнодорожным сообщением Brightline.",
         },
     },
     'brickell-key': {
         'name':'Brickell Key','tagline':"Miami's Most Exclusive Private Island Address",
         'geo':{'lat':25.7676,'lng':-80.1875},
-        'highlights':['360Â° Water Views','Private Island','Ultra-Exclusive','Steps from Brickell'],
+        'highlights':['360° Water Views','Private Island','Ultra-Exclusive','Steps from Brickell'],
         'descriptions':{
-            'en':"Brickell Key is Miami's most exclusive private island â a manicured oasis in Biscayne Bay just steps from the Brickell financial district, with 360Â° water views and complete privacy.",
-            'es':"Brickell Key es la isla privada mÃ¡s exclusiva de Miami â un oasis cuidado en la BahÃ­a de Biscayne a pasos del distrito financiero de Brickell.",
-            'pt':"Brickell Key Ã© a ilha privada mais exclusiva de Miami â um oÃ¡sis bem cuidado na BaÃ­a Biscayne a passos do distrito financeiro de Brickell.",
-            'ru':"ÐÑÐ¸ÐºÐµÐ»Ð»-ÐÐ¸ â ÑÐ°Ð¼ÑÐ¹ ÑÐºÑÐºÐ»ÑÐ·Ð¸Ð²Ð½ÑÐ¹ ÑÐ°ÑÑÐ½ÑÐ¹ Ð¾ÑÑÑÐ¾Ð² ÐÐ°Ð¹Ð°Ð¼Ð¸ â ÑÑÐ¾Ð¶ÐµÐ½Ð½ÑÐ¹ Ð¾Ð°Ð·Ð¸Ñ Ð² Ð±ÑÑÑÐµ ÐÐ¸ÑÐºÐ°Ð¹Ð½ Ð² ÑÐ°Ð³Ðµ Ð¾Ñ ÑÐ¸Ð½Ð°Ð½ÑÐ¾Ð²Ð¾Ð³Ð¾ ÑÐ°Ð¹Ð¾Ð½Ð°.",
+            'en':"Brickell Key is Miami's most exclusive private island — a manicured oasis in Biscayne Bay just steps from the Brickell financial district, with 360° water views and complete privacy.",
+            'es':"Brickell Key es la isla privada más exclusiva de Miami — un oasis cuidado en la Bahía de Biscayne a pasos del distrito financiero de Brickell.",
+            'pt':"Brickell Key é a ilha privada mais exclusiva de Miami — um oásis bem cuidado na Baía Biscayne a passos do distrito financeiro de Brickell.",
+            'ru':"Брикелл-Ки — самый эксклюзивный частный остров Майами — ухоженный оазис в бухте Бискайн в шаге от финансового района.",
         },
     },
     'wynwood': {
-        'name':'Wynwood','tagline':"Miami's Arts Capital â Culture Meets Luxury Living",
+        'name':'Wynwood','tagline':"Miami's Arts Capital — Culture Meets Luxury Living",
         'geo':{'lat':25.8006,'lng':-80.1993},
         'highlights':['World-Famous Street Art','Top Restaurant Scene','Creative Community','High Appreciation'],
         'descriptions':{
-            'en':"Wynwood is Miami's creative capital â a vibrant arts district famed for world-renowned murals, cutting-edge galleries, and the city's best restaurant scene, now transforming into a luxury residential destination.",
-            'es':"Wynwood es la capital creativa de Miami â un vibrante distrito artÃ­stico famoso por sus murales de renombre mundial, galerÃ­as de vanguardia y la mejor escena gastronÃ³mica de la ciudad.",
-            'pt':"Wynwood Ã© a capital criativa de Miami â um vibrante distrito artÃ­stico famoso por murais de renome mundial, galerias de vanguarda e a melhor cena gastronÃ´mica da cidade.",
-            'ru':"ÐÐ°Ð¹Ð½Ð²ÑÐ´ â ÑÐ²Ð¾ÑÑÐµÑÐºÐ°Ñ ÑÑÐ¾Ð»Ð¸ÑÐ° ÐÐ°Ð¹Ð°Ð¼Ð¸ â ÑÑÐºÐ¸Ð¹ ÑÑÐ´Ð¾Ð¶ÐµÑÑÐ²ÐµÐ½Ð½ÑÐ¹ ÑÐ°Ð¹Ð¾Ð½ Ñ Ð²ÑÐµÐ¼Ð¸ÑÐ½Ð¾ Ð¸Ð·Ð²ÐµÑÑÐ½ÑÐ¼Ð¸ Ð¼ÑÑÐ°Ð»Ð°Ð¼Ð¸, Ð¿ÐµÑÐµÐ´Ð¾Ð²ÑÐ¼Ð¸ Ð³Ð°Ð»ÐµÑÐµÑÐ¼Ð¸ Ð¸ Ð»ÑÑÑÐµÐ¹ ÑÐµÑÑÐ¾ÑÐ°Ð½Ð½Ð¾Ð¹ ÑÑÐµÐ½Ð¾Ð¹ Ð³Ð¾ÑÐ¾Ð´Ð°.",
+            'en':"Wynwood is Miami's creative capital — a vibrant arts district famed for world-renowned murals, cutting-edge galleries, and the city's best restaurant scene, now transforming into a luxury residential destination.",
+            'es':"Wynwood es la capital creativa de Miami — un vibrante distrito artístico famoso por sus murales de renombre mundial, galerías de vanguardia y la mejor escena gastronómica de la ciudad.",
+            'pt':"Wynwood é a capital criativa de Miami — um vibrante distrito artístico famoso por murais de renome mundial, galerias de vanguarda e a melhor cena gastronômica da cidade.",
+            'ru':"Вайнвуд — творческая столица Майами — яркий художественный район с всемирно известными муралами, передовыми галереями и лучшей ресторанной сценой города.",
         },
     },
 }
 
 CAT_NAMES = {
-    'new-developments':{'en':'New Developments','es':'Nuevos Desarrollos','pt':'Novos Empreendimentos','ru':'ÐÐ¾Ð²Ð¾ÑÑÑÐ¾Ð¹ÐºÐ¸'},
-    'villas':          {'en':'Luxury Villas',   'es':'Villas de Lujo',    'pt':'Vilas de Luxo',        'ru':'ÐÐ¸Ð»Ð»Ñ'},
-    'penthouses':      {'en':'Penthouses',       'es':'Penthouses',        'pt':'Coberturas',           'ru':'ÐÐµÐ½ÑÑÐ°ÑÑÑ'},
+    'new-developments':{'en':'New Developments','es':'Nuevos Desarrollos','pt':'Novos Empreendimentos','ru':'Новостройки'},
+    'villas':          {'en':'Luxury Villas',   'es':'Villas de Lujo',    'pt':'Vilas de Luxo',        'ru':'Виллы'},
+    'penthouses':      {'en':'Penthouses',       'es':'Penthouses',        'pt':'Coberturas',           'ru':'Пентхаусы'},
 }
 
-#──Language configs âââââââââââââââââââââââââââââââââââââââââââ
+#──Language configs ───────────────────────────────────────────
 LANGS = {
     'en':{'code':'en','dir':'','hreflang':'en','og_locale':'en_US','T':{
         'nav_all':'New Developments','nav_contact':'Contact','nav_vip':'Get VIP Access',
         'hub_label':'New Developments','hub_title':'New Pre-Construction Condos in Miami',
-        'hub_subtitle':"Explore the most exclusive pre-construction residences across Miami's most sought-after neighborhoods. Zero buyer commission â we work exclusively for you.",
+        'hub_subtitle':"Explore the most exclusive pre-construction residences across Miami's most sought-after neighborhoods. Zero buyer commission — we work exclusively for you.",
         'hub_browse':'Browse by Neighborhood','hub_all':'All Projects',
-        'hood_label':'Pre-Construction Condos','hood_other':'Other Miami Neighborhoods','hood_all_miami':'â All Miami Developments',
-        'card_from':'From','card_floors':'Floors','card_units':'Residences','card_delivery':'Delivery','card_view':'View Details â',
-        'cta_title':'Get Exclusive Access','cta_subtitle':'Floor plans, pricing & developer brochures â sent to your inbox.',
-        'cta_name':'Full Name','cta_email':'Email Address','cta_submit':'Request Information â',
+        'hood_label':'Pre-Construction Condos','hood_other':'Other Miami Neighborhoods','hood_all_miami':'← All Miami Developments',
+        'card_from':'From','card_floors':'Floors','card_units':'Residences','card_delivery':'Delivery','card_view':'View Details →',
+        'cta_title':'Get Exclusive Access','cta_subtitle':'Floor plans, pricing & developer brochures — sent to your inbox.',
+        'cta_name':'Full Name','cta_email':'Email Address','cta_submit':'Request Information →',
         'hub_meta_title':'New Pre-Construction Condos Miami 2025 | MiaLux Realty',
         'hub_meta_desc':'Browse all new pre-construction condos in Miami. Brickell, Miami Beach, Edgewater, Sunny Isles & more. VIP pricing, no buyer fees.',
         'hood_meta_title':'New Pre-Construction Condos in {hood} Miami 2025 | MiaLux Realty',
@@ -159,48 +159,48 @@ LANGS = {
     'es':{'code':'es','dir':'es','hreflang':'es','og_locale':'es_LA','T':{
         'nav_all':'Nuevos Desarrollos','nav_contact':'Contacto','nav_vip':'Acceso VIP',
         'hub_label':'Nuevos Desarrollos','hub_title':'Nuevos Condominios en Preventa en Miami',
-        'hub_subtitle':"Descubra las residencias en preventa mÃ¡s exclusivas en los vecindarios mÃ¡s codiciados de Miami. Sin comisiÃ³n para el comprador.",
+        'hub_subtitle':"Descubra las residencias en preventa más exclusivas en los vecindarios más codiciados de Miami. Sin comisión para el comprador.",
         'hub_browse':'Explorar por Vecindario','hub_all':'Todos los Proyectos',
-        'hood_label':'Condominios en Preventa','hood_other':'Otros Vecindarios de Miami','hood_all_miami':'â Todos los Desarrollos en Miami',
-        'card_from':'Desde','card_floors':'Pisos','card_units':'Residencias','card_delivery':'Entrega','card_view':'Ver Detalles â',
-        'cta_title':'Obtenga Acceso Exclusivo','cta_subtitle':'Planos, precios y brochures del desarrollador â enviados a su correo.',
-        'cta_name':'Nombre Completo','cta_email':'Correo ElectrÃ³nico','cta_submit':'Solicitar InformaciÃ³n â',
+        'hood_label':'Condominios en Preventa','hood_other':'Otros Vecindarios de Miami','hood_all_miami':'← Todos los Desarrollos en Miami',
+        'card_from':'Desde','card_floors':'Pisos','card_units':'Residencias','card_delivery':'Entrega','card_view':'Ver Detalles →',
+        'cta_title':'Obtenga Acceso Exclusivo','cta_subtitle':'Planos, precios y brochures del desarrollador — enviados a su correo.',
+        'cta_name':'Nombre Completo','cta_email':'Correo Electrónico','cta_submit':'Solicitar Información →',
         'hub_meta_title':'Nuevos Condominios en Preventa Miami 2025 | MiaLux Realty',
-        'hub_meta_desc':'Explore todos los nuevos condominios en preventa en Miami. Brickell, Miami Beach, Edgewater, Sunny Isles. Precios VIP, sin comisiÃ³n.',
+        'hub_meta_desc':'Explore todos los nuevos condominios en preventa en Miami. Brickell, Miami Beach, Edgewater, Sunny Isles. Precios VIP, sin comisión.',
         'hood_meta_title':'Nuevos Condominios en Preventa en {hood} Miami | MiaLux Realty',
-        'hood_meta_desc':'Descubra nuevos condominios en preventa en {hood}, Miami. Precios VIP exclusivos, planos completos. Sin comisiÃ³n.',
+        'hood_meta_desc':'Descubra nuevos condominios en preventa en {hood}, Miami. Precios VIP exclusivos, planos completos. Sin comisión.',
     }},
     'pt':{'code':'pt','dir':'pt','hreflang':'pt','og_locale':'pt_BR','T':{
         'nav_all':'Novos Empreendimentos','nav_contact':'Contato','nav_vip':'Acesso VIP',
         'hub_label':'Novos Empreendimentos','hub_title':'Novos Apartamentos na Planta em Miami',
-        'hub_subtitle':"Descubra os empreendimentos mais exclusivos nos bairros mais cobiÃ§ados de Miami. Sem comissÃ£o para o comprador.",
+        'hub_subtitle':"Descubra os empreendimentos mais exclusivos nos bairros mais cobiçados de Miami. Sem comissão para o comprador.",
         'hub_browse':'Explorar por Bairro','hub_all':'Todos os Projetos',
-        'hood_label':'Apartamentos na Planta','hood_other':'Outros Bairros de Miami','hood_all_miami':'â Todos os Empreendimentos',
-        'card_from':'A partir de','card_floors':'Andares','card_units':'ResidÃªncias','card_delivery':'Entrega','card_view':'Ver Detalhes â',
-        'cta_title':'Obtenha Acesso Exclusivo','cta_subtitle':'Plantas, preÃ§os e brochures do incorporador â enviados para seu e-mail.',
-        'cta_name':'Nome Completo','cta_email':'E-mail','cta_submit':'Solicitar InformaÃ§Ãµes â',
+        'hood_label':'Apartamentos na Planta','hood_other':'Outros Bairros de Miami','hood_all_miami':'← Todos os Empreendimentos',
+        'card_from':'A partir de','card_floors':'Andares','card_units':'Residências','card_delivery':'Entrega','card_view':'Ver Detalhes →',
+        'cta_title':'Obtenha Acesso Exclusivo','cta_subtitle':'Plantas, preços e brochures do incorporador — enviados para seu e-mail.',
+        'cta_name':'Nome Completo','cta_email':'E-mail','cta_submit':'Solicitar Informações →',
         'hub_meta_title':'Novos Apartamentos na Planta Miami 2025 | MiaLux Realty',
-        'hub_meta_desc':'Explore novos apartamentos na planta em Miami. Brickell, Miami Beach, Edgewater, Sunny Isles. PreÃ§os VIP, sem comissÃ£o.',
+        'hub_meta_desc':'Explore novos apartamentos na planta em Miami. Brickell, Miami Beach, Edgewater, Sunny Isles. Preços VIP, sem comissão.',
         'hood_meta_title':'Novos Apartamentos na Planta em {hood} Miami | MiaLux Realty',
-        'hood_meta_desc':'Descubra novos apartamentos na planta em {hood}, Miami. PreÃ§os VIP exclusivos, plantas completas. Sem comissÃ£o.',
+        'hood_meta_desc':'Descubra novos apartamentos na planta em {hood}, Miami. Preços VIP exclusivos, plantas completas. Sem comissão.',
     }},
     'ru':{'code':'ru','dir':'ru','hreflang':'ru','og_locale':'ru_RU','T':{
-        'nav_all':'ÐÑÐµ ÐÑÐ¾ÐµÐºÑÑ','nav_contact':'ÐÐ¾Ð½ÑÐ°ÐºÑÑ','nav_vip':'VIP ÐÐ¾ÑÑÑÐ¿',
-        'hub_label':'ÐÐ¾Ð²Ð¾ÑÑÑÐ¾Ð¹ÐºÐ¸','hub_title':'ÐÐ¾Ð²ÑÐµ ÐÐ¾Ð½Ð´Ð¾Ð¼Ð¸Ð½Ð¸ÑÐ¼Ñ Ð² ÐÐ°Ð¹Ð°Ð¼Ð¸',
-        'hub_subtitle':"ÐÑÑÐ»ÐµÐ´ÑÐ¹ÑÐµ ÑÐ°Ð¼ÑÐµ ÑÐºÑÐºÐ»ÑÐ·Ð¸Ð²Ð½ÑÐµ Ð½Ð¾Ð²Ð¾ÑÑÑÐ¾Ð¹ÐºÐ¸ Ð² ÑÐ°Ð¼ÑÑ Ð²Ð¾ÑÑÑÐµÐ±Ð¾Ð²Ð°Ð½Ð½ÑÑ ÑÐ°Ð¹Ð¾Ð½Ð°Ñ ÐÐ°Ð¹Ð°Ð¼Ð¸. ÐÐµÐ· ÐºÐ¾Ð¼Ð¸ÑÑÐ¸Ð¸ Ð´Ð»Ñ Ð¿Ð¾ÐºÑÐ¿Ð°ÑÐµÐ»Ñ.",
-        'hub_browse':'ÐÐ¾Ð¸ÑÐº Ð¿Ð¾ Ð Ð°Ð¹Ð¾Ð½Ð°Ð¼','hub_all':'ÐÑÐµ ÐÑÐ¾ÐµÐºÑÑ',
-        'hood_label':'ÐÐ¾Ð²Ð¾ÑÑÑÐ¾Ð¹ÐºÐ¸','hood_other':'ÐÑÑÐ³Ð¸Ðµ Ð Ð°Ð¹Ð¾Ð½Ñ ÐÐ°Ð¹Ð°Ð¼Ð¸','hood_all_miami':'â ÐÑÐµ ÐÐ¾Ð²Ð¾ÑÑÑÐ¾Ð¹ÐºÐ¸ ÐÐ°Ð¹Ð°Ð¼Ð¸',
-        'card_from':'ÐÑ','card_floors':'Ð­ÑÐ°Ð¶ÐµÐ¹','card_units':'Ð ÐµÐ·Ð¸Ð´ÐµÐ½ÑÐ¸Ð¹','card_delivery':'Ð¡Ð´Ð°ÑÐ°','card_view':'ÐÐ¾Ð´ÑÐ¾Ð±Ð½ÐµÐµ â',
-        'cta_title':'ÐÐ¾Ð»ÑÑÐ¸ÑÑ Ð­ÐºÑÐºÐ»ÑÐ·Ð¸Ð²Ð½ÑÐ¹ ÐÐ¾ÑÑÑÐ¿','cta_subtitle':'ÐÐ»Ð°Ð½Ð¸ÑÐ¾Ð²ÐºÐ¸, ÑÐµÐ½Ñ Ð¸ Ð±ÑÐ¾ÑÑÑÑ Ð·Ð°ÑÑÑÐ¾Ð¸ÑÐ¸ÐºÐ° â Ð½Ð° Ð²Ð°ÑÑ Ð¿Ð¾ÑÑÑ.',
-        'cta_name':'ÐÐ¾Ð»Ð½Ð¾Ðµ ÐÐ¼Ñ','cta_email':'Email','cta_submit':'ÐÐ°Ð¿ÑÐ¾ÑÐ¸ÑÑ ÐÐ½ÑÐ¾ÑÐ¼Ð°ÑÐ¸Ñ â',
-        'hub_meta_title':'ÐÐ¾Ð²ÑÐµ ÐÐ¾Ð½Ð´Ð¾Ð¼Ð¸Ð½Ð¸ÑÐ¼Ñ Ð² ÐÐ°Ð¹Ð°Ð¼Ð¸ 2025 | MiaLux Realty',
-        'hub_meta_desc':'ÐÑÐµ Ð½Ð¾Ð²ÑÐµ ÐºÐ¾Ð½Ð´Ð¾Ð¼Ð¸Ð½Ð¸ÑÐ¼Ñ Ð² ÐÐ°Ð¹Ð°Ð¼Ð¸. ÐÑÐ¸ÐºÐµÐ»Ð», ÐÐ°Ð¹Ð°Ð¼Ð¸ ÐÐ¸Ñ, Ð­Ð´Ð¶ÑÐ¾ÑÐµÑ, Ð¡Ð°Ð½Ð½Ð¸-ÐÐ¹Ð»Ñ. VIP-ÑÐµÐ½Ñ, Ð±ÐµÐ· ÐºÐ¾Ð¼Ð¸ÑÑÐ¸Ð¸.',
-        'hood_meta_title':'ÐÐ¾Ð²Ð¾ÑÑÑÐ¾Ð¹ÐºÐ¸ Ð² {hood} ÐÐ°Ð¹Ð°Ð¼Ð¸ | MiaLux Realty',
-        'hood_meta_desc':'ÐÐ¾Ð²ÑÐµ ÐºÐ¾Ð½Ð´Ð¾Ð¼Ð¸Ð½Ð¸ÑÐ¼Ñ Ð² {hood}, ÐÐ°Ð¹Ð°Ð¼Ð¸. Ð­ÐºÑÐºÐ»ÑÐ·Ð¸Ð²Ð½ÑÐµ VIP-ÑÐµÐ½Ñ, Ð¿Ð¾Ð»Ð½ÑÐµ Ð¿Ð»Ð°Ð½Ð¸ÑÐ¾Ð²ÐºÐ¸. ÐÐµÐ· ÐºÐ¾Ð¼Ð¸ÑÑÐ¸Ð¸.',
+        'nav_all':'Все Проекты','nav_contact':'Контакты','nav_vip':'VIP Доступ',
+        'hub_label':'Новостройки','hub_title':'Новые Кондоминиумы в Майами',
+        'hub_subtitle':"Исследуйте самые эксклюзивные новостройки в самых востребованных районах Майами. Без комиссии для покупателя.",
+        'hub_browse':'Поиск по Районам','hub_all':'Все Проекты',
+        'hood_label':'Новостройки','hood_other':'Другие Районы Майами','hood_all_miami':'← Все Новостройки Майами',
+        'card_from':'От','card_floors':'Этажей','card_units':'Резиденций','card_delivery':'Сдача','card_view':'Подробнее →',
+        'cta_title':'Получить Эксклюзивный Доступ','cta_subtitle':'Планировки, цены и брошюры застройщика — на вашу почту.',
+        'cta_name':'Полное Имя','cta_email':'Email','cta_submit':'Запросить Информацию →',
+        'hub_meta_title':'Новые Кондоминиумы в Майами 2025 | MiaLux Realty',
+        'hub_meta_desc':'Все новые кондоминиумы в Майами. Брикелл, Майами Бич, Эджуотер, Санни-Айлс. VIP-цены, без комиссии.',
+        'hood_meta_title':'Новостройки в {hood} Майами | MiaLux Realty',
+        'hood_meta_desc':'Новые кондоминиумы в {hood}, Майами. Эксклюзивные VIP-цены, полные планировки. Без комиссии.',
     }},
 }
 
-#──Helpers ââââââââââââââââââââââââââââââââââââââââââââââââââââ
+#──Helpers ────────────────────────────────────────────────────
 def fmt_price(n):
     if not n: return 'Contact for Pricing'
     if n >= 1000000:
@@ -274,7 +274,7 @@ def inject_schema(html, schema_obj):
         return html
     return result
 
-#──Schema generators ââââââââââââââââââââââââââââââââââââââââââ
+#──Schema generators ──────────────────────────────────────────
 def s_agent(): return {"@type":"RealEstateAgent","@id":AGENT_ID}
 
 def s_hub(cat, lang, T):
@@ -394,10 +394,10 @@ def s_listing(listing, lang):
 
     return {"@context":"https://schema.org","@graph":[acc, lst, s_agent()]}
 
-#──Load templates âââââââââââââââââââââââââââââââââââââââââââââ
-with open('hub-template.html')     as f: HUB_T  = f.read()
-with open('hood-template.html')    as f: HOOD_T = f.read()
-with open('landing-template.html') as f: LAND_T = f.read()
+#──Load templates ─────────────────────────────────────────────
+with open('hub-template.html', encoding='utf-8')     as f: HUB_T  = f.read()
+with open('hood-template.html', encoding='utf-8')    as f: HOOD_T = f.read()
+with open('landing-template.html', encoding='utf-8') as f: LAND_T = f.read()
 
 # All hoods per category (include all HOOD_META for new-developments)
 all_hoods_by_cat = {}
@@ -406,9 +406,9 @@ for cat, hoods in by_cat_hood.items():
 all_hoods_by_cat['new-developments'] = list(set(
     all_hoods_by_cat.get('new-developments',[]) + list(HOOD_META.keys())))
 
-# ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# ─────────────────────────────────────────────────────────────
 # HUB PAGES
-# ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# ─────────────────────────────────────────────────────────────
 print("Building Hub pages...")
 for lc, lang in LANGS.items():
     T, d = lang['T'], lang['dir']
@@ -420,7 +420,7 @@ for lc, lang in LANGS.items():
         '{{META_TITLE}}':T['hub_meta_title'],'{{META_DESC}}':T['hub_meta_desc'],
         '{{T_NAV_ALL_PROJECTS}}':T['nav_all'],'{{T_NAV_CONTACT}}':T['nav_contact'],'{{T_NAV_VIP}}':T['nav_vip'],
         '{{T_HUB_LABEL}}':T['hub_label'],'{{T_HUB_TITLE}}':T['hub_title'],'{{T_HUB_SUBTITLE}}':T['hub_subtitle'],
-        '{{T_HUB_BROWSE}}':T['hub_browse'],'{{T_HUB_ALL_LISTINGS}}':T['hub_all'],'{{T_HUB_SEE_ALL}}':T['hub_all']+' â',
+        '{{T_HUB_BROWSE}}':T['hub_browse'],'{{T_HUB_ALL_LISTINGS}}':T['hub_all'],'{{T_HUB_SEE_ALL}}':T['hub_all']+' →',
         '{{T_CARD_FROM}}':T['card_from'],'{{T_CARD_FLOORS}}':T['card_floors'],'{{T_CARD_UNITS}}':T['card_units'],
         '{{T_CARD_DELIVERY}}':T['card_delivery'],'{{T_CARD_VIEW}}':T['card_view'],
         '{{T_CTA_TITLE}}':T['cta_title'],'{{T_CTA_SUBTITLE}}':T['cta_subtitle'],
@@ -434,11 +434,11 @@ for lc, lang in LANGS.items():
     html = inject_head(html, og(T['hub_meta_title'],T['hub_meta_desc'],url,f"{BASE_URL}/images/miami-skyline.jpg",lang['og_locale']), hreflang(cat))
     out  = f"{d}/{cat}/index.html" if d else f"{cat}/index.html"
     write_file(out, html)
-    print(f"  â {out}")
+    print(f"  ✓ {out}")
 
-# ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# ─────────────────────────────────────────────────────────────
 # NEIGHBORHOOD PAGES
-# ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# ─────────────────────────────────────────────────────────────
 print("\nBuilding Neighborhood pages...")
 for lc, lang in LANGS.items():
     T, d = lang['T'], lang['dir']
@@ -474,11 +474,11 @@ for lc, lang in LANGS.items():
         html = inject_head(html, og(meta_title,meta_desc,url,hood_img or f"{BASE_URL}/images/miami-{hood_slug}.jpg",lang['og_locale']), hreflang(cat, hood_slug))
         out  = f"{d}/{cat}/{hood_slug}/index.html" if d else f"{cat}/{hood_slug}/index.html"
         write_file(out, html)
-    print(f"  â {lc}: {len(all_hoods_by_cat.get(cat,[]))} neighborhood pages")
+    print(f"  ✓ {lc}: {len(all_hoods_by_cat.get(cat,[]))} neighborhood pages")
 
-# ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# ─────────────────────────────────────────────────────────────
 # LISTING PAGES
-# ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# ─────────────────────────────────────────────────────────────
 print("\nBuilding Listing pages...")
 for lc, lang in LANGS.items():
     d = lang['dir']
@@ -513,11 +513,11 @@ for lc, lang in LANGS.items():
         html = inject_head(html, og(meta_title,meta_desc,url,img,lang['og_locale']), hreflang(cat, hood, pslug))
         out  = f"{d}/{cat}/{hood}/{pslug}/index.html" if d else f"{cat}/{hood}/{pslug}/index.html"
         write_file(out, html)
-    print(f"  â {lc}: {len(LISTINGS)} listing pages")
+    print(f"  ✓ {lc}: {len(LISTINGS)} listing pages")
 
-# ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# ─────────────────────────────────────────────────────────────
 # SITEMAP
-# ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# ─────────────────────────────────────────────────────────────
 print("\nBuilding sitemap...")
 today = date.today().isoformat()
 urls  = []
@@ -537,14 +537,14 @@ for cat in ALL_CATEGORIES:
                     '0.85','weekly',listing.get('image_main',''),listing.get('name',''))
 
 sitemap = f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n{chr(10).join(urls)}\n</urlset>'
-with open('sitemap.xml','w') as f: f.write(sitemap)
-print(f"  â sitemap.xml: {len(urls)} URLs")
+with open('sitemap.xml','w', encoding='utf-8') as f: f.write(sitemap)
+print(f"  ✓ sitemap.xml: {len(urls)} URLs")
 
-# ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+# ─────────────────────────────────────────────────────────────
 # _REDIRECTS
-# ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-lines = ["# MiaLux Realty â _redirects v3","# Auto-generated â do not edit manually","",
-         "#──Legacy root listing slugs â new 3-level structure (301) ââ"]
+# ─────────────────────────────────────────────────────────────
+lines = ["# MiaLux Realty — _redirects v3","# Auto-generated — do not edit manually","",
+         "#── Legacy root listing slugs → new 3-level structure (301) ──"]
 
 OLD_SLUGS = {
     'cipriani-residences-brickell':       ('new-developments','brickell','cipriani-residences'),
@@ -558,12 +558,12 @@ for old,(cat,hood,pslug) in OLD_SLUGS.items():
     lines += [f"/{old}  /{cat}/{hood}/{pslug}/  301",
               f"/{old}/  /{cat}/{hood}/{pslug}/  301"]
 
-lines += ["","#──Legacy hub/catalog URLs ââ",
+lines += ["","#── Legacy hub/catalog URLs ──",
           "/miami-pre-construction-condos  /new-developments/  301",
           "/miami-pre-construction-condos/  /new-developments/  301",
           "/developments  /new-developments/  301",
           "/developments/  /new-developments/  301",
-          "","#──Clean URL rewrites (200) ââ"]
+          "","#── Clean URL rewrites (200) ──"]
 
 for cat in ALL_CATEGORIES:
     for lc,l in LANGS.items():
@@ -583,30 +583,21 @@ for cat in ALL_CATEGORIES:
             p = f"/{d}/{cat}/{hood}/{pslug}" if d else f"/{cat}/{hood}/{pslug}"
             lines += [f"{p}  {p}/index.html  200", f"{p}/  {p}/index.html  200"]
 
-with open('_redirects','w') as f: f.write('\n'.join(lines))
-print(f"  â _redirects: {len([x for x in lines if x and not x.startswith('#')])} rules")
+with open('_redirects','w', encoding='utf-8') as f: f.write('\n'.join(lines))
+print(f"  ✓ _redirects: {len([x for x in lines if x and not x.startswith('#')])} rules")
 
-with open('robots.txt','w') as f:
-    f.write("# âââââââââââââââââââââââââââââââââââââââââââââ\n# MiaLux Realty â robots.txt\n# STATUS: DEVELOPMENT MODE â all crawlers blocked\n# â  When going live, replace with the PRODUCTION version below\n# âââââââââââââââââââââââââââââââââââââââââââââ\n\nUser-agent: *\nDisallow: /\n\n# âââââââââââââââââââââââââââââââââââââââââââââ\n# PRODUCTION VERSION (use when ready to go live)\n# âââââââââââââââââââââââââââââââââââââââââââââ\n# User-agent: *\n# Allow: /\n# Disallow: /admin/\n#\n# Sitemap: https://mialuxrealty.com/sitemap.xml\n# âââââââââââââââââââââââââââââââââââââââââââââ\n")
-print("  â robots.txt")
+with open('robots.txt','w', encoding='utf-8') as f:
+    f.write("# MiaLux Realty — robots.txt\n# STATUS: DEVELOPMENT MODE — all crawlers blocked\n\nUser-agent: *\nDisallow: /\n\n# PRODUCTION VERSION (use when ready to go live)\n# User-agent: *\n# Allow: /\n# Disallow: /admin/\n#\n# Sitemap: https://mialuxrealty.com/sitemap.xml\n")
+print("  ✓ robots.txt")
 
-# ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-# SUMMARY
-# ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 total_hood_pages = len(LANGS)*sum(len(v) for v in all_hoods_by_cat.values())
 print(f"""
-âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
-â  BUILD COMPLETE v3  â  Clean 3-level URL structure            â
-â ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ£
-â  Hub pages           {len(LANGS)*len(ALL_CATEGORIES):>4}                                    â
-â  Neighborhood pages  {total_hood_pages:>4}                                    â
-â  Listing pages       {len(LANGS)*len(LISTINGS):>4}                                    â
-â  Sitemap URLs        {len(urls):>4}                                    â
-â ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ£
-â  /new-developments/brickell/cipriani-residences/   â EN       â
-â  /es/new-developments/brickell/cipriani-residences/ â ES      â
-â  Root folder: CLEAN                                           â
-â  Legacy slugs: 301 redirected                                 â
-â  Future: /villas/ /penthouses/ ready to add                   â
-âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+╔══════════════════════════════════════════════╗
+║  BUILD COMPLETE v3                           ║
+╠══════════════════════════════════════════════╣
+║  Hub pages           {len(LANGS)*len(ALL_CATEGORIES):>4}                        ║
+║  Neighborhood pages  {total_hood_pages:>4}                        ║
+║  Listing pages       {len(LANGS)*len(LISTINGS):>4}                        ║
+║  Sitemap URLs        {len(urls):>4}                        ║
+╚══════════════════════════════════════════════╝
 """)
