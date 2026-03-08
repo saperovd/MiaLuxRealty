@@ -1,7 +1,7 @@
-# MiaLux Realty — _redirects v3
-# Auto-generated — do not edit manually
+# MiaLux Realty â _redirects v3
+# Auto-generated â do not edit manually
 
-# ── Legacy root listing slugs → new 3-level structure (301) ──
+# ââ Legacy root listing slugs â new 3-level structure (301) ââ
 /cipriani-residences-brickell  /new-developments/brickell/cipriani-residences/  301
 /cipriani-residences-brickell/  /new-developments/brickell/cipriani-residences/  301
 /ora-by-casa-tua  /new-developments/brickell/ora-by-casa-tua/  301
@@ -15,13 +15,13 @@
 /faena-residences-miami  /new-developments/downtown-miami/faena-residences/  301
 /faena-residences-miami/  /new-developments/downtown-miami/faena-residences/  301
 
-# ── Legacy hub/catalog URLs ──
+# ââ Legacy hub/catalog URLs ââ
 /miami-pre-construction-condos  /new-developments/  301
 /miami-pre-construction-condos/  /new-developments/  301
 /developments  /new-developments/  301
 /developments/  /new-developments/  301
 
-# ── Clean URL rewrites (200) ──
+# ââ Clean URL rewrites (200) ââ
 /new-developments  /new-developments/index.html  200
 /new-developments/  /new-developments/index.html  200
 /es/new-developments  /es/new-developments/index.html  200
@@ -30,30 +30,6 @@
 /pt/new-developments/  /pt/new-developments/index.html  200
 /ru/new-developments  /ru/new-developments/index.html  200
 /ru/new-developments/  /ru/new-developments/index.html  200
-/new-developments/brickell  /new-developments/brickell/index.html  200
-/new-developments/brickell/  /new-developments/brickell/index.html  200
-/es/new-developments/brickell  /es/new-developments/brickell/index.html  200
-/es/new-developments/brickell/  /es/new-developments/brickell/index.html  200
-/pt/new-developments/brickell  /pt/new-developments/brickell/index.html  200
-/pt/new-developments/brickell/  /pt/new-developments/brickell/index.html  200
-/ru/new-developments/brickell  /ru/new-developments/brickell/index.html  200
-/ru/new-developments/brickell/  /ru/new-developments/brickell/index.html  200
-/new-developments/downtown-miami  /new-developments/downtown-miami/index.html  200
-/new-developments/downtown-miami/  /new-developments/downtown-miami/index.html  200
-/es/new-developments/downtown-miami  /es/new-developments/downtown-miami/index.html  200
-/es/new-developments/downtown-miami/  /es/new-developments/downtown-miami/index.html  200
-/pt/new-developments/downtown-miami  /pt/new-developments/downtown-miami/index.html  200
-/pt/new-developments/downtown-miami/  /pt/new-developments/downtown-miami/index.html  200
-/ru/new-developments/downtown-miami  /ru/new-developments/downtown-miami/index.html  200
-/ru/new-developments/downtown-miami/  /ru/new-developments/downtown-miami/index.html  200
-/new-developments/wynwood  /new-developments/wynwood/index.html  200
-/new-developments/wynwood/  /new-developments/wynwood/index.html  200
-/es/new-developments/wynwood  /es/new-developments/wynwood/index.html  200
-/es/new-developments/wynwood/  /es/new-developments/wynwood/index.html  200
-/pt/new-developments/wynwood  /pt/new-developments/wynwood/index.html  200
-/pt/new-developments/wynwood/  /pt/new-developments/wynwood/index.html  200
-/ru/new-developments/wynwood  /ru/new-developments/wynwood/index.html  200
-/ru/new-developments/wynwood/  /ru/new-developments/wynwood/index.html  200
 /new-developments/miami-beach  /new-developments/miami-beach/index.html  200
 /new-developments/miami-beach/  /new-developments/miami-beach/index.html  200
 /es/new-developments/miami-beach  /es/new-developments/miami-beach/index.html  200
@@ -62,6 +38,22 @@
 /pt/new-developments/miami-beach/  /pt/new-developments/miami-beach/index.html  200
 /ru/new-developments/miami-beach  /ru/new-developments/miami-beach/index.html  200
 /ru/new-developments/miami-beach/  /ru/new-developments/miami-beach/index.html  200
+/new-developments/brickell-key  /new-developments/brickell-key/index.html  200
+/new-developments/brickell-key/  /new-developments/brickell-key/index.html  200
+/es/new-developments/brickell-key  /es/new-developments/brickell-key/index.html  200
+/es/new-developments/brickell-key/  /es/new-developments/brickell-key/index.html  200
+/pt/new-developments/brickell-key  /pt/new-developments/brickell-key/index.html  200
+/pt/new-developments/brickell-key/  /pt/new-developments/brickell-key/index.html  200
+/ru/new-developments/brickell-key  /ru/new-developments/brickell-key/index.html  200
+/ru/new-developments/brickell-key/  /ru/new-developments/brickell-key/index.html  200
+/new-developments/downtown-miami  /new-developments/downtown-miami/index.html  200
+/new-developments/downtown-miami/  /new-developments/downtown-miami/index.html  200
+/es/new-developments/downtown-miami  /es/new-developments/downtown-miami/index.html  200
+/es/new-developments/downtown-miami/  /es/new-developments/downtown-miami/index.html  200
+/pt/new-developments/downtown-miami  /pt/new-developments/downtown-miami/index.html  200
+/pt/new-developments/downtown-miami/  /pt/new-developments/downtown-miami/index.html  200
+/ru/new-developments/downtown-miami  /ru/new-developments/downtown-miami/index.html  200
+/ru/new-developments/downtown-miami/  /ru/new-developments/downtown-miami/index.html  200
 /new-developments/sunny-isles-beach  /new-developments/sunny-isles-beach/index.html  200
 /new-developments/sunny-isles-beach/  /new-developments/sunny-isles-beach/index.html  200
 /es/new-developments/sunny-isles-beach  /es/new-developments/sunny-isles-beach/index.html  200
@@ -78,14 +70,22 @@
 /pt/new-developments/edgewater/  /pt/new-developments/edgewater/index.html  200
 /ru/new-developments/edgewater  /ru/new-developments/edgewater/index.html  200
 /ru/new-developments/edgewater/  /ru/new-developments/edgewater/index.html  200
-/new-developments/brickell-key  /new-developments/brickell-key/index.html  200
-/new-developments/brickell-key/  /new-developments/brickell-key/index.html  200
-/es/new-developments/brickell-key  /es/new-developments/brickell-key/index.html  200
-/es/new-developments/brickell-key/  /es/new-developments/brickell-key/index.html  200
-/pt/new-developments/brickell-key  /pt/new-developments/brickell-key/index.html  200
-/pt/new-developments/brickell-key/  /pt/new-developments/brickell-key/index.html  200
-/ru/new-developments/brickell-key  /ru/new-developments/brickell-key/index.html  200
-/ru/new-developments/brickell-key/  /ru/new-developments/brickell-key/index.html  200
+/new-developments/wynwood  /new-developments/wynwood/index.html  200
+/new-developments/wynwood/  /new-developments/wynwood/index.html  200
+/es/new-developments/wynwood  /es/new-developments/wynwood/index.html  200
+/es/new-developments/wynwood/  /es/new-developments/wynwood/index.html  200
+/pt/new-developments/wynwood  /pt/new-developments/wynwood/index.html  200
+/pt/new-developments/wynwood/  /pt/new-developments/wynwood/index.html  200
+/ru/new-developments/wynwood  /ru/new-developments/wynwood/index.html  200
+/ru/new-developments/wynwood/  /ru/new-developments/wynwood/index.html  200
+/new-developments/brickell  /new-developments/brickell/index.html  200
+/new-developments/brickell/  /new-developments/brickell/index.html  200
+/es/new-developments/brickell  /es/new-developments/brickell/index.html  200
+/es/new-developments/brickell/  /es/new-developments/brickell/index.html  200
+/pt/new-developments/brickell  /pt/new-developments/brickell/index.html  200
+/pt/new-developments/brickell/  /pt/new-developments/brickell/index.html  200
+/ru/new-developments/brickell  /ru/new-developments/brickell/index.html  200
+/ru/new-developments/brickell/  /ru/new-developments/brickell/index.html  200
 /new-developments/brickell/cipriani-residences-brickell  /new-developments/brickell/cipriani-residences-brickell/index.html  200
 /new-developments/brickell/cipriani-residences-brickell/  /new-developments/brickell/cipriani-residences-brickell/index.html  200
 /es/new-developments/brickell/cipriani-residences-brickell  /es/new-developments/brickell/cipriani-residences-brickell/index.html  200
