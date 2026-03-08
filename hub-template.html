@@ -393,7 +393,10 @@
 <body>
 
 <!-- SITE BAR -->
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5bbcc11 (Header white links)
 <nav class="site-nav" id="siteNav">
   <a class="site-nav-logo" href="/{{LANG_DIR_PREFIX}}">MiaLux<span>Realty</span></a>
   <ul class="site-nav-links">
@@ -428,7 +431,10 @@
   </div>
   <a href="/#contact" class="site-mob-cta">{{T_NAV_VIP}} →</a>
 </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5bbcc11 (Header white links)
 
 <!-- HERO -->
 <div class="hub-hero">
@@ -629,6 +635,19 @@ function submitStrip(e) {
   const mob = document.getElementById('siteMob');
   if(ham && mob) { ham.addEventListener('click', () => mob.classList.toggle('open')); }
 
+  });
+  </script>
+  <script>
+  document.addEventListener('DOMContentLoaded',function(){
+    const ld = document.getElementById('langDrop');
+    const lb = document.getElementById('langBtn');
+    if(ld && lb) {
+      lb.addEventListener('click', e => { e.stopPropagation(); ld.classList.toggle('open'); lb.setAttribute('aria-expanded', ld.classList.contains('open')); });
+      document.addEventListener('click', () => { ld.classList.remove('open'); lb.setAttribute('aria-expanded','false'); });
+    }
+    const ham = document.getElementById('siteHam');
+    const mob = document.getElementById('siteMob');
+    if(ham && mob) { ham.addEventListener('click', () => mob.classList.toggle('open')); }
   });
   </script>
 </body>
