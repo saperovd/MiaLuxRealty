@@ -25,49 +25,48 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--charcoal);font-family:var(--sans);font-weight:300;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
 
-    /* ── UNIFIED SITE NAV ── */
+    /* ââ UNIFIED SITE NAV ââ */
+    
+    /* ── SITE NAV ── */
     .site-nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
       background: rgba(10,10,10,0.97);
       border-bottom: 1px solid rgba(201,168,76,0.1);
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 2.5rem; height: 60px;
       backdrop-filter: blur(12px);
     }
-    .site-nav-logo { font-family: var(--serif); font-size: 1.2rem; color: var(--text); text-decoration: none; letter-spacing: 0.06em; }
+    .site-nav-logo { font-family: var(--serif); font-size: 1.2rem; color: var(--text) !important; text-decoration: none; letter-spacing: 0.06em; }
     .site-nav-logo span { color: var(--gold); }
     .site-nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
-    .site-nav-links a { font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted2); text-decoration: none; transition: color .2s; }
-    .site-nav-links a:hover, .site-nav-links a.active { color: var(--gold); }
+    .site-nav-links a { font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--text) !important; text-decoration: none; transition: color .2s; opacity: .7; }
+    .site-nav-links a:hover, .site-nav-links a.active { color: var(--gold) !important; opacity: 1; }
     .site-nav-right { display: flex; align-items: center; gap: 1.2rem; }
-    /* Language dropdown */
     .lang-drop { position: relative; }
-    .lang-drop-btn { display: flex; align-items: center; gap: .35rem; font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted2); background: none; border: 1px solid var(--border); padding: .3rem .7rem; cursor: pointer; transition: color .2s, border-color .2s; font-family: var(--sans); }
-    .lang-drop-btn:hover { color: var(--gold); border-color: var(--gold); }
+    .lang-drop-btn { display: flex; align-items: center; gap: .35rem; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--text) !important; background: none; border: 1px solid rgba(201,168,76,0.3); padding: .3rem .7rem; cursor: pointer; transition: color .2s, border-color .2s; font-family: var(--sans); }
+    .lang-drop-btn:hover { color: var(--gold) !important; border-color: var(--gold); }
     .lang-drop-btn svg { width: 10px; height: 10px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .2s; }
     .lang-drop.open .lang-drop-btn svg { transform: rotate(180deg); }
-    .lang-drop-menu { display: none; position: absolute; top: calc(100% + 6px); right: 0; background: rgba(17,17,17,0.98); border: 1px solid var(--border); min-width: 80px; z-index: 300; }
+    .lang-drop-menu { display: none; position: absolute; top: calc(100% + 6px); right: 0; background: rgba(15,15,15,0.99); border: 1px solid rgba(201,168,76,0.2); min-width: 80px; z-index: 400; }
     .lang-drop.open .lang-drop-menu { display: block; }
-    .lang-drop-menu a { display: block; padding: .5rem .9rem; font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted2); text-decoration: none; transition: color .2s, background .2s; }
-    .lang-drop-menu a:hover { color: var(--gold); background: rgba(201,168,76,0.06); }
-    .lang-drop-menu a.active { color: var(--gold); }
-    .site-nav-cta { font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--dark); background: var(--gold); padding: .45rem 1.1rem; text-decoration: none; transition: background .2s; white-space: nowrap; }
-    .site-nav-cta:hover { background: var(--gold-light); }
+    .lang-drop-menu a { display: block; padding: .5rem .9rem; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--text) !important; text-decoration: none; transition: color .2s, background .2s; }
+    .lang-drop-menu a:hover { color: var(--gold) !important; background: rgba(201,168,76,0.06); }
+    .lang-drop-menu a.active { color: var(--gold) !important; }
+    .site-nav-cta { font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: #0A0A0A !important; background: #C9A84C; padding: .45rem 1.1rem; text-decoration: none; transition: background .2s; white-space: nowrap; }
+    .site-nav-cta:hover { background: #E8C97A; }
     .site-nav-ham { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: .3rem; }
-    .site-nav-ham span { display: block; width: 22px; height: 1.5px; background: var(--text); transition: .3s; }
+    .site-nav-ham span { display: block; width: 22px; height: 1.5px; background: var(--text); }
     @media(max-width:900px) {
       .site-nav-links { display: none; }
       .site-nav-ham { display: flex; }
-      .lang-drop-menu { right: 0; }
     }
-    /* Mobile drawer */
     .site-mob { display: none; position: fixed; top: 60px; left: 0; right: 0; bottom: 0; background: rgba(10,10,10,0.99); z-index: 199; flex-direction: column; padding: 2rem; gap: .3rem; overflow-y: auto; }
     .site-mob.open { display: flex; }
-    .site-mob a { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted2); text-decoration: none; padding: .9rem 0; border-bottom: 1px solid rgba(201,168,76,0.07); transition: color .2s; }
-    .site-mob a:hover { color: var(--gold); }
+    .site-mob a { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--text) !important; text-decoration: none; padding: .9rem 0; border-bottom: 1px solid rgba(201,168,76,0.07); transition: color .2s; }
+    .site-mob a:hover { color: var(--gold) !important; }
     .site-mob-langs { display: flex; gap: 1rem; padding: .9rem 0; border-bottom: 1px solid rgba(201,168,76,0.07); }
     .site-mob-langs a { border: none; padding: 0; font-size: .58rem; }
-    .site-mob-cta { margin-top: 1.5rem; background: var(--gold); color: var(--dark) !important; text-align: center; padding: .9rem !important; font-weight: 600; border: none !important; }
+    .site-mob-cta { margin-top: 1.5rem; background: var(--gold); color: #0A0A0A !important; text-align: center; padding: .9rem !important; font-weight: 600; border: none !important; }
     /* HERO */
 .hero{position:relative;height:calc(100svh - 64px);min-height:560px;display:flex;align-items:flex-end;overflow:hidden;border-radius:0 0 var(--rxl) var(--rxl)}
 .hero-bg{position:absolute;inset:0;background:#1a3040;background-size:cover;background-position:center;border-radius:0 0 var(--rxl) var(--rxl)}
@@ -318,7 +317,7 @@ footer{background:var(--dark-footer);padding:4rem 6vw 2rem;border-radius:var(--r
     <a href="/pt/">PT</a>
     <a href="/ru/">RU</a>
   </div>
-  <a href="#contact" class="site-mob-cta">Get VIP Access →</a>
+  <a href="#contact" class="site-mob-cta">Get VIP Access â</a>
 </div>
 
 <!-- MOBILE MENU -->
@@ -330,7 +329,7 @@ footer{background:var(--dark-footer);padding:4rem 6vw 2rem;border-radius:var(--r
   <div class="hero-content">
     <div class="eyebrow">Miami Pre-Construction Specialists</div>
     <h1>Where Luxury<br>Meets <em>Smart</em><br>Investment</h1>
-    <p class="hero-sub">Exclusive access to Miami's finest pre-construction condos Ã¢ÂÂ VIP pricing, expert guidance, and zero buyer commission.</p>
+    <p class="hero-sub">Exclusive access to Miami's finest pre-construction condos ÃÂ¢ÃÂÃÂ VIP pricing, expert guidance, and zero buyer commission.</p>
     <div class="hero-actions">
       <a href="#developments" class="btn btn-gold">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -364,7 +363,7 @@ footer{background:var(--dark-footer);padding:4rem 6vw 2rem;border-radius:var(--r
 <section class="bg-soft" id="neighborhoods">
   <div class="sec-header reveal">
     <div><div class="sec-label">Explore by Area</div><h2>Miami's Finest <em>Neighborhoods</em></h2></div>
-    <a href="#contact" class="btn btn-dark">All Locations Ã¢ÂÂ</a>
+    <a href="#contact" class="btn btn-dark">All Locations ÃÂ¢ÃÂÃÂ</a>
   </div>
   <div class="nb-grid">
     <a href="/new-developments/brickell/" class="nb-card reveal">
@@ -390,13 +389,13 @@ footer{background:var(--dark-footer);padding:4rem 6vw 2rem;border-radius:var(--r
 <section class="bg-white" id="developments">
   <div class="sec-header reveal">
     <div><div class="sec-label">Hot Listings</div><h2>Featured <em>New</em> Developments</h2></div>
-    <a href="#contact" class="btn btn-dark">View All Ã¢ÂÂ</a>
+    <a href="#contact" class="btn btn-dark">View All ÃÂ¢ÃÂÃÂ</a>
   </div>
   <div class="proj-grid">
     <a href="/new-developments/brickell/residences-1428-brickell/" class="proj-card reveal">
-      <div class="proj-img"><img src="data:image/webp;base64,UklGRkoCAABXRUJQVlA4ID4CAAAwOQCdASr0AXcBPp1OpE4lpCOiIAgAsBOJaW7hd9bKj/7AJesAFNKfvPUVP3nqKn7z1FT956ipnZ6ip+89RU/eeoqfvPUVP3nmpWAqybbAVZNtgKsm2wFWTbXhWTbYCrJtsBVk22AqybbAVZIoEdZNtgKsm2wFWTbYCrJtsBH022AqybbAVZNtgKsm2wFWTXkFWTbYCrJtsBVk22AqybbAU0T9EdZNtgKsm2wFWTbYCrJtmZrJtsBVk22AqybbAVZNtgKrwGiOsm2wFWTbYCrJtsBVk214Vk22AqybbAVZNtgKsm2wFWSKBHWTbYCrJtsBVk22AqybbAJGj9EdZNtgKsm2wFWTbYCrJryCrJtsBVk22AqybbAVZNtgKaJ+iOsm2wFWTbYCrJtsBVk2zM7A/OsnIs5FNZdlv5+GOUaekosw269PVZOQ3obvPUVP3nqKn7z1FT7rRFT956ip+89RU/eeoqfvPUALvPUVP3nqKn7z1FT956ip+5wCp+89RU/eeoqfvPUVP3nqKIoIuKn7z1FT956ip+89RU/eZ5U/eeoqfvPUVP3nqKn7z1FTOz1FT956ip+89RU/eeoqfvPMqAjrJtsBVk22AqybbAVZNtZgAP7/Zc352PcH/QfFlTf+usPPypW4CAnvAoLmQNXg3cApTYBAx4FI7Cg+hIKFb0ChbHwUK3oFCt6BQtk2mFCYeeytFK7WSZUPuAwNgM2C77TAuU8FJf2os1DgVu7hAtiJ4hyHDkOHHpY4AAAA" alt="The Residences at 1428 Brickell"><div class="badge badge-hot">Ã°ÂÂÂ¥ Hot Deal</div></div>
+      <div class="proj-img"><img src="data:image/webp;base64,UklGRkoCAABXRUJQVlA4ID4CAAAwOQCdASr0AXcBPp1OpE4lpCOiIAgAsBOJaW7hd9bKj/7AJesAFNKfvPUVP3nqKn7z1FT956ipnZ6ip+89RU/eeoqfvPUVP3nmpWAqybbAVZNtgKsm2wFWTbXhWTbYCrJtsBVk22AqybbAVZIoEdZNtgKsm2wFWTbYCrJtsBH022AqybbAVZNtgKsm2wFWTXkFWTbYCrJtsBVk22AqybbAU0T9EdZNtgKsm2wFWTbYCrJtmZrJtsBVk22AqybbAVZNtgKrwGiOsm2wFWTbYCrJtsBVk214Vk22AqybbAVZNtgKsm2wFWSKBHWTbYCrJtsBVk22AqybbAJGj9EdZNtgKsm2wFWTbYCrJryCrJtsBVk22AqybbAVZNtgKaJ+iOsm2wFWTbYCrJtsBVk2zM7A/OsnIs5FNZdlv5+GOUaekosw269PVZOQ3obvPUVP3nqKn7z1FT7rRFT956ip+89RU/eeoqfvPUALvPUVP3nqKn7z1FT956ip+5wCp+89RU/eeoqfvPUVP3nqKIoIuKn7z1FT956ip+89RU/eZ5U/eeoqfvPUVP3nqKn7z1FTOz1FT956ip+89RU/eeoqfvPMqAjrJtsBVk22AqybbAVZNtZgAP7/Zc352PcH/QfFlTf+usPPypW4CAnvAoLmQNXg3cApTYBAx4FI7Cg+hIKFb0ChbHwUK3oFCt6BQtk2mFCYeeytFK7WSZUPuAwNgM2C77TAuU8FJf2os1DgVu7hAtiJ4hyHDkOHHpY4AAAA" alt="The Residences at 1428 Brickell"><div class="badge badge-hot">ÃÂ°ÃÂÃÂÃÂ¥ Hot Deal</div></div>
       <div class="proj-body">
-        <div class="proj-loc">Ã°ÂÂÂ Brickell, Miami</div>
+        <div class="proj-loc">ÃÂ°ÃÂÃÂÃÂ Brickell, Miami</div>
         <div class="proj-name">The Residences at 1428 Brickell</div>
         <div class="proj-dev">Developer: Coto & Coto</div>
         <div class="proj-specs">
@@ -410,7 +409,7 @@ footer{background:var(--dark-footer);padding:4rem 6vw 2rem;border-radius:var(--r
     <a href="/new-developments/edgewater/ora-by-casa-tua/" class="proj-card reveal">
       <div class="proj-img"><img src="data:image/webp;base64,UklGRrACAABXRUJQVlA4IKQCAAAQOgCdASr0AXcBPp1Oo04lpCMiIAgAsBOJaW7hd98C0L//obR//cCO/OPcUAAaI9UIdZNtgKsm2wFWTbYCrJtmZrJtsBVk22AqybbAVZNtgKrwILIbvPUVP3nqKn7z1FT956gBd56ip+89RU/eeoqfvPUVP3OAVP3nqKn7z1FT956ip+89RRFBRseIdZNtgKsm2wFWTbYCq8BojrJtsBVk22AqybbAVZNteAEHzrpSB9nM4oJxQTignFBNYvz13z5LWQrKgX5101qEw/ThPu7UVP3pLbYEpWPG156mAI62xwiWTbYCrJtsBVk22AqybbAVZIoEdZNtgKsm2wFWTbYCrJtsAhqQPs5nFBOKCcUE4oJxQTid4WTbYCrJtsBVk22AqybbAVXdbEdZNtgKsm2wFWTbYCrJtrwrJtsBVk22AqybbAVZNtgKskUCOsm2wFWTbYCrJtsBVk22ASNH6I6ybbAVZNtgKsm2wFWTXkFWTbYCrJtsBVk22AqybbAU0T9EdZNtgKsm2wFWTbYCrJtmbpWPEOsm2wFWTbYCrJtsBVkigR1k22AqybbAVZNtgKsm2wCRo/RHWTbYCrJtsBVk22Aqya8gq6a1CYfpwn8R97dqovF0To9lgAD+2SfwJ1h5TFv/oV+4f9AwXguYZiAR6BQXmeU1+pFq79SLV36kWrv1ItXfqRau/Ui1d+wtcyq38IGwmOAnzMAu/wvCYFqxC4SEGj9KeHAX5PRcmqgQgoVAr1eF4IQUKgV6vC8EIKFQK9XheCEFfcAAAAAAvrqbyu2bksn9dgILqgwCbrbRwmh/ND+aH80P5ofzQ/mh/kpEAAAAAA68A9TAfjSHAjz0IDHAF+UYBn8AyOAZVYfjIsZFjIsZFjIsZFjIp6juxAAAAAAA" alt="Ora by Casa Tua Edgewater"><div class="badge badge-new">New Launch</div></div>
       <div class="proj-body">
-        <div class="proj-loc">Ã°ÂÂÂ Edgewater, Miami</div>
+        <div class="proj-loc">ÃÂ°ÃÂÃÂÃÂ Edgewater, Miami</div>
         <div class="proj-name">Ora by Casa Tua</div>
         <div class="proj-dev">Developer: Casa Tua Hospitality</div>
         <div class="proj-specs">
@@ -422,9 +421,9 @@ footer{background:var(--dark-footer);padding:4rem 6vw 2rem;border-radius:var(--r
       </div>
     </a>
     <a href="/new-developments/sunny-isles-beach/st-regis-residences/" class="proj-card reveal">
-      <div class="proj-img"><img src="data:image/webp;base64,UklGRm4CAABXRUJQVlA4IGICAABQOgCdASr0AXcBPp1OpE4lpCOiIAgAsBOJaW7hd+Cy28H/3X9b/3P+f/T4ABTSn7z1FT956ip+89RU/eeoqafMERYRjCIsIxhEWEYwiLCMYCLvPUVP3nqKn7z1FT956ip+5wCp+89RU/eeoqfvPUVP3nqKexz1FT956ip+89RU/eeoqfvM8qfvPUVP3nqKn7z1FT956ipnZ6ip+89RU/eeoqfvPUVP3nmpWAqybbAVZNtgKsm2wFWTbXhWTbYCrJtsBVk22AqybbAVZIoEdZNtgKsm2wFWTbYCrJtsAkaP0R1k22AqybbAVZNtgKsmwDLMNuvghSSzkU1l2W/n4Y5Rp6SizDbr09Vk22AqybbAVZNtgKsm2wFV4DRHWTbYCrJtsBVk22Aqyba8KybbAVZNtgKsm2wFWTbYCrJFAjrJtsBVk22AqybbAVZNtgEjR+iOsm2wFWTbYCrJtsBVk13dVk22AqybbAVZNtgKsm2wFNE/RHWTbYCrJtsBVk22AqybZmaybbAVZNtgKsm2wFWTbYCq8BojrJtsBVk22AqybbAVZNteB9NtgKsm2wFWTbYCrJtsBVkigR1k22AqybbAVZNtgKsm2wCRo/RHWTbYCrJtsBVk22AqyZ6AAP7/TFb/4NkimN/zse+jIcN5OO/GLQmAyYDJgMmAyYDJgMmAyYDJgMmAyYDJgMmAyYP/ajXoAAAAAPLEaMSSeIBEKFY4jAs/xQ7A53FD0oKjgNLtBiTBn0jxKr+v6/r+v6/r+60ps5dS6l1LqXUupXPrdJqlJLIG1J1L/YFLP9iLvSa5AAAA" alt="Armani Casa Sunny Isles Beach"><div class="badge badge-hot">Ã°ÂÂÂ¥ VIP Pricing</div></div>
+      <div class="proj-img"><img src="data:image/webp;base64,UklGRm4CAABXRUJQVlA4IGICAABQOgCdASr0AXcBPp1OpE4lpCOiIAgAsBOJaW7hd+Cy28H/3X9b/3P+f/T4ABTSn7z1FT956ip+89RU/eeoqafMERYRjCIsIxhEWEYwiLCMYCLvPUVP3nqKn7z1FT956ip+5wCp+89RU/eeoqfvPUVP3nqKexz1FT956ip+89RU/eeoqfvM8qfvPUVP3nqKn7z1FT956ipnZ6ip+89RU/eeoqfvPUVP3nmpWAqybbAVZNtgKsm2wFWTbXhWTbYCrJtsBVk22AqybbAVZIoEdZNtgKsm2wFWTbYCrJtsAkaP0R1k22AqybbAVZNtgKsmwDLMNuvghSSzkU1l2W/n4Y5Rp6SizDbr09Vk22AqybbAVZNtgKsm2wFV4DRHWTbYCrJtsBVk22Aqyba8KybbAVZNtgKsm2wFWTbYCrJFAjrJtsBVk22AqybbAVZNtgEjR+iOsm2wFWTbYCrJtsBVk13dVk22AqybbAVZNtgKsm2wFNE/RHWTbYCrJtsBVk22AqybZmaybbAVZNtgKsm2wFWTbYCq8BojrJtsBVk22AqybbAVZNteB9NtgKsm2wFWTbYCrJtsBVkigR1k22AqybbAVZNtgKsm2wCRo/RHWTbYCrJtsBVk22AqyZ6AAP7/TFb/4NkimN/zse+jIcN5OO/GLQmAyYDJgMmAyYDJgMmAyYDJgMmAyYDJgMmAyYP/ajXoAAAAAPLEaMSSeIBEKFY4jAs/xQ7A53FD0oKjgNLtBiTBn0jxKr+v6/r+v6/r+60ps5dS6l1LqXUupXPrdJqlJLIG1J1L/YFLP9iLvSa5AAAA" alt="Armani Casa Sunny Isles Beach"><div class="badge badge-hot">ÃÂ°ÃÂÃÂÃÂ¥ VIP Pricing</div></div>
       <div class="proj-body">
-        <div class="proj-loc">Ã°ÂÂÂ Sunny Isles Beach</div>
+        <div class="proj-loc">ÃÂ°ÃÂÃÂÃÂ Sunny Isles Beach</div>
         <div class="proj-name">Armani/Casa Residences</div>
         <div class="proj-dev">Developer: Dezer Development</div>
         <div class="proj-specs">
@@ -454,11 +453,11 @@ footer{background:var(--dark-footer);padding:4rem 6vw 2rem;border-radius:var(--r
       </div>
       <div class="why-feat reveal">
         <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
-        <div><h3>Zero Commission for Buyers</h3><p>Our service is 100% free to buyers. The developer pays us Ã¢ÂÂ you get expert guidance and full concierge support at no extra cost.</p></div>
+        <div><h3>Zero Commission for Buyers</h3><p>Our service is 100% free to buyers. The developer pays us ÃÂ¢ÃÂÃÂ you get expert guidance and full concierge support at no extra cost.</p></div>
       </div>
       <div class="why-feat reveal">
         <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-        <div><h3>Full Market Coverage</h3><p>From Brickell to Bal Harbour Ã¢ÂÂ we cover every luxury neighborhood in Greater Miami. One call, all projects.</p></div>
+        <div><h3>Full Market Coverage</h3><p>From Brickell to Bal Harbour ÃÂ¢ÃÂÃÂ we cover every luxury neighborhood in Greater Miami. One call, all projects.</p></div>
       </div>
       <div class="why-feat reveal">
         <div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
@@ -475,8 +474,8 @@ footer{background:var(--dark-footer);padding:4rem 6vw 2rem;border-radius:var(--r
   <div class="proc-grid">
     <div class="proc-step reveal"><div class="step-n">01</div><h3>Free Consultation</h3><p>Tell us your goals, budget, and timeline. We'll discuss neighborhoods, investment potential, and the right projects for you.</p></div>
     <div class="proc-step reveal"><div class="step-n">02</div><h3>Project Selection</h3><p>We present curated options with full pricing, floor plans, amenities, developer track record, and ROI projections.</p></div>
-    <div class="proc-step reveal"><div class="step-n">03</div><h3>Reserve & Contract</h3><p>Secure your unit with a deposit (typically 10Ã¢ÂÂ30%). We guide you through the purchase agreement and payment schedule.</p></div>
-    <div class="proc-step reveal"><div class="step-n">04</div><h3>Close & Enjoy</h3><p>At completion we walk you through final inspection, closing, and handover Ã¢ÂÂ plus rental or resale strategy if needed.</p></div>
+    <div class="proc-step reveal"><div class="step-n">03</div><h3>Reserve & Contract</h3><p>Secure your unit with a deposit (typically 10ÃÂ¢ÃÂÃÂ30%). We guide you through the purchase agreement and payment schedule.</p></div>
+    <div class="proc-step reveal"><div class="step-n">04</div><h3>Close & Enjoy</h3><p>At completion we walk you through final inspection, closing, and handover ÃÂ¢ÃÂÃÂ plus rental or resale strategy if needed.</p></div>
   </div>
 </section>
 
@@ -486,21 +485,21 @@ footer{background:var(--dark-footer);padding:4rem 6vw 2rem;border-radius:var(--r
   <h2 class="reveal">Frequently Asked <em>Questions</em></h2>
   <div class="faq-grid">
     <div class="faq-list reveal">
-      <div class="faq-item"><button class="faq-q">What is pre-construction real estate in Miami?<div class="faq-icon">+</div></button><div class="faq-a">Pre-construction means buying a condo before it's built Ã¢ÂÂ directly from the developer at today's prices. You typically pay 10Ã¢ÂÂ30% deposit spread over time, and by completion (2Ã¢ÂÂ4 years), the property has often appreciated significantly.</div></div>
-      <div class="faq-item"><button class="faq-q">How much do I need to invest to buy in Miami?<div class="faq-icon">+</div></button><div class="faq-a">Pre-construction starts around $500,000 for studios in emerging neighborhoods. Luxury projects in Brickell or Miami Beach typically range from $800K to $10M+. You can start with a 10Ã¢ÂÂ20% deposit structured over the construction period.</div></div>
+      <div class="faq-item"><button class="faq-q">What is pre-construction real estate in Miami?<div class="faq-icon">+</div></button><div class="faq-a">Pre-construction means buying a condo before it's built ÃÂ¢ÃÂÃÂ directly from the developer at today's prices. You typically pay 10ÃÂ¢ÃÂÃÂ30% deposit spread over time, and by completion (2ÃÂ¢ÃÂÃÂ4 years), the property has often appreciated significantly.</div></div>
+      <div class="faq-item"><button class="faq-q">How much do I need to invest to buy in Miami?<div class="faq-icon">+</div></button><div class="faq-a">Pre-construction starts around $500,000 for studios in emerging neighborhoods. Luxury projects in Brickell or Miami Beach typically range from $800K to $10M+. You can start with a 10ÃÂ¢ÃÂÃÂ20% deposit structured over the construction period.</div></div>
       <div class="faq-item"><button class="faq-q">Can foreigners buy property in Miami?<div class="faq-icon">+</div></button><div class="faq-a">Absolutely. There are no restrictions on foreign nationals buying US property. Many of our clients are from Latin America, Europe, and Canada. We also assist with foreign national mortgage options.</div></div>
-      <div class="faq-item"><button class="faq-q">Is your service really free for buyers?<div class="faq-icon">+</div></button><div class="faq-a">Yes, 100% free. Developers pay us a commission when a sale closes Ã¢ÂÂ this is built into their budget and does not increase your purchase price in any way.</div></div>
+      <div class="faq-item"><button class="faq-q">Is your service really free for buyers?<div class="faq-icon">+</div></button><div class="faq-a">Yes, 100% free. Developers pay us a commission when a sale closes ÃÂ¢ÃÂÃÂ this is built into their budget and does not increase your purchase price in any way.</div></div>
       <div class="faq-item"><button class="faq-q">What happens if a developer goes bankrupt?<div class="faq-icon">+</div></button><div class="faq-a">Florida law requires all pre-construction deposits to be held in escrow accounts, completely separate from the developer's operating funds. Your money is legally protected. We also only represent developers with strong track records.</div></div>
-      <div class="faq-item"><button class="faq-q">Can I rent out my pre-construction condo?<div class="faq-icon">+</div></button><div class="faq-a">Most Miami luxury developments allow rentals after a short owner-occupancy period (usually 1 year). A luxury condo can generate $5,000Ã¢ÂÂ$15,000+/month in rent.</div></div>
-      <div class="faq-item"><button class="faq-q">What are the typical additional purchase costs?<div class="faq-icon">+</div></button><div class="faq-a">Budget for closing costs of 2Ã¢ÂÂ4% (title insurance, doc stamps, legal fees). HOA fees are typically $1Ã¢ÂÂ2.50/sqft/month. Property taxes are around 1Ã¢ÂÂ2% per year. We provide a full cost breakdown for any property.</div></div>
+      <div class="faq-item"><button class="faq-q">Can I rent out my pre-construction condo?<div class="faq-icon">+</div></button><div class="faq-a">Most Miami luxury developments allow rentals after a short owner-occupancy period (usually 1 year). A luxury condo can generate $5,000ÃÂ¢ÃÂÃÂ$15,000+/month in rent.</div></div>
+      <div class="faq-item"><button class="faq-q">What are the typical additional purchase costs?<div class="faq-icon">+</div></button><div class="faq-a">Budget for closing costs of 2ÃÂ¢ÃÂÃÂ4% (title insurance, doc stamps, legal fees). HOA fees are typically $1ÃÂ¢ÃÂÃÂ2.50/sqft/month. Property taxes are around 1ÃÂ¢ÃÂÃÂ2% per year. We provide a full cost breakdown for any property.</div></div>
       <div class="faq-item"><button class="faq-q">How do I get started?<div class="faq-icon">+</div></button><div class="faq-a">Fill out our contact form or call/WhatsApp us. We'll schedule a free 30-minute consultation to understand your needs and share our full project catalog with pricing and floor plans.</div></div>
     </div>
     <div>
       <div class="faq-cta reveal">
         <div class="sec-label" style="margin:0">VIP Access</div>
         <h3>Get the Full <em>Project Catalog</em></h3>
-        <p>120+ pre-construction developments, current pricing, floor plans, and investment analysis Ã¢ÂÂ sent to your inbox.</p>
-        <a href="#contact" class="btn btn-gold" style="justify-content:center">Request Free Catalog Ã¢ÂÂ</a>
+        <p>120+ pre-construction developments, current pricing, floor plans, and investment analysis ÃÂ¢ÃÂÃÂ sent to your inbox.</p>
+        <a href="#contact" class="btn btn-gold" style="justify-content:center">Request Free Catalog ÃÂ¢ÃÂÃÂ</a>
         <div style="font-size:.73rem;color:var(--light);text-align:center">No spam. No pressure. Just great properties.</div>
       </div>
     </div>
@@ -511,24 +510,24 @@ footer{background:var(--dark-footer);padding:4rem 6vw 2rem;border-radius:var(--r
 <section class="bg-white" id="news">
   <div class="sec-header reveal">
     <div><div class="sec-label">Latest Updates</div><h2>Miami Real Estate <em>News</em></h2></div>
-    <a href="#contact" class="btn btn-dark">All Articles Ã¢ÂÂ</a>
+    <a href="#contact" class="btn btn-dark">All Articles ÃÂ¢ÃÂÃÂ</a>
   </div>
   <div class="news-grid">
     <a href="#contact" class="news-card reveal">
       <div class="news-thumb"><img src="data:image/webp;base64,UklGRnwBAABXRUJQVlA4IHABAAAQHgCdASqQAeEAPp1Oo04lpCMiICgAsBOJaW7hd9YEkFf/3AN1D6wALc0fojrJtsBVk22Aqya8gqybbAVZNtgKsm2wFNIKhu89RU/eeoqfvPUURQRcVP3nqKn7z1FT95nxkxRRLKKJZRRLKKJZRRLIabAVZNtgKsm2wFWTbXhh8eIdZNtgKsm2wFWTXkFWTbYCrJtsBVk22AphXYEKle+80eS+/+3vvNHj4jxDrJtsBVk22AqybZmaybbAVZNtgKsm2wFV4DRHWTbYCrJtsBVk214Vk22AqybbAVZNtgKskUCOsm2wFWTbYCrJtsAfbJyHvtk5D32ycKAA/v9hf/P90uVu10r/4i+7P07GG/gAMABgAMABgAMABgAMABgAMABgALvrgKHDUgRhxZAlj1QvlTfKm+cGUwDK4+HHXMNwSQOQTNRlNGpHd0gH875qkoFtfbKw5a0Y9kFAAAAJ/mgk8Q6xRKrmEEmeUTxwxgQAAA==" alt="Miami pre-construction market 2025"></div>
-      <div class="news-body"><div class="news-date">March 2025 ÃÂ· Market Report</div><div class="news-title">Miami Pre-Construction Hits Record Demand in Q1 2025</div><div class="news-exc">International buyers driving unprecedented demand, pushing prices up 18% year-over-year in Brickell and Edgewater.</div></div>
+      <div class="news-body"><div class="news-date">March 2025 ÃÂÃÂ· Market Report</div><div class="news-title">Miami Pre-Construction Hits Record Demand in Q1 2025</div><div class="news-exc">International buyers driving unprecedented demand, pushing prices up 18% year-over-year in Brickell and Edgewater.</div></div>
     </a>
     <a href="#contact" class="news-card reveal">
       <div class="news-thumb"><img src="data:image/webp;base64,UklGRmYBAABXRUJQVlA4IFoBAADwHgCdASqQAeEAPp1Oo04lpCMiICgAsBOJaW7hd+DZ2bH/3X/cCOy7/6eAAKaU/eeoqfvPUVP3nqKmbGMIiwjGERYRjCIsIxNKwFWTbYCrJtsBVk21+WybbAVZNtgKsm2wFWSKBHWTbYCrJtsBVk22ASNH6I6ybbAVZNtgKsmvIKsm2wFWTbYCrJtsBTRP0R1k22AqybbAVZNsyDZNtgKsm2wFWTbYCq8CDLbr4IUks5FNZdlv5+GOUadY7ip+89RU/eeoqfvPUALvPUVP3nqKn7z1FT9zgFT956ip+89RU/eeooigi4qfvPUVP3nqKn7zPKn7z1FT956ip+89RUaAAP7/X0ajvOx7g/6D4tW2/9f9bRM6xiOYUydPZP5AStwEAAAAJfFr4NgRe/FQRicRAwY5MkqITBybjnmkQY5MkeTMT1AxnkThFKwspeAwY5MkqITByF4igAAA" alt="New luxury towers Miami Beach 2025"></div>
-      <div class="news-body"><div class="news-date">February 2025 ÃÂ· New Development</div><div class="news-title">5 New Luxury Towers Just Launched in Miami Beach</div><div class="news-exc">From branded residences to boutique ultra-luxury buildings, Miami Beach is seeing its biggest development wave in a decade.</div></div>
+      <div class="news-body"><div class="news-date">February 2025 ÃÂÃÂ· New Development</div><div class="news-title">5 New Luxury Towers Just Launched in Miami Beach</div><div class="news-exc">From branded residences to boutique ultra-luxury buildings, Miami Beach is seeing its biggest development wave in a decade.</div></div>
     </a>
     <a href="#contact" class="news-card reveal">
       <div class="news-thumb"><img src="data:image/webp;base64,UklGRqYBAABXRUJQVlA4IJoBAADwHwCdASqQAeEAPp1Ook4lpCMiICgAsBOJaW7hdzFU078ALz/df+VRn/q/7n/cgef8hkCgAGZ8Qco09JRZht18EKSWcimsuy3ENUJJ/J24MPk7cGHydjQVZNtgKsm2wFWTbYCmifojrJtsBVk22AqybZmaybbAVZNtgKsm2wFV4DRHWTbYCrJtsBVk214Vk22AqybbAVZNtgKskUCOsm2wFWTbYCrJtsAkaP0R1k22AqybbAVZNeQVZNtgKsm2wFWTbYCnEvQ3eeoqfvPUVP3nqKIoIuKrUI6PiPv5r5LWxQjeNZNtgKsm2wFWTbYCmaoST+TtwYfJ24MPk7a9PbJyHvtk5D32xwAA/vLIZ/+Hffb3JQed7lzDSuROWkTlpE5aROWkTlpE5aROWkTlpE5aROWkvSE4+ahAAAAFm69IhKyHEOGOhkgCI1H8DEyuowUpnoBEjRIvVKL7FzGDhi5YSVTK+g3OfZz7OfZz7OfcizTPwlAYLIGOZ7C09iPmjzR5o80eaPNHmjzR5o+wk5eCAAAAOgzfggAAAA==" alt="Foreign buyers guide Miami real estate"></div>
-      <div class="news-body"><div class="news-date">January 2025 ÃÂ· Investment Guide</div><div class="news-title">Foreign Buyer's Complete Guide to Pre-Construction in Miami 2025</div><div class="news-exc">Visas, taxes, financing, and the best neighborhoods for rental yield and capital appreciation.</div></div>
+      <div class="news-body"><div class="news-date">January 2025 ÃÂÃÂ· Investment Guide</div><div class="news-title">Foreign Buyer's Complete Guide to Pre-Construction in Miami 2025</div><div class="news-exc">Visas, taxes, financing, and the best neighborhoods for rental yield and capital appreciation.</div></div>
     </a>
     <a href="#contact" class="news-card reveal">
       <div class="news-thumb"><img src="data:image/webp;base64,UklGRlgBAABXRUJQVlA4IEwBAABQHgCdASqQAeEAPp1Oo04lpCMiICgAsBOJaW7hd9MAsfzf+wDT/p8AAppT956ip+89RU/eeoqZ2eoqfvPUVP3nqKn7zzUrAVZNtgKsm2wFWTbXgfTbYCrJtsBVk22AqyRQI6ybbAVZNtgKsm2wCRo/RHWTbYCrJtsBVk15DKrst/PwxyjT0lFmG3XwQpJUufojrJtsBVk22AqybZmaybbAVZNtgKsm2wFV4DRHWTbYCrJtsBVk214Vk22AqybbAVZNtgKskUCOsm2wFWTbYCrJtsAjJP0R1k22AqybbAVZNeQVZNtgKsm2wFWTbYCmGrFtXNo6h1B+EO/nAAD+/shzL/natj7Pv/w7ubr00nde6WYEjp55VDD43R3mg1jALevptnQPsLmYHgmIn9YwC3r4ygnr4AotYwCsJAsbgB73kgD3vJACgAAAAAAAAA==" alt="Brickell vs Edgewater Miami ROI"></div>
-      <div class="news-body"><div class="news-date">December 2024 ÃÂ· Neighborhood Guide</div><div class="news-title">Brickell vs. Edgewater: Which Miami Area Has the Best ROI?</div><div class="news-exc">We break down pricing, appreciation rates, rental yields, and lifestyle factors to help you invest smarter.</div></div>
+      <div class="news-body"><div class="news-date">December 2024 ÃÂÃÂ· Neighborhood Guide</div><div class="news-title">Brickell vs. Edgewater: Which Miami Area Has the Best ROI?</div><div class="news-exc">We break down pricing, appreciation rates, rental yields, and lifestyle factors to help you invest smarter.</div></div>
     </a>
   </div>
 </section>
@@ -547,23 +546,23 @@ footer{background:var(--dark-footer);padding:4rem 6vw 2rem;border-radius:var(--r
           <div class="fg"><label>Email Address</label><input type="email" placeholder="john@email.com" autocomplete="email"></div>
           <div class="fg"><label>Phone / WhatsApp</label><input type="tel" placeholder="+1 305 000 0000" autocomplete="tel"></div>
           <div class="fg"><label>Budget Range</label>
-            <select><option value="" disabled selected>Select budget</option><option>$500K Ã¢ÂÂ $1M</option><option>$1M Ã¢ÂÂ $2M</option><option>$2M Ã¢ÂÂ $5M</option><option>$5M Ã¢ÂÂ $10M</option><option>$10M+</option></select>
+            <select><option value="" disabled selected>Select budget</option><option>$500K ÃÂ¢ÃÂÃÂ $1M</option><option>$1M ÃÂ¢ÃÂÃÂ $2M</option><option>$2M ÃÂ¢ÃÂÃÂ $5M</option><option>$5M ÃÂ¢ÃÂÃÂ $10M</option><option>$10M+</option></select>
           </div>
           <div class="fg"><label>I'm Looking To</label>
             <select><option value="" disabled selected>Select goal</option><option>Buy to live in</option><option>Buy to rent/invest</option><option>Buy for resale / flip</option><option>Still deciding</option></select>
           </div>
-          <div class="fg full"><label>Anything else? (optional)</label><textarea placeholder="Preferred neighborhoods, bedrooms, timelineÃ¢ÂÂ¦"></textarea></div>
+          <div class="fg full"><label>Anything else? (optional)</label><textarea placeholder="Preferred neighborhoods, bedrooms, timelineÃÂ¢ÃÂÃÂ¦"></textarea></div>
           <div class="form-submit">
             <button type="button" class="btn btn-gold" onclick="submitForm()">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-              Send My Request Ã¢ÂÂ It's Free
+              Send My Request ÃÂ¢ÃÂÃÂ It's Free
             </button>
-            <div class="form-privacy">Ã°ÂÂÂ Private & confidential. We never share your data.</div>
+            <div class="form-privacy">ÃÂ°ÃÂÃÂÃÂ Private & confidential. We never share your data.</div>
           </div>
         </div>
       </div>
       <div class="form-success" id="formSuccess">
-        <h3>Ã¢ÂÂ Thank You!</h3>
+        <h3>ÃÂ¢ÃÂÃÂ Thank You!</h3>
         <p>A specialist will contact you within 2 hours with personalized recommendations.</p>
       </div>
     </div>
@@ -596,12 +595,12 @@ footer{background:var(--dark-footer);padding:4rem 6vw 2rem;border-radius:var(--r
         <a href="tel:+13050000000">+1 (305) 000-0000</a>
         <a href="mailto:hello@mialuxrealty.com">hello@mialuxrealty.com</a>
         <a href="https://wa.me/13050000000">WhatsApp Chat</a>
-        <span style="color:rgba(255,255,255,.3);font-size:.79rem;display:block;margin-top:.5rem;line-height:1.7">Miami, FL 33131<br>MonÃ¢ÂÂSun 9amÃ¢ÂÂ9pm EST</span>
+        <span style="color:rgba(255,255,255,.3);font-size:.79rem;display:block;margin-top:.5rem;line-height:1.7">Miami, FL 33131<br>MonÃÂ¢ÃÂÃÂSun 9amÃÂ¢ÃÂÃÂ9pm EST</span>
       </div>
     </div>
   </div>
   <div class="f-bottom">
-    <p>ÃÂ© 2025 MiaLuxRealty.com ÃÂ· All rights reserved ÃÂ· Licensed Real Estate Broker, Florida</p>
+    <p>ÃÂÃÂ© 2025 MiaLuxRealty.com ÃÂÃÂ· All rights reserved ÃÂÃÂ· Licensed Real Estate Broker, Florida</p>
     <div class="f-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Sitemap</a></div>
   </div>
 </footer>
