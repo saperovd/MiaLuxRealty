@@ -293,6 +293,18 @@
       transition: background .2s;
     }
     .project-nav-btn:hover { background: var(--gold-light); }
+    /* Language selector in project nav */
+    .proj-nav-lang { position: relative; margin-left: .8rem; }
+    .proj-nav-lang-btn { display: flex; align-items: center; gap: .3rem; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--text); background: none; border: 1px solid rgba(201,168,76,0.3); padding: .28rem .6rem; cursor: pointer; transition: color .2s, border-color .2s; font-family: var(--sans); }
+    .proj-nav-lang-btn:hover { color: var(--gold); border-color: var(--gold); }
+    .proj-nav-lang-btn svg { width: 9px; height: 9px; stroke: currentColor; fill: none; stroke-width: 2; transition: transform .2s; }
+    .proj-nav-lang.open .proj-nav-lang-btn svg { transform: rotate(180deg); }
+    .proj-nav-lang-menu { display: none; position: absolute; top: calc(100% + 6px); right: 0; background: rgba(15,15,15,0.99); border: 1px solid rgba(201,168,76,0.2); min-width: 70px; z-index: 400; }
+    .proj-nav-lang.open .proj-nav-lang-menu { display: block; }
+    .proj-nav-lang-menu a { display: block; padding: .4rem .8rem; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; color: var(--text); text-decoration: none; transition: color .2s, background .2s; }
+    .proj-nav-lang-menu a:hover { color: var(--gold); background: rgba(201,168,76,0.06); }
+    .proj-nav-lang-menu a.active { color: var(--gold); }
+    @media(max-width:768px) { .proj-nav-lang { display: none; } }
 
     /* ── HERO ── */
     #hero {
@@ -1100,6 +1112,18 @@
     <a href="#contact">Contact</a>
   </div>
   <a href="#contact" class="project-nav-btn">Request Info</a>
+  <div class="proj-nav-lang" id="projNavLang">
+    <button class="proj-nav-lang-btn" id="projLangBtn" aria-expanded="false">
+      EN
+      <svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg>
+    </button>
+    <div class="proj-nav-lang-menu">
+      <a href="/new-developments/sunny-isles-beach/st-regis-residences-sunny-isles/" class="active">EN</a>
+      <a href="/es/new-developments/sunny-isles-beach/st-regis-residences-sunny-isles/" >ES</a>
+      <a href="/pt/new-developments/sunny-isles-beach/st-regis-residences-sunny-isles/" >PT</a>
+      <a href="/ru/new-developments/sunny-isles-beach/st-regis-residences-sunny-isles/" >RU</a>
+    </div>
+  </div>
 </nav>
 
 <!-- HERO -->
