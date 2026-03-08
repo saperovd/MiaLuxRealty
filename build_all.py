@@ -27,7 +27,7 @@ SITE_NAME  = "MiaLux Realty"
 PHONE      = "+1-305-000-0000"
 LOGO_URL   = f"{BASE_URL}/images/logo.png"
 
-# ââ Load listings ââââââââââââââââââââââââââââââââââââââââââââââ
+#──Load listings ââââââââââââââââââââââââââââââââââââââââââââââ
 with open('listings.json') as f:
     LISTINGS = json.load(f)
 
@@ -53,7 +53,7 @@ for l in LISTINGS:
 
 ALL_CATEGORIES = list(by_cat_hood.keys())
 
-# ââ Neighborhood metadata ââââââââââââââââââââââââââââââââââââââ
+#──Neighborhood metadata ââââââââââââââââââââââââââââââââââââââ
 HOOD_META = {
     'brickell': {
         'name':'Brickell','tagline':"Miami's Financial Capital & Luxury Living Hub",
@@ -140,7 +140,7 @@ CAT_NAMES = {
     'penthouses':      {'en':'Penthouses',       'es':'Penthouses',        'pt':'Coberturas',           'ru':'ÐÐµÐ½ÑÑÐ°ÑÑÑ'},
 }
 
-# ââ Language configs âââââââââââââââââââââââââââââââââââââââââââ
+#──Language configs âââââââââââââââââââââââââââââââââââââââââââ
 LANGS = {
     'en':{'code':'en','dir':'','hreflang':'en','og_locale':'en_US','T':{
         'nav_all':'New Developments','nav_contact':'Contact','nav_vip':'Get VIP Access',
@@ -200,7 +200,7 @@ LANGS = {
     }},
 }
 
-# ââ Helpers ââââââââââââââââââââââââââââââââââââââââââââââââââââ
+#──Helpers ââââââââââââââââââââââââââââââââââââââââââââââââââââ
 def fmt_price(n):
     if not n: return 'Contact for Pricing'
     if n >= 1000000:
@@ -274,7 +274,7 @@ def inject_schema(html, schema_obj):
         return html
     return result
 
-# ââ Schema generators ââââââââââââââââââââââââââââââââââââââââââ
+#──Schema generators ââââââââââââââââââââââââââââââââââââââââââ
 def s_agent(): return {"@type":"RealEstateAgent","@id":AGENT_ID}
 
 def s_hub(cat, lang, T):
@@ -394,7 +394,7 @@ def s_listing(listing, lang):
 
     return {"@context":"https://schema.org","@graph":[acc, lst, s_agent()]}
 
-# ââ Load templates âââââââââââââââââââââââââââââââââââââââââââââ
+#──Load templates âââââââââââââââââââââââââââââââââââââââââââââ
 with open('hub-template.html')     as f: HUB_T  = f.read()
 with open('hood-template.html')    as f: HOOD_T = f.read()
 with open('landing-template.html') as f: LAND_T = f.read()
@@ -544,7 +544,7 @@ print(f"  â sitemap.xml: {len(urls)} URLs")
 # _REDIRECTS
 # ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 lines = ["# MiaLux Realty â _redirects v3","# Auto-generated â do not edit manually","",
-         "# ââ Legacy root listing slugs â new 3-level structure (301) ââ"]
+         "#──Legacy root listing slugs â new 3-level structure (301) ââ"]
 
 OLD_SLUGS = {
     'cipriani-residences-brickell':       ('new-developments','brickell','cipriani-residences'),
@@ -558,12 +558,12 @@ for old,(cat,hood,pslug) in OLD_SLUGS.items():
     lines += [f"/{old}  /{cat}/{hood}/{pslug}/  301",
               f"/{old}/  /{cat}/{hood}/{pslug}/  301"]
 
-lines += ["","# ââ Legacy hub/catalog URLs ââ",
+lines += ["","#──Legacy hub/catalog URLs ââ",
           "/miami-pre-construction-condos  /new-developments/  301",
           "/miami-pre-construction-condos/  /new-developments/  301",
           "/developments  /new-developments/  301",
           "/developments/  /new-developments/  301",
-          "","# ââ Clean URL rewrites (200) ââ"]
+          "","#──Clean URL rewrites (200) ââ"]
 
 for cat in ALL_CATEGORIES:
     for lc,l in LANGS.items():

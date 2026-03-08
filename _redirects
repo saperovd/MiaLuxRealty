@@ -1,7 +1,7 @@
 # MiaLux Realty â _redirects v3
 # Auto-generated â do not edit manually
 
-# ââ Legacy root listing slugs â new 3-level structure (301) ââ
+#──Legacy root listing slugs â new 3-level structure (301) ââ
 /cipriani-residences-brickell  /new-developments/brickell/cipriani-residences/  301
 /cipriani-residences-brickell/  /new-developments/brickell/cipriani-residences/  301
 /ora-by-casa-tua  /new-developments/brickell/ora-by-casa-tua/  301
@@ -15,13 +15,13 @@
 /faena-residences-miami  /new-developments/downtown-miami/faena-residences/  301
 /faena-residences-miami/  /new-developments/downtown-miami/faena-residences/  301
 
-# ââ Legacy hub/catalog URLs ââ
+#──Legacy hub/catalog URLs ââ
 /miami-pre-construction-condos  /new-developments/  301
 /miami-pre-construction-condos/  /new-developments/  301
 /developments  /new-developments/  301
 /developments/  /new-developments/  301
 
-# ââ Clean URL rewrites (200) ââ
+#──Clean URL rewrites (200) ââ
 /new-developments  /new-developments/index.html  200
 /new-developments/  /new-developments/index.html  200
 /es/new-developments  /es/new-developments/index.html  200
