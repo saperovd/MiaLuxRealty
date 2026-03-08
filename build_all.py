@@ -14,7 +14,12 @@ Future categories:
 
 Root stays CLEAN â only index.html + config files.
 """
-
+# Encoding guard - run after any manual edits to index.html
+import re
+with open('index.html', encoding='utf-8') as f:
+    src = f.read()
+if 'ÃÂ' in src:
+    raise SystemExit("❌ index.html has encoding corruption! Fix before building.")
 import json, os, re
 from datetime import date
 from pathlib import Path
