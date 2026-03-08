@@ -108,7 +108,7 @@
     html { scroll-behavior: smooth; }
     body { background: var(--dark); color: var(--text); font-family: var(--sans); font-size: 15px; line-height: 1.7; overflow-x: hidden; }
 
-    /* Ã¢ÂÂÃ¢ÂÂ SITE BAR Ã¢ÂÂÃ¢ÂÂ */
+    /* -Â-Â SITE BAR -Â-Â */
     .site-bar {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       background: rgba(10,10,10,0.97);
@@ -128,7 +128,7 @@
     .site-bar-cta { font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--dark); background: var(--gold); padding: .4rem 1rem; text-decoration: none; transition: background .2s; }
     .site-bar-cta:hover { background: var(--gold-light); }
 
-    /* Ã¢ÂÂÃ¢ÂÂ HERO Ã¢ÂÂÃ¢ÂÂ */
+    /* -Â-Â HERO -Â-Â */
     .hub-hero {
       padding-top: 60px;
       background: var(--dark2);
@@ -191,10 +191,10 @@
     .hub-stat-num { font-family: var(--serif); font-size: 2.2rem; font-weight: 300; color: var(--gold-light); line-height: 1; }
     .hub-stat-label { font-size: .55rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-top: .3rem; }
 
-    /* Ã¢ÂÂÃ¢ÂÂ MAIN LAYOUT Ã¢ÂÂÃ¢ÂÂ */
+    /* -Â-Â MAIN LAYOUT -Â-Â */
     .hub-body { max-width: 1400px; margin: 0 auto; padding: 4rem 3rem; }
 
-    /* Ã¢ÂÂÃ¢ÂÂ NEIGHBORHOOD GRID Ã¢ÂÂÃ¢ÂÂ */
+    /* -Â-Â NEIGHBORHOOD GRID -Â-Â */
     .section-heading {
       font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold);
       display: flex; align-items: center; gap: .8rem; margin-bottom: 2rem;
@@ -265,7 +265,7 @@
       padding: .2rem .5rem;
     }
 
-    /* Ã¢ÂÂÃ¢ÂÂ ALL LISTINGS GRID Ã¢ÂÂÃ¢ÂÂ */
+    /* -Â-Â ALL LISTINGS GRID -Â-Â */
     .listings-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
@@ -338,7 +338,7 @@
       color: var(--gold); font-weight: 600;
     }
 
-    /* Ã¢ÂÂÃ¢ÂÂ CONTACT STRIP Ã¢ÂÂÃ¢ÂÂ */
+    /* -Â-Â CONTACT STRIP -Â-Â */
     .contact-strip {
       background: var(--dark3);
       border: 1px solid var(--border);
@@ -373,7 +373,7 @@
     }
     .cs-btn:hover { background: var(--gold-light); }
 
-    /* Ã¢ÂÂÃ¢ÂÂ FOOTER Ã¢ÂÂÃ¢ÂÂ */
+    /* -Â-Â FOOTER -Â-Â */
     .site-footer {
       background: var(--dark2); border-top: 1px solid var(--border);
       padding: 2rem 3rem;
@@ -497,15 +497,15 @@
     <p class="hub-hero-subtitle">ÐÑÑÐ»ÐµÐ´ÑÐ¹ÑÐµ ÑÐ°Ð¼ÑÐµ ÑÐºÑÐºÐ»ÑÐ·Ð¸Ð²Ð½ÑÐµ Ð½Ð¾Ð²Ð¾ÑÑÑÐ¾Ð¹ÐºÐ¸ Ð² ÑÐ°Ð¼ÑÑ Ð²Ð¾ÑÑÑÐµÐ±Ð¾Ð²Ð°Ð½Ð½ÑÑ ÑÐ°Ð¹Ð¾Ð½Ð°Ñ ÐÐ°Ð¹Ð°Ð¼Ð¸. ÐÐµÐ· ÐºÐ¾Ð¼Ð¸ÑÑÐ¸Ð¸ Ð´Ð»Ñ Ð¿Ð¾ÐºÑÐ¿Ð°ÑÐµÐ»Ñ.</p>
     <div class="hub-stats-bar">
       <div class="hub-stat">
-        <div class="hub-stat-num" id="statListings">Ã¢ÂÂ</div>
+        <div class="hub-stat-num" id="statListings">-Â</div>
         <div class="hub-stat-label">Active Projects</div>
       </div>
       <div class="hub-stat">
-        <div class="hub-stat-num" id="statHoods">Ã¢ÂÂ</div>
+        <div class="hub-stat-num" id="statHoods">-Â</div>
         <div class="hub-stat-label">Neighborhoods</div>
       </div>
       <div class="hub-stat">
-        <div class="hub-stat-num" id="statPrice">Ã¢ÂÂ</div>
+        <div class="hub-stat-num" id="statPrice">-Â</div>
         <div class="hub-stat-label">Prices From</div>
       </div>
       <div class="hub-stat">
@@ -574,7 +574,7 @@ const T = {
 };
 
 function fmtPrice(n) {
-  if (!n) return 'Ã¢ÂÂ';
+  if (!n) return '-Â';
   if (n >= 1000000) return '$' + (n/1000000).toFixed(1).replace(/\.0$/,'') + 'M';
   return '$' + n.toLocaleString();
 }
@@ -622,7 +622,7 @@ hoodGrid.innerHTML = hoodsToShow.map(hoodSlug => {
 
   return `
     <a href="${hoodPath(hoodSlug)}" class="hood-card">
-      <span class="hood-card-arrow">Ã¢ÂÂ</span>
+      <span class="hood-card-arrow">-Â</span>
       <div class="hood-card-name">${name}</div>
       <div class="hood-card-tagline">${tagline}</div>
       <div class="hood-card-count">${countLabel}</div>
@@ -647,9 +647,9 @@ listingsGrid.innerHTML = LISTINGS.map(l => {
         <div class="listing-card-name">${l.name}</div>
         <div class="listing-card-address">${l.address || ''}</div>
         <div class="listing-card-stats">
-          <div class="lcs"><span class="lcs-val">${l.floors || 'Ã¢ÂÂ'}</span><span class="lcs-lbl">${T.floors}</span></div>
-          <div class="lcs"><span class="lcs-val">${l.total_units || 'Ã¢ÂÂ'}</span><span class="lcs-lbl">${T.units}</span></div>
-          <div class="lcs"><span class="lcs-val">${l.estimated_delivery || 'Ã¢ÂÂ'}</span><span class="lcs-lbl">${T.delivery}</span></div>
+          <div class="lcs"><span class="lcs-val">${l.floors || '-Â'}</span><span class="lcs-lbl">${T.floors}</span></div>
+          <div class="lcs"><span class="lcs-val">${l.total_units || '-Â'}</span><span class="lcs-lbl">${T.units}</span></div>
+          <div class="lcs"><span class="lcs-val">${l.estimated_delivery || '-Â'}</span><span class="lcs-lbl">${T.delivery}</span></div>
         </div>
         <div class="listing-card-footer">
           <div class="listing-card-price">${T.from} <strong>${fmtPrice(l.price_from)}</strong></div>
@@ -662,7 +662,7 @@ listingsGrid.innerHTML = LISTINGS.map(l => {
 
 function submitStrip(e) {
   e.preventDefault();
-  e.target.innerHTML = '<p style="color:var(--gold-light);font-size:.8rem;padding:.5rem 0">Ã¢ÂÂ Thank you! We\'ll be in touch shortly.</p>';
+  e.target.innerHTML = '<p style="color:var(--gold-light);font-size:.8rem;padding:.5rem 0">-Â Thank you! We\'ll be in touch shortly.</p>';
 }
 </script>
 
