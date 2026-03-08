@@ -543,48 +543,9 @@ print(f"  ✓ sitemap.xml: {len(urls)} URLs")
 # ─────────────────────────────────────────────────────────────
 # _REDIRECTS
 # ─────────────────────────────────────────────────────────────
-lines = ["# MiaLux Realty — _redirects v3","# Auto-generated — do not edit manually","",
-         "#── Legacy root listing slugs → new 3-level structure (301) ──"]
-
-OLD_SLUGS = {
-    'cipriani-residences-brickell':       ('new-developments','brickell','cipriani-residences'),
-    'ora-by-casa-tua':                    ('new-developments','brickell','ora-by-casa-tua'),
-    'st-regis-residences-sunny-isles':    ('new-developments','sunny-isles-beach','st-regis-residences'),
-    'residences-1428-brickell':           ('new-developments','brickell','1428-residences'),
-    'mandarin-oriental-residences-miami': ('new-developments','brickell-key','mandarin-oriental-residences'),
-    'faena-residences-miami':             ('new-developments','downtown-miami','faena-residences'),
-}
-for old,(cat,hood,pslug) in OLD_SLUGS.items():
-    lines += [f"/{old}  /{cat}/{hood}/{pslug}/  301",
-              f"/{old}/  /{cat}/{hood}/{pslug}/  301"]
-
-lines += ["","#── Legacy hub/catalog URLs ──",
-          "/miami-pre-construction-condos  /new-developments/  301",
-          "/miami-pre-construction-condos/  /new-developments/  301",
-          "/developments  /new-developments/  301",
-          "/developments/  /new-developments/  301",
-          "","#── Clean URL rewrites (200) ──"]
-
-for cat in ALL_CATEGORIES:
-    for lc,l in LANGS.items():
-        d = l['dir']
-        p = f"/{d}/{cat}" if d else f"/{cat}"
-        lines += [f"{p}  {p}/index.html  200", f"{p}/  {p}/index.html  200"]
-    for hs in all_hoods_by_cat.get(cat,[]):
-        for lc,l in LANGS.items():
-            d = l['dir']
-            p = f"/{d}/{cat}/{hs}" if d else f"/{cat}/{hs}"
-            lines += [f"{p}  {p}/index.html  200", f"{p}/  {p}/index.html  200"]
-    for listing in [x for x in LISTINGS if x['category']==cat]:
-        hood  = listing['_hood_slug']
-        pslug = listing['page_slug']
-        for lc,l in LANGS.items():
-            d = l['dir']
-            p = f"/{d}/{cat}/{hood}/{pslug}" if d else f"/{cat}/{hood}/{pslug}"
-            lines += [f"{p}  {p}/index.html  200", f"{p}/  {p}/index.html  200"]
-
-with open('_redirects','w', encoding='utf-8') as f: f.write('\n'.join(lines))
-print(f"  ✓ _redirects: {len([x for x in lines if x and not x.startswith('#')])} rules")
+with open('_redirects','w', encoding='utf-8') as f:
+    f.write("# MiaLux Realty — _redirects\n# Cloudflare Pages serves index.html automatically — no rewrites needed.\n# Add 301s here only when URLs change after the site goes live.\n")
+print(f"  ✓ _redirects: empty (not needed yet)")
 
 with open('robots.txt','w', encoding='utf-8') as f:
     f.write("# MiaLux Realty — robots.txt\n# STATUS: DEVELOPMENT MODE — all crawlers blocked\n\nUser-agent: *\nDisallow: /\n\n# PRODUCTION VERSION (use when ready to go live)\n# User-agent: *\n# Allow: /\n# Disallow: /admin/\n#\n# Sitemap: https://mialuxrealty.com/sitemap.xml\n")

@@ -531,7 +531,6 @@ function listingPath(l) {
   const hood = l._hood_slug || (l.neighborhood || '').toLowerCase().replace(/\s+/g,'-');
   const slug = l.page_slug || l.slug;
   return langPath(`/new-developments/${hood}/${slug}/`);
-}`);
 }
 
 function hoodPath(hoodSlug) {
