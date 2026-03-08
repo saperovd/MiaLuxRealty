@@ -3,366 +3,366 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://mialuxrealty.com/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://mialuxrealty.com/new-developments/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://mialuxrealty.com/es/new-developments/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://mialuxrealty.com/pt/new-developments/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://mialuxrealty.com/ru/new-developments/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://mialuxrealty.com/new-developments/brickell/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mialuxrealty.com/es/new-developments/brickell/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mialuxrealty.com/pt/new-developments/brickell/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mialuxrealty.com/ru/new-developments/brickell/</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mialuxrealty.com/new-developments/miami-beach/</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mialuxrealty.com/es/new-developments/miami-beach/</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mialuxrealty.com/pt/new-developments/miami-beach/</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mialuxrealty.com/ru/new-developments/miami-beach/</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mialuxrealty.com/new-developments/sunny-isles-beach/</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mialuxrealty.com/es/new-developments/sunny-isles-beach/</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mialuxrealty.com/pt/new-developments/sunny-isles-beach/</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mialuxrealty.com/ru/new-developments/sunny-isles-beach/</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mialuxrealty.com/new-developments/edgewater/</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mialuxrealty.com/es/new-developments/edgewater/</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mialuxrealty.com/pt/new-developments/edgewater/</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mialuxrealty.com/ru/new-developments/edgewater/</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mialuxrealty.com/new-developments/brickell-key/</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mialuxrealty.com/es/new-developments/brickell-key/</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mialuxrealty.com/pt/new-developments/brickell-key/</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mialuxrealty.com/ru/new-developments/brickell-key/</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mialuxrealty.com/new-developments/wynwood/</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mialuxrealty.com/es/new-developments/wynwood/</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mialuxrealty.com/pt/new-developments/wynwood/</loc>
-    <lastmod>2026-03-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://mialuxrealty.com/ru/new-developments/wynwood/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mialuxrealty.com/new-developments/downtown-miami/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mialuxrealty.com/es/new-developments/downtown-miami/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mialuxrealty.com/pt/new-developments/downtown-miami/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mialuxrealty.com/ru/new-developments/downtown-miami/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mialuxrealty.com/new-developments/wynwood/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mialuxrealty.com/es/new-developments/wynwood/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mialuxrealty.com/pt/new-developments/wynwood/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mialuxrealty.com/ru/new-developments/wynwood/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mialuxrealty.com/new-developments/miami-beach/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mialuxrealty.com/es/new-developments/miami-beach/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mialuxrealty.com/pt/new-developments/miami-beach/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mialuxrealty.com/ru/new-developments/miami-beach/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mialuxrealty.com/new-developments/sunny-isles-beach/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mialuxrealty.com/es/new-developments/sunny-isles-beach/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mialuxrealty.com/pt/new-developments/sunny-isles-beach/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mialuxrealty.com/ru/new-developments/sunny-isles-beach/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mialuxrealty.com/new-developments/edgewater/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mialuxrealty.com/es/new-developments/edgewater/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mialuxrealty.com/pt/new-developments/edgewater/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mialuxrealty.com/ru/new-developments/edgewater/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mialuxrealty.com/new-developments/brickell-key/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mialuxrealty.com/es/new-developments/brickell-key/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mialuxrealty.com/pt/new-developments/brickell-key/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mialuxrealty.com/ru/new-developments/brickell-key/</loc>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://mialuxrealty.com/new-developments/brickell/cipriani-residences-brickell/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/cipriani-main.webp</image:loc><image:title>Cipriani Residences Miami</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/es/new-developments/brickell/cipriani-residences-brickell/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/cipriani-main.webp</image:loc><image:title>Cipriani Residences Miami</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/pt/new-developments/brickell/cipriani-residences-brickell/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/cipriani-main.webp</image:loc><image:title>Cipriani Residences Miami</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/ru/new-developments/brickell/cipriani-residences-brickell/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/cipriani-main.webp</image:loc><image:title>Cipriani Residences Miami</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/new-developments/brickell/ora-by-casa-tua/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/ora-main.webp</image:loc><image:title>ORA by Casa Tua</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/es/new-developments/brickell/ora-by-casa-tua/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/ora-main.webp</image:loc><image:title>ORA by Casa Tua</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/pt/new-developments/brickell/ora-by-casa-tua/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/ora-main.webp</image:loc><image:title>ORA by Casa Tua</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/ru/new-developments/brickell/ora-by-casa-tua/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/ora-main.webp</image:loc><image:title>ORA by Casa Tua</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/new-developments/sunny-isles-beach/st-regis-residences-sunny-isles/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/stregis-main.webp</image:loc><image:title>St. Regis Residences Sunny Isles</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/es/new-developments/sunny-isles-beach/st-regis-residences-sunny-isles/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/stregis-main.webp</image:loc><image:title>St. Regis Residences Sunny Isles</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/pt/new-developments/sunny-isles-beach/st-regis-residences-sunny-isles/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/stregis-main.webp</image:loc><image:title>St. Regis Residences Sunny Isles</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/ru/new-developments/sunny-isles-beach/st-regis-residences-sunny-isles/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/stregis-main.webp</image:loc><image:title>St. Regis Residences Sunny Isles</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/new-developments/brickell/residences-1428-brickell/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/1428-main.webp</image:loc><image:title>The Residences at 1428 Brickell</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/es/new-developments/brickell/residences-1428-brickell/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/1428-main.webp</image:loc><image:title>The Residences at 1428 Brickell</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/pt/new-developments/brickell/residences-1428-brickell/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/1428-main.webp</image:loc><image:title>The Residences at 1428 Brickell</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/ru/new-developments/brickell/residences-1428-brickell/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/1428-main.webp</image:loc><image:title>The Residences at 1428 Brickell</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/new-developments/brickell-key/mandarin-oriental-residences-miami/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/mandarin-main.webp</image:loc><image:title>The Residences at Mandarin Oriental</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/es/new-developments/brickell-key/mandarin-oriental-residences-miami/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/mandarin-main.webp</image:loc><image:title>The Residences at Mandarin Oriental</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/pt/new-developments/brickell-key/mandarin-oriental-residences-miami/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/mandarin-main.webp</image:loc><image:title>The Residences at Mandarin Oriental</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/ru/new-developments/brickell-key/mandarin-oriental-residences-miami/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/mandarin-main.webp</image:loc><image:title>The Residences at Mandarin Oriental</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/new-developments/downtown-miami/faena-residences-miami/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/faena-main.webp</image:loc><image:title>Faena Residences Miami</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/es/new-developments/downtown-miami/faena-residences-miami/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/faena-main.webp</image:loc><image:title>Faena Residences Miami</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/pt/new-developments/downtown-miami/faena-residences-miami/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/faena-main.webp</image:loc><image:title>Faena Residences Miami</image:title></image:image>
   </url>
   <url>
     <loc>https://mialuxrealty.com/ru/new-developments/downtown-miami/faena-residences-miami/</loc>
-    <lastmod>2026-03-07</lastmod>
+    <lastmod>2026-03-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <image:image><image:loc>https://mialuxrealty.com/images/faena-main.webp</image:loc><image:title>Faena Residences Miami</image:title></image:image>

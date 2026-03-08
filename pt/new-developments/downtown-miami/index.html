@@ -118,7 +118,7 @@
     html { scroll-behavior: smooth; }
     body { background: var(--dark); color: var(--text); font-family: var(--sans); font-size: 15px; line-height: 1.7; overflow-x: hidden; }
 
-    /* ── SITE BAR ── */
+    /* ââ SITE BAR ââ */
     .site-bar { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: rgba(10,10,10,0.97); border-bottom: 1px solid rgba(201,168,76,0.1); display: flex; align-items: center; justify-content: space-between; padding: 0 2.5rem; height: 52px; }
     .site-bar-logo { font-family: var(--serif); font-size: 1.15rem; color: var(--text); text-decoration: none; letter-spacing: .06em; }
     .site-bar-logo span { color: var(--gold); }
@@ -131,8 +131,8 @@
     .site-bar-cta { font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--dark); background: var(--gold); padding: .4rem 1rem; text-decoration: none; }
     .site-bar-cta:hover { background: var(--gold-light); }
 
-    /* ── HERO ── */
-    .hood-hero { padding-top: 52px; background: var(--dark2); border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    /* ââ HERO ââ */
+    .hood-hero { padding-top: 60px; background: var(--dark2); border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
     .hood-hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse 70% 50% at 80% 50%, rgba(201,168,76,0.07) 0%, transparent 70%); pointer-events: none; }
     .hood-hero-inner { max-width: 1400px; margin: 0 auto; padding: 4rem 3rem 3.5rem; position: relative; z-index: 1; }
 
@@ -164,13 +164,13 @@
     .hsp-value { font-family: var(--serif); font-size: 1.1rem; font-weight: 300; color: var(--text); }
     .hsp-value.gold { color: var(--gold-light); }
 
-    /* ── MAIN BODY ── */
+    /* ââ MAIN BODY ââ */
     .hood-body { max-width: 1400px; margin: 0 auto; padding: 4rem 3rem; }
 
     .section-heading { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: .8rem; margin-bottom: 2rem; }
     .section-heading::before { content: ''; width: 28px; height: 1px; background: var(--gold); display: block; }
 
-    /* ── LISTINGS ── */
+    /* ââ LISTINGS ââ */
     .listings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 1.5rem; margin-bottom: 5rem; }
 
     .listing-card { background: var(--dark2); border: 1px solid var(--border); text-decoration: none; display: block; overflow: hidden; transition: border-color .25s, transform .25s; }
@@ -190,7 +190,7 @@
     .listing-card-price strong { color: var(--gold-light); font-size: 1.05rem; font-weight: 400; }
     .listing-card-cta { font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
 
-    /* ── OTHER NEIGHBORHOODS ── */
+    /* ââ OTHER NEIGHBORHOODS ââ */
     .other-hoods-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 5rem; }
     .other-hood-card { background: var(--dark2); padding: 1.5rem; text-decoration: none; display: block; transition: background .2s; }
     .other-hood-card:hover { background: var(--dark3); }
@@ -199,7 +199,7 @@
     .ohc-arrow { float: right; color: var(--border); transition: color .2s; }
     .other-hood-card:hover .ohc-arrow { color: var(--gold); }
 
-    /* ── CONTACT STRIP ── */
+    /* ââ CONTACT STRIP ââ */
     .contact-strip { background: var(--dark3); border: 1px solid var(--border); padding: 3rem; margin-top: 2rem; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
     .cs-title { font-family: var(--serif); font-size: 1.8rem; font-weight: 300; margin-bottom: .5rem; }
     .cs-sub { font-size: .82rem; color: var(--muted2); }
@@ -210,7 +210,7 @@
     .cs-btn { font-family: var(--sans); font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; color: var(--dark); background: var(--gold); padding: .8rem 1.4rem; border: none; cursor: pointer; transition: background .2s; white-space: nowrap; }
     .cs-btn:hover { background: var(--gold-light); }
 
-    /* ── FOOTER ── */
+    /* ââ FOOTER ââ */
     .site-footer { background: var(--dark2); border-top: 1px solid var(--border); padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; }
     .footer-logo { font-family: var(--serif); font-size: 1rem; color: var(--text); text-decoration: none; }
     .footer-logo span { color: var(--gold); }
@@ -237,17 +237,40 @@
 
 <header class="site-bar">
   <a href="/pt/" class="site-bar-logo">MiaLux<span>Realty</span></a>
-  <nav class="site-bar-nav">
-    <a href="/pt/new-developments/">Novos Empreendimentos</a>
-    <a href="/pt/#contact">Contato</a>
-    <div class="lang-switcher">
-      <a href="/new-developments/downtown-miami/" >EN</a>
-      <a href="/es/new-developments/downtown-miami/" >ES</a>
-      <a href="/pt/new-developments/downtown-miami/" class="active">PT</a>
-      <a href="/ru/new-developments/downtown-miami/" >RU</a>
+  <nav class="site-nav" id="siteNav">
+  <a class="site-nav-logo" href="/pt/">MiaLux<span>Realty</span></a>
+  <ul class="site-nav-links">
+    <li><a href="/pt/new-developments/">Novos Empreendimentos</a></li>
+    <li><a href="/pt/#contact">Contato</a></li>
+  </ul>
+  <div class="site-nav-right">
+    <div class="lang-drop" id="langDrop">
+      <button class="lang-drop-btn" id="langBtn" aria-expanded="false">
+        {{LANG_CODE_UPPER}}
+        <svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg>
+      </button>
+      <div class="lang-drop-menu">
+        <a href="/new-developments/downtown-miami/" >EN</a>
+        <a href="/es/new-developments/downtown-miami/" >ES</a>
+        <a href="/pt/new-developments/downtown-miami/" class="active">PT</a>
+        <a href="/ru/new-developments/downtown-miami/" >RU</a>
+      </div>
     </div>
-    <a href="#contact" class="site-bar-cta">Acesso VIP</a>
-  </nav>
+    <a href="#contact" class="site-nav-cta">Acesso VIP</a>
+    <button class="site-nav-ham" id="siteHam" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="site-mob" id="siteMob">
+  <a href="/pt/new-developments/">Novos Empreendimentos</a>
+  <a href="/pt/#contact">Contato</a>
+  <div class="site-mob-langs">
+    <a href="/new-developments/downtown-miami/" >EN</a>
+    <a href="/es/new-developments/downtown-miami/" >ES</a>
+    <a href="/pt/new-developments/downtown-miami/" class="active">PT</a>
+    <a href="/ru/new-developments/downtown-miami/" >RU</a>
+  </div>
+  <a href="#contact" class="site-mob-cta">Acesso VIP →</a>
+</div>
 </header>
 
 <!-- HERO -->
@@ -307,7 +330,7 @@
     <a href="/pt/new-developments/">← Todos os Empreendimentos</a>
     <a href="/sitemap.xml">Sitemap</a>
   </div>
-  <p class="footer-legal">© 2025 MiaLux Realty. All rights reserved.</p>
+  <p class="footer-legal">Â© 2025 MiaLux Realty. All rights reserved.</p>
 </footer>
 
 <script>
@@ -327,7 +350,7 @@ const T = {
 };
 
 function fmtPrice(n) {
-  if (!n) return '—';
+  if (!n) return 'â';
   if (n >= 1000000) return '$' + (n/1000000).toFixed(1).replace(/\.0$/,'') + 'M';
   return '$' + n.toLocaleString();
 }
@@ -363,7 +386,7 @@ if (hoodListings.length) {
     <div class="hsp-row"><span class="hsp-label">Neighborhood</span><span class="hsp-value">Miami, FL</span></div>
   `;
 } else {
-  document.getElementById('hoodStatsPanel').innerHTML = `<div class="hsp-row"><span style="color:var(--muted);font-size:.75rem">Coming soon — contact us for off-market opportunities</span></div>`;
+  document.getElementById('hoodStatsPanel').innerHTML = `<div class="hsp-row"><span style="color:var(--muted);font-size:.75rem">Coming soon â contact us for off-market opportunities</span></div>`;
 }
 
 // Listings
@@ -381,9 +404,9 @@ if (hoodListings.length) {
           <div class="listing-card-name">${l.name}</div>
           <div class="listing-card-address">${l.address || ''}</div>
           <div class="listing-card-stats">
-            <div class="lcs"><span class="lcs-val">${l.floors||'—'}</span><span class="lcs-lbl">${T.floors}</span></div>
-            <div class="lcs"><span class="lcs-val">${l.total_units||'—'}</span><span class="lcs-lbl">${T.units}</span></div>
-            <div class="lcs"><span class="lcs-val">${l.estimated_delivery||'—'}</span><span class="lcs-lbl">${T.delivery}</span></div>
+            <div class="lcs"><span class="lcs-val">${l.floors||'â'}</span><span class="lcs-lbl">${T.floors}</span></div>
+            <div class="lcs"><span class="lcs-val">${l.total_units||'â'}</span><span class="lcs-lbl">${T.units}</span></div>
+            <div class="lcs"><span class="lcs-val">${l.estimated_delivery||'â'}</span><span class="lcs-lbl">${T.delivery}</span></div>
           </div>
           <div class="listing-card-footer">
             <div class="listing-card-price">${T.from} <strong>${fmtPrice(l.price_from)}</strong></div>
@@ -407,7 +430,7 @@ document.getElementById('otherHoods').innerHTML = otherHoods.map(([hoodSlug, ls]
   const name = meta.name || hoodSlug.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
   return `
     <a href="${hoodPath(hoodSlug)}" class="other-hood-card">
-      <span class="ohc-arrow">→</span>
+      <span class="ohc-arrow">â</span>
       <div class="ohc-name">${name}</div>
       <div class="ohc-count">${ls.length} Project${ls.length !== 1 ? 's' : ''}</div>
     </a>
@@ -416,8 +439,26 @@ document.getElementById('otherHoods').innerHTML = otherHoods.map(([hoodSlug, ls]
 
 function submitStrip(e) {
   e.preventDefault();
-  e.target.innerHTML = '<p style="color:var(--gold-light);font-size:.8rem;padding:.5rem 0">✓ Thank you! We\'ll be in touch shortly.</p>';
+  e.target.innerHTML = '<p style="color:var(--gold-light);font-size:.8rem;padding:.5rem 0">â Thank you! We\'ll be in touch shortly.</p>';
 }
 </script>
+
+  <script>
+  document.addEventListener('DOMContentLoaded',function(){
+  
+  // Lang dropdown
+  const ld = document.getElementById('langDrop');
+  const lb = document.getElementById('langBtn');
+  if(ld && lb) {
+    lb.addEventListener('click', e => { e.stopPropagation(); ld.classList.toggle('open'); lb.setAttribute('aria-expanded', ld.classList.contains('open')); });
+    document.addEventListener('click', () => { ld.classList.remove('open'); lb.setAttribute('aria-expanded','false'); });
+  }
+  // Mobile menu
+  const ham = document.getElementById('siteHam');
+  const mob = document.getElementById('siteMob');
+  if(ham && mob) { ham.addEventListener('click', () => mob.classList.toggle('open')); }
+
+  });
+  </script>
 </body>
 </html>
