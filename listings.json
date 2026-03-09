@@ -108,12 +108,18 @@
     "brochure_pdf": "docs/cipriani-brochure.pdf",
     "floorplans_pdf": "docs/cipriani-floorplans.pdf",
     "meta_title": "Cipriani Residences Miami | Pre-Construction Luxury Condos Brickell",
-    "meta_description": "Cipriani Residences Miami \u2014 80-story luxury tower in Brickell from $1.75M. Italian elegance, 24hr Cipriani dining, VIP pricing available.",
-    "image_main": "images/cipriani-main.webp",
+    "meta_description": "Cipriani Residences Miami — 80-story luxury tower in Brickell from $1.75M. Italian elegance, 24hr Cipriani dining, VIP pricing available.",
+    "image_main": "https://mialuxrealty.com/images/cipriani-miami-residences-exterior.webp",
     "images_gallery": [
-      "images/cipriani-1.webp",
-      "images/cipriani-2.webp",
-      "images/cipriani-3.webp"
+      "https://mialuxrealty.com/images/cipriani-miami-residences-exterior.webp",
+      "https://mialuxrealty.com/images/cipriani-miami-residences-aerial-view.webp",
+      "https://mialuxrealty.com/images/cipriani-miami-residences-bar-and-restaurant.webp",
+      "https://mialuxrealty.com/images/cipriani-miami-residences-city-view-sunset.webp",
+      "https://mialuxrealty.com/images/cipriani-miami-residences-city-view.webp",
+      "https://mialuxrealty.com/images/cipriani-miami-residences-pool-area.webp",
+      "https://mialuxrealty.com/images/cipriani-miami-residences-pool.webp",
+      "https://mialuxrealty.com/images/cipriani-miami-residences-street-view-bs-miami-ave.webp",
+      "https://mialuxrealty.com/images/cipriani-miami-residences-street-view.webp"
     ],
     "geo": {
       "lat": 25.759,
@@ -122,7 +128,104 @@
     "postal_code": "33130",
     "rating_value": null,
     "review_count": 0,
-    "reviews": []
+    "reviews": [],
+    "image_meta": [
+      {
+        "file": "https://mialuxrealty.com/images/cipriani-miami-residences-exterior.webp",
+        "title": "Cipriani Residences Miami exterior",
+        "alt": {
+          "en": "Cipriani Residences Miami exterior — 80-story luxury tower in Brickell",
+          "es": "Cipriani Residences Miami exterior — 80-story luxury tower in Brickell",
+          "pt": "Cipriani Residences Miami exterior — 80-story luxury tower in Brickell",
+          "ru": "Cipriani Residences Miami exterior — 80-story luxury tower in Brickell"
+        }
+      },
+      {
+        "file": "https://mialuxrealty.com/images/cipriani-miami-residences-aerial-view.webp",
+        "title": "Cipriani Residences Miami aerial view from Biscayne Bay",
+        "alt": {
+          "en": "Cipriani Residences Miami aerial view from Biscayne Bay",
+          "es": "Cipriani Residences Miami aerial view from Biscayne Bay",
+          "pt": "Cipriani Residences Miami aerial view from Biscayne Bay",
+          "ru": "Cipriani Residences Miami aerial view from Biscayne Bay"
+        }
+      },
+      {
+        "file": "https://mialuxrealty.com/images/cipriani-miami-residences-bar-and-restaurant.webp",
+        "title": "Cipriani bar and restaurant with panoramic views",
+        "alt": {
+          "en": "Cipriani bar and restaurant with panoramic views",
+          "es": "Cipriani bar and restaurant with panoramic views",
+          "pt": "Cipriani bar and restaurant with panoramic views",
+          "ru": "Cipriani bar and restaurant with panoramic views"
+        }
+      },
+      {
+        "file": "https://mialuxrealty.com/images/cipriani-miami-residences-city-view-sunset.webp",
+        "title": "Cipriani Residences Miami city view at sunset",
+        "alt": {
+          "en": "Cipriani Residences Miami city view at sunset",
+          "es": "Cipriani Residences Miami city view at sunset",
+          "pt": "Cipriani Residences Miami city view at sunset",
+          "ru": "Cipriani Residences Miami city view at sunset"
+        }
+      },
+      {
+        "file": "https://mialuxrealty.com/images/cipriani-miami-residences-city-view.webp",
+        "title": "Cipriani Residences Miami city view",
+        "alt": {
+          "en": "Cipriani Residences Miami city view",
+          "es": "Cipriani Residences Miami city view",
+          "pt": "Cipriani Residences Miami city view",
+          "ru": "Cipriani Residences Miami city view"
+        }
+      },
+      {
+        "file": "https://mialuxrealty.com/images/cipriani-miami-residences-pool-area.webp",
+        "title": "Cipriani Residences Miami pool area and terrace",
+        "alt": {
+          "en": "Cipriani Residences Miami pool area and terrace",
+          "es": "Cipriani Residences Miami pool area and terrace",
+          "pt": "Cipriani Residences Miami pool area and terrace",
+          "ru": "Cipriani Residences Miami pool area and terrace"
+        }
+      },
+      {
+        "file": "https://mialuxrealty.com/images/cipriani-miami-residences-pool.webp",
+        "title": "Cipriani Residences Miami infinity pool",
+        "alt": {
+          "en": "Cipriani Residences Miami infinity pool",
+          "es": "Cipriani Residences Miami infinity pool",
+          "pt": "Cipriani Residences Miami infinity pool",
+          "ru": "Cipriani Residences Miami infinity pool"
+        }
+      },
+      {
+        "file": "https://mialuxrealty.com/images/cipriani-miami-residences-street-view-bs-miami-ave.webp",
+        "title": "Cipriani Residences Miami street view Brickell Ave",
+        "alt": {
+          "en": "Cipriani Residences Miami street view Brickell Ave",
+          "es": "Cipriani Residences Miami street view Brickell Ave",
+          "pt": "Cipriani Residences Miami street view Brickell Ave",
+          "ru": "Cipriani Residences Miami street view Brickell Ave"
+        }
+      },
+      {
+        "file": "https://mialuxrealty.com/images/cipriani-miami-residences-street-view.webp",
+        "title": "Cipriani Residences Miami street view",
+        "alt": {
+          "en": "Cipriani Residences Miami street view",
+          "es": "Cipriani Residences Miami street view",
+          "pt": "Cipriani Residences Miami street view",
+          "ru": "Cipriani Residences Miami street view"
+        }
+      }
+    ],
+    "schema_images": [
+      "https://mialuxrealty.com/images/cipriani-miami-residences-exterior.webp",
+      "https://mialuxrealty.com/images/cipriani-miami-residences-aerial-view.webp",
+      "https://mialuxrealty.com/images/cipriani-miami-residences-bar-and-restaurant.webp"
+    ]
   },
   {
     "id": "ora-by-casa-tua",
@@ -216,11 +319,11 @@
       "Custom Italian Cabinetry"
     ],
     "description_short": "A curated lifestyle tower by the iconic Casa Tua brand. 55 stories of artful living in Brickell, blending hospitality with residential luxury.",
-    "description_full": "ORA by Casa Tua reimagines luxury living through the lens of art and hospitality. Developed by the team behind Casa Tua \u2014 one of Miami's most beloved lifestyle brands \u2014 ORA offers 540 residences across 55 stories, combining the warmth of a private home with the services of a world-class hotel. Each residence is thoughtfully designed to reflect Casa Tua's signature aesthetic.",
+    "description_full": "ORA by Casa Tua reimagines luxury living through the lens of art and hospitality. Developed by the team behind Casa Tua — one of Miami's most beloved lifestyle brands — ORA offers 540 residences across 55 stories, combining the warmth of a private home with the services of a world-class hotel. Each residence is thoughtfully designed to reflect Casa Tua's signature aesthetic.",
     "brochure_pdf": "docs/ora-brochure.pdf",
     "floorplans_pdf": "docs/ora-floorplans.pdf",
     "meta_title": "ORA by Casa Tua Brickell | Pre-Construction Condos from $870K",
-    "meta_description": "ORA by Casa Tua \u2014 55-story luxury tower in Brickell from $870K. Casa Tua dining, rooftop pool, VIP access available.",
+    "meta_description": "ORA by Casa Tua — 55-story luxury tower in Brickell from $870K. Casa Tua dining, rooftop pool, VIP access available.",
     "image_main": "images/ora-main.webp",
     "images_gallery": [
       "images/ora-1.webp",
@@ -332,11 +435,11 @@
       "Walk-in Wine Cooler"
     ],
     "description_short": "62 stories of pure oceanfront luxury in Sunny Isles Beach. The St. Regis brand's legendary butler service meets Miami's most coveted beachfront address.",
-    "description_full": "The St. Regis Residences Sunny Isles Beach represents the pinnacle of branded luxury living on Florida's Gold Coast. Designed by the legendary Robert A.M. Stern Architects and featuring interiors by Rottet Studio, this 62-story oceanfront tower offers just 194 residences \u2014 ensuring an exclusive, private community. Every detail reflects the St. Regis tradition of bespoke service and timeless elegance.",
+    "description_full": "The St. Regis Residences Sunny Isles Beach represents the pinnacle of branded luxury living on Florida's Gold Coast. Designed by the legendary Robert A.M. Stern Architects and featuring interiors by Rottet Studio, this 62-story oceanfront tower offers just 194 residences — ensuring an exclusive, private community. Every detail reflects the St. Regis tradition of bespoke service and timeless elegance.",
     "brochure_pdf": "docs/stregis-brochure.pdf",
     "floorplans_pdf": "docs/stregis-floorplans.pdf",
     "meta_title": "St. Regis Residences Sunny Isles | Oceanfront Luxury from $5M",
-    "meta_description": "St. Regis Residences Sunny Isles Beach \u2014 62-story oceanfront tower from $5M. Butler service, private beach club, 70% construction complete.",
+    "meta_description": "St. Regis Residences Sunny Isles Beach — 62-story oceanfront tower from $5M. Butler service, private beach club, 70% construction complete.",
     "image_main": "images/stregis-main.webp",
     "images_gallery": [
       "images/stregis-1.webp",
@@ -451,12 +554,12 @@
       "Smart Energy Management",
       "Walk-in Closets"
     ],
-    "description_short": "The world's first solar-powered luxury residential skyscraper. 70 floors of sustainable ultra-luxury in the heart of Brickell \u2014 designed by Adrian Smith + Gordon Gill.",
-    "description_full": "The Residences at 1428 Brickell is a landmark in sustainable luxury living \u2014 the first residential skyscraper in the world powered entirely by solar energy. Designed by the visionary firm Adrian Smith + Gordon Gill Architecture, responsible for some of the world's tallest buildings, 1428 Brickell offers 189 ultra-luxury residences across 70 floors, each crafted with extraordinary attention to sustainability, design excellence, and resident well-being.",
+    "description_short": "The world's first solar-powered luxury residential skyscraper. 70 floors of sustainable ultra-luxury in the heart of Brickell — designed by Adrian Smith + Gordon Gill.",
+    "description_full": "The Residences at 1428 Brickell is a landmark in sustainable luxury living — the first residential skyscraper in the world powered entirely by solar energy. Designed by the visionary firm Adrian Smith + Gordon Gill Architecture, responsible for some of the world's tallest buildings, 1428 Brickell offers 189 ultra-luxury residences across 70 floors, each crafted with extraordinary attention to sustainability, design excellence, and resident well-being.",
     "brochure_pdf": "docs/1428-brochure.pdf",
     "floorplans_pdf": "docs/1428-floorplans.pdf",
     "meta_title": "The Residences at 1428 Brickell | World's First Solar Luxury Tower",
-    "meta_description": "1428 Brickell \u2014 world's first solar-powered luxury skyscraper. 70 floors, 189 residences from $2.1M. Adrian Smith + Gordon Gill design.",
+    "meta_description": "1428 Brickell — world's first solar-powered luxury skyscraper. 70 floors, 189 residences from $2.1M. Adrian Smith + Gordon Gill design.",
     "image_main": "images/1428-main.webp",
     "images_gallery": [
       "images/1428-1.webp",
@@ -561,19 +664,19 @@
     "residence_features": [
       "11-ft Ceilings",
       "Private Elevator Foyer",
-      "360\u00b0 Views",
+      "360° Views",
       "Sub-Zero & Wolf Appliances",
       "Italian Marble",
       "Smart Home System",
       "Private Terraces",
       "Walk-in Closets"
     ],
-    "description_short": "228 ultra-luxury residences on the exclusive Brickell Key island. The Mandarin Oriental's legendary service in an unmatched 360\u00b0 water-view setting.",
+    "description_short": "228 ultra-luxury residences on the exclusive Brickell Key island. The Mandarin Oriental's legendary service in an unmatched 360° water-view setting.",
     "description_full": "Set on the private island of Brickell Key, The Residences at Mandarin Oriental Miami offer an extraordinary 360-degree water view experience unlike any other address in Miami. With Mandarin Oriental's world-renowned service, every resident enjoys personalized concierge, spa access, and hotel amenities in one of the city's most secluded and prestigious locations.",
     "brochure_pdf": "docs/mandarin-brochure.pdf",
     "floorplans_pdf": "docs/mandarin-floorplans.pdf",
     "meta_title": "Mandarin Oriental Residences Miami | Island Luxury from $4M",
-    "meta_description": "Mandarin Oriental Residences Miami \u2014 64-story island luxury tower from $3.97M. 360\u00b0 water views, MO Spa, private island setting.",
+    "meta_description": "Mandarin Oriental Residences Miami — 64-story island luxury tower from $3.97M. 360° water views, MO Spa, private island setting.",
     "image_main": "images/mandarin-main.webp",
     "images_gallery": [
       "images/mandarin-1.webp",
@@ -686,11 +789,11 @@
       "Smart Home System"
     ],
     "description_short": "57 floors of art-infused luxury in Downtown Miami. Faena Group and Bjarke Ingels Group unite to create the most culturally vibrant residential tower in the city.",
-    "description_full": "Faena Residences Miami brings together two iconic forces \u2014 the Faena Group's legendary vision of culture-driven living and Bjarke Ingels Group's boundary-pushing architecture. Located in Downtown Miami's rapidly evolving arts district, the tower offers 315 residences surrounded by curated art, world-class dining, and an immersive cultural program unique to the Faena brand.",
+    "description_full": "Faena Residences Miami brings together two iconic forces — the Faena Group's legendary vision of culture-driven living and Bjarke Ingels Group's boundary-pushing architecture. Located in Downtown Miami's rapidly evolving arts district, the tower offers 315 residences surrounded by curated art, world-class dining, and an immersive cultural program unique to the Faena brand.",
     "brochure_pdf": "docs/faena-brochure.pdf",
     "floorplans_pdf": "docs/faena-floorplans.pdf",
     "meta_title": "Faena Residences Miami | Pre-Construction Downtown from $1.3M",
-    "meta_description": "Faena Residences Miami \u2014 57 floors by BIG architects from $1.3M. Art-driven luxury living in Downtown Miami. VIP access available.",
+    "meta_description": "Faena Residences Miami — 57 floors by BIG architects from $1.3M. Art-driven luxury living in Downtown Miami. VIP access available.",
     "image_main": "images/faena-main.webp",
     "images_gallery": [
       "images/faena-1.webp",
