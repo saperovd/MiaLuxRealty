@@ -222,7 +222,7 @@ html,body{height:100%;background:var(--darker);color:var(--text);font-family:var
     <input class="login-input" type="text" id="repoInput" placeholder="yourusername/mialuxrealty" value="">
     <label class="login-label">Branch</label>
     <input class="login-input" type="text" id="branchInput" value="main" placeholder="main">
-    <button class="login-btn" onclick="doLogin()">Connect to GitHub &#226;</button>
+    <button class="login-btn" onclick="doLogin()">Connect to GitHub &#8594;</button>
     <div class="login-error" id="loginError"></div>
     <div class="login-hint">Your token is stored in localStorage only. Never sent anywhere except GitHub API.</div>
   </div>
@@ -247,7 +247,7 @@ html,body{height:100%;background:var(--darker);color:var(--text);font-family:var
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
       Save & Deploy
     </button>
-    <button class="topbar-logout" onclick="logout()" title="Logout">&#226;</button>
+    <button class="topbar-logout" onclick="logout()" title="Logout">&#8594;</button>
   </div>
 
   <!-- SIDEBAR -->
@@ -327,15 +327,15 @@ html,body{height:100%;background:var(--darker);color:var(--text);font-family:var
           <button class="btn-add" onclick="newListing()">+ New Listing</button>
           <button class="btn-add" onclick="newPost()">+ New Blog Post</button>
           <button class="btn-add" onclick="newPage()">+ New Page</button>
-          <button class="btn-secondary" onclick="showPanel('settings')">&#226; Site Settings</button>
+          <button class="btn-secondary" onclick="showPanel('settings')">&#8594; Site Settings</button>
         </div>
       </div>
       <div class="cms-card">
         <div class="cms-card-title">Deploy Status</div>
         <div style="font-size:.82rem;color:var(--muted)">
-          Connected to: <span style="color:var(--gold)" id="deployRepo">&#226;</span><br>
-          Branch: <span style="color:var(--text)" id="deployBranch">&#226;</span><br>
-          <span style="font-size:.75rem;color:var(--light);margin-top:.4rem;display:block">Save &#226; GitHub Action runs build_all.py &#226; all listing folders auto-generated &#226; Cloudflare deploys in ~2 min.</span>
+          Connected to: <span style="color:var(--gold)" id="deployRepo">&#8594;</span><br>
+          Branch: <span style="color:var(--text)" id="deployBranch">&#8594;</span><br>
+          <span style="font-size:.75rem;color:var(--light);margin-top:.4rem;display:block">Save &#8594; GitHub Action runs build_all.py &#8594; all listing folders auto-generated &#8594; Cloudflare deploys in ~2 min.</span>
         </div>
       </div>
     </div>
@@ -410,7 +410,7 @@ html,body{height:100%;background:var(--darker);color:var(--text);font-family:var
           <div class="field"><label>WhatsApp <span class="hint">(digits only)</span></label><input class="cms-input" id="s-whatsapp" placeholder="13050000000"></div>
           <div class="field full"><label>License Text</label><input class="cms-input" id="s-license" placeholder="Licensed Real Estate Broker, Florida"></div>
           <div class="field"><label>Address</label><input class="cms-input" id="s-address" placeholder="Miami, FL 33131"></div>
-          <div class="field"><label>Hours</label><input class="cms-input" id="s-hours" placeholder="Mon&#226;Sun 9am&#226;9pm EST"></div>
+          <div class="field"><label>Hours</label><input class="cms-input" id="s-hours" placeholder="Mon&#8594;Sun 9am&#8594;9pm EST"></div>
         </div>
       </div>
 
@@ -483,16 +483,16 @@ html,body{height:100%;background:var(--darker);color:var(--text);font-family:var
 
         <!-- Mode tabs -->
         <div style="display:flex;gap:0;margin-bottom:1rem;border:1px solid var(--border);border-radius:var(--r);overflow:hidden">
-          <button id="tab-url" onclick="setScrapeMode('url')" style="flex:1;padding:.45rem;font-size:.72rem;background:var(--gold);color:#1a1610;border:none;cursor:pointer;font-family:var(--sans);font-weight:600">&#240; From URL</button>
-          <button id="tab-paste" onclick="setScrapeMode('paste')" style="flex:1;padding:.45rem;font-size:.72rem;background:var(--card2);color:var(--muted);border:none;cursor:pointer;font-family:var(--sans)">&#240; Paste Text</button>
-          <button id="tab-ai" onclick="setScrapeMode('ai')" style="flex:1;padding:.45rem;font-size:.72rem;background:var(--card2);color:var(--muted);border:none;cursor:pointer;font-family:var(--sans)">&#226;&#168; AI Extract</button>
+          <button id="tab-url" onclick="setScrapeMode('url')" style="flex:1;padding:.45rem;font-size:.72rem;background:var(--gold);color:#1a1610;border:none;cursor:pointer;font-family:var(--sans);font-weight:600">&#9670; From URL</button>
+          <button id="tab-paste" onclick="setScrapeMode('paste')" style="flex:1;padding:.45rem;font-size:.72rem;background:var(--card2);color:var(--muted);border:none;cursor:pointer;font-family:var(--sans)">&#9670; Paste Text</button>
+          <button id="tab-ai" onclick="setScrapeMode('ai')" style="flex:1;padding:.45rem;font-size:.72rem;background:var(--card2);color:var(--muted);border:none;cursor:pointer;font-family:var(--sans)">&#10003; AI Extract</button>
         </div>
 
         <!-- URL mode -->
         <div id="mode-url">
           <div style="display:flex;gap:.6rem;margin-bottom:.8rem">
             <input class="cms-input" id="scrape-url" placeholder="https://developer.ciprianiresidencessoutham.com/..." style="flex:1">
-            <button class="btn-add" onclick="scrapeUrl()" id="scrape-btn">Scrape &#226;</button>
+            <button class="btn-add" onclick="scrapeUrl()" id="scrape-btn">Scrape &#8594;</button>
           </div>
           <div style="font-size:.72rem;color:var(--muted);line-height:1.6">
             Works best on static sites. For JS-rendered sites (Zillow, miamiresidence.com etc) use <strong style="color:var(--gold-light)">Paste Text</strong> or <strong style="color:var(--gold-light)">AI Extract</strong>.
@@ -502,21 +502,21 @@ html,body{height:100%;background:var(--darker);color:var(--text);font-family:var
         <!-- Paste Text mode -->
         <div id="mode-paste" style="display:none">
           <div style="font-size:.78rem;color:var(--muted);margin-bottom:.6rem;line-height:1.6">
-            Open listing page &#226; select all visible text on the page &#226; copy &#226; paste below. Works on any site including JS-rendered ones.
+            Open listing page &#8594; select all visible text on the page &#8594; copy &#8594; paste below. Works on any site including JS-rendered ones.
           </div>
           <input class="cms-input" id="paste-source-url" placeholder="Source URL (for reference)" style="margin-bottom:.5rem">
           <textarea class="cms-textarea" id="paste-html" rows="6" placeholder="Paste page text or HTML here..."></textarea>
-          <button class="btn-add" onclick="parsePastedHtml()" style="margin-top:.6rem;width:100%">Parse &#226;</button>
+          <button class="btn-add" onclick="parsePastedHtml()" style="margin-top:.6rem;width:100%">Parse &#8594;</button>
         </div>
 
         <!-- AI Extract mode -->
         <div id="mode-ai" style="display:none">
           <div style="background:rgba(184,147,90,.08);border:1px solid rgba(184,147,90,.2);border-radius:var(--r);padding:.7rem;margin-bottom:.8rem;font-size:.75rem;color:var(--gold-light);line-height:1.6">
-            &#226;&#168; Paste ANY text about a listing &#226; from a website, email, brochure, or PDF. AI will extract all structured fields automatically.
+            &#10003; Paste ANY text about a listing &#8594; from a website, email, brochure, or PDF. AI will extract all structured fields automatically.
           </div>
           <input class="cms-input" id="ai-source-url" placeholder="Source URL (optional, for reference)" style="margin-bottom:.5rem">
-          <textarea class="cms-textarea" id="ai-raw-text" rows="8" placeholder="Paste listing text here &#226; any format works:&#10;&#10;Mercedes-Benz Places, 1133 SW 2nd Ave Miami FL 33130&#10;65 floors, 390 residences, delivery 2028&#10;Prices from $1.2M, architect SHoP Architects..."></textarea>
-          <button class="btn-add" onclick="aiExtract()" id="ai-btn" style="margin-top:.6rem;width:100%">&#226;&#168; Extract with AI &#226;</button>
+          <textarea class="cms-textarea" id="ai-raw-text" rows="8" placeholder="Paste listing text here &#8594; any format works:&#10;&#10;Mercedes-Benz Places, 1133 SW 2nd Ave Miami FL 33130&#10;65 floors, 390 residences, delivery 2028&#10;Prices from $1.2M, architect SHoP Architects..."></textarea>
+          <button class="btn-add" onclick="aiExtract()" id="ai-btn" style="margin-top:.6rem;width:100%">&#10003; Extract with AI &#8594;</button>
         </div>
       </div>
 
@@ -526,9 +526,9 @@ html,body{height:100%;background:var(--darker);color:var(--text);font-family:var
 
       <div id="scrape-results" style="display:none">
         <div class="cms-card">
-          <div class="cms-card-title">Scraped Data &#226; Review & Edit Before Saving</div>
+          <div class="cms-card-title">Scraped Data &#8594; Review & Edit Before Saving</div>
           <div style="background:rgba(184,147,90,.08);border:1px solid rgba(184,147,90,.2);border-radius:var(--r);padding:.8rem;margin-bottom:1rem;font-size:.78rem;color:var(--gold-light);line-height:1.6">
-            &#226;&nbsp; This is a draft. Review all fields, rewrite descriptions for SEO, verify prices, and replace images with WebP versions before publishing.
+            &#8594;&nbsp; This is a draft. Review all fields, rewrite descriptions for SEO, verify prices, and replace images with WebP versions before publishing.
           </div>
           <div class="field-grid">
             <div class="field"><label>Project Name</label><input class="cms-input" id="sc-name" placeholder="Project name"></div>
@@ -546,11 +546,11 @@ html,body{height:100%;background:var(--darker);color:var(--text);font-family:var
             <div class="field full"><label>Short Description <span style="color:var(--light);font-size:.65rem;font-weight:300">(rewrite for SEO before publishing)</span></label>
               <textarea class="cms-textarea" id="sc-description" rows="3"></textarea>
             </div>
-            <div class="field full"><label>Full Content / Body <span style="color:var(--light);font-size:.65rem;font-weight:300">(scraped article text &#226; rewrite before publishing)</span></label>
+            <div class="field full"><label>Full Content / Body <span style="color:var(--light);font-size:.65rem;font-weight:300">(scraped article text &#8594; rewrite before publishing)</span></label>
               <textarea class="cms-textarea" id="sc-fullcontent" rows="8" placeholder="Full article body will appear here after scraping..."></textarea>
             </div>
             <div class="field full"><label>Images Found 
-                <span style="color:var(--light);font-size:.65rem;font-weight:300">(click to select &#194;&#183; convert to WebP in Image Tools)</span>
+                <span style="color:var(--light);font-size:.65rem;font-weight:300">(click to select &#183; convert to WebP in Image Tools)</span>
                 <span style="margin-left:.8rem">
                   <button onclick="selectAllImages()" style="font-size:.62rem;padding:.15rem .4rem;background:rgba(184,147,90,.15);border:1px solid var(--gold);border-radius:3px;color:var(--gold);cursor:pointer">Select All</button>
                   <button onclick="deselectAllImages()" style="font-size:.62rem;padding:.15rem .4rem;background:var(--card2);border:1px solid var(--border);border-radius:3px;color:var(--muted);cursor:pointer;margin-left:.3rem">Deselect All</button>
@@ -588,14 +588,14 @@ html,body{height:100%;background:var(--darker);color:var(--text);font-family:var
     <!-- IMAGE TOOLS -->
     <div class="panel" id="panel-imagetools">
       <div class="panel-title">Image Tools</div>
-      <div class="panel-sub">Convert images to WebP format and set SEO metadata. All processing happens in your browser &#226; no upload to any server.</div>
+      <div class="panel-sub">Convert images to WebP format and set SEO metadata. All processing happens in your browser &#8594; no upload to any server.</div>
 
       <div class="cms-card">
         <div class="cms-card-title">Upload & Convert to WebP</div>
         <div id="img-drop-zone" style="border:2px dashed var(--border);border-radius:var(--rm);padding:2rem;text-align:center;cursor:pointer;transition:border-color .2s;margin-bottom:1rem" onclick="document.getElementById('img-file-input').click()" ondragover="event.preventDefault();this.style.borderColor='var(--gold)'" ondragleave="this.style.borderColor='var(--border)'" ondrop="handleImageDrop(event)">
-          <div style="font-size:2rem;margin-bottom:.5rem">&#240;&#188;</div>
+          <div style="font-size:2rem;margin-bottom:.5rem">&#9670;&#188;</div>
           <div style="font-size:.82rem;color:var(--muted)">Click or drag & drop images here</div>
-          <div style="font-size:.72rem;color:var(--light);margin-top:.3rem">JPG, PNG, GIF, HEIC supported &#194;&#183; Converts to WebP &#194;&#183; Max 20MB per file</div>
+          <div style="font-size:.72rem;color:var(--light);margin-top:.3rem">JPG, PNG, GIF, HEIC supported &#183; Converts to WebP &#183; Max 20MB per file</div>
         </div>
         <input type="file" id="img-file-input" multiple accept="image/*" style="display:none" onchange="handleImageFiles(this.files)">
         <div style="display:flex;gap:.6rem;margin-bottom:.8rem;flex-wrap:wrap">
@@ -641,18 +641,18 @@ html,body{height:100%;background:var(--darker);color:var(--text);font-family:var
 <div class="toast" id="toast"></div>
 
 <script>
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // STATE
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 let GH_TOKEN = '', GH_REPO = '', GH_BRANCH = 'main';
 let content = {}, listings = [];
 let currentLang = 'en';
 let fileSHAs = {};
 let pendingDelete = null;
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // AUTH
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 async function doLogin() {
   const token  = document.getElementById('tokenInput').value.trim();
   const repo   = document.getElementById('repoInput').value.trim();
@@ -662,7 +662,7 @@ async function doLogin() {
   if (!token || !repo) { err.textContent = 'Please fill in all fields.'; err.style.display='block'; return; }
 
   err.style.display = 'none';
-  document.querySelector('.login-btn').textContent = 'Connecting&#226;&#166;';
+  document.querySelector('.login-btn').textContent = 'Connecting&#10038;';
 
   try {
     const resp = await fetch(`https://api.github.com/repos/${repo}`, {
@@ -670,15 +670,15 @@ async function doLogin() {
     });
     const r = await resp.json();
     if (resp.status === 401) {
-      err.textContent = '401 &#226; Token invalid or expired. Generate a new token at github.com/settings/tokens';
+      err.textContent = '401 &#8594; Token invalid or expired. Generate a new token at github.com/settings/tokens';
       err.style.display = 'block';
-      document.querySelector('.login-btn').textContent = 'Connect to GitHub &#226;';
+      document.querySelector('.login-btn').textContent = 'Connect to GitHub &#8594;';
       return;
     }
     if (resp.status === 404) {
-      err.textContent = '404 &#226; Repo not found. Check spelling: must be exact e.g. saperovd/MiaLuxRealty';
+      err.textContent = '404 &#8594; Repo not found. Check spelling: must be exact e.g. saperovd/MiaLuxRealty';
       err.style.display = 'block';
-      document.querySelector('.login-btn').textContent = 'Connect to GitHub &#226;';
+      document.querySelector('.login-btn').textContent = 'Connect to GitHub &#8594;';
       return;
     }
     if (r.id) {
@@ -690,12 +690,12 @@ async function doLogin() {
     } else {
       err.textContent = 'Unexpected error: ' + (r.message || JSON.stringify(r));
       err.style.display = 'block';
-      document.querySelector('.login-btn').textContent = 'Connect to GitHub &#226;';
+      document.querySelector('.login-btn').textContent = 'Connect to GitHub &#8594;';
     }
   } catch(e) {
     err.textContent = 'Network error: ' + e.message;
     err.style.display = 'block';
-    document.querySelector('.login-btn').textContent = 'Connect to GitHub &#226;';
+    document.querySelector('.login-btn').textContent = 'Connect to GitHub &#8594;';
   }
 }
 
@@ -706,9 +706,9 @@ function logout() {
   location.reload();
 }
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // GITHUB API
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 async function ghGet(path) {
   const r = await fetch(`https://api.github.com/${path}`, {
     headers: { Authorization: `Bearer ${GH_TOKEN}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' }
@@ -743,9 +743,9 @@ async function ghPutFile(path, data, message) {
   return res;
 }
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // INIT
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 async function initApp() {
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('app').classList.add('visible');
@@ -794,9 +794,9 @@ function updateCounts() {
   document.getElementById('dash-listings').textContent = l;
 }
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // PANEL NAVIGATION
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function showPanel(name) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
@@ -809,14 +809,14 @@ function switchLang(lang) {
   document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
 }
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // SAVE & DEPLOY
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 async function saveAll() {
   const btn = document.getElementById('saveBtn');
   const status = document.getElementById('saveStatus');
   btn.classList.add('saving');
-  btn.textContent = 'Saving&#226;&#166;';
+  btn.textContent = 'Saving&#10038;';
   status.className = 'save-status';
   status.textContent = '';
 
@@ -836,11 +836,11 @@ async function saveAll() {
     await triggerBuild();
 
     status.className = 'save-status ok';
-    status.textContent = '&#226; Saved &#226; building pages&#226;&#166;';
-    showToast('&#226; Saved! GitHub Action is now running build_all.py &#226; generating all listing folders &#226; Cloudflare deploys in ~2 min.', 'success');
+    status.textContent = '&#8594; Saved &#8594; building pages&#10038;';
+    showToast('&#8594; Saved! GitHub Action is now running build_all.py &#8594; generating all listing folders &#8594; Cloudflare deploys in ~2 min.', 'success');
   } catch(e) {
     status.className = 'save-status err';
-    status.textContent = '&#226; Save failed';
+    status.textContent = '&#8594; Save failed';
     showToast('Save failed: ' + e.message, 'error');
   }
 
@@ -849,12 +849,12 @@ async function saveAll() {
 }
 
 async function triggerBuild() {
-  // Write a build trigger timestamp &#226; GitHub Action picks it up and runs build_all.py
+  // Write a build trigger timestamp &#8594; GitHub Action picks it up and runs build_all.py
   // This generates all folder/index.html pages automatically on the server
   try {
     const ts = { last_build: new Date().toISOString(), triggered_by: 'cms-admin' };
-    await ghPutFile('.cms-build-trigger', ts, 'CMS: trigger build &#226; runs build_all.py via GitHub Action');
-  } catch(e) {} // Non-fatal &#226; deploy still proceeds via listings.json commit
+    await ghPutFile('.cms-build-trigger', ts, 'CMS: trigger build &#8594; runs build_all.py via GitHub Action');
+  } catch(e) {} // Non-fatal &#8594; deploy still proceeds via listings.json commit
 }
 
 async function generateRedirectsFile() {
@@ -894,9 +894,9 @@ async function generateRedirectsFile() {
   } catch(e) {}
 }
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // SETTINGS EDITOR
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function renderSettingsEditor() {
   const s = content.site_settings || {};
   const flat = {
@@ -930,12 +930,12 @@ function collectSettings() {
   const rb = document.getElementById('s-robots'); if (rb) s.seo.robots = rb.value;
 }
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // NAVIGATION EDITOR
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function renderNavEditor() {
   const langs = ['en','es','pt','ru'];
-  const labels = {en:'English',es:'Espa&#241;ol',pt:'Portugu&#234;s',ru:'&#208;&nbsp;&#209;&#209;&#209;&#208;&#186;&#208;&#184;&#208;&#185;'};
+  const labels = {en:'English',es:'Espa&#241;ol',pt:'Portugu&#234;s',ru:'&nbsp;&#1088;&#1086;&#1089;&#1089;&#1080;&#1081;&#1089;&#1082;&#1080;&#1081;'};
 
   document.getElementById('navLangTabs').innerHTML = langs.map((l,i) =>
     `<button class="ltab ${i===0?'active':''}" onclick="switchLangTab('nav',this,'${l}')">${labels[l]}</button>`
@@ -963,10 +963,10 @@ function renderNavEditor() {
 
 function navLinkRow(lang, idx, link) {
   return `<div class="nav-item-row" id="nav-row-${lang}-${idx}">
-    <span class="drag-handle">&#226;&nbsp;&#191;</span>
+    <span class="drag-handle">&#8594;&nbsp;&#8230;</span>
     <input class="cms-input" placeholder="Label" value="${link.label||''}" data-nav-label="${lang}-${idx}">
     <input class="cms-input" placeholder="/url" value="${link.url||''}" data-nav-url="${lang}-${idx}">
-    <button class="remove-btn" onclick="removeNavLink('${lang}',${idx})">&#226;</button>
+    <button class="remove-btn" onclick="removeNavLink('${lang}',${idx})">&#8594;</button>
   </div>`;
 }
 
@@ -1005,12 +1005,12 @@ function collectNavigation() {
   });
 }
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // FOOTER EDITOR
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function renderFooterEditor() {
   const langs = ['en','es','pt','ru'];
-  const labels = {en:'English',es:'Espa&#241;ol',pt:'Portugu&#234;s',ru:'&#208;&nbsp;&#209;&#209;&#209;&#208;&#186;&#208;&#184;&#208;&#185;'};
+  const labels = {en:'English',es:'Espa&#241;ol',pt:'Portugu&#234;s',ru:'&nbsp;&#1088;&#1086;&#1089;&#1089;&#1080;&#1081;&#1089;&#1082;&#1080;&#1081;'};
 
   document.getElementById('footerLangTabs').innerHTML = langs.map((l,i) =>
     `<button class="ltab ${i===0?'active':''}" onclick="switchLangTab('footer',this,'${l}')">${labels[l]}</button>`
@@ -1052,9 +1052,9 @@ function collectFooter() {
   });
 }
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // LANG TAB SWITCHER
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function switchLangTab(prefix, btn, lang) {
   const parent = btn.closest('.panel') || btn.parentElement.parentElement;
   parent.querySelectorAll(`.ltab`).forEach(b => b.classList.remove('active'));
@@ -1072,9 +1072,9 @@ function switchLangTabById(prefix, lang) {
   if (tabs && tabs[idx]) switchLangTab(prefix, tabs[idx], lang);
 }
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // PAGES
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function renderPagesList() {
   const pages = content.pages || [];
   document.getElementById('pagesList').innerHTML = pages.length === 0
@@ -1115,9 +1115,9 @@ function editPage(idx) {
   updateSeoPreview('page', idx, 'en');
 }
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // LISTINGS
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function renderListingsList() {
   document.getElementById('listingsList').innerHTML = listings.length === 0
     ? '<div style="color:var(--muted);font-size:.82rem;padding:1rem">No listings yet.</div>'
@@ -1125,7 +1125,7 @@ function renderListingsList() {
       <div class="item-row" onclick="editListing(${i})">
         <span class="item-badge ${l.status==='Selling'?'badge-published':'badge-draft'}">${l.status||'Draft'}</span>
         <span class="item-name">${l.name||'Untitled Listing'}</span>
-        <span class="item-meta">${l.neighborhood||''} &#194;&#183; ${l.price_from ? '$'+Math.round(l.price_from/1000)+'K' : '&#226;'}</span>
+        <span class="item-meta">${l.neighborhood||''} &#183; ${l.price_from ? '$'+Math.round(l.price_from/1000)+'K' : '&#8594;'}</span>
         <div class="item-actions">
           <button class="ia-btn" onclick="event.stopPropagation();editListing(${i})">Edit</button>
           <button class="ia-btn del" onclick="event.stopPropagation();confirmDelete('listing',${i})">Del</button>
@@ -1177,17 +1177,17 @@ function renderListingEditor(idx, l) {
       <button class="tab-btn" onclick="switchTab(this,'ltab-details-${idx}')">Details & Units</button>
       <button class="tab-btn" onclick="switchTab(this,'ltab-media-${idx}')">Media</button>
       <button class="tab-btn" onclick="switchTab(this,'ltab-seo-${idx}')">SEO</button>
-      <button class="tab-btn" onclick="switchTab(this,'ltab-reviews-${idx}')">&#226;&#173; Reviews</button>
-      <button class="tab-btn" onclick="switchTab(this,'ltab-microdata-${idx}')">&#240; Microdata</button>
+      <button class="tab-btn" onclick="switchTab(this,'ltab-reviews-${idx}')">&#11088; Reviews</button>
+      <button class="tab-btn" onclick="switchTab(this,'ltab-microdata-${idx}')">&#128203; Microdata</button>
     </div>
 
     <div class="tab-content active" id="ltab-info-${idx}">
       <div class="cms-card" style="background:linear-gradient(135deg,rgba(184,147,90,.08),rgba(184,147,90,.03));border-color:rgba(184,147,90,.25)">
-        <div class="cms-card-title" style="color:var(--gold-light)">&#226;&#161; Quick Fill</div>
-        <div style="font-size:.72rem;color:var(--muted);margin-bottom:.6rem">Paste a line with any info &#226; AI will parse and fill all fields instantly.</div>
+        <div class="cms-card-title" style="color:var(--gold-light)">&#9889; Quick Fill</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-bottom:.6rem">Paste a line with any info &#8594; AI will parse and fill all fields instantly.</div>
         <div style="display:flex;gap:.5rem">
           <input class="cms-input" id="qf-input-${idx}" placeholder='e.g. "The Perigon | 5333 Collins Ave | Miami Beach | $3.75M | 2027 | OMA Architect | Mast Capital"' style="flex:1;font-size:.78rem">
-          <button class="btn-add" onclick="quickFill(${idx})" style="white-space:nowrap;padding:.5rem .9rem">&#226;&#161; Fill</button>
+          <button class="btn-add" onclick="quickFill(${idx})" style="white-space:nowrap;padding:.5rem .9rem">&#9889; Fill</button>
         </div>
       </div>
 
@@ -1317,47 +1317,47 @@ function renderListingEditor(idx, l) {
     </div>
 
     <div class="tab-content" id="ltab-reviews-${idx}">
-      <!-- &#226;&#226; SEO STAR RATINGS NOTE &#226;&#226; -->
+      <!-- &#9472;&#9472; SEO STAR RATINGS NOTE &#9472;&#9472; -->
       <div class="cms-card" style="background:linear-gradient(135deg,rgba(255,200,50,.07),rgba(255,200,50,.02));border-color:rgba(255,200,50,.3)">
         <div class="cms-card-title" style="color:#FFD700;display:flex;align-items:center;gap:.5rem">
-          &#226;&#173; How to Get Star Ratings in Google Search
+          &#11088; How to Get Star Ratings in Google Search
         </div>
         <div style="font-size:.78rem;line-height:1.75;color:rgba(255,255,255,.75);margin-bottom:1rem">
-          <p style="margin-bottom:.6rem">Once you collect <strong style="color:var(--text)">real client reviews</strong> on your site, add them here. The build script will automatically inject <code style="background:rgba(255,255,255,.08);padding:.1rem .3rem;border-radius:3px">AggregateRating</code> + <code style="background:rgba(255,255,255,.08);padding:.1rem .3rem;border-radius:3px">Review</code> structured data into the listing's JSON-LD &#226; which triggers &#226;&#173; gold star ratings in Google search results.</p>
-          <p style="margin-bottom:.6rem">&#240; <strong style="color:var(--gold-light)">Google's rules (must follow to avoid penalty):</strong></p>
+          <p style="margin-bottom:.6rem">Once you collect <strong style="color:var(--text)">real client reviews</strong> on your site, add them here. The build script will automatically inject <code style="background:rgba(255,255,255,.08);padding:.1rem .3rem;border-radius:3px">AggregateRating</code> + <code style="background:rgba(255,255,255,.08);padding:.1rem .3rem;border-radius:3px">Review</code> structured data into the listing's JSON-LD &#8594; which triggers &#11088; gold star ratings in Google search results.</p>
+          <p style="margin-bottom:.6rem">&#9670; <strong style="color:var(--gold-light)">Google's rules (must follow to avoid penalty):</strong></p>
           <ul style="list-style:none;display:flex;flex-direction:column;gap:.4rem;padding-left:.5rem">
-            <li>&#226; Reviews must come from <strong>real users</strong> who interacted with your agency &#226; not copy-pasted from Google Maps, Zillow, or other sites</li>
-            <li>&#226; Each review must have a <strong>real author name</strong> (no "Anonymous" or keyword-stuffed names)</li>
-            <li>&#226; Each review must have a <strong>written review body</strong> (not just a star number)</li>
-            <li>&#226; You need at least <strong>1 review</strong> for the schema to activate &#226; stars appear once Google re-crawls the page</li>
-            <li>&#226; Do <strong>NOT</strong> fabricate or incentivize fake reviews &#226; Google will penalize the entire domain</li>
+            <li>&#8594; Reviews must come from <strong>real users</strong> who interacted with your agency &#8594; not copy-pasted from Google Maps, Zillow, or other sites</li>
+            <li>&#8594; Each review must have a <strong>real author name</strong> (no "Anonymous" or keyword-stuffed names)</li>
+            <li>&#8594; Each review must have a <strong>written review body</strong> (not just a star number)</li>
+            <li>&#8594; You need at least <strong>1 review</strong> for the schema to activate &#8594; stars appear once Google re-crawls the page</li>
+            <li>&#8594; Do <strong>NOT</strong> fabricate or incentivize fake reviews &#8594; Google will penalize the entire domain</li>
           </ul>
         </div>
         <div style="font-size:.7rem;color:var(--muted);padding:.6rem .8rem;background:rgba(0,0,0,.25);border-radius:4px;border-left:2px solid var(--gold)">
-          &#240;&#161; <strong style="color:var(--gold-light)">Tip:</strong> After a deal closes, send clients a short WhatsApp message: <em>"Would you mind leaving us a quick review about your experience? It takes 2 minutes and helps other buyers find us."</em> Then add their review here.
+          &#9670;&#161; <strong style="color:var(--gold-light)">Tip:</strong> After a deal closes, send clients a short WhatsApp message: <em>"Would you mind leaving us a quick review about your experience? It takes 2 minutes and helps other buyers find us."</em> Then add their review here.
         </div>
       </div>
 
-      <!-- &#226;&#226; REMINDER: HOW REVIEWS REACH listings.json &#226;&#226; -->
+      <!-- &#9472;&#9472; REMINDER: HOW REVIEWS REACH listings.json &#9472;&#9472; -->
       <div class="cms-card" style="background:linear-gradient(135deg,rgba(201,168,76,.08),rgba(201,168,76,.02));border-color:rgba(201,168,76,.35)">
         <div class="cms-card-title" style="color:var(--gold-light);display:flex;align-items:center;gap:.5rem">
-          &#240; Important: How Reviews Get Into the Website
+          &#9670; Important: How Reviews Get Into the Website
         </div>
         <div style="font-size:.78rem;line-height:1.8;color:rgba(255,255,255,.75)">
           <p style="margin-bottom:.8rem">Reviews added here are saved to <code style="background:rgba(255,255,255,.08);padding:.1rem .4rem;border-radius:3px">listings.json</code>. <strong style="color:var(--text)">They don't appear on the live website until you run the build script.</strong> The workflow is:</p>
           <ol style="padding-left:1.2rem;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem">
-            <li>Add the review in this tab using the form below &#226;</li>
+            <li>Add the review in this tab using the form below &#8594;</li>
             <li>Click <strong style="color:var(--text)">Export listings.json</strong> (top of the Listings section) and push to GitHub</li>
-            <li>Run <code style="background:rgba(255,255,255,.08);padding:.1rem .4rem;border-radius:3px">python3 build_all.py</code> &#226; it reads the reviews and injects <code style="background:rgba(255,255,255,.08);padding:.1rem .4rem;border-radius:3px">AggregateRating</code> + <code style="background:rgba(255,255,255,.08);padding:.1rem .4rem;border-radius:3px">Review</code> JSON-LD automatically</li>
-            <li>Cloudflare Pages deploys &#226; Google sees the stars on the next crawl (usually within 1&#226;7 days)</li>
+            <li>Run <code style="background:rgba(255,255,255,.08);padding:.1rem .4rem;border-radius:3px">python3 build_all.py</code> &#8594; it reads the reviews and injects <code style="background:rgba(255,255,255,.08);padding:.1rem .4rem;border-radius:3px">AggregateRating</code> + <code style="background:rgba(255,255,255,.08);padding:.1rem .4rem;border-radius:3px">Review</code> JSON-LD automatically</li>
+            <li>Cloudflare Pages deploys &#8594; Google sees the stars on the next crawl (usually within 1&#8594;7 days)</li>
           </ol>
           <div style="padding:.7rem .9rem;background:rgba(0,0,0,.3);border-radius:4px;border-left:2px solid var(--gold);font-size:.72rem;color:var(--muted)">
-            <strong style="color:var(--text)">Once you have at least 1 review with a written body and real author name, the stars activate automatically.</strong> You never need to touch the HTML or schema code manually &#226; <code style="background:rgba(255,255,255,.08);padding:.1rem .3rem;border-radius:3px">build_all.py</code> handles it all.
+            <strong style="color:var(--text)">Once you have at least 1 review with a written body and real author name, the stars activate automatically.</strong> You never need to touch the HTML or schema code manually &#8594; <code style="background:rgba(255,255,255,.08);padding:.1rem .3rem;border-radius:3px">build_all.py</code> handles it all.
           </div>
         </div>
       </div>
 
-      <!-- &#226;&#226; AGGREGATE RATING INPUTS &#226;&#226; -->
+      <!-- &#9472;&#9472; AGGREGATE RATING INPUTS &#9472;&#9472; -->
       <div class="cms-card">
         <div class="cms-card-title">Aggregate Rating <span class="hint">(auto-calculated from reviews below, or set manually)</span></div>
         <div class="field-grid three">
@@ -1386,14 +1386,14 @@ function renderListingEditor(idx, l) {
                 : 'background:rgba(255,200,50,.08);border:1px solid rgba(255,200,50,.25);color:#FFD700'
             }">
               ${(l.review_count||0) > 0
-                ? `&#226; ${l.review_count} review${l.review_count>1?'s':''} &#194;&#183; Stars active in Google`
-                : '&#226;&#179; No reviews yet &#226; stars won\'t show in Google'}
+                ? `&#8594; ${l.review_count} review${l.review_count>1?'s':''} &#183; Stars active in Google`
+                : '&#9650; No reviews yet &#8594; stars won\'t show in Google'}
             </div>
           </div>
         </div>
       </div>
 
-      <!-- &#226;&#226; INDIVIDUAL REVIEWS &#226;&#226; -->
+      <!-- &#9472;&#9472; INDIVIDUAL REVIEWS &#9472;&#9472; -->
       <div class="cms-card">
         <div class="cms-card-title">Individual Reviews</div>
         <div id="l-reviews-list-${idx}">
@@ -1403,11 +1403,11 @@ function renderListingEditor(idx, l) {
               <div class="review-item" id="l-review-${idx}-${ri}" style="background:var(--card2);border:1px solid var(--border);border-radius:var(--r);padding:1rem;margin-bottom:.6rem;position:relative">
                 <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.5rem">
                   <span style="font-size:.82rem;font-weight:600;color:var(--text)">${r.author||'Unknown'}</span>
-                  <span style="color:#FFD700;font-size:.85rem">${'&#226;'.repeat(Math.round(r.rating||5))}${'&#226;'.repeat(5-Math.round(r.rating||5))}</span>
+                  <span style="color:#FFD700;font-size:.85rem">${'&#8594;'.repeat(Math.round(r.rating||5))}${'&#8594;'.repeat(5-Math.round(r.rating||5))}</span>
                   <span style="font-size:.65rem;color:var(--muted)">${r.date||''}</span>
                 </div>
                 <div style="font-size:.78rem;color:rgba(255,255,255,.7);line-height:1.6">${r.body||''}</div>
-                <button onclick="deleteReview(${idx},${ri})" style="position:absolute;top:.6rem;right:.6rem;background:rgba(255,80,80,.12);border:1px solid rgba(255,80,80,.25);color:#ff8080;padding:.2rem .5rem;border-radius:3px;font-size:.65rem;cursor:pointer">&#226; Delete</button>
+                <button onclick="deleteReview(${idx},${ri})" style="position:absolute;top:.6rem;right:.6rem;background:rgba(255,80,80,.12);border:1px solid rgba(255,80,80,.25);color:#ff8080;padding:.2rem .5rem;border-radius:3px;font-size:.65rem;cursor:pointer">&#8594; Delete</button>
               </div>`).join('')
           }
         </div>
@@ -1423,11 +1423,11 @@ function renderListingEditor(idx, l) {
             <div class="field">
               <label>Star Rating</label>
               <select class="cms-select" id="new-review-rating-${idx}">
-                <option value="5">&#226;&#226;&#226;&#226;&#226; (5)</option>
-                <option value="4">&#226;&#226;&#226;&#226;&#226; (4)</option>
-                <option value="3">&#226;&#226;&#226;&#226;&#226; (3)</option>
-                <option value="2">&#226;&#226;&#226;&#226;&#226; (2)</option>
-                <option value="1">&#226;&#226;&#226;&#226;&#226; (1)</option>
+                <option value="5">&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472; (5)</option>
+                <option value="4">&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472; (4)</option>
+                <option value="3">&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472; (3)</option>
+                <option value="2">&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472; (2)</option>
+                <option value="1">&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472; (1)</option>
               </select>
             </div>
             <div class="field">
@@ -1436,7 +1436,7 @@ function renderListingEditor(idx, l) {
             </div>
           </div>
           <div class="field full" style="margin-bottom:.8rem">
-            <label>Review Body <span class="req">*</span> <span class="hint">(written text required by Google &#226; not just stars)</span></label>
+            <label>Review Body <span class="req">*</span> <span class="hint">(written text required by Google &#8594; not just stars)</span></label>
             <textarea class="cms-textarea" id="new-review-body-${idx}" rows="3" placeholder="Working with MiaLux Realty was an exceptional experience. They found us the perfect unit at Cipriani and guided us through every step of the process..."></textarea>
           </div>
           <button class="btn-add" onclick="addReview(${idx})" style="width:100%;justify-content:center">
@@ -1447,10 +1447,10 @@ function renderListingEditor(idx, l) {
     </div>
 
     <div class="tab-content" id="ltab-microdata-${idx}">
-      <!-- &#226;&#226; MICRODATA EXPLAINER &#226;&#226; -->
+      <!-- &#9472;&#9472; MICRODATA EXPLAINER &#9472;&#9472; -->
       <div class="cms-card" style="background:linear-gradient(135deg,rgba(80,160,255,.07),rgba(80,160,255,.02));border-color:rgba(80,160,255,.3)">
         <div class="cms-card-title" style="color:#7eb8ff;display:flex;align-items:center;gap:.5rem">
-          &#240; Schema.org Microdata &#226; What's Auto vs Manual
+          &#9670; Schema.org Microdata &#8594; What's Auto vs Manual
         </div>
         <div style="font-size:.78rem;line-height:1.8;color:rgba(255,255,255,.75)">
           <p style="margin-bottom:.8rem">When you run <code style="background:rgba(255,255,255,.08);padding:.1rem .3rem;border-radius:3px">build_all.py</code>, it reads every field in your listings and injects rich structured data into each page's <code style="background:rgba(255,255,255,.08);padding:.1rem .3rem;border-radius:3px">&lt;script type="application/ld+json"&gt;</code>. Here's what's automatic and what you need to check:</p>
@@ -1465,23 +1465,23 @@ function renderListingEditor(idx, l) {
             </thead>
             <tbody>
               ${[
-                ['RealEstateListing @type','Automatic','&#226; Always set'],
-                ['name, description, url','From Project Name + Short Desc fields','&#226; Automatic'],
-                ['offers.price','From Price From field','&#226; Automatic'],
-                ['offers.availability','From Status field (Selling = PreOrder)','&#226; Automatic'],
-                ['broker (@id reference)','Global RealEstateAgent entity','&#226; Automatic'],
-                ['image[] array','From Main Image + Gallery','&#226; Automatic &#226; use absolute URLs'],
-                ['BreadcrumbList (4 levels)','Built from slug + neighborhood','&#226; Automatic'],
-                ['hreflang (EN/ES/PT/RU)','Built from language structure','&#226; Automatic'],
-                ['og:title, og:description','From Meta Title + Meta Desc fields (SEO tab)','&#226; Auto-filled from listing if empty'],
-                ['og:image (absolute URL)','From Main Image field','&#226;&nbsp;&#239;&#184; Must be full https:// URL'],
-                ['og:locale per language','en_US / es_LA / pt_BR / ru_RU','&#226; Automatic'],
-                ['twitter:card (summary_large_image)','All pages','&#226; Automatic'],
-                ['Accommodation.floorSize','From largest unit_type size_to','&#226; Automatic from unit types'],
-                ['Accommodation.numberOfFloors','From Floors field','&#226; Automatic'],
-                ['GeoCoordinates (lat/lng)','From Microdata tab below &#226;','&#226;&nbsp;&#239;&#184; Check & update per listing'],
-                ['postalCode','From Microdata tab below &#226;','&#226;&nbsp;&#239;&#184; Check & update per listing'],
-                ['AggregateRating + Review[]','From Reviews tab &#226;','&#226;&#173; Manual &#226; add reviews to activate stars'],
+                ['RealEstateListing @type','Automatic','&#8594; Always set'],
+                ['name, description, url','From Project Name + Short Desc fields','&#8594; Automatic'],
+                ['offers.price','From Price From field','&#8594; Automatic'],
+                ['offers.availability','From Status field (Selling = PreOrder)','&#8594; Automatic'],
+                ['broker (@id reference)','Global RealEstateAgent entity','&#8594; Automatic'],
+                ['image[] array','From Main Image + Gallery','&#8594; Automatic &#8594; use absolute URLs'],
+                ['BreadcrumbList (4 levels)','Built from slug + neighborhood','&#8594; Automatic'],
+                ['hreflang (EN/ES/PT/RU)','Built from language structure','&#8594; Automatic'],
+                ['og:title, og:description','From Meta Title + Meta Desc fields (SEO tab)','&#8594; Auto-filled from listing if empty'],
+                ['og:image (absolute URL)','From Main Image field','&#8594;&nbsp;&#239;&#184; Must be full https:// URL'],
+                ['og:locale per language','en_US / es_LA / pt_BR / ru_RU','&#8594; Automatic'],
+                ['twitter:card (summary_large_image)','All pages','&#8594; Automatic'],
+                ['Accommodation.floorSize','From largest unit_type size_to','&#8594; Automatic from unit types'],
+                ['Accommodation.numberOfFloors','From Floors field','&#8594; Automatic'],
+                ['GeoCoordinates (lat/lng)','From Microdata tab below &#8594;','&#8594;&nbsp;&#239;&#184; Check & update per listing'],
+                ['postalCode','From Microdata tab below &#8594;','&#8594;&nbsp;&#239;&#184; Check & update per listing'],
+                ['AggregateRating + Review[]','From Reviews tab &#8594;','&#11088; Manual &#8594; add reviews to activate stars'],
               ].map(([field,source,status]) => `
                 <tr style="border-bottom:1px solid rgba(255,255,255,.05)">
                   <td style="padding:.5rem .6rem;color:var(--text);font-family:monospace;font-size:.68rem">${field}</td>
@@ -1493,10 +1493,10 @@ function renderListingEditor(idx, l) {
         </div>
       </div>
 
-      <!-- &#226;&#226; GEO + POSTAL FIELDS &#226;&#226; -->
+      <!-- &#9472;&#9472; GEO + POSTAL FIELDS &#9472;&#9472; -->
       <div class="cms-card">
-        <div class="cms-card-title">&#240; Geo Coordinates & Postal Code
-          <span class="hint" style="display:block;margin-top:.2rem;font-weight:400">Used in GeoCoordinates schema on the listing page. Pre-filled from neighborhood defaults &#226; verify per listing for accuracy.</span>
+        <div class="cms-card-title">&#9670; Geo Coordinates & Postal Code
+          <span class="hint" style="display:block;margin-top:.2rem;font-weight:400">Used in GeoCoordinates schema on the listing page. Pre-filled from neighborhood defaults &#8594; verify per listing for accuracy.</span>
         </div>
         <div class="field-grid three">
           <div class="field">
@@ -1525,34 +1525,34 @@ function renderListingEditor(idx, l) {
           </div>
         </div>
         <div style="margin-top:.8rem;font-size:.7rem;color:var(--muted);display:flex;align-items:center;gap:.5rem">
-          <span>&#240;&#186;</span>
+          <span>&#9670;&#186;</span>
           <span>To find exact coordinates: go to <a href="https://maps.google.com" target="_blank" style="color:var(--gold)">Google Maps</a>, right-click on the building, copy the lat/lng shown.</span>
         </div>
       </div>
 
-      <!-- &#226;&#226; VALIDATE BUTTON &#226;&#226; -->
+      <!-- &#9472;&#9472; VALIDATE BUTTON &#9472;&#9472; -->
       <div class="cms-card">
         <div class="cms-card-title">Validate Schema</div>
         <div style="font-size:.78rem;color:var(--muted);margin-bottom:.8rem">After publishing, test this listing's structured data in Google's Rich Results Test tool to verify everything is correct.</div>
         <div style="display:flex;gap:.8rem;flex-wrap:wrap">
           <a href="https://search.google.com/test/rich-results" target="_blank"
             style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:rgba(80,160,255,.12);border:1px solid rgba(80,160,255,.3);border-radius:4px;font-size:.72rem;color:#7eb8ff;text-decoration:none">
-            &#240; Google Rich Results Test
+            &#9670; Google Rich Results Test
           </a>
           <a href="https://search.google.com/search-console" target="_blank"
             style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:rgba(80,160,255,.12);border:1px solid rgba(80,160,255,.3);border-radius:4px;font-size:.72rem;color:#7eb8ff;text-decoration:none">
-            &#240; Google Search Console
+            &#9670; Google Search Console
           </a>
           <a href="https://validator.schema.org/" target="_blank"
             style="display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;background:rgba(80,160,255,.12);border:1px solid rgba(80,160,255,.3);border-radius:4px;font-size:.72rem;color:#7eb8ff;text-decoration:none">
-            &#226; Schema.org Validator
+            &#8594; Schema.org Validator
           </a>
         </div>
       </div>
     </div>`;
 }
 
-// &#226;&#226; REVIEWS &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472; REVIEWS &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function recalcRating(idx) {
   const reviews = listings[idx].reviews || [];
   if (reviews.length === 0) return;
@@ -1569,7 +1569,7 @@ function recalcRating(idx) {
     statusEl.style.background = 'rgba(80,200,80,.12)';
     statusEl.style.border = '1px solid rgba(80,200,80,.3)';
     statusEl.style.color = '#7eff7e';
-    statusEl.textContent = `&#226; ${n} review${n>1?'s':''} &#194;&#183; Stars active in Google`;
+    statusEl.textContent = `&#8594; ${n} review${n>1?'s':''} &#183; Stars active in Google`;
   }
 }
 
@@ -1597,15 +1597,15 @@ function addReview(idx) {
       <div class="review-item" id="l-review-${idx}-${ri}" style="background:var(--card2);border:1px solid var(--border);border-radius:var(--r);padding:1rem;margin-bottom:.6rem;position:relative">
         <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.5rem">
           <span style="font-size:.82rem;font-weight:600;color:var(--text)">${r.author}</span>
-          <span style="color:#FFD700;font-size:.85rem">${'&#226;'.repeat(Math.round(r.rating||5))}${'&#226;'.repeat(5-Math.round(r.rating||5))}</span>
+          <span style="color:#FFD700;font-size:.85rem">${'&#8594;'.repeat(Math.round(r.rating||5))}${'&#8594;'.repeat(5-Math.round(r.rating||5))}</span>
           <span style="font-size:.65rem;color:var(--muted)">${r.date||''}</span>
         </div>
         <div style="font-size:.78rem;color:rgba(255,255,255,.7);line-height:1.6">${r.body}</div>
-        <button onclick="deleteReview(${idx},${ri})" style="position:absolute;top:.6rem;right:.6rem;background:rgba(255,80,80,.12);border:1px solid rgba(255,80,80,.25);color:#ff8080;padding:.2rem .5rem;border-radius:3px;font-size:.65rem;cursor:pointer">&#226; Delete</button>
+        <button onclick="deleteReview(${idx},${ri})" style="position:absolute;top:.6rem;right:.6rem;background:rgba(255,80,80,.12);border:1px solid rgba(255,80,80,.25);color:#ff8080;padding:.2rem .5rem;border-radius:3px;font-size:.65rem;cursor:pointer">&#8594; Delete</button>
       </div>`).join('');
   }
 
-  showToast(`Review by ${author} added. &#226;&#173; Stars will activate after next build & deploy.`, 'success');
+  showToast(`Review by ${author} added. &#11088; Stars will activate after next build & deploy.`, 'success');
 }
 
 function deleteReview(idx, ri) {
@@ -1627,18 +1627,18 @@ function deleteReview(idx, ri) {
         statusEl.style.background = 'rgba(255,200,50,.08)';
         statusEl.style.border = '1px solid rgba(255,200,50,.25)';
         statusEl.style.color = '#FFD700';
-        statusEl.textContent = "&#226;&#179; No reviews yet &#226; stars won't show in Google";
+        statusEl.textContent = "&#9650; No reviews yet &#8594; stars won't show in Google";
       }
     } else {
       listEl.innerHTML = listings[idx].reviews.map((r, ri2) => `
         <div class="review-item" style="background:var(--card2);border:1px solid var(--border);border-radius:var(--r);padding:1rem;margin-bottom:.6rem;position:relative">
           <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:.5rem">
             <span style="font-size:.82rem;font-weight:600;color:var(--text)">${r.author}</span>
-            <span style="color:#FFD700;font-size:.85rem">${'&#226;'.repeat(Math.round(r.rating||5))}${'&#226;'.repeat(5-Math.round(r.rating||5))}</span>
+            <span style="color:#FFD700;font-size:.85rem">${'&#8594;'.repeat(Math.round(r.rating||5))}${'&#8594;'.repeat(5-Math.round(r.rating||5))}</span>
             <span style="font-size:.65rem;color:var(--muted)">${r.date||''}</span>
           </div>
           <div style="font-size:.78rem;color:rgba(255,255,255,.7);line-height:1.6">${r.body}</div>
-          <button onclick="deleteReview(${idx},${ri2})" style="position:absolute;top:.6rem;right:.6rem;background:rgba(255,80,80,.12);border:1px solid rgba(255,80,80,.25);color:#ff8080;padding:.2rem .5rem;border-radius:3px;font-size:.65rem;cursor:pointer">&#226; Delete</button>
+          <button onclick="deleteReview(${idx},${ri2})" style="position:absolute;top:.6rem;right:.6rem;background:rgba(255,80,80,.12);border:1px solid rgba(255,80,80,.25);color:#ff8080;padding:.2rem .5rem;border-radius:3px;font-size:.65rem;cursor:pointer">&#8594; Delete</button>
         </div>`).join('');
     }
   }
@@ -1653,9 +1653,9 @@ function switchListingSeoLang(idx, lang, btn) {
   bindCharCounters();
 }
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // BLOG POSTS
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function renderPostsList() {
   const posts = content.posts || [];
   document.getElementById('postsList').innerHTML = posts.length === 0
@@ -1664,7 +1664,7 @@ function renderPostsList() {
       <div class="item-row" onclick="editPost(${i})">
         <span class="item-badge ${p.status==='published'?'badge-published':'badge-draft'}">${p.status||'draft'}</span>
         <span class="item-name">${p.en?.title || p.id || 'Untitled Post'}</span>
-        <span class="item-meta">${p.date||''} &#194;&#183; ${p.category||''}</span>
+        <span class="item-meta">${p.date||''} &#183; ${p.category||''}</span>
         <div class="item-actions">
           <button class="ia-btn" onclick="event.stopPropagation();editPost(${i})">Edit</button>
           <button class="ia-btn del" onclick="event.stopPropagation();confirmDelete('post',${i})">Del</button>
@@ -1765,9 +1765,9 @@ function switchPostSeoLang(idx, lang, btn) {
   bindCharCounters();
 }
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // SEO FIELDS (reusable)
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function renderSeoFields(prefix, idx, lang, data) {
   const schemaTypes = ['WebPage','Article','RealEstateAgent','Accommodation','ItemList','LocalBusiness','FAQPage','BreadcrumbList'];
   const url = data.canonical || '';
@@ -1775,13 +1775,13 @@ function renderSeoFields(prefix, idx, lang, data) {
   const desc = data.meta_description || '';
   return `
     <div class="cms-card">
-      <div class="cms-card-title">Meta Tags &#226; ${lang.toUpperCase()}</div>
+      <div class="cms-card-title">Meta Tags &#8594; ${lang.toUpperCase()}</div>
       <div class="field-grid">
-        <div class="field full"><label>Meta Title <span class="hint">(50&#226;60 chars ideal)</span></label>
+        <div class="field full"><label>Meta Title <span class="hint">(50&#8594;60 chars ideal)</span></label>
           <input class="cms-input cc-input" id="${prefix}-meta_title-${idx}-${lang}" maxlength="80" placeholder="Page Title | MiaLux Realty" value="${title}" oninput="updateSeoPreviewFromField(this,'title','${prefix}-${idx}-${lang}')">
           <div class="char-count" id="cc-${prefix}-meta_title-${idx}-${lang}"></div>
         </div>
-        <div class="field full"><label>Meta Description <span class="hint">(140&#226;160 chars ideal)</span></label>
+        <div class="field full"><label>Meta Description <span class="hint">(140&#8594;160 chars ideal)</span></label>
           <textarea class="cms-textarea cc-input" id="${prefix}-meta_desc-${idx}-${lang}" maxlength="200" oninput="updateSeoPreviewFromField(this,'desc','${prefix}-${idx}-${lang}')">${desc}</textarea>
           <div class="char-count" id="cc-${prefix}-meta_desc-${idx}-${lang}"></div>
         </div>
@@ -1843,9 +1843,9 @@ function selectSchema(chip, key) {
   chip.classList.add('active');
 }
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // PAGES EDITOR
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function renderItemEditor(type, idx, item) {
   const langs = ['en','es','pt','ru'];
   return `
@@ -1907,9 +1907,9 @@ function switchPageSeoLang(idx, lang, btn) {
   bindCharCounters();
 }
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // BACK TO LIST
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function backToList(panel) {
   if (panel === 'listings') {
     document.getElementById('listings-list-view').style.display = 'block';
@@ -1926,9 +1926,9 @@ function backToList(panel) {
   }
 }
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // TAB SWITCHER
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function switchTab(btn, targetId) {
   const parent = btn.closest('.panel') || document.body;
   const tabBar = btn.closest('.tab-bar');
@@ -1942,15 +1942,15 @@ function switchTab(btn, targetId) {
   if (target) target.classList.add('active');
 }
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // REDIRECTS
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function renderRedirects() {
   const langs = [{code:'es',name:'Spanish',path:'/es/'},{code:'pt',name:'Portuguese',path:'/pt/'},{code:'ru',name:'Russian',path:'/ru/'}];
   document.getElementById('langRedirects').innerHTML = langs.map(l => `
     <div style="display:flex;align-items:center;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--border2)">
       <button class="toggle on" id="redirect-toggle-${l.code}" onclick="this.classList.toggle('on')"></button>
-      <span class="toggle-label">${l.path}* &#226; / (302) &nbsp;&#194;&#183;&nbsp; <strong style="color:var(--text)">${l.name}</strong></span>
+      <span class="toggle-label">${l.path}* &#8594; / (302) &nbsp;&#183;&nbsp; <strong style="color:var(--text)">${l.name}</strong></span>
       <span style="font-size:.7rem;color:var(--light);margin-left:auto">Redirect until ${l.name} content is ready</span>
     </div>`).join('');
 
@@ -1964,13 +1964,13 @@ function addRedirectRow() {
     <input class="cms-input cr-from" placeholder="/old-page">
     <input class="cms-input cr-to" placeholder="/new-page">
     <select class="redirect-code cr-code"><option>301</option><option>302</option></select>
-    <button class="remove-btn" onclick="this.parentElement.remove()">&#226;</button>`;
+    <button class="remove-btn" onclick="this.parentElement.remove()">&#8594;</button>`;
   document.getElementById('customRedirects').appendChild(row);
 }
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // DELETE
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function confirmDelete(type, idx) {
   pendingDelete = {type, idx};
   const names = {
@@ -2000,9 +2000,9 @@ function closeModal() {
   pendingDelete = null;
 }
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // CHAR COUNTERS
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function bindCharCounters() {
   document.querySelectorAll('.cc-input').forEach(el => updateCharCount(el));
   document.querySelectorAll('.cc-input').forEach(el => el.addEventListener('input', () => updateCharCount(el)));
@@ -2017,20 +2017,20 @@ function updateCharCount(el) {
   cc.className = 'char-count' + (len > max*0.9 && len <= max ? ' warn' : len > max ? ' over' : '');
 }
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // TOAST
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function showToast(msg, type='') {
   const t = document.getElementById('toast');
-  t.textContent = (type==='success'?'&#226; ':type==='error'?'&#226; ':'') + msg;
+  t.textContent = (type==='success'?'&#8594; ':type==='error'?'&#8594; ':'') + msg;
   t.className = 'toast show ' + type;
   setTimeout(() => t.className = 'toast', 3500);
 }
 
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // URL SCRAPER
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // Worker URL - update this after deploying the Cloudflare Worker
 const SCRAPER_WORKER_URL = 'https://mialux-scraper.gqmiami.workers.dev';
 
@@ -2042,10 +2042,10 @@ async function scrapeUrl() {
   const btn = document.getElementById('scrape-btn');
   const statusEl = document.getElementById('scrape-status');
   const statusText = document.getElementById('scrape-status-text');
-  btn.textContent = 'Scraping&#226;&#166;';
+  btn.textContent = 'Scraping&#10038;';
   btn.disabled = true;
   statusEl.style.display = 'block';
-  statusText.textContent = '&#226;&#179; Fetching page via server&#226;&#166;';
+  statusText.textContent = '&#9650; Fetching page via server&#10038;';
   document.getElementById('scrape-results').style.display = 'none';
 
   try {
@@ -2057,21 +2057,21 @@ async function scrapeUrl() {
     });
 
     const data = await r.json();
-    btn.textContent = 'Scrape &#226;';
+    btn.textContent = 'Scrape &#8594;';
     btn.disabled = false;
 
     if (!r.ok || data.error) {
-      statusText.innerHTML = `&#226; ${data.error || 'Could not fetch page'}.`;
+      statusText.innerHTML = `&#8594; ${data.error || 'Could not fetch page'}.`;
       return;
     }
 
-    statusText.textContent = '&#226; Page fetched &#226; filling form&#226;&#166;';
+    statusText.textContent = '&#8594; Page fetched &#8594; filling form&#10038;';
     fillScraperForm(data);
 
   } catch(e) {
-    btn.textContent = 'Scrape &#226;';
+    btn.textContent = 'Scrape &#8594;';
     btn.disabled = false;
-    statusText.innerHTML = `&#226; Error: ${e.message}`;
+    statusText.innerHTML = `&#8594; Error: ${e.message}`;
   }
 }
 
@@ -2080,9 +2080,9 @@ function fillScraperForm(data) {
     address = '', neighborhood = '', paragraphs = [], sourceUrl = '' } = data;
 
   const fullDesc = paragraphs && paragraphs.length ? paragraphs.join('\n\n') : description;
-  const cleanTitle = title.replace(/\s*[-|&#226;]\s*.+$/, '').trim();
+  const cleanTitle = title.replace(/\s*[-|&#8594;]\s*.+$/, '').trim();
   const metaTitle = cleanTitle ? `${cleanTitle} | Miami Pre-Construction Condos | MiaLux Realty` : '';
-  const metaDesc = description || `Discover ${cleanTitle} &#226; luxury pre-construction condos in Miami. VIP pricing, zero buyer commission.`;
+  const metaDesc = description || `Discover ${cleanTitle} &#8594; luxury pre-construction condos in Miami. VIP pricing, zero buyer commission.`;
 
   // Fill all form fields
   document.getElementById('sc-name').value = cleanTitle;
@@ -2102,7 +2102,7 @@ function fillScraperForm(data) {
     <div style="position:relative;display:inline-block">
       <img src="${src}" data-selected="0" style="width:120px;height:80px;object-fit:cover;border-radius:4px;border:2px solid var(--border);cursor:pointer;opacity:0.5;transition:all .15s" 
         onclick="toggleImgSelect(this)" title="${src}" onerror="this.parentElement.remove()">
-      <div style="position:absolute;top:3px;right:3px;width:18px;height:18px;background:var(--gold);border-radius:50%;display:none;align-items:center;justify-content:center;font-size:.6rem;color:#fff" class="img-check">&#226;</div>
+      <div style="position:absolute;top:3px;right:3px;width:18px;height:18px;background:var(--gold);border-radius:50%;display:none;align-items:center;justify-content:center;font-size:.6rem;color:#fff" class="img-check">&#8594;</div>
     </div>`).join('') 
     : '<span style="color:var(--muted);font-size:.78rem">No images found on this page.</span>';
 
@@ -2261,10 +2261,10 @@ async function aiExtract() {
   const btn = document.getElementById('ai-btn');
   const statusEl = document.getElementById('scrape-status');
   const statusText = document.getElementById('scrape-status-text');
-  btn.textContent = '&#226;&#168; Extracting&#226;&#166;';
+  btn.textContent = '&#10003; Extracting&#10038;';
   btn.disabled = true;
   statusEl.style.display = 'block';
-  statusText.textContent = '&#226;&#168; AI is reading the listing&#226;&#166;';
+  statusText.textContent = '&#10003; AI is reading the listing&#10038;';
   document.getElementById('scrape-results').style.display = 'none';
 
   try {
@@ -2276,11 +2276,11 @@ async function aiExtract() {
     });
 
     const data = await response.json();
-    btn.textContent = '&#226;&#168; Extract with AI &#226;';
+    btn.textContent = '&#10003; Extract with AI &#8594;';
     btn.disabled = false;
 
     if (!response.ok || data.error) {
-      statusText.innerHTML = '&#226; ' + (data.error || 'AI extraction failed');
+      statusText.innerHTML = '&#8594; ' + (data.error || 'AI extraction failed');
       return;
     }
 
@@ -2309,9 +2309,9 @@ async function aiExtract() {
     showToast('AI extracted ' + Object.keys(parsed).filter(k => parsed[k]).length + ' fields!', 'success');
 
   } catch(e) {
-    btn.textContent = '&#226;&#168; Extract with AI &#226;';
+    btn.textContent = '&#10003; Extract with AI &#8594;';
     btn.disabled = false;
-    statusText.innerHTML = '&#226; Error: ' + e.message;
+    statusText.innerHTML = '&#8594; Error: ' + e.message;
   }
 }
 
@@ -2325,7 +2325,7 @@ function parsePastedHtml() {
   const statusEl = document.getElementById('scrape-status');
   const statusText = document.getElementById('scrape-status-text');
   statusEl.style.display = 'block';
-  statusText.textContent = '&#226;&#179; Parsing HTML&#226;&#166;';
+  statusText.textContent = '&#9650; Parsing HTML&#10038;';
   document.getElementById('scrape-results').style.display = 'none';
 
   // Parse in browser using DOMParser
@@ -2404,15 +2404,15 @@ function parsePastedHtml() {
       if (src.startsWith('//')) src = 'https:' + src;
       if (src.startsWith('/') && sourceUrl.startsWith('http')) { try { src = new URL(src, sourceUrl).href; } catch(e) { return; } }
       if (!src.startsWith('http') || seen.has(src)) return;
-      // Only check the filename part &#226; avoid false-matching domains like 'miamicondos'
+      // Only check the filename part &#8594; avoid false-matching domains like 'miamicondos'
       const imgFile = src.split('/').pop().split('?')[0];
       if (/logo|icon|avatar|sprite|pixel|blank|1x1/i.test(imgFile)) return;
       seen.add(src); images.push(src);
     });
 
-    // Paragraphs &#226; grab p, li, div with substantial text
+    // Paragraphs &#8594; grab p, li, div with substantial text
     const paragraphs = [];
-    const skipWords = /log in|register|cookie|privacy policy|terms of|subscribe|newsletter|copyright|all rights|&#194;&copy;/i;
+    const skipWords = /log in|register|cookie|privacy policy|terms of|subscribe|newsletter|copyright|all rights|&copy;/i;
     doc.querySelectorAll('p, li, [class*="desc"], [class*="content"], [class*="text"], [class*="detail"]').forEach(el => {
       if (paragraphs.length >= 10) return;
       const t = el.textContent.trim().replace(/\s+/g,' ');
@@ -2431,11 +2431,11 @@ function parsePastedHtml() {
     statusEl.style.display = 'none';
     fillScraperForm(data);
   } catch(e) {
-    document.getElementById('scrape-status-text').textContent = '&#226; Parse error: ' + e.message;
+    document.getElementById('scrape-status-text').textContent = '&#8594; Parse error: ' + e.message;
   }
 }
 
-// &#226;&#226; LISTING QUICK-FILL & AI HELPERS &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472; LISTING QUICK-FILL & AI HELPERS &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function autoSlug(idx) {
   const name = document.getElementById('l-name-' + idx)?.value || '';
   const slug = name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
@@ -2451,7 +2451,7 @@ async function quickFill(idx) {
   if (!input) { showToast('Enter some text first', 'error'); return; }
 
   const btn = event.target;
-  btn.textContent = '&#226;&#179;';
+  btn.textContent = '&#9650;';
   btn.disabled = true;
 
   try {
@@ -2492,7 +2492,7 @@ async function quickFill(idx) {
   } catch(e) {
     showToast('Error: ' + e.message, 'error');
   }
-  btn.textContent = '&#226;&#161; Fill';
+  btn.textContent = '&#9889; Fill';
   btn.disabled = false;
 }
 
@@ -2512,7 +2512,7 @@ async function aiGenDesc(idx, type) {
   if (!context.trim()) { showToast('Fill in some fields first', 'error'); return; }
 
   const btn = event.target;
-  btn.textContent = '&#226;&#179;';
+  btn.textContent = '&#9650;';
   btn.disabled = true;
 
   try {
@@ -2543,7 +2543,7 @@ async function aiGenDesc(idx, type) {
   } catch(e) {
     showToast('Error: ' + e.message, 'error');
   }
-  btn.textContent = '&#226;&#168; AI Write';
+  btn.textContent = '&#10003; AI Write';
   btn.disabled = false;
 }
 
@@ -2553,9 +2553,9 @@ function clearScraper() {
   document.getElementById('scrape-status').style.display = 'none';
 }
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
-// IMAGE TOOLS &#226; WebP Converter
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
+// IMAGE TOOLS &#8594; WebP Converter
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 let imageQueue = [];
 
 function handleImageDrop(e) {
@@ -2594,7 +2594,7 @@ function addImageToQueue(id, file, dataUrl) {
       <div>
         <img src="${dataUrl}" style="width:140px;height:90px;object-fit:cover;border-radius:var(--r);border:1px solid var(--border)">
         <div style="font-size:.65rem;color:var(--muted);margin-top:.3rem;word-break:break-all">${file.name}</div>
-        <div style="font-size:.65rem;color:var(--light)">${(file.size/1024).toFixed(0)} KB &#194;&#183; ${file.type.split('/')[1].toUpperCase()}</div>
+        <div style="font-size:.65rem;color:var(--light)">${(file.size/1024).toFixed(0)} KB &#183; ${file.type.split('/')[1].toUpperCase()}</div>
       </div>
       <div>
         <div class="field-grid">
@@ -2605,7 +2605,7 @@ function addImageToQueue(id, file, dataUrl) {
             <input class="cms-input" id="alt-${id}" placeholder="Cipriani Residences Miami lobby interior">
           </div>
           <div class="field"><label>Title <span style="color:var(--light);font-size:.6rem">(hover tooltip)</span></label>
-            <input class="cms-input" id="title-${id}" placeholder="Cipriani Residences Miami &#226; Luxury Living">
+            <input class="cms-input" id="title-${id}" placeholder="Cipriani Residences Miami &#8594; Luxury Living">
           </div>
           <div class="field"><label>Status</label>
             <div id="status-${id}" style="font-size:.75rem;color:var(--muted);padding:.5rem 0">Ready to convert</div>
@@ -2633,7 +2633,7 @@ async function convertSingleImage(id) {
   const quality = Math.min(100, Math.max(1, parseInt(document.getElementById('img-quality').value) || 85)) / 100;
   const maxWidth = parseInt(document.getElementById('img-maxwidth').value) || 0;
   const statusEl = document.getElementById('status-' + id);
-  statusEl.innerHTML = '<span style="color:var(--gold)">&#226;&#179; Converting&#226;&#166;</span>';
+  statusEl.innerHTML = '<span style="color:var(--gold)">&#9650; Converting&#10038;</span>';
 
   try {
     const canvas = document.createElement('canvas');
@@ -2659,14 +2659,14 @@ async function convertSingleImage(id) {
     const webpSize = Math.round((webpDataUrl.length * 3/4) / 1024);
     const savings = Math.round((1 - webpSize/origSize) * 100);
 
-    statusEl.innerHTML = `<span style="color:var(--green)">&#226; Converted ${w}&#215;${h}px</span>`;
+    statusEl.innerHTML = `<span style="color:var(--green)">&#8594; Converted ${w}&#215;${h}px</span>`;
     document.getElementById('savings-' + id).textContent = 
-      `${origSize}KB &#226; ${webpSize}KB &#194;&#183; ${savings > 0 ? savings+'% smaller' : 'similar size'}`;
+      `${origSize}KB &#8594; ${webpSize}KB &#183; ${savings > 0 ? savings+'% smaller' : 'similar size'}`;
     document.getElementById('preview-' + id).style.display = 'block';
     document.getElementById('webp-preview-' + id).src = webpDataUrl;
     document.getElementById('dl-' + id).disabled = false;
   } catch(e) {
-    statusEl.innerHTML = `<span style="color:var(--red)">&#226; Error: ${e.message}</span>`;
+    statusEl.innerHTML = `<span style="color:var(--red)">&#8594; Error: ${e.message}</span>`;
   }
 }
 
@@ -2708,9 +2708,9 @@ function clearImageQueue() {
   document.getElementById('img-actions').style.display = 'none';
 }
 
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // AUTO-LOGIN
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 window.addEventListener('DOMContentLoaded', async () => {
   const token  = localStorage.getItem('cms_token');
   const repo   = localStorage.getItem('cms_repo');
@@ -2725,9 +2725,9 @@ window.addEventListener('DOMContentLoaded', async () => {
 });
 </script>
 <!--
-  &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
-  &#226;  MiaLux Admin &#226; Image Manager Patch                             &#226;
-  &#226;  Paste this entire block just before 
+  &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
+  &#8594;  MiaLux Admin &#8594; Image Manager Patch                             &#8594;
+  &#8594;  Paste this entire block just before 
 
 
 <!-- IM-PATCH-START -->
@@ -3066,12 +3066,12 @@ console.log('[MiaLux] Image Manager v3 loaded');
 })();
 </script>
 <!-- IM-PATCH-END -->
-</body> in admin/index.html &#226;
-  &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+</body> in admin/index.html &#8594;
+  &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 -->
 
 <style>
-/* &#226;&#226; Image Manager Styles &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226; */
+/* &#9472;&#9472; Image Manager Styles &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472; */
 .im-wrap { margin-bottom: 1.2rem; }
 .im-section { background: #161616; border: 1px solid #282828; border-radius: 6px; padding: 1.2rem; margin-bottom: .9rem; }
 .im-label { font-size: .62rem; letter-spacing: .13em; text-transform: uppercase; color: #c9a84c; margin: 0 0 .9rem; display: flex; align-items: center; gap: .5rem; }
@@ -3147,21 +3147,21 @@ console.log('[MiaLux] Image Manager v3 loaded');
 </style>
 
 <script>
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
-//  MiaLux Image Manager &#226; injected into existing CMS
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
+//  MiaLux Image Manager &#8594; injected into existing CMS
 //  Targets: #ltab-media-{idx}   Gallery textarea: #l-gallery-{idx}
-// &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 (function(){
 'use strict';
 
-// &#226;&#226; CONFIG &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472; CONFIG &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 const GH_OWNER  = 'saperovd';
 const GH_REPO   = 'MiaLuxRealty';
 const IMG_DIR   = 'images';
 const SITE_BASE = 'https://mialuxrealty.com/';
 
-// &#226;&#226; PER-LISTING STATE &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
-// Keyed by listing index (0,1,2&#226;&#166;)
+// &#9472;&#9472; PER-LISTING STATE &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
+// Keyed by listing index (0,1,2&#10038;)
 const IM = {};   // IM[idx] = { tab, images:[{url,title,alt}], schemaUrls:[], repoFiles:[], repoLoaded }
 
 function state(idx) {
@@ -3169,13 +3169,13 @@ function state(idx) {
   return IM[idx];
 }
 
-// &#226;&#226; TOKEN &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472; TOKEN &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function ghToken() {
   const inp = document.getElementById('tokenInput');
   return (inp && inp.value.trim()) || localStorage.getItem('cms_gh_token') || '';
 }
 
-// &#226;&#226; GITHUB API &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472; GITHUB API &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 async function listRepoImages(idx) {
   const s = state(idx);
   if (s.repoLoaded) return s.repoFiles;
@@ -3216,7 +3216,7 @@ async function uploadImage(file, idx) {
 
 function fileB64(f){ return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=rej; r.readAsDataURL(f); }); }
 
-// &#226;&#226; SEED FROM EXISTING TEXTAREA &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472; SEED FROM EXISTING TEXTAREA &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function seedFromTextarea(idx) {
   const s = state(idx);
   if (s.seeded) return;
@@ -3230,7 +3230,7 @@ function seedFromTextarea(idx) {
   if (hs) { try { s.schemaUrls = JSON.parse(hs.value)||[]; } catch{} }
 }
 
-// &#226;&#226; INJECT MANAGER INTO MEDIA TAB &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472; INJECT MANAGER INTO MEDIA TAB &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function injectManager(idx) {
   const mediaTab = document.getElementById(`ltab-media-${idx}`);
   if (!mediaTab || mediaTab.querySelector('.im-wrap')) return; // already injected
@@ -3257,14 +3257,14 @@ function injectManager(idx) {
   renderManager(idx);
 }
 
-// &#226;&#226; FULL RENDER &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472; FULL RENDER &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function renderManager(idx) {
   const root = document.getElementById(`im-root-${idx}`);
   if (!root) return;
   const s = state(idx);
 
   root.innerHTML = `
-  <!-- &#226;&nbsp; Image Source -->
+  <!-- &#8594;&nbsp; Image Source -->
   <div class="im-section">
     <div class="im-label">Add Images <span class="im-badge" id="im-cnt-${idx}">${s.images.length}</span></div>
     <div class="im-tabs">
@@ -3277,12 +3277,12 @@ function renderManager(idx) {
         onclick="document.getElementById('im-file-${idx}').click()"
         ondragover="imDragOver(event,${idx})" ondragleave="imDragLeave(${idx})" ondrop="imFileDrop(event,${idx})">
         <input type="file" id="im-file-${idx}" multiple accept="image/*" onchange="imUploadFiles(this.files,${idx})">
-        <div class="im-dz-icon">&#240;</div>
+        <div class="im-dz-icon">&#9670;</div>
         <div class="im-dz-text">Drop images here or <strong>browse</strong></div>
-        <div class="im-dz-hint">JPG, PNG, WebP &#194;&#183; uploads to /images/ in your repo</div>
+        <div class="im-dz-hint">JPG, PNG, WebP &#183; uploads to /images/ in your repo</div>
       </div>
       <div class="im-prog" id="im-prog-${idx}">
-        <div class="im-prog-lbl" id="im-prog-lbl-${idx}">Uploading&#226;&#166;</div>
+        <div class="im-prog-lbl" id="im-prog-lbl-${idx}">Uploading&#10038;</div>
         <div class="im-prog-track"><div class="im-prog-fill" id="im-prog-fill-${idx}"></div></div>
       </div>
     </div>
@@ -3290,26 +3290,26 @@ function renderManager(idx) {
     <div id="im-panel-repo-${idx}" style="display:${s.tab==='repo'?'block':'none'}">
       <div class="im-repo-bar">
         <span class="im-repo-path">/${IMG_DIR}/</span>
-        <button class="im-btn-xs" onclick="imLoadRepo(${idx},true)">&#226;&#186; Refresh</button>
+        <button class="im-btn-xs" onclick="imLoadRepo(${idx},true)">&#9658; Refresh</button>
       </div>
       <div class="im-grid" id="im-repogrid-${idx}">
-        <div class="im-loading">Loading&#226;&#166;</div>
+        <div class="im-loading">Loading&#10038;</div>
       </div>
     </div>
   </div>
 
-  <!-- &#226;&#161; Selected images with Title + Alt -->
+  <!-- &#9889; Selected images with Title + Alt -->
   <div class="im-section">
     <div class="im-label">Selected Gallery Images</div>
     <div class="im-sel-list" id="im-sellist-${idx}">
-      ${s.images.length ? s.images.map((img,i)=>selItemHTML(img,i,idx,s.schemaUrls)).join('') : '<div class="im-empty-msg">No images yet &#226; upload or pick from repo above</div>'}
+      ${s.images.length ? s.images.map((img,i)=>selItemHTML(img,i,idx,s.schemaUrls)).join('') : '<div class="im-empty-msg">No images yet &#8594; upload or pick from repo above</div>'}
     </div>
   </div>
 
-  <!-- &#226;&#162; Schema.org picker -->
+  <!-- &#9889; Schema.org picker -->
   <div class="im-section">
     <div class="im-label">Schema.org Images <span style="color:#4caf50;font-size:.58rem;font-weight:400;margin-left:.4rem">Pick 3 for structured data SEO</span></div>
-    <p class="im-sch-tip">Click any image row above to toggle it as a Schema image. <strong>Pick exactly 3</strong> &#226; they become <code>Residence.image[]</code> in ld+json.</p>
+    <p class="im-sch-tip">Click any image row above to toggle it as a Schema image. <strong>Pick exactly 3</strong> &#8594; they become <code>Residence.image[]</code> in ld+json.</p>
     <div class="im-sch-slots" id="im-schslots-${idx}">
       ${[0,1,2].map(i=>schSlotHTML(i,idx,s.schemaUrls[i]||'')).join('')}
     </div>
@@ -3327,7 +3327,7 @@ function selItemHTML(img, i, idx, schUrls) {
     <img class="im-sel-thumb" src="${escAttr(img.url)}" onerror="this.style.opacity='.2'">
     <input class="im-sel-input" type="text" placeholder="Title (e.g. Rooftop Pool at Sunset)" value="${escAttr(img.title)}" oninput="imMeta(${idx},${i},'title',this.value)" onclick="event.stopPropagation()">
     <input class="im-sel-input" type="text" placeholder="Alt text for SEO" value="${escAttr(img.alt)}" oninput="imMeta(${idx},${i},'alt',this.value)" onclick="event.stopPropagation()">
-    <button class="im-sel-remove" onclick="event.stopPropagation();imRemove(${idx},${i})" title="Remove">&#226;</button>
+    <button class="im-sel-remove" onclick="event.stopPropagation();imRemove(${idx},${i})" title="Remove">&#8594;</button>
   </div>`;
 }
 
@@ -3345,7 +3345,7 @@ function schemaCodeHTML(idx) {
   const imgs = s.schemaUrls.slice(0,3);
   const imgLines = imgs.length
     ? imgs.map(u=>`  <span class="c-str">"${u}"</span>`).join(',\n')
-    : `  <span class="c-str">"https://mialuxrealty.com/images/photo-1.jpg"</span>,\n  <span class="c-str">"&#226;&#166;"</span>,\n  <span class="c-str">"&#226;&#166;"</span>`;
+    : `  <span class="c-str">"https://mialuxrealty.com/images/photo-1.jpg"</span>,\n  <span class="c-str">"&#10038;"</span>,\n  <span class="c-str">"&#10038;"</span>`;
   return `<span class="c-bra">{</span>
   <span class="c-key">"@context"</span>: <span class="c-str">"https://schema.org"</span>,
   <span class="c-key">"@type"</span>: <span class="c-str">"Residence"</span>,
@@ -3356,13 +3356,13 @@ ${imgLines}
 <span class="c-bra">}</span>`;
 }
 
-// &#226;&#226; REPO GRID &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472; REPO GRID &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 window.imLoadRepo = async function(idx, force) {
   const s = state(idx);
   if (s.repoLoaded && !force) { renderRepoGrid(idx); return; }
   const grid = document.getElementById(`im-repogrid-${idx}`);
   if (!grid) return;
-  grid.innerHTML = '<div class="im-loading">Loading from GitHub&#226;&#166;</div>';
+  grid.innerHTML = '<div class="im-loading">Loading from GitHub&#10038;</div>';
   await listRepoImages(idx);
   renderRepoGrid(idx);
 };
@@ -3379,14 +3379,14 @@ function renderRepoGrid(idx) {
     const sch = schUrls.has(f.url);
     return `<div class="im-thumb${sel?' sel':''}${sch?' sch':''}" data-url="${escAttr(f.url)}" onclick="imRepoToggle(${idx},'${esc(f.url)}','${esc(f.name)}')" title="${escAttr(f.name)}">
       <img src="${escAttr(f.raw||f.url)}" loading="lazy" onerror="this.style.display='none'">
-      <div class="im-thumb-chk">&#226;</div>
+      <div class="im-thumb-chk">&#8594;</div>
       <div class="im-thumb-sch">S</div>
       <div class="im-thumb-name">${esc(f.name)}</div>
     </div>`;
   }).join('');
 }
 
-// &#226;&#226; EVENT HANDLERS &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472; EVENT HANDLERS &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 window.imTab = function(idx, tab) {
   state(idx).tab = tab;
   document.getElementById(`im-panel-upload-${idx}`).style.display = tab==='upload' ? 'block' : 'none';
@@ -3405,7 +3405,7 @@ window.imUploadFiles = async function(files, idx) {
   const fill  = document.getElementById(`im-prog-fill-${idx}`);
   prog.classList.add('on');
   for (let i=0; i<files.length; i++) {
-    lbl.textContent = `Uploading ${files[i].name} (${i+1}/${files.length})&#226;&#166;`;
+    lbl.textContent = `Uploading ${files[i].name} (${i+1}/${files.length})&#10038;`;
     fill.style.width = `${Math.round(i/files.length*100)}%`;
     try {
       const url = await uploadImage(files[i], idx);
@@ -3417,7 +3417,7 @@ window.imUploadFiles = async function(files, idx) {
     }
   }
   fill.style.width = '100%';
-  lbl.textContent = `Done &#226; ${files.length} image(s) added.`;
+  lbl.textContent = `Done &#8594; ${files.length} image(s) added.`;
   setTimeout(()=>prog.classList.remove('on'), 3000);
 };
 
@@ -3480,7 +3480,7 @@ window.imToggleSchema = function(url, idx) {
   if (card) card.classList.toggle('sch', s.schemaUrls.includes(url));
 };
 
-// &#226;&#226; RE-RENDERS &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472; RE-RENDERS &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function rerenderSelList(idx) {
   const s = state(idx);
   const list = document.getElementById(`im-sellist-${idx}`);
@@ -3507,7 +3507,7 @@ function updateCount(idx) {
   if (el) el.textContent = state(idx).images.length;
 }
 
-// &#226;&#226; SYNC TO ORIGINAL CMS FORM &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472; SYNC TO ORIGINAL CMS FORM &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function syncToForm(idx) {
   const s = state(idx);
   // 1. Sync gallery textarea (used by existing save logic)
@@ -3524,11 +3524,11 @@ function syncToForm(idx) {
   if (hs) { hs.value = JSON.stringify(s.schemaUrls); hs.dispatchEvent(new Event('input',{bubbles:true})); }
 }
 
-// &#226;&#226; UTILS &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472; UTILS &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 function esc(s)     { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&#39;').replace(/"/g,'&quot;'); }
 function escAttr(s) { return esc(s); }
 
-// &#226;&#226; OBSERVER: inject when media tab becomes visible &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472; OBSERVER: inject when media tab becomes visible &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 const _observer = new MutationObserver(()=>{
   document.querySelectorAll('[id^="ltab-media-"]').forEach(panel=>{
     const idx = parseInt(panel.id.replace('ltab-media-',''),10);
@@ -3539,7 +3539,7 @@ const _observer = new MutationObserver(()=>{
 });
 _observer.observe(document.body, { childList:true, subtree:true, attributes:true, attributeFilter:['style','class'] });
 
-// &#226;&#226; ALSO PATCH build_all.py data output &#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;&#226;
+// &#9472;&#9472; ALSO PATCH build_all.py data output &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
 // When the CMS saves, we need schema_images written to listings.json
 // Hook into the existing collectListing / saveListing function
 const _origSave = window.saveListing || window.saveAllData;
@@ -3558,7 +3558,7 @@ if (typeof window.collectListing === 'function') {
   };
 }
 
-console.log('[MiaLux] Image Manager loaded &#226;');
+console.log('[MiaLux] Image Manager loaded &#8594;');
 })();
 </script>
 </body>
