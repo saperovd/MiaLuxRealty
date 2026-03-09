@@ -2955,7 +2955,7 @@ function rmgr(x){var rt=document.getElementById('im-root-'+x);if(!rt)return;
     '</div>'+
     '<div class="im-section">'+
       '<div class="im-label">Gallery &#8212; Title &amp; Alt Text</div>'+
-      '<div class="im-sel-list" id="im-ls-'+x+'">'+(s.images.length?s.images.map(function(img,i){return iH(img,i,x,s);}).join(''):'<div class="im-empty-msg">No images yet &#8212; upload or browse the folder above</div>')+'</div>'+
+      '<div class="im-sel-list" id="im-ls-'+x+'">'+(s.images.length?s.images.filter(function(img){return img&&img.file;}).map(function(img,i){return iH(img,i,x,s);}).join(''):'<div class="im-empty-msg">No images yet &#8212; upload or browse the folder above</div>')+'</div>'+
     '</div>'+
     '<div class="im-section">'+
       '<div class="im-label">Schema.org Images <span style="color:#4caf50;font-size:.58rem;font-weight:400;margin-left:.4rem">Pick 3 for structured data</span></div>'+
@@ -3021,13 +3021,13 @@ function attachPreviews(x){
   if(mi&&!mi._imPrev){
     var wrap=document.createElement('div');wrap.className='im-field-preview';wrap.id='im-prev-main-'+x;
     var img=document.createElement('img');img.className='im-field-thumb';
-    img.setAttribute('src',mi.value?RAW+mi.value:'');
+    img.setAttribute('src',mi.value?imgSrc(x,mi.value):'');
     img.onerror=function(){this.style.display='none';};
     img.onload=function(){this.style.display='block';};
     if(!mi.value)img.style.display='none';
     wrap.appendChild(img);
     mi.parentNode.appendChild(wrap);
-    mi.addEventListener('input',function(){img.src=this.value?RAW+this.value:'';img.style.display=this.value?'block':'none';});
+    mi.addEventListener('input',function(){img.src=this.value?imgSrc(x,this.value):'';img.style.display=this.value?'block':'none';});
     mi._imPrev=true;}
   /* gallery strip preview */
   var ga=document.getElementById('l-gallery-'+x);
@@ -3037,7 +3037,7 @@ function attachPreviews(x){
     function updateStrip(){
       var urls=ga.value.split('\n').map(function(u){return u.trim();}).filter(Boolean).slice(0,12);
       strip.innerHTML=urls.map(function(u){
-        var src=u.startsWith('http')?u:RAW+u;
+        var src=imgSrc(x,u);
         return'<div class="im-gallery-pill"><img src="'+ex(src)+'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" onload="this.nextElementSibling.style.display='none'"><div class="im-gallery-pill-err" style="display:none">&#9641;</div></div>';
       }).join('');
     }
