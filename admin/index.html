@@ -2889,7 +2889,7 @@ function iH(img,i,x,s){
   return'<div class="im-sel-item'+(is?' sch-sel':'')+'" id="im-item-'+x+'-'+i+'">'+
     '<div class="im-sel-top">'+
       '<div class="im-sel-thumb-wrap">'+
-        '<img class="im-sel-thumb" src="'+ex(src)+'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" onload="this.nextElementSibling.style.display='none'">'+
+        '<img class="im-sel-thumb" src="'+ex(src)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'" onload="this.nextElementSibling.style.display=\'none\'">'+
         '<div class="im-sel-thumb-err" style="display:none">&#9641;</div>'+
       '</div>'+
       '<div class="im-sel-fields">'+
@@ -2918,7 +2918,7 @@ function schSlotH(i,x,file){
   var fname=file?file.replace(/.*\//,''):'';
   return'<div class="im-sch-slot'+(file?' on':'')+'" id="im-sl-'+x+'-'+i+'">'+
     (file
-      ?'<img class="im-sch-slot-img" src="'+ex(src)+'" onerror="this.style.display='none'">'+
+      ?'<img class="im-sch-slot-img" src="'+ex(src)+'" onerror="this.style.display=\'none\'">'+
         '<div class="im-sch-slot-label">IMG '+(i+1)+'</div>'+
         '<button class="im-sch-slot-rm" onclick="imSchRm('+x+','+i+')" title="Remove">&#x2715;</button>'+
         '<div class="im-sch-slot-name" title="'+ex(fname)+'">'+ex(fname)+'</div>'
@@ -2973,7 +2973,7 @@ function rg(x){var s=st(x),g=document.getElementById('im-gr-'+x);if(!g)return;
   if(!s.repoFiles.length){g.innerHTML='<div class="im-empty-msg">No images in this folder yet.</div>';return;}
   g.innerHTML=s.repoFiles.map(function(f){
     return'<div class="im-thumb'+(ss.has(f.name)?' sel':'')+(sc.has(f.name)?' sch':'')+'" data-nm="'+ex(f.name)+'" onclick="imRT('+x+',''+ex(f.name)+'')" title="'+ex(f.name)+'">'+
-      '<img src="'+ex(f.raw)+'" loading="lazy" onerror="this.style.display='none'">'+
+      '<img src="'+ex(f.raw)+'" loading="lazy" onerror="this.style.display=\'none\'">'+
       '<div class="im-thumb-chk">&#x2713;</div><div class="im-thumb-sch-dot">S</div>'+
       '<div class="im-thumb-name">'+ex(f.name)+'</div>'+
     '</div>';
@@ -3022,9 +3022,9 @@ function attachPreviews(x){
     var wrap=document.createElement('div');wrap.className='im-field-preview';wrap.id='im-prev-main-'+x;
     var img=document.createElement('img');img.className='im-field-thumb';
     img.setAttribute('src',mi.value?imgSrc(x,mi.value):'');
-    img.onerror=function(){this.style.display='none';};
+    img.onerror=function(){this.style.display=\'none\';};
     img.onload=function(){this.style.display='block';};
-    if(!mi.value)img.style.display='none';
+    if(!mi.value)img.style.display=\'none\';
     wrap.appendChild(img);
     mi.parentNode.appendChild(wrap);
     mi.addEventListener('input',function(){img.src=this.value?imgSrc(x,this.value):'';img.style.display=this.value?'block':'none';});
@@ -3038,7 +3038,7 @@ function attachPreviews(x){
       var urls=ga.value.split('\n').map(function(u){return u.trim();}).filter(Boolean).slice(0,12);
       strip.innerHTML=urls.map(function(u){
         var src=imgSrc(x,u);
-        return'<div class="im-gallery-pill"><img src="'+ex(src)+'" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" onload="this.nextElementSibling.style.display='none'"><div class="im-gallery-pill-err" style="display:none">&#9641;</div></div>';
+        return'<div class="im-gallery-pill"><img src="'+ex(src)+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'" onload="this.nextElementSibling.style.display=\'none\'"><div class="im-gallery-pill-err" style="display:none">&#9641;</div></div>';
       }).join('');
     }
     updateStrip();
@@ -3378,7 +3378,7 @@ function renderRepoGrid(idx) {
     const sel = selUrls.has(f.url);
     const sch = schUrls.has(f.url);
     return `<div class="im-thumb${sel?' sel':''}${sch?' sch':''}" data-url="${escAttr(f.url)}" onclick="imRepoToggle(${idx},'${esc(f.url)}','${esc(f.name)}')" title="${escAttr(f.name)}">
-      <img src="${escAttr(f.raw||f.url)}" loading="lazy" onerror="this.style.display='none'">
+      <img src="${escAttr(f.raw||f.url)}" loading="lazy" onerror="this.style.display=\'none\'">
       <div class="im-thumb-chk">&#8594;</div>
       <div class="im-thumb-sch">S</div>
       <div class="im-thumb-name">${esc(f.name)}</div>
