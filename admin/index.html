@@ -2843,7 +2843,7 @@ function imgSrc(x,file){
   if(file.startsWith('http'))return file;
   var folder=fp(x);
   /* if path already includes folder structure, use raw github */
-  if(file.indexOf('/')>-1)return RAW+file;
+  if(file.indexOf('/')>-1)return file.startsWith(folder)?RAW+file:RAW+folder+'/'+file;
   return RAW+folder+'/'+file;
 }
 function b64r(f){return new Promise(function(r,j){var rd=new FileReader();rd.onload=function(){r(rd.result);};rd.onerror=j;rd.readAsDataURL(f);});}
@@ -2865,7 +2865,7 @@ function seed(x){var s=st(x);if(s.seeded)return;
   var hm=document.getElementById('im-meta-hidden-'+x);
   if(hm&&hm.value){try{var m=JSON.parse(hm.value);if(Array.isArray(m)&&m.length){s.images=m;s.seeded=true;}}catch(e){}}
   if(!s.seeded){var ta=document.getElementById('l-gallery-'+x);
-    var urls=ta?ta.value.split('\n').map(function(u){return u.trim();}).filter(Boolean):[];
+    var urls=ta?ta.value.split('\n').map(function(u){return u.trim();}).filter(Boolean).filter(function(u){return u.startsWith('http')||u.split('/').length>2;}):[];
     s.images=urls.map(function(u){return{file:u,title:'',alt:{en:'',es:'',pt:'',ru:''}};});
     s.seeded=true;}
   var hs=document.getElementById('im-sch-hidden-'+x);
