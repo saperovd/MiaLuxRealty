@@ -2877,7 +2877,40 @@ function inj(x){var tab=document.getElementById('ltab-media-'+x);if(!tab||tab.qu
   ['meta','sch'].forEach(function(k){if(!document.getElementById('im-'+k+'-hidden-'+x)){var h=document.createElement('input');h.type='hidden';h.id='im-'+k+'-hidden-'+x;tab.appendChild(h);}});
   rmgr(x);
   /* attach previews to existing image fields */
-  setTimeout(function(){attachPreviews(x);},200);}
+  setTimeout(function(){
+  // Preview: Main Image
+  var mi=document.getElementById('l-image_main-'+x);
+  if(mi&&!mi._imPv){mi._imPv=1;
+    var pm=document.createElement('img');
+    pm.style.cssText='width:80px;height:56px;object-fit:cover;border-radius:4px;margin-top:6px;border:1px solid #444;display:'+(mi.value?'block':'none');
+    pm.src=mi.value||'';
+    pm.onerror=function(){this.style.display='none';};
+    pm.onload=function(){this.style.display='block';};
+    mi.parentNode.appendChild(pm);
+    mi.addEventListener('input',function(){pm.src=this.value;pm.style.display=this.value?'block':'none';});}
+  // Preview: OG/Social Image
+  var tab2=document.getElementById('ltab-media-'+x);
+  var ogi=tab2?tab2.querySelector('input[placeholder="/images/project-og.webp"]'):null;
+  if(ogi&&!ogi._imPv){ogi._imPv=1;
+    var po=document.createElement('img');
+    po.style.cssText='width:80px;height:56px;object-fit:cover;border-radius:4px;margin-top:6px;border:1px solid #444;display:'+(ogi.value?'block':'none');
+    po.src=ogi.value||'';
+    po.onerror=function(){this.style.display='none';};
+    po.onload=function(){this.style.display='block';};
+    ogi.parentNode.appendChild(po);
+    ogi.addEventListener('input',function(){po.src=this.value;po.style.display=this.value?'block':'none';});}
+  // Preview: Gallery
+  var gt=document.getElementById('l-gallery-'+x);
+  if(gt&&!gt._imPv){gt._imPv=1;
+    var gd=document.createElement('div');
+    gd.style.cssText='display:flex;flex-wrap:wrap;gap:4px;margin-top:6px';
+    var urls=(listings[x]&&listings[x].images_gallery)||[];
+    gd.innerHTML=urls.filter(Boolean).map(function(u){return'<img src="'+u+'" style="width:60px;height:45px;object-fit:cover;border-radius:3px;border:1px solid #444" onerror="this.style.opacity=0">';}).join('');
+    gt.parentNode.insertBefore(gd,gt.nextSibling);
+    gt.addEventListener('input',function(){
+      gd.innerHTML=this.value.split('\n').filter(Boolean).map(function(u){return'<img src="'+u.trim()+'" style="width:60px;height:45px;object-fit:cover;border-radius:3px;border:1px solid #444" onerror="this.style.opacity=0">';}).join('');
+    });}
+},200);}
 /*    HTML helpers    */
 function ex(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&#39;').replace(/"/g,'&quot;');}
 function ah(lc,file){var n=file.replace(/.*\//,'').replace(/[-_]/g,' ').replace(/\.[^.]+$/,'');return({en:'e.g. "'+n+' with Miami skyline views"',es:'ej. "'+n+' con vistas al skyline"',pt:'ex. "'+n+' com vistas para o skyline"',ru:'=0?@. "'+n+'"'})[lc]||n;}
@@ -3146,420 +3179,6 @@ console.log('[MiaLux] Image Manager v3 loaded');
 .im-sch-code .c-bra { color:#e3b341; }
 </style>
 
-<script>
-// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
-//  MiaLux Image Manager &#8594; injected into existing CMS
-//  Targets: #ltab-media-{idx}   Gallery textarea: #l-gallery-{idx}
-// &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
-(function(){
-'use strict';
 
-// &#9472;&#9472; CONFIG &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
-const GH_OWNER  = 'saperovd';
-const GH_REPO   = 'MiaLuxRealty';
-const IMG_DIR   = 'images';
-const SITE_BASE = 'https://mialuxrealty.com/';
-
-// &#9472;&#9472; PER-LISTING STATE &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
-// Keyed by listing index (0,1,2&#10038;)
-const IM = {};   // IM[idx] = { tab, images:[{url,title,alt}], schemaUrls:[], repoFiles:[], repoLoaded }
-
-function state(idx) {
-  if (!IM[idx]) IM[idx] = { tab:'upload', images:[], schemaUrls:[], repoFiles:[], repoLoaded:false };
-  return IM[idx];
-}
-
-// &#9472;&#9472; TOKEN &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
-function ghToken() {
-  const inp = document.getElementById('tokenInput');
-  return (inp && inp.value.trim()) || localStorage.getItem('cms_gh_token') || '';
-}
-
-// &#9472;&#9472; GITHUB API &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
-async function listRepoImages(idx) {
-  const s = state(idx);
-  if (s.repoLoaded) return s.repoFiles;
-  const tok = ghToken();
-  if (!tok) return [];
-  try {
-    const r = await fetch(
-      `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${IMG_DIR}`,
-      { headers:{ Authorization:`Bearer ${tok}`, Accept:'application/vnd.github.v3+json' }}
-    );
-    if (!r.ok) return [];
-    const files = await r.json();
-    s.repoFiles = files
-      .filter(f => /\.(jpe?g|png|webp|gif)$/i.test(f.name))
-      .map(f => ({ name:f.name, url:`${SITE_BASE}${IMG_DIR}/${f.name}`, raw:f.download_url }));
-    s.repoLoaded = true;
-    return s.repoFiles;
-  } catch { return []; }
-}
-
-async function uploadImage(file, idx) {
-  const tok = ghToken();
-  if (!tok) throw new Error('Not authenticated');
-  const b64 = (await fileB64(file)).split(',')[1];
-  const slug = file.name.toLowerCase().replace(/[^a-z0-9.]+/g,'-').replace(/^-|-$/g,'');
-  const path = `${IMG_DIR}/${slug}`;
-  const r = await fetch(
-    `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`,
-    { method:'PUT',
-      headers:{ Authorization:`Bearer ${tok}`, Accept:'application/vnd.github.v3+json', 'Content-Type':'application/json' },
-      body: JSON.stringify({ message:`img: upload ${slug}`, content:b64 })
-    }
-  );
-  if (!r.ok) { const e = await r.json(); throw new Error(e.message||'Upload failed'); }
-  state(idx).repoLoaded = false; // invalidate cache
-  return `${SITE_BASE}${path}`;
-}
-
-function fileB64(f){ return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=rej; r.readAsDataURL(f); }); }
-
-// &#9472;&#9472; SEED FROM EXISTING TEXTAREA &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
-function seedFromTextarea(idx) {
-  const s = state(idx);
-  if (s.seeded) return;
-  const ta = document.getElementById(`l-gallery-${idx}`);
-  if (!ta) return;
-  const urls = ta.value.split('\n').map(u=>u.trim()).filter(Boolean);
-  s.images = urls.map(url => ({ url, title:'', alt:'' }));
-  s.seeded = true;
-  // Also seed schema from hidden field if set
-  const hs = document.getElementById(`im-sch-hidden-${idx}`);
-  if (hs) { try { s.schemaUrls = JSON.parse(hs.value)||[]; } catch{} }
-}
-
-// &#9472;&#9472; INJECT MANAGER INTO MEDIA TAB &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
-function injectManager(idx) {
-  const mediaTab = document.getElementById(`ltab-media-${idx}`);
-  if (!mediaTab || mediaTab.querySelector('.im-wrap')) return; // already injected
-  seedFromTextarea(idx);
-
-  // Insert our manager before the first .cms-card inside the media tab
-  const firstCard = mediaTab.querySelector('.cms-card');
-  if (!firstCard) return;
-
-  const root = document.createElement('div');
-  root.className = 'im-wrap';
-  root.id = `im-root-${idx}`;
-  mediaTab.insertBefore(root, firstCard);
-
-  // Add hidden fields for schema persistence
-  ['sch','meta'].forEach(k => {
-    if (!document.getElementById(`im-${k}-hidden-${idx}`)) {
-      const h = document.createElement('input');
-      h.type='hidden'; h.id=`im-${k}-hidden-${idx}`; h.name=`im_${k}_${idx}`;
-      mediaTab.appendChild(h);
-    }
-  });
-
-  renderManager(idx);
-}
-
-// &#9472;&#9472; FULL RENDER &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
-function renderManager(idx) {
-  const root = document.getElementById(`im-root-${idx}`);
-  if (!root) return;
-  const s = state(idx);
-
-  root.innerHTML = `
-  <!-- &#8594;&nbsp; Image Source -->
-  <div class="im-section">
-    <div class="im-label">Add Images <span class="im-badge" id="im-cnt-${idx}">${s.images.length}</span></div>
-    <div class="im-tabs">
-      <div class="im-tab ${s.tab==='upload'?'active':''}" onclick="imTab(${idx},'upload')">Upload New</div>
-      <div class="im-tab ${s.tab==='repo'?'active':''}"   onclick="imTab(${idx},'repo')">Browse Repo</div>
-    </div>
-
-    <div id="im-panel-upload-${idx}" style="display:${s.tab==='upload'?'block':'none'}">
-      <div class="im-dropzone" id="im-dz-${idx}"
-        onclick="document.getElementById('im-file-${idx}').click()"
-        ondragover="imDragOver(event,${idx})" ondragleave="imDragLeave(${idx})" ondrop="imFileDrop(event,${idx})">
-        <input type="file" id="im-file-${idx}" multiple accept="image/*" onchange="imUploadFiles(this.files,${idx})">
-        <div class="im-dz-icon">&#9670;</div>
-        <div class="im-dz-text">Drop images here or <strong>browse</strong></div>
-        <div class="im-dz-hint">JPG, PNG, WebP &#183; uploads to /images/ in your repo</div>
-      </div>
-      <div class="im-prog" id="im-prog-${idx}">
-        <div class="im-prog-lbl" id="im-prog-lbl-${idx}">Uploading&#10038;</div>
-        <div class="im-prog-track"><div class="im-prog-fill" id="im-prog-fill-${idx}"></div></div>
-      </div>
-    </div>
-
-    <div id="im-panel-repo-${idx}" style="display:${s.tab==='repo'?'block':'none'}">
-      <div class="im-repo-bar">
-        <span class="im-repo-path">/${IMG_DIR}/</span>
-        <button class="im-btn-xs" onclick="imLoadRepo(${idx},true)">&#9658; Refresh</button>
-      </div>
-      <div class="im-grid" id="im-repogrid-${idx}">
-        <div class="im-loading">Loading&#10038;</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- &#9889; Selected images with Title + Alt -->
-  <div class="im-section">
-    <div class="im-label">Selected Gallery Images</div>
-    <div class="im-sel-list" id="im-sellist-${idx}">
-      ${s.images.length ? s.images.map((img,i)=>selItemHTML(img,i,idx,s.schemaUrls)).join('') : '<div class="im-empty-msg">No images yet &#8594; upload or pick from repo above</div>'}
-    </div>
-  </div>
-
-  <!-- &#9889; Schema.org picker -->
-  <div class="im-section">
-    <div class="im-label">Schema.org Images <span style="color:#4caf50;font-size:.58rem;font-weight:400;margin-left:.4rem">Pick 3 for structured data SEO</span></div>
-    <p class="im-sch-tip">Click any image row above to toggle it as a Schema image. <strong>Pick exactly 3</strong> &#8594; they become <code>Residence.image[]</code> in ld+json.</p>
-    <div class="im-sch-slots" id="im-schslots-${idx}">
-      ${[0,1,2].map(i=>schSlotHTML(i,idx,s.schemaUrls[i]||'')).join('')}
-    </div>
-    <div class="im-sch-code" id="im-schcode-${idx}">${schemaCodeHTML(idx)}</div>
-    <input type="hidden" id="im-sch-hidden-${idx}" value="${escAttr(JSON.stringify(s.schemaUrls))}">
-  </div>`;
-
-  // Kick off repo load if on repo tab
-  if (s.tab === 'repo') imLoadRepo(idx, false);
-}
-
-function selItemHTML(img, i, idx, schUrls) {
-  const isSch = schUrls.includes(img.url);
-  return `<div class="im-sel-item${isSch?' sch-sel':''}" data-i="${i}" onclick="imToggleSchema('${esc(img.url)}',${idx})" title="Click to toggle as Schema image">
-    <img class="im-sel-thumb" src="${escAttr(img.url)}" onerror="this.style.opacity='.2'">
-    <input class="im-sel-input" type="text" placeholder="Title (e.g. Rooftop Pool at Sunset)" value="${escAttr(img.title)}" oninput="imMeta(${idx},${i},'title',this.value)" onclick="event.stopPropagation()">
-    <input class="im-sel-input" type="text" placeholder="Alt text for SEO" value="${escAttr(img.alt)}" oninput="imMeta(${idx},${i},'alt',this.value)" onclick="event.stopPropagation()">
-    <button class="im-sel-remove" onclick="event.stopPropagation();imRemove(${idx},${i})" title="Remove">&#8594;</button>
-  </div>`;
-}
-
-function schSlotHTML(i, idx, url) {
-  const name = url ? url.split('/').pop() : '';
-  return `<div class="im-sch-slot${url?' on':''}" id="im-schslot-${idx}-${i}" data-url="${escAttr(url)}">
-    Image ${i+1}${url ? `<span title="${escAttr(url)}">${name}</span>` : ''}
-  </div>`;
-}
-
-function schemaCodeHTML(idx) {
-  const s = state(idx);
-  const nameEl = document.getElementById(`l-name-${idx}`);
-  const name = nameEl ? nameEl.value : 'Listing Name';
-  const imgs = s.schemaUrls.slice(0,3);
-  const imgLines = imgs.length
-    ? imgs.map(u=>`  <span class="c-str">"${u}"</span>`).join(',\n')
-    : `  <span class="c-str">"https://mialuxrealty.com/images/photo-1.jpg"</span>,\n  <span class="c-str">"&#10038;"</span>,\n  <span class="c-str">"&#10038;"</span>`;
-  return `<span class="c-bra">{</span>
-  <span class="c-key">"@context"</span>: <span class="c-str">"https://schema.org"</span>,
-  <span class="c-key">"@type"</span>: <span class="c-str">"Residence"</span>,
-  <span class="c-key">"name"</span>: <span class="c-str">"${esc(name)}"</span>,
-  <span class="c-key">"image"</span>: <span class="c-bra">[</span>
-${imgLines}
-  <span class="c-bra">]</span>
-<span class="c-bra">}</span>`;
-}
-
-// &#9472;&#9472; REPO GRID &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
-window.imLoadRepo = async function(idx, force) {
-  const s = state(idx);
-  if (s.repoLoaded && !force) { renderRepoGrid(idx); return; }
-  const grid = document.getElementById(`im-repogrid-${idx}`);
-  if (!grid) return;
-  grid.innerHTML = '<div class="im-loading">Loading from GitHub&#10038;</div>';
-  await listRepoImages(idx);
-  renderRepoGrid(idx);
-};
-
-function renderRepoGrid(idx) {
-  const s = state(idx);
-  const grid = document.getElementById(`im-repogrid-${idx}`);
-  if (!grid) return;
-  const selUrls = new Set(s.images.map(im=>im.url));
-  const schUrls = new Set(s.schemaUrls);
-  if (!s.repoFiles.length) { grid.innerHTML='<div class="im-empty-msg">No images in /images/ folder yet.</div>'; return; }
-  grid.innerHTML = s.repoFiles.map(f => {
-    const sel = selUrls.has(f.url);
-    const sch = schUrls.has(f.url);
-    return `<div class="im-thumb${sel?' sel':''}${sch?' sch':''}" data-url="${escAttr(f.url)}" onclick="imRepoToggle(${idx},'${esc(f.url)}','${esc(f.name)}')" title="${escAttr(f.name)}">
-      <img src="${escAttr(f.raw||f.url)}" loading="lazy" onerror="this.style.display=\'none\'">
-      <div class="im-thumb-chk">&#8594;</div>
-      <div class="im-thumb-sch">S</div>
-      <div class="im-thumb-name">${esc(f.name)}</div>
-    </div>`;
-  }).join('');
-}
-
-// &#9472;&#9472; EVENT HANDLERS &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
-window.imTab = function(idx, tab) {
-  state(idx).tab = tab;
-  document.getElementById(`im-panel-upload-${idx}`).style.display = tab==='upload' ? 'block' : 'none';
-  document.getElementById(`im-panel-repo-${idx}`).style.display   = tab==='repo'   ? 'block' : 'none';
-  document.querySelectorAll(`#im-root-${idx} .im-tab`).forEach((t,i)=>t.classList.toggle('active',i===(tab==='upload'?0:1)));
-  if (tab==='repo') imLoadRepo(idx,false);
-};
-
-window.imDragOver  = function(e,idx){ e.preventDefault(); document.getElementById(`im-dz-${idx}`).classList.add('over'); };
-window.imDragLeave = function(idx)  { document.getElementById(`im-dz-${idx}`).classList.remove('over'); };
-window.imFileDrop  = function(e,idx){ e.preventDefault(); imDragLeave(idx); imUploadFiles(e.dataTransfer.files,idx); };
-
-window.imUploadFiles = async function(files, idx) {
-  const prog  = document.getElementById(`im-prog-${idx}`);
-  const lbl   = document.getElementById(`im-prog-lbl-${idx}`);
-  const fill  = document.getElementById(`im-prog-fill-${idx}`);
-  prog.classList.add('on');
-  for (let i=0; i<files.length; i++) {
-    lbl.textContent = `Uploading ${files[i].name} (${i+1}/${files.length})&#10038;`;
-    fill.style.width = `${Math.round(i/files.length*100)}%`;
-    try {
-      const url = await uploadImage(files[i], idx);
-      const alt = files[i].name.replace(/[-_]/g,' ').replace(/\.[^.]+$/,'');
-      imAddImage(idx, { url, title:'', alt });
-    } catch(err) {
-      lbl.textContent = `Error: ${err.message}`;
-      await new Promise(r=>setTimeout(r,2000));
-    }
-  }
-  fill.style.width = '100%';
-  lbl.textContent = `Done &#8594; ${files.length} image(s) added.`;
-  setTimeout(()=>prog.classList.remove('on'), 3000);
-};
-
-window.imRepoToggle = function(idx, url, name) {
-  const s = state(idx);
-  const i = s.images.findIndex(im=>im.url===url);
-  if (i>=0) imRemove(idx,i);
-  else imAddImage(idx, { url, title:'', alt:name.replace(/[-_]/g,' ').replace(/\.[^.]+$/,'') });
-};
-
-window.imAddImage = function(idx, img) {
-  const s = state(idx);
-  s.images.push(img);
-  rerenderSelList(idx);
-  updateCount(idx);
-  syncToForm(idx);
-  // Update repo grid card
-  const card = document.querySelector(`#im-repogrid-${idx} [data-url="${CSS.escape(img.url)}"]`);
-  if (card) card.classList.add('sel');
-};
-
-window.imRemove = function(idx, i) {
-  const s = state(idx);
-  const url = s.images[i]?.url;
-  s.images.splice(i,1);
-  // Remove from schema too
-  s.schemaUrls = s.schemaUrls.filter(u=>u!==url);
-  rerenderSelList(idx);
-  rerenderSchSlots(idx);
-  updateCount(idx);
-  syncToForm(idx);
-  updateSchemaCode(idx);
-  // Update repo grid card
-  if (url) {
-    const card = document.querySelector(`#im-repogrid-${idx} [data-url="${CSS.escape(url)}"]`);
-    if (card) { card.classList.remove('sel'); card.classList.remove('sch'); }
-  }
-};
-
-window.imMeta = function(idx, i, field, val) {
-  const s = state(idx);
-  if (s.images[i]) { s.images[i][field] = val; syncToForm(idx); }
-};
-
-window.imToggleSchema = function(url, idx) {
-  const s = state(idx);
-  const pos = s.schemaUrls.indexOf(url);
-  if (pos>=0) {
-    s.schemaUrls.splice(pos,1);
-  } else {
-    if (s.schemaUrls.length>=3) s.schemaUrls.shift(); // drop oldest if already 3
-    s.schemaUrls.push(url);
-  }
-  rerenderSelList(idx);
-  rerenderSchSlots(idx);
-  updateSchemaCode(idx);
-  syncToForm(idx);
-  // Update repo grid
-  const card = document.querySelector(`#im-repogrid-${idx} [data-url="${CSS.escape(url)}"]`);
-  if (card) card.classList.toggle('sch', s.schemaUrls.includes(url));
-};
-
-// &#9472;&#9472; RE-RENDERS &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
-function rerenderSelList(idx) {
-  const s = state(idx);
-  const list = document.getElementById(`im-sellist-${idx}`);
-  if (!list) return;
-  list.innerHTML = s.images.length
-    ? s.images.map((img,i)=>selItemHTML(img,i,idx,s.schemaUrls)).join('')
-    : '<div class="im-empty-msg">No images yet</div>';
-}
-
-function rerenderSchSlots(idx) {
-  const s = state(idx);
-  const container = document.getElementById(`im-schslots-${idx}`);
-  if (!container) return;
-  container.innerHTML = [0,1,2].map(i=>schSlotHTML(i,idx,s.schemaUrls[i]||'')).join('');
-}
-
-function updateSchemaCode(idx) {
-  const el = document.getElementById(`im-schcode-${idx}`);
-  if (el) el.innerHTML = schemaCodeHTML(idx);
-}
-
-function updateCount(idx) {
-  const el = document.getElementById(`im-cnt-${idx}`);
-  if (el) el.textContent = state(idx).images.length;
-}
-
-// &#9472;&#9472; SYNC TO ORIGINAL CMS FORM &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
-function syncToForm(idx) {
-  const s = state(idx);
-  // 1. Sync gallery textarea (used by existing save logic)
-  const ta = document.getElementById(`l-gallery-${idx}`);
-  if (ta) {
-    ta.value = s.images.map(im=>im.url).join('\n');
-    ta.dispatchEvent(new Event('input',{bubbles:true}));
-  }
-  // 2. Sync image meta hidden field
-  const hm = document.getElementById(`im-meta-hidden-${idx}`);
-  if (hm) hm.value = JSON.stringify(s.images.map(im=>({url:im.url,title:im.title,alt:im.alt})));
-  // 3. Sync schema hidden field
-  const hs = document.getElementById(`im-sch-hidden-${idx}`);
-  if (hs) { hs.value = JSON.stringify(s.schemaUrls); hs.dispatchEvent(new Event('input',{bubbles:true})); }
-}
-
-// &#9472;&#9472; UTILS &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
-function esc(s)     { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&#39;').replace(/"/g,'&quot;'); }
-function escAttr(s) { return esc(s); }
-
-// &#9472;&#9472; OBSERVER: inject when media tab becomes visible &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
-const _observer = new MutationObserver(()=>{
-  document.querySelectorAll('[id^="ltab-media-"]').forEach(panel=>{
-    const idx = parseInt(panel.id.replace('ltab-media-',''),10);
-    if (!isNaN(idx) && panel.style.display!=='none' && panel.offsetParent!==null) {
-      injectManager(idx);
-    }
-  });
-});
-_observer.observe(document.body, { childList:true, subtree:true, attributes:true, attributeFilter:['style','class'] });
-
-// &#9472;&#9472; ALSO PATCH build_all.py data output &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;
-// When the CMS saves, we need schema_images written to listings.json
-// Hook into the existing collectListing / saveListing function
-const _origSave = window.saveListing || window.saveAllData;
-if (typeof window.collectListing === 'function') {
-  const _origCollect = window.collectListing;
-  window.collectListing = function(idx) {
-    const data = _origCollect.call(this, idx);
-    const s = state(idx);
-    if (data && s.images.length) {
-      // Overwrite gallery with our managed list
-      data.gallery_images = s.images.map(im=>im.url);
-      data.image_meta     = s.images.map(im=>({url:im.url,title:im.title,alt:im.alt}));
-      data.schema_images  = s.schemaUrls.slice(0,3);
-    }
-    return data;
-  };
-}
-
-console.log('[MiaLux] Image Manager loaded &#8594;');
-})();
-</script>
 </body>
 </html>
